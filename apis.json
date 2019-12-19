@@ -1,0 +1,116 @@
+{
+    "name": "Reddit",
+    "description": "Reddit is a community of millions of users engaging in the creation of content and the sharing of conversation across tens of thousands of topics.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/3516-reddit.jpg",
+    "tags": [
+        "general data",
+        "have api",
+        "links",
+        "pedestal",
+        "social",
+        "streams"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/reddit\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Reddit",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/3516-reddit.jpg",
+            "humanURL": "http:\/\/www.reddit.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/reddit-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Authentication",
+            "url": "https:\/\/github.com\/reddit\/reddit\/wiki\/OAuth2"
+        },
+        {
+            "type": "Base",
+            "url": "https:\/\/www.reddit.com\/"
+        },
+        {
+            "type": "Best Practices",
+            "url": "https:\/\/github.com\/reddit\/reddit\/wiki\/API"
+        },
+        {
+            "type": "Blog",
+            "url": "http:\/\/www.redditblog.com\/"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "https:\/\/www.reddit.com\/r\/datasets\/.rss"
+        },
+        {
+            "type": "Blog RSS",
+            "url": "http:\/\/www.redditblog.com\/feeds\/posts\/default?alt=rss"
+        },
+        {
+            "type": "Code",
+            "url": "https:\/\/github.com\/reddit\/reddit\/wiki\/API-Wrappers"
+        },
+        {
+            "type": "Console",
+            "url": "https:\/\/apigee.com\/console\/reddit"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/reddit"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/www.reddit.com\/dev\/api"
+        },
+        {
+            "type": "Email",
+            "url": "legal@reddit.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/reddit"
+        },
+        {
+            "type": "LinkedIn",
+            "url": "https:\/\/www.linkedin.com\/company\/product-hunt\/"
+        },
+        {
+            "type": "Privacy",
+            "url": "https:\/\/www.reddit.com\/help\/privacypolicy"
+        },
+        {
+            "type": "Security",
+            "url": "https:\/\/www.reddit.com\/help\/privacypolicy#section_security"
+        },
+        {
+            "type": "Support",
+            "url": "https:\/\/www.reddit.com\/contact\/"
+        },
+        {
+            "type": "Terms Of Service",
+            "url": "http:\/\/www.reddit.com\/help\/useragreement"
+        },
+        {
+            "type": "Transparency Report",
+            "url": "https:\/\/www.reddit.com\/wiki\/transparency"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/reddit"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/www.reddit.com"
+        }
+    ]
+}
