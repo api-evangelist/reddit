@@ -1,0 +1,176 @@
+openapi: 3.1.0
+info:
+  title: Reddit Embeds
+  description: >-
+    Reddit Embeds allows developers and content creators to embed Reddit
+    posts and comments directly into external websites and applications.
+    This service provides oEmbed endpoints that return embed codes and
+    metadata for rendering Reddit content in a visually consistent format
+    outside of the Reddit platform. It follows the oEmbed specification
+    for content discovery and embedding.
+  version: '1.0'
+  contact:
+    name: Reddit Developer Support
+    url: https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
+externalDocs:
+  description: oEmbed Specification
+  url: https://oembed.com/
+servers:
+  - url: https://www.reddit.com
+    description: Reddit oEmbed Server
+tags:
+  - name: oEmbed
+    description: >-
+      Endpoints implementing the oEmbed protocol for embedding Reddit
+      content in external websites and applications.
+paths:
+  /oembed:
+    get:
+      operationId: getOembed
+      summary: Get oEmbed data for a Reddit URL
+      description: >-
+        Returns oEmbed-formatted embed data for a given Reddit URL. This
+        endpoint follows the oEmbed specification and returns HTML embed
+        code along with metadata about the content. Supports both JSON
+        and XML response formats. The returned HTML can be used to embed
+        Reddit posts and comments into external pages.
+      tags:
+        - oEmbed
+      parameters:
+        - name: url
+          in: query
+          required: true
+          description: >-
+            The URL of the Reddit content to embed. Must be a valid Reddit
+            post or comment permalink URL.
+          schema:
+            type: string
+            format: uri
+        - name: format
+          in: query
+          description: >-
+            The response format. Defaults to JSON.
+          schema:
+            type: string
+            enum:
+              - json
+              - xml
+            default: json
+        - name: maxwidth
+          in: query
+          description: >-
+            The maximum width of the embed in pixels. The embed will be
+            scaled to fit within this width.
+          schema:
+            type: integer
+            minimum: 1
+        - name: maxheight
+          in: query
+          description: >-
+            The maximum height of the embed in pixels.
+          schema:
+            type: integer
+            minimum: 1
+        - name: parent
+          in: query
+          description: >-
+            The parent origin domain for the embed iframe. Required for
+            proper cross-origin embed functionality.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: oEmbed response with embed data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OEmbedResponse'
+            text/xml:
+              schema:
+                $ref: '#/components/schemas/OEmbedResponse'
+        '400':
+          description: Invalid URL or parameters
+        '404':
+          description: Content not found or not embeddable
+        '501':
+          description: URL not supported for embedding
+components:
+  schemas:
+    OEmbedResponse:
+      type: object
+      description: >-
+        An oEmbed response containing embed HTML and metadata, conforming
+        to the oEmbed specification.
+      required:
+        - type
+        - version
+      properties:
+        type:
+          type: string
+          description: >-
+            The oEmbed resource type. Reddit embeds are always of type
+            rich, providing HTML for rendering.
+          enum:
+            - rich
+        version:
+          type: string
+          description: >-
+            The oEmbed version number.
+          enum:
+            - '1.0'
+        title:
+          type: string
+          description: >-
+            The title of the Reddit post or comment being embedded.
+        author_name:
+          type: string
+          description: >-
+            The Reddit username of the content author.
+        author_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the author's Reddit profile.
+        provider_name:
+          type: string
+          description: >-
+            The name of the content provider, always Reddit.
+          enum:
+            - reddit
+        provider_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of the content provider.
+          enum:
+            - https://www.reddit.com/
+        html:
+          type: string
+          description: >-
+            The HTML code for the embed. Contains an iframe or script
+            tag that renders the Reddit content.
+        width:
+          type: integer
+          description: >-
+            The width of the embed in pixels.
+        height:
+          type: integer
+          description: >-
+            The height of the embed in pixels.
+        thumbnail_url:
+          type: string
+          format: uri
+          description: >-
+            The URL of a thumbnail image for the content, if available.
+        thumbnail_width:
+          type: integer
+          description: >-
+            The width of the thumbnail image in pixels.
+        thumbnail_height:
+          type: integer
+          description: >-
+            The height of the thumbnail image in pixels.
+        cache_age:
+          type: integer
+          description: >-
+            The suggested cache lifetime for the embed data in seconds.

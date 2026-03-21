@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reddit.com/schemas/reddit/comment.json",
+  "title": "Reddit Comment",
+  "description": "Represents a Reddit comment within a submission's comment tree, including its text content, author information, voting data, and position in the reply hierarchy.",
+  "type": "object",
+  "required": ["id", "name", "body", "author", "link_id", "created_utc"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID36 identifier for the comment."
+    },
+    "name": {
+      "type": "string",
+      "description": "The fullname of the comment, with the t1_ prefix.",
+      "pattern": "^t1_[a-z0-9]+$"
+    },
+    "parent_id": {
+      "type": "string",
+      "description": "The fullname of the parent thing (t1_ for a comment, t3_ for a submission).",
+      "pattern": "^t[13]_[a-z0-9]+$"
+    },
+    "link_id": {
+      "type": "string",
+      "description": "The fullname of the submission this comment belongs to.",
+      "pattern": "^t3_[a-z0-9]+$"
+    },
+    "subreddit": {
+      "type": "string",
+      "description": "The name of the subreddit this comment was posted in."
+    },
+    "subreddit_id": {
+      "type": "string",
+      "description": "The fullname of the subreddit.",
+      "pattern": "^t5_[a-z0-9]+$"
+    },
+    "author": {
+      "type": "string",
+      "description": "The username of the comment author."
+    },
+    "author_fullname": {
+      "type": "string",
+      "description": "The fullname of the comment author.",
+      "pattern": "^t2_[a-z0-9]+$"
+    },
+    "body": {
+      "type": "string",
+      "description": "The body text of the comment in markdown format."
+    },
+    "body_html": {
+      "type": "string",
+      "description": "The body text of the comment rendered as HTML."
+    },
+    "score": {
+      "type": "integer",
+      "description": "The net score (upvotes minus downvotes) of the comment."
+    },
+    "ups": {
+      "type": "integer",
+      "description": "The number of upvotes."
+    },
+    "downs": {
+      "type": "integer",
+      "description": "The number of downvotes."
+    },
+    "created_utc": {
+      "type": "number",
+      "format": "double",
+      "description": "The Unix timestamp of when the comment was created."
+    },
+    "edited": {
+      "type": ["number", "boolean"],
+      "description": "The Unix timestamp of the last edit, or false if never edited."
+    },
+    "is_submitter": {
+      "type": "boolean",
+      "description": "Whether the comment author is also the author of the parent submission."
+    },
+    "stickied": {
+      "type": "boolean",
+      "description": "Whether the comment is stickied (pinned) by a moderator."
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "Whether the comment is locked from replies."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the comment is archived."
+    },
+    "saved": {
+      "type": "boolean",
+      "description": "Whether the comment is saved by the authenticated user."
+    },
+    "distinguished": {
+      "type": ["string", "null"],
+      "description": "Whether the comment has been distinguished by a moderator or admin.",
+      "enum": [null, "moderator", "admin"]
+    },
+    "author_flair_text": {
+      "type": ["string", "null"],
+      "description": "The flair text of the comment author in this subreddit."
+    },
+    "author_flair_css_class": {
+      "type": ["string", "null"],
+      "description": "The CSS class of the author's flair."
+    },
+    "permalink": {
+      "type": "string",
+      "description": "The relative permalink URL of the comment."
+    },
+    "depth": {
+      "type": "integer",
+      "description": "The depth of the comment in the reply tree, starting at 0.",
+      "minimum": 0
+    },
+    "gilded": {
+      "type": "integer",
+      "description": "The number of times this comment has been gilded.",
+      "minimum": 0
+    },
+    "replies": {
+      "type": ["object", "string"],
+      "description": "The replies to this comment as a Listing object, or an empty string if there are no replies."
+    },
+    "score_hidden": {
+      "type": "boolean",
+      "description": "Whether the comment score is currently hidden."
+    },
+    "controversiality": {
+      "type": "integer",
+      "description": "Whether the comment is controversial (0 or 1).",
+      "minimum": 0,
+      "maximum": 1
+    }
+  }
+}

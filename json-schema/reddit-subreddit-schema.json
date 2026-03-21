@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reddit.com/schemas/reddit/subreddit.json",
+  "title": "Reddit Subreddit",
+  "description": "Represents a Reddit subreddit community, including its display configuration, subscriber count, rules, and moderation settings.",
+  "type": "object",
+  "required": ["id", "name", "display_name", "title", "created_utc"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID36 identifier for the subreddit."
+    },
+    "name": {
+      "type": "string",
+      "description": "The fullname of the subreddit, with the t5_ prefix.",
+      "pattern": "^t5_[a-z0-9]+$"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the subreddit without the r/ prefix."
+    },
+    "display_name_prefixed": {
+      "type": "string",
+      "description": "The display name with the r/ prefix.",
+      "pattern": "^r/"
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the subreddit shown in the header."
+    },
+    "public_description": {
+      "type": "string",
+      "description": "A short public description shown in search results and listings."
+    },
+    "description": {
+      "type": "string",
+      "description": "The full sidebar description in markdown format."
+    },
+    "description_html": {
+      "type": ["string", "null"],
+      "description": "The sidebar description rendered as HTML."
+    },
+    "subscribers": {
+      "type": "integer",
+      "description": "The total number of subscribers.",
+      "minimum": 0
+    },
+    "accounts_active": {
+      "type": ["integer", "null"],
+      "description": "The approximate number of users currently active in the subreddit."
+    },
+    "created_utc": {
+      "type": "number",
+      "format": "double",
+      "description": "The Unix timestamp of when the subreddit was created."
+    },
+    "subreddit_type": {
+      "type": "string",
+      "description": "The access type of the subreddit.",
+      "enum": ["public", "private", "restricted", "gold_restricted", "archived"]
+    },
+    "submission_type": {
+      "type": "string",
+      "description": "The types of submissions allowed.",
+      "enum": ["any", "link", "self"]
+    },
+    "lang": {
+      "type": "string",
+      "description": "The primary language of the subreddit (IETF language tag)."
+    },
+    "over18": {
+      "type": "boolean",
+      "description": "Whether the subreddit is marked as NSFW."
+    },
+    "spoilers_enabled": {
+      "type": "boolean",
+      "description": "Whether spoiler tagging is enabled."
+    },
+    "allow_images": {
+      "type": "boolean",
+      "description": "Whether image posts are allowed."
+    },
+    "allow_videos": {
+      "type": "boolean",
+      "description": "Whether video posts are allowed."
+    },
+    "allow_polls": {
+      "type": "boolean",
+      "description": "Whether poll posts are allowed."
+    },
+    "url": {
+      "type": "string",
+      "description": "The relative URL path of the subreddit."
+    },
+    "icon_img": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the subreddit icon image."
+    },
+    "banner_img": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the subreddit banner image."
+    },
+    "header_img": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "The URL of the subreddit header image."
+    },
+    "community_icon": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the community icon."
+    },
+    "primary_color": {
+      "type": "string",
+      "description": "The primary theme color as a hex code.",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "key_color": {
+      "type": "string",
+      "description": "The key accent color as a hex code.",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    },
+    "wiki_enabled": {
+      "type": ["boolean", "null"],
+      "description": "Whether the subreddit wiki is enabled."
+    },
+    "user_is_subscriber": {
+      "type": ["boolean", "null"],
+      "description": "Whether the authenticated user is subscribed to this subreddit."
+    },
+    "user_is_moderator": {
+      "type": ["boolean", "null"],
+      "description": "Whether the authenticated user is a moderator of this subreddit."
+    },
+    "user_is_banned": {
+      "type": ["boolean", "null"],
+      "description": "Whether the authenticated user is banned from this subreddit."
+    }
+  }
+}

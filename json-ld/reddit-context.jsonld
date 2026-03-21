@@ -1,0 +1,195 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "reddit": "https://www.reddit.com/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "sioc": "http://rdfs.org/sioc/ns#",
+
+    "Subreddit": {
+      "@id": "reddit:Subreddit",
+      "@context": {
+        "display_name": "schema:name",
+        "title": "schema:alternateName",
+        "description": "schema:description",
+        "public_description": "schema:abstract",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "subscribers": "schema:memberCount",
+        "created_utc": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "subreddit_type": "reddit:subredditType",
+        "over18": "reddit:isNSFW",
+        "lang": "schema:inLanguage",
+        "icon_img": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "banner_img": {
+          "@id": "reddit:bannerImage",
+          "@type": "@id"
+        },
+        "rules": {
+          "@id": "reddit:rules",
+          "@container": "@set"
+        },
+        "moderators": {
+          "@id": "reddit:moderators",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Post": {
+      "@id": "reddit:Post",
+      "@context": {
+        "title": "schema:headline",
+        "selftext": "schema:articleBody",
+        "author": "schema:author",
+        "subreddit": "sioc:has_container",
+        "url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "permalink": {
+          "@id": "reddit:permalink",
+          "@type": "@id"
+        },
+        "score": "reddit:score",
+        "upvote_ratio": "reddit:upvoteRatio",
+        "num_comments": "schema:commentCount",
+        "created_utc": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "edited": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "is_self": "reddit:isSelfPost",
+        "is_video": "reddit:isVideo",
+        "over_18": "reddit:isNSFW",
+        "spoiler": "reddit:isSpoiler",
+        "stickied": "reddit:isStickied",
+        "locked": "reddit:isLocked",
+        "archived": "reddit:isArchived",
+        "link_flair_text": "reddit:flairText",
+        "domain": "reddit:linkDomain",
+        "thumbnail": {
+          "@id": "schema:thumbnailUrl",
+          "@type": "@id"
+        }
+      }
+    },
+
+    "Comment": {
+      "@id": "reddit:Comment",
+      "@context": {
+        "body": "schema:text",
+        "author": "schema:author",
+        "link_id": "sioc:reply_of",
+        "parent_id": "reddit:parentId",
+        "subreddit": "sioc:has_container",
+        "score": "reddit:score",
+        "created_utc": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "edited": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "permalink": {
+          "@id": "reddit:permalink",
+          "@type": "@id"
+        },
+        "depth": "reddit:depth",
+        "is_submitter": "reddit:isSubmitter",
+        "stickied": "reddit:isStickied",
+        "locked": "reddit:isLocked",
+        "distinguished": "reddit:distinguished",
+        "replies": {
+          "@id": "sioc:has_reply",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Account": {
+      "@id": "reddit:Account",
+      "@context": {
+        "name": "schema:name",
+        "link_karma": "reddit:linkKarma",
+        "comment_karma": "reddit:commentKarma",
+        "created_utc": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "icon_img": {
+          "@id": "schema:image",
+          "@type": "@id"
+        },
+        "has_verified_email": "reddit:hasVerifiedEmail",
+        "is_gold": "reddit:isPremium",
+        "is_mod": "reddit:isModerator",
+        "over_18": "reddit:isOver18"
+      }
+    },
+
+    "AdCampaign": {
+      "@id": "reddit:AdCampaign",
+      "@context": {
+        "name": "schema:name",
+        "status": "reddit:campaignStatus",
+        "objective": "reddit:campaignObjective",
+        "daily_budget_micro": "reddit:dailyBudgetMicro",
+        "lifetime_budget_micro": "reddit:lifetimeBudgetMicro",
+        "start_time": {
+          "@id": "schema:startDate",
+          "@type": "xsd:dateTime"
+        },
+        "end_time": {
+          "@id": "schema:endDate",
+          "@type": "xsd:dateTime"
+        },
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AdGroup": {
+      "@id": "reddit:AdGroup",
+      "@context": {
+        "name": "schema:name",
+        "campaign_id": "reddit:campaignId",
+        "status": "reddit:adGroupStatus",
+        "bid_strategy": "reddit:bidStrategy",
+        "targeting": "reddit:targeting"
+      }
+    },
+
+    "Ad": {
+      "@id": "reddit:Ad",
+      "@context": {
+        "name": "schema:name",
+        "status": "reddit:adStatus",
+        "click_url": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "review_status": "reddit:reviewStatus",
+        "created_at": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    }
+  }
+}

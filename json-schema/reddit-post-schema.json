@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://reddit.com/schemas/reddit/post.json",
+  "title": "Reddit Post (Submission)",
+  "description": "Represents a Reddit submission (also known as a post or link), including its content, metadata, voting data, and associated subreddit information.",
+  "type": "object",
+  "required": ["id", "name", "subreddit", "title", "author", "created_utc"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The unique ID36 identifier for the post."
+    },
+    "name": {
+      "type": "string",
+      "description": "The fullname of the post, with the t3_ prefix.",
+      "pattern": "^t3_[a-z0-9]+$"
+    },
+    "subreddit": {
+      "type": "string",
+      "description": "The name of the subreddit the post was submitted to, without the r/ prefix."
+    },
+    "subreddit_id": {
+      "type": "string",
+      "description": "The fullname of the subreddit.",
+      "pattern": "^t5_[a-z0-9]+$"
+    },
+    "title": {
+      "type": "string",
+      "description": "The title of the post.",
+      "maxLength": 300
+    },
+    "author": {
+      "type": "string",
+      "description": "The username of the post author."
+    },
+    "author_fullname": {
+      "type": "string",
+      "description": "The fullname of the post author.",
+      "pattern": "^t2_[a-z0-9]+$"
+    },
+    "selftext": {
+      "type": "string",
+      "description": "The body text of a self-post in markdown format. Empty string for link posts."
+    },
+    "selftext_html": {
+      "type": ["string", "null"],
+      "description": "The body text of a self-post rendered as HTML."
+    },
+    "url": {
+      "type": "string",
+      "format": "uri",
+      "description": "The URL of the linked content, or the permalink for self-posts."
+    },
+    "permalink": {
+      "type": "string",
+      "description": "The relative permalink URL of the post on Reddit."
+    },
+    "domain": {
+      "type": "string",
+      "description": "The domain of the linked URL."
+    },
+    "is_self": {
+      "type": "boolean",
+      "description": "Whether the post is a self-post (text post) rather than a link post."
+    },
+    "is_video": {
+      "type": "boolean",
+      "description": "Whether the post contains hosted video content."
+    },
+    "score": {
+      "type": "integer",
+      "description": "The net score (upvotes minus downvotes) of the post."
+    },
+    "ups": {
+      "type": "integer",
+      "description": "The number of upvotes."
+    },
+    "downs": {
+      "type": "integer",
+      "description": "The number of downvotes."
+    },
+    "upvote_ratio": {
+      "type": "number",
+      "format": "double",
+      "description": "The ratio of upvotes to total votes, between 0.0 and 1.0.",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "num_comments": {
+      "type": "integer",
+      "description": "The number of comments on the post.",
+      "minimum": 0
+    },
+    "created_utc": {
+      "type": "number",
+      "format": "double",
+      "description": "The Unix timestamp of when the post was created."
+    },
+    "edited": {
+      "type": ["number", "boolean"],
+      "description": "The Unix timestamp of the last edit, or false if never edited."
+    },
+    "over_18": {
+      "type": "boolean",
+      "description": "Whether the post is marked as NSFW."
+    },
+    "spoiler": {
+      "type": "boolean",
+      "description": "Whether the post is marked as a spoiler."
+    },
+    "stickied": {
+      "type": "boolean",
+      "description": "Whether the post is stickied (pinned) in the subreddit."
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "Whether the post is locked from new comments."
+    },
+    "archived": {
+      "type": "boolean",
+      "description": "Whether the post is archived and no longer accepts votes or comments."
+    },
+    "hidden": {
+      "type": "boolean",
+      "description": "Whether the post is hidden by the authenticated user."
+    },
+    "saved": {
+      "type": "boolean",
+      "description": "Whether the post is saved by the authenticated user."
+    },
+    "distinguished": {
+      "type": ["string", "null"],
+      "description": "Whether the post has been distinguished by a moderator or admin.",
+      "enum": [null, "moderator", "admin"]
+    },
+    "link_flair_text": {
+      "type": ["string", "null"],
+      "description": "The text of the link flair applied to the post."
+    },
+    "link_flair_css_class": {
+      "type": ["string", "null"],
+      "description": "The CSS class of the link flair."
+    },
+    "thumbnail": {
+      "type": "string",
+      "description": "The URL of the post thumbnail, or a placeholder value like self, default, image, or nsfw."
+    },
+    "thumbnail_width": {
+      "type": ["integer", "null"],
+      "description": "The width of the thumbnail in pixels."
+    },
+    "thumbnail_height": {
+      "type": ["integer", "null"],
+      "description": "The height of the thumbnail in pixels."
+    },
+    "media": {
+      "type": ["object", "null"],
+      "description": "Media metadata for video or embedded content posts."
+    },
+    "gilded": {
+      "type": "integer",
+      "description": "The number of times this post has been gilded (awarded gold).",
+      "minimum": 0
+    },
+    "num_crossposts": {
+      "type": "integer",
+      "description": "The number of times this post has been crossposted.",
+      "minimum": 0
+    }
+  }
+}
