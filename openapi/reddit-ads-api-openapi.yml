@@ -24,10 +24,6 @@ tags:
     description: >-
       Endpoints for managing Reddit Ads accounts, including retrieving
       account details and configuration settings.
-  - name: Campaigns
-    description: >-
-      Endpoints for creating, reading, updating, and deleting advertising
-      campaigns, including budget and schedule management.
   - name: Ad Groups
     description: >-
       Endpoints for managing ad groups within campaigns, including
@@ -36,26 +32,30 @@ tags:
     description: >-
       Endpoints for creating and managing individual ads and their
       associated creative content.
-  - name: Custom Audiences
+  - name: Campaigns
     description: >-
-      Endpoints for managing custom audiences for targeting, including
-      email lists, mobile device IDs, and website visitor audiences.
+      Endpoints for creating, reading, updating, and deleting advertising
+      campaigns, including budget and schedule management.
   - name: Conversions
     description: >-
       Endpoints for managing conversion pixels and sending server-side
       conversion events via the Conversions API (CAPI).
-  - name: Targeting
+  - name: Custom Audiences
     description: >-
-      Endpoints for retrieving available targeting options including
-      interests, communities, locations, and devices.
-  - name: Reporting
-    description: >-
-      Endpoints for retrieving campaign, ad group, and ad performance
-      reporting data including impressions, clicks, and conversions.
+      Endpoints for managing custom audiences for targeting, including
+      email lists, mobile device IDs, and website visitor audiences.
   - name: Funding
     description: >-
       Endpoints for managing account funding instruments and billing
       information.
+  - name: Reporting
+    description: >-
+      Endpoints for retrieving campaign, ad group, and ad performance
+      reporting data including impressions, clicks, and conversions.
+  - name: Targeting
+    description: >-
+      Endpoints for retrieving available targeting options including
+      interests, communities, locations, and devices.
 security:
   - oauth2: []
 paths:

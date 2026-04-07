@@ -61,18 +61,6 @@ tags:
     description: >-
       Endpoints for managing subreddit wikis, including reading and
       editing wiki pages, revision history, and permissions.
-  - name: Collections
-    description: >-
-      Endpoints for managing post collections within subreddits, allowing
-      curated groupings of related posts.
-  - name: Widgets
-    description: >-
-      Endpoints for managing subreddit sidebar widgets, including text
-      widgets, button widgets, and calendar widgets.
-  - name: Emoji
-    description: >-
-      Endpoints for managing custom subreddit emoji used in flair and
-      rich text content.
 security:
   - oauth2: []
 paths:
