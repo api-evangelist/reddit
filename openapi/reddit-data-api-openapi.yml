@@ -67,7 +67,7 @@ paths:
   /api/v1/me:
     get:
       operationId: getMe
-      summary: Get current user identity
+      summary: Get Current User Identity
       description: >-
         Returns the identity of the currently authenticated user, including
         username, karma, account age, and preferences.
@@ -85,7 +85,7 @@ paths:
   /api/v1/me/prefs:
     get:
       operationId: getMyPrefs
-      summary: Get user preferences
+      summary: Get User Preferences
       description: >-
         Returns the preference settings of the currently authenticated user.
       tags:
@@ -101,7 +101,7 @@ paths:
           description: Authentication required
     patch:
       operationId: updateMyPrefs
-      summary: Update user preferences
+      summary: Update User Preferences
       description: >-
         Updates the preference settings of the currently authenticated user.
       tags:
@@ -124,7 +124,7 @@ paths:
   /api/v1/me/karma:
     get:
       operationId: getMyKarma
-      summary: Get karma breakdown by subreddit
+      summary: Get Karma Breakdown by Subreddit
       description: >-
         Returns a breakdown of the current user's karma by subreddit,
         including link karma and comment karma for each subreddit.
@@ -149,7 +149,7 @@ paths:
   /api/v1/me/trophies:
     get:
       operationId: getMyTrophies
-      summary: Get current user trophies
+      summary: Get Current User Trophies
       description: >-
         Returns a list of trophies for the currently authenticated user.
       tags:
@@ -166,7 +166,7 @@ paths:
   /api/v1/me/friends:
     get:
       operationId: getMyFriends
-      summary: Get friends list
+      summary: Get Friends List
       description: >-
         Returns a list of the current user's friends.
       tags:
@@ -183,7 +183,7 @@ paths:
   /api/v1/me/blocked:
     get:
       operationId: getMyBlocked
-      summary: Get blocked users list
+      summary: Get Blocked Users List
       description: >-
         Returns a list of users blocked by the currently authenticated user.
       tags:
@@ -200,7 +200,7 @@ paths:
   /r/{subreddit}/hot:
     get:
       operationId: getHotListings
-      summary: Get hot listings
+      summary: Get Hot Listings
       description: >-
         Returns a listing of hot posts from the specified subreddit. Results
         are sorted by Reddit's hot ranking algorithm.
@@ -315,7 +315,7 @@ paths:
   /r/{subreddit}/new:
     get:
       operationId: getNewListings
-      summary: Get new listings
+      summary: Get New Listings
       description: >-
         Returns a listing of new posts from the specified subreddit, sorted
         by submission time with newest first.
@@ -337,7 +337,7 @@ paths:
   /r/{subreddit}/rising:
     get:
       operationId: getRisingListings
-      summary: Get rising listings
+      summary: Get Rising Listings
       description: >-
         Returns a listing of rising posts from the specified subreddit.
         Rising posts are those gaining upvotes at a rapid rate.
@@ -359,7 +359,7 @@ paths:
   /r/{subreddit}/top:
     get:
       operationId: getTopListings
-      summary: Get top listings
+      summary: Get Top Listings
       description: >-
         Returns a listing of top-scoring posts from the specified subreddit,
         filterable by time period.
@@ -382,7 +382,7 @@ paths:
   /r/{subreddit}/controversial:
     get:
       operationId: getControversialListings
-      summary: Get controversial listings
+      summary: Get Controversial Listings
       description: >-
         Returns a listing of controversial posts from the specified
         subreddit, which are posts with a roughly even mix of upvotes
@@ -406,7 +406,7 @@ paths:
   /comments/{article}:
     get:
       operationId: getComments
-      summary: Get comments for a submission
+      summary: Get Comments for a Submission
       description: >-
         Returns comments for a given submission (article). The response
         includes both the submission data and a tree of comments. Use
@@ -463,7 +463,7 @@ paths:
   /api/morechildren:
     get:
       operationId: getMoreChildren
-      summary: Retrieve additional comments
+      summary: Retrieve Additional Comments
       description: >-
         Retrieves additional comments omitted from a base comment tree.
         Used to load more comments from a stub returned in a comment
@@ -517,7 +517,7 @@ paths:
   /api/submit:
     post:
       operationId: submit
-      summary: Submit a new link or self-post
+      summary: Submit a New Link or Self-post
       description: >-
         Submits a new link or self-post to a subreddit. Requires the
         submit OAuth scope.
@@ -606,7 +606,7 @@ paths:
   /api/comment:
     post:
       operationId: comment
-      summary: Submit a new comment
+      summary: Submit a New Comment
       description: >-
         Submits a new comment on a submission or in reply to another
         comment. Requires the submit OAuth scope.
@@ -649,7 +649,7 @@ paths:
   /api/vote:
     post:
       operationId: vote
-      summary: Vote on a submission or comment
+      summary: Vote on a Submission or Comment
       description: >-
         Casts a vote on a submission or comment. Direction values are
         1 for upvote, -1 for downvote, and 0 to remove the vote.
@@ -694,7 +694,7 @@ paths:
   /api/save:
     post:
       operationId: save
-      summary: Save a submission or comment
+      summary: Save a Submission or Comment
       description: >-
         Saves a submission or comment to the authenticated user's saved
         items. Requires the save OAuth scope.
@@ -723,7 +723,7 @@ paths:
   /api/unsave:
     post:
       operationId: unsave
-      summary: Unsave a submission or comment
+      summary: Unsave a Submission or Comment
       description: >-
         Removes a submission or comment from the authenticated user's
         saved items. Requires the save OAuth scope.
@@ -748,7 +748,7 @@ paths:
   /api/hide:
     post:
       operationId: hide
-      summary: Hide a submission
+      summary: Hide a Submission
       description: >-
         Hides a submission from the authenticated user's listings.
         Requires the report OAuth scope.
@@ -773,7 +773,7 @@ paths:
   /api/unhide:
     post:
       operationId: unhide
-      summary: Unhide a submission
+      summary: Unhide a Submission
       description: >-
         Unhides a previously hidden submission. Requires the report
         OAuth scope.
@@ -798,7 +798,7 @@ paths:
   /api/del:
     post:
       operationId: del
-      summary: Delete a submission or comment
+      summary: Delete a Submission or Comment
       description: >-
         Deletes a submission or comment authored by the authenticated user.
         Requires the edit OAuth scope.
@@ -823,7 +823,7 @@ paths:
   /api/editusertext:
     post:
       operationId: editUserText
-      summary: Edit a self-post or comment
+      summary: Edit a Self-post or Comment
       description: >-
         Edits the body text of a self-post or comment authored by the
         authenticated user. Requires the edit OAuth scope.
@@ -860,7 +860,7 @@ paths:
   /api/report:
     post:
       operationId: report
-      summary: Report a submission or comment
+      summary: Report a Submission or Comment
       description: >-
         Reports a submission or comment to the moderators of the
         subreddit. Requires the report OAuth scope.
@@ -906,7 +906,7 @@ paths:
   /message/inbox:
     get:
       operationId: getInbox
-      summary: Get inbox messages
+      summary: Get Inbox Messages
       description: >-
         Returns a listing of the authenticated user's inbox messages,
         including both private messages and comment replies.
@@ -935,7 +935,7 @@ paths:
   /message/unread:
     get:
       operationId: getUnreadMessages
-      summary: Get unread messages
+      summary: Get Unread Messages
       description: >-
         Returns a listing of the authenticated user's unread messages.
         Requires the privatemessages OAuth scope.
@@ -963,7 +963,7 @@ paths:
   /message/sent:
     get:
       operationId: getSentMessages
-      summary: Get sent messages
+      summary: Get Sent Messages
       description: >-
         Returns a listing of the authenticated user's sent messages.
         Requires the privatemessages OAuth scope.
@@ -984,7 +984,7 @@ paths:
   /api/compose:
     post:
       operationId: composeMessage
-      summary: Compose a private message
+      summary: Compose a Private Message
       description: >-
         Sends a private message to another user or a subreddit's
         moderators. Requires the privatemessages OAuth scope.
@@ -1025,7 +1025,7 @@ paths:
   /api/read_message:
     post:
       operationId: readMessage
-      summary: Mark messages as read
+      summary: Mark Messages As Read
       description: >-
         Marks one or more messages as read. Requires the privatemessages
         OAuth scope.
@@ -1050,7 +1050,7 @@ paths:
   /api/read_all_messages:
     post:
       operationId: readAllMessages
-      summary: Mark all messages as read
+      summary: Mark All Messages As Read
       description: >-
         Marks all of the authenticated user's messages as read.
         Requires the privatemessages OAuth scope.
@@ -1062,7 +1062,7 @@ paths:
   /r/{subreddit}/about:
     get:
       operationId: getSubredditAbout
-      summary: Get subreddit information
+      summary: Get Subreddit Information
       description: >-
         Returns information about the specified subreddit, including
         subscriber count, description, rules, and settings.
@@ -1082,7 +1082,7 @@ paths:
   /r/{subreddit}/about/rules:
     get:
       operationId: getSubredditRules
-      summary: Get subreddit rules
+      summary: Get Subreddit Rules
       description: >-
         Returns the rules defined for the specified subreddit.
       tags:
@@ -1108,7 +1108,7 @@ paths:
   /subreddits/mine/subscriber:
     get:
       operationId: getMySubreddits
-      summary: Get subscribed subreddits
+      summary: Get Subscribed Subreddits
       description: >-
         Returns a listing of subreddits the authenticated user is
         subscribed to. Requires the mysubreddits OAuth scope.
@@ -1129,7 +1129,7 @@ paths:
   /api/subscribe:
     post:
       operationId: subscribe
-      summary: Subscribe or unsubscribe from a subreddit
+      summary: Subscribe or Unsubscribe From a Subreddit
       description: >-
         Subscribes to or unsubscribes from a subreddit. Requires the
         subscribe OAuth scope.
@@ -1166,7 +1166,7 @@ paths:
   /subreddits/search:
     get:
       operationId: searchSubreddits
-      summary: Search subreddits
+      summary: Search Subreddits
       description: >-
         Searches for subreddits by name and description.
       tags:
@@ -1193,7 +1193,7 @@ paths:
   /r/{subreddit}/search:
     get:
       operationId: search
-      summary: Search submissions
+      summary: Search Submissions
       description: >-
         Searches for submissions within a specific subreddit or across
         all of Reddit. Supports sorting and time filtering.
@@ -1252,7 +1252,7 @@ paths:
   /user/{username}/about:
     get:
       operationId: getUserAbout
-      summary: Get user profile
+      summary: Get User Profile
       description: >-
         Returns public information about the specified user, including
         karma, account age, and display preferences.
@@ -1278,7 +1278,7 @@ paths:
   /user/{username}/submitted:
     get:
       operationId: getUserSubmitted
-      summary: Get user submissions
+      summary: Get User Submissions
       description: >-
         Returns a listing of submissions posted by the specified user.
       tags:
@@ -1317,7 +1317,7 @@ paths:
   /user/{username}/comments:
     get:
       operationId: getUserComments
-      summary: Get user comments
+      summary: Get User Comments
       description: >-
         Returns a listing of comments posted by the specified user.
       tags:
@@ -1356,7 +1356,7 @@ paths:
   /user/{username}/trophies:
     get:
       operationId: getUserTrophies
-      summary: Get user trophies
+      summary: Get User Trophies
       description: >-
         Returns a list of trophies for the specified user.
       tags:
@@ -1379,7 +1379,7 @@ paths:
   /r/{subreddit}/about/moderators:
     get:
       operationId: getSubredditModerators
-      summary: Get subreddit moderators
+      summary: Get Subreddit Moderators
       description: >-
         Returns a listing of the moderators of the specified subreddit.
       tags:
@@ -1396,7 +1396,7 @@ paths:
   /r/{subreddit}/about/modqueue:
     get:
       operationId: getModqueue
-      summary: Get moderation queue
+      summary: Get Moderation Queue
       description: >-
         Returns a listing of items in the subreddit's moderation queue.
         Items include submissions and comments that have been reported
@@ -1428,7 +1428,7 @@ paths:
   /r/{subreddit}/about/reports:
     get:
       operationId: getReports
-      summary: Get reported items
+      summary: Get Reported Items
       description: >-
         Returns a listing of reported items in the subreddit. Requires
         the modposts OAuth scope.
@@ -1450,7 +1450,7 @@ paths:
   /r/{subreddit}/about/spam:
     get:
       operationId: getSpam
-      summary: Get spam items
+      summary: Get Spam Items
       description: >-
         Returns a listing of items marked as spam in the subreddit.
         Requires the modposts OAuth scope.
@@ -1472,7 +1472,7 @@ paths:
   /r/{subreddit}/about/log:
     get:
       operationId: getModLog
-      summary: Get moderation log
+      summary: Get Moderation Log
       description: >-
         Returns a listing of moderation actions taken in the subreddit.
         Requires the modlog OAuth scope.
@@ -1506,7 +1506,7 @@ paths:
   /api/approve:
     post:
       operationId: approve
-      summary: Approve a submission or comment
+      summary: Approve a Submission or Comment
       description: >-
         Approves a submission or comment that was removed or reported.
         Requires the modposts OAuth scope.
@@ -1531,7 +1531,7 @@ paths:
   /api/remove:
     post:
       operationId: remove
-      summary: Remove a submission or comment
+      summary: Remove a Submission or Comment
       description: >-
         Removes a submission or comment from public listings. Requires
         the modposts OAuth scope.
@@ -1561,7 +1561,7 @@ paths:
   /r/{subreddit}/about/banned:
     get:
       operationId: getBannedUsers
-      summary: Get banned users
+      summary: Get Banned Users
       description: >-
         Returns a listing of users banned from the specified subreddit.
         Requires the modcontributors OAuth scope.
@@ -1583,7 +1583,7 @@ paths:
   /r/{subreddit}/api/flair:
     post:
       operationId: setFlair
-      summary: Set user flair
+      summary: Set User Flair
       description: >-
         Sets the flair for a user in the specified subreddit. Requires
         the modflair OAuth scope (or flair scope for self-flair).
@@ -1619,7 +1619,7 @@ paths:
   /r/{subreddit}/api/flairselector:
     post:
       operationId: getFlairSelector
-      summary: Get available flair options
+      summary: Get Available Flair Options
       description: >-
         Returns available flair options for a user or link in the
         specified subreddit.
@@ -1651,7 +1651,7 @@ paths:
   /r/{subreddit}/wiki/{page}:
     get:
       operationId: getWikiPage
-      summary: Get a wiki page
+      summary: Get a Wiki Page
       description: >-
         Returns the content of a wiki page in the specified subreddit.
         Requires the wikiread OAuth scope.
@@ -1678,7 +1678,7 @@ paths:
   /r/{subreddit}/wiki/pages:
     get:
       operationId: getWikiPages
-      summary: List wiki pages
+      summary: List Wiki Pages
       description: >-
         Returns a listing of all wiki pages in the specified subreddit.
         Requires the wikiread OAuth scope.
@@ -1703,7 +1703,7 @@ paths:
   /r/{subreddit}/api/wiki/edit:
     post:
       operationId: editWikiPage
-      summary: Edit a wiki page
+      summary: Edit a Wiki Page
       description: >-
         Edits the content of a wiki page in the specified subreddit.
         Requires the wikiedit OAuth scope.
@@ -1744,7 +1744,7 @@ paths:
   /r/{subreddit}/wiki/revisions/{page}:
     get:
       operationId: getWikiPageRevisions
-      summary: Get wiki page revision history
+      summary: Get Wiki Page Revision History
       description: >-
         Returns the revision history for a wiki page. Requires the
         wikiread OAuth scope.
@@ -1773,7 +1773,7 @@ paths:
   /api/v1/scopes:
     get:
       operationId: getScopes
-      summary: Get available OAuth scopes
+      summary: Get Available Oauth Scopes
       description: >-
         Returns a listing of all available OAuth scopes and their
         descriptions.

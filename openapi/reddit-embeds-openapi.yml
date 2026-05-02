@@ -27,7 +27,7 @@ paths:
   /oembed:
     get:
       operationId: getOembed
-      summary: Get oEmbed data for a Reddit URL
+      summary: Get Oembed Data for a Reddit Url
       description: >-
         Returns oEmbed-formatted embed data for a given Reddit URL. This
         endpoint follows the oEmbed specification and returns HTML embed

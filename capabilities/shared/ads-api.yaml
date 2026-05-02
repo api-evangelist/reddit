@@ -1,0 +1,169 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Reddit Ads API"
+  description: "Programmatic management of Reddit advertising campaigns, ad groups, ads, targeting, custom audiences, and performance reporting."
+  tags:
+    - Advertising
+    - Marketing
+    - Reddit
+    - Social Media
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      REDDIT_ADS_ACCESS_TOKEN: REDDIT_ADS_ACCESS_TOKEN
+
+capability:
+  consumes:
+    - type: http
+      namespace: reddit-ads
+      baseUri: https://ads-api.reddit.com/api/v3
+      description: "Reddit Ads API for programmatic advertising management"
+      authentication:
+        type: bearer
+        token: "{{REDDIT_ADS_ACCESS_TOKEN}}"
+      resources:
+        - name: account
+          path: /accounts/{account_id}
+          description: "Ads account management"
+          operations:
+            - name: get-account
+              method: GET
+              description: "Get ads account details"
+              inputParameters:
+                - name: account_id
+                  in: path
+                  type: string
+                  required: true
+                  description: "The ads account ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: campaigns
+          path: /campaigns
+          description: "Campaign management"
+          operations:
+            - name: list-campaigns
+              method: GET
+              description: "List advertising campaigns"
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Ads account ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-campaign
+              method: POST
+              description: "Create an advertising campaign"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  account_id: "{{tools.account_id}}"
+                  campaign_name: "{{tools.campaign_name}}"
+                  objective: "{{tools.objective}}"
+                  total_budget_amount: "{{tools.budget}}"
+        - name: custom-audiences
+          path: /custom_audiences
+          description: "Custom audience management"
+          operations:
+            - name: list-custom-audiences
+              method: GET
+              description: "List custom targeting audiences"
+              inputParameters:
+                - name: account_id
+                  in: query
+                  type: string
+                  required: true
+                  description: "Ads account ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: reddit-ads-rest
+      resources:
+        - path: /v1/campaigns
+          name: campaigns
+          description: "Campaign management"
+          operations:
+            - method: GET
+              name: list-campaigns
+              description: "List advertising campaigns"
+              call: "reddit-ads.list-campaigns"
+              with:
+                account_id: "rest.account_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: reddit-ads-mcp
+      transport: http
+      tools:
+        - name: get-ads-account
+          description: "Get Reddit Ads account details and settings"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "reddit-ads.get-account"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-campaigns
+          description: "List advertising campaigns for a Reddit Ads account"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "reddit-ads.list-campaigns"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-campaign
+          description: "Create a new Reddit advertising campaign"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "reddit-ads.create-campaign"
+          with:
+            account_id: "tools.account_id"
+            campaign_name: "tools.campaign_name"
+            objective: "tools.objective"
+            budget: "tools.budget"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-custom-audiences
+          description: "List custom targeting audiences for a Reddit Ads account"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "reddit-ads.list-custom-audiences"
+          with:
+            account_id: "tools.account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

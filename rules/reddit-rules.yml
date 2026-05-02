@@ -1,0 +1,143 @@
+extends: spectral:oas
+rules:
+  # Reddit API uses OAuth 2.0 - require oauth2 security scheme
+  reddit-oauth2-security:
+    description: >-
+      All Reddit API operations must use OAuth 2.0 authentication. The
+      oauth2 security scheme must be defined with authorizationCode flow
+      pointing to reddit.com authorization endpoints.
+    severity: error
+    given: $.components.securitySchemes.oauth2.flows.authorizationCode
+    then:
+      field: tokenUrl
+      function: pattern
+      functionOptions:
+        match: "reddit.com"
+
+  # User-Agent header is required for Reddit API
+  reddit-user-agent-required:
+    description: >-
+      Reddit API requires a descriptive User-Agent header identifying the
+      application. This must be documented in the API info or parameters.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: pattern
+      functionOptions:
+        match: "User-Agent"
+
+  # API must specify rate limits
+  reddit-rate-limits-documented:
+    description: >-
+      Reddit API has strict rate limits (60 req/min for authenticated, 1 req/sec
+      for Ads API). Rate limits must be documented in the API description.
+    severity: warn
+    given: $.info.description
+    then:
+      function: pattern
+      functionOptions:
+        match: "rate limit|requests per"
+
+  # Operation IDs required
+  reddit-operation-id-required:
+    description: >-
+      All Reddit API operations must have operationIds for SDK generation
+      and tooling support.
+    severity: error
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+
+  # Summary must use Title Case
+  reddit-summary-title-case:
+    description: >-
+      Operation summaries must use Title Case formatting following Reddit API
+      documentation conventions.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].summary
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9 &/'-]+$"
+
+  # Operations need descriptions
+  reddit-operation-description:
+    description: >-
+      All Reddit API operations must include descriptions explaining the
+      endpoint behavior, required scopes, and response format.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: description
+      function: truthy
+
+  # Reddit API pagination uses after/before
+  reddit-pagination-params:
+    description: >-
+      Reddit listing endpoints use after/before fullname-based pagination
+      rather than page numbers. List endpoints should document pagination.
+    severity: info
+    given: $.paths[*][get]
+    then:
+      function: truthy
+
+  # Subreddit path parameter is string type
+  reddit-subreddit-param-type:
+    description: >-
+      The subreddit path parameter must be of type string as subreddit
+      names are alphanumeric strings.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].parameters[?(@.name === 'subreddit')].schema
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: "^string$"
+
+  # Response schemas needed for 200 responses
+  reddit-response-schema:
+    description: >-
+      GET operations must define response schemas to document the structure
+      of Reddit Thing and Listing objects.
+    severity: warn
+    given: $.paths[*][get].responses[200].content.application/json
+    then:
+      field: schema
+      function: truthy
+
+  # 401 responses defined
+  reddit-401-response:
+    description: >-
+      All Reddit API endpoints must define a 401 Unauthorized response
+      since all endpoints require valid OAuth 2.0 tokens.
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch].responses
+    then:
+      field: '401'
+      function: truthy
+
+  # Tags organize the Reddit API
+  reddit-tags-required:
+    description: >-
+      All operations must include tags to organize the Reddit API by
+      functional area (Account, Subreddits, Links and Comments, etc.).
+    severity: warn
+    given: $.paths[*][get,post,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+
+  # Server URL must use oauth.reddit.com
+  reddit-server-url:
+    description: >-
+      Authenticated Reddit API endpoints must use oauth.reddit.com as the
+      base server URL. Public endpoints may use www.reddit.com.
+    severity: error
+    given: $.servers[0]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "reddit.com"

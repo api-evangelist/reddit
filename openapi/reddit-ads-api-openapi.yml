@@ -62,7 +62,7 @@ paths:
   /accounts/{account_id}:
     get:
       operationId: getAccount
-      summary: Get account details
+      summary: Get Account Details
       description: >-
         Fetches detailed information about a specific Reddit Ads account
         including attribution settings, status, and account configuration.
@@ -84,7 +84,7 @@ paths:
   /accounts/{account_id}/campaigns:
     get:
       operationId: listCampaigns
-      summary: List campaigns
+      summary: List Campaigns
       description: >-
         Lists all campaigns in a Reddit Ads account with filtering,
         pagination, and sorting. Returns campaign IDs, names, status,
@@ -126,7 +126,7 @@ paths:
           description: Authentication required
     post:
       operationId: createCampaign
-      summary: Create a campaign
+      summary: Create a Campaign
       description: >-
         Creates a new advertising campaign in the specified Reddit Ads
         account.
@@ -154,7 +154,7 @@ paths:
   /accounts/{account_id}/campaigns/{campaign_id}:
     get:
       operationId: getCampaign
-      summary: Get a campaign
+      summary: Get a Campaign
       description: >-
         Fetches detailed information about a specific Reddit Ads campaign
         including status, budget, schedule, and targeting configuration.
@@ -174,7 +174,7 @@ paths:
           description: Campaign not found
     put:
       operationId: updateCampaign
-      summary: Update a campaign
+      summary: Update a Campaign
       description: >-
         Updates an existing campaign's configuration, including name,
         budget, schedule, and status.
@@ -202,7 +202,7 @@ paths:
           description: Campaign not found
     delete:
       operationId: deleteCampaign
-      summary: Delete a campaign
+      summary: Delete a Campaign
       description: >-
         Deletes an advertising campaign. The campaign must be in a
         non-active state to be deleted.
@@ -219,7 +219,7 @@ paths:
   /accounts/{account_id}/ad_groups:
     get:
       operationId: listAdGroups
-      summary: List ad groups
+      summary: List Ad Groups
       description: >-
         Lists ad groups in a Reddit Ads account or campaign, with ad
         groups containing targeting settings and grouping related ads.
@@ -255,7 +255,7 @@ paths:
           description: Authentication required
     post:
       operationId: createAdGroup
-      summary: Create an ad group
+      summary: Create an Ad Group
       description: >-
         Creates a new ad group within a campaign with targeting and
         bidding configuration.
@@ -281,7 +281,7 @@ paths:
   /accounts/{account_id}/ad_groups/{ad_group_id}:
     get:
       operationId: getAdGroup
-      summary: Get an ad group
+      summary: Get an Ad Group
       description: >-
         Fetches detailed information about a specific ad group including
         targeting settings, bid configuration, and schedule.
@@ -301,7 +301,7 @@ paths:
           description: Ad group not found
     put:
       operationId: updateAdGroup
-      summary: Update an ad group
+      summary: Update an Ad Group
       description: >-
         Updates an existing ad group's configuration, including targeting,
         bidding, and scheduling.
@@ -327,7 +327,7 @@ paths:
           description: Invalid ad group data
     delete:
       operationId: deleteAdGroup
-      summary: Delete an ad group
+      summary: Delete an Ad Group
       description: >-
         Deletes an ad group from a campaign.
       tags:
@@ -343,7 +343,7 @@ paths:
   /accounts/{account_id}/ads:
     get:
       operationId: listAds
-      summary: List ads
+      summary: List Ads
       description: >-
         Lists ads in a Reddit Ads account or ad group, returning ad IDs,
         names, status, creative content, and review status.
@@ -379,7 +379,7 @@ paths:
           description: Authentication required
     post:
       operationId: createAd
-      summary: Create an ad
+      summary: Create an Ad
       description: >-
         Creates a new ad with creative content within an ad group.
       tags:
@@ -404,7 +404,7 @@ paths:
   /accounts/{account_id}/ads/{ad_id}:
     get:
       operationId: getAd
-      summary: Get an ad
+      summary: Get an Ad
       description: >-
         Fetches detailed information about a specific ad including
         creative content, status, and review information.
@@ -424,7 +424,7 @@ paths:
           description: Ad not found
     put:
       operationId: updateAd
-      summary: Update an ad
+      summary: Update an Ad
       description: >-
         Updates an existing ad's creative content and configuration.
       tags:
@@ -449,7 +449,7 @@ paths:
           description: Invalid ad data
     delete:
       operationId: deleteAd
-      summary: Delete an ad
+      summary: Delete an Ad
       description: >-
         Deletes an ad from an ad group.
       tags:
@@ -465,7 +465,7 @@ paths:
   /accounts/{account_id}/custom_audiences:
     get:
       operationId: listCustomAudiences
-      summary: List custom audiences
+      summary: List Custom Audiences
       description: >-
         Lists custom audiences in a Reddit Ads account. Custom audiences
         allow targeting specific users based on email lists, mobile
@@ -496,7 +496,7 @@ paths:
           description: Authentication required
     post:
       operationId: createCustomAudience
-      summary: Create a custom audience
+      summary: Create a Custom Audience
       description: >-
         Creates a new custom audience for targeting in ad campaigns.
       tags:
@@ -521,7 +521,7 @@ paths:
   /accounts/{account_id}/custom_audiences/{audience_id}:
     get:
       operationId: getCustomAudience
-      summary: Get a custom audience
+      summary: Get a Custom Audience
       description: >-
         Fetches detailed information about a specific custom audience.
       tags:
@@ -546,7 +546,7 @@ paths:
           description: Custom audience not found
     put:
       operationId: updateCustomAudience
-      summary: Update a custom audience
+      summary: Update a Custom Audience
       description: >-
         Updates an existing custom audience's configuration and user list.
       tags:
@@ -575,7 +575,7 @@ paths:
                 $ref: '#/components/schemas/CustomAudience'
     delete:
       operationId: deleteCustomAudience
-      summary: Delete a custom audience
+      summary: Delete a Custom Audience
       description: >-
         Deletes a custom audience from the account.
       tags:
@@ -597,7 +597,7 @@ paths:
   /accounts/{account_id}/pixels:
     get:
       operationId: listPixels
-      summary: List conversion pixels
+      summary: List Conversion Pixels
       description: >-
         Lists conversion pixels (Reddit Pixel) in a Reddit Ads account.
         Pixels are used to track website visitors and conversions for
@@ -623,7 +623,7 @@ paths:
   /accounts/{account_id}/conversions/events:
     post:
       operationId: sendConversionEvents
-      summary: Send conversion events
+      summary: Send Conversion Events
       description: >-
         Sends server-side conversion events to the Reddit Ads Conversions
         API (CAPI). This enables advertisers to track conversions that
@@ -655,7 +655,7 @@ paths:
   /targeting/interests:
     get:
       operationId: listInterests
-      summary: List interest targeting options
+      summary: List Interest Targeting Options
       description: >-
         Returns available interest categories for ad targeting on the
         Reddit platform.
@@ -676,7 +676,7 @@ paths:
   /targeting/communities:
     get:
       operationId: listTargetingCommunities
-      summary: List community targeting options
+      summary: List Community Targeting Options
       description: >-
         Returns subreddit communities available for ad targeting.
       tags:
@@ -703,7 +703,7 @@ paths:
   /targeting/locations:
     get:
       operationId: listLocations
-      summary: List location targeting options
+      summary: List Location Targeting Options
       description: >-
         Returns available geographic locations for ad targeting,
         including countries, regions, and metro areas.
@@ -731,7 +731,7 @@ paths:
   /accounts/{account_id}/reports:
     post:
       operationId: createReport
-      summary: Create a performance report
+      summary: Create a Performance Report
       description: >-
         Generates a performance report for campaigns, ad groups, or ads
         in the specified account. Reports include metrics such as
@@ -758,7 +758,7 @@ paths:
   /accounts/{account_id}/funding_instruments:
     get:
       operationId: listFundingInstruments
-      summary: List funding instruments
+      summary: List Funding Instruments
       description: >-
         Lists the funding instruments (payment methods) associated
         with the specified Reddit Ads account.

@@ -1,0 +1,26 @@
+{
+  "name": "Post",
+  "description": "Reddit post (link) structure - also known as a submission or link (t3 type)",
+  "fields": [
+    { "name": "id", "type": "string", "description": "Base36 post ID" },
+    { "name": "name", "type": "string", "description": "Fullname (t3_<id>)" },
+    { "name": "title", "type": "string", "description": "Post title" },
+    { "name": "author", "type": "string", "description": "Author username" },
+    { "name": "subreddit", "type": "string", "description": "Subreddit name without r/ prefix" },
+    { "name": "subreddit_id", "type": "string", "description": "Subreddit fullname (t5_xxxxx)" },
+    { "name": "score", "type": "integer", "description": "Net vote score (upvotes - downvotes)" },
+    { "name": "upvote_ratio", "type": "number", "description": "Ratio of upvotes to total votes" },
+    { "name": "num_comments", "type": "integer", "description": "Total comment count" },
+    { "name": "url", "type": "string", "description": "Link URL (for link posts) or reddit.com permalink (self posts)" },
+    { "name": "permalink", "type": "string", "description": "Reddit post permalink path" },
+    { "name": "created_utc", "type": "number", "description": "Unix timestamp of creation (UTC)" },
+    { "name": "is_self", "type": "boolean", "description": "True for text posts, false for link posts" },
+    { "name": "selftext", "type": "string", "description": "Post text content (markdown, self posts only)" },
+    { "name": "thumbnail", "type": "string", "description": "Thumbnail image URL" },
+    { "name": "stickied", "type": "boolean", "description": "Whether the post is stickied in the subreddit" },
+    { "name": "over_18", "type": "boolean", "description": "Whether the post is NSFW" },
+    { "name": "spoiler", "type": "boolean", "description": "Whether the post is marked as a spoiler" },
+    { "name": "locked", "type": "boolean", "description": "Whether comments are locked" },
+    { "name": "flair_text", "type": "string", "description": "Link flair text" }
+  ]
+}

@@ -1,0 +1,141 @@
+name: Reddit Platform Vocabulary
+description: >-
+  Core vocabulary and terminology for the Reddit social platform including
+  community structure, content types, moderation, and API concepts.
+created: '2026-05-02'
+modified: '2026-05-02'
+terms:
+  - term: Subreddit
+    definition: >-
+      A named community on Reddit focused on a specific topic or interest. Subreddits
+      are prefixed with r/ (e.g., r/technology). They are t5 Things in the API.
+    tags:
+      - Communities
+      - Platform
+
+  - term: Post (Link/Submission)
+    definition: >-
+      A piece of content submitted to a subreddit. Can be a link to external content
+      (link post) or a text post (self post). Posts are t3 Things in the API.
+    tags:
+      - Content
+      - Platform
+
+  - term: Comment
+    definition: >-
+      A text response to a post or another comment. Comments form threaded
+      conversation trees. Comments are t1 Things in the API.
+    tags:
+      - Content
+      - Platform
+
+  - term: Thing
+    definition: >-
+      The base object type in the Reddit API. All Reddit objects are Things with
+      a kind prefix: t1=comment, t2=account, t3=link, t4=message, t5=subreddit, t6=award.
+    tags:
+      - API
+      - Data Model
+
+  - term: Fullname
+    definition: >-
+      A unique identifier for a Reddit Thing consisting of the kind prefix and base36 ID
+      (e.g., t3_abc123 for a post). Used for API pagination and references.
+    tags:
+      - API
+      - Identity
+
+  - term: Listing
+    definition: >-
+      A paginated collection of Things in the Reddit API. Listings contain children
+      (the items), and after/before fullnames for pagination.
+    tags:
+      - API
+      - Pagination
+
+  - term: Karma
+    definition: >-
+      A score accumulated by Reddit users based on upvotes received on their
+      posts and comments. Includes link karma and comment karma.
+    tags:
+      - Reputation
+      - Gamification
+
+  - term: Upvote / Downvote
+    definition: >-
+      Community voting mechanism. Upvotes increase a post or comment's score;
+      downvotes decrease it. Net score determines listing sort order.
+    tags:
+      - Voting
+      - Content Discovery
+
+  - term: Flair
+    definition: >-
+      A label that can be applied to posts (link flair) or users (user flair)
+      in a subreddit to categorize content or identify users.
+    tags:
+      - Organization
+      - Community
+
+  - term: Moderator
+    definition: >-
+      A volunteer or appointed user with permissions to manage a subreddit,
+      including approving/removing content, banning users, and editing settings.
+    tags:
+      - Moderation
+      - Community
+
+  - term: Modqueue
+    definition: >-
+      A queue of posts and comments awaiting moderator review, typically due to
+      spam filters, reports, or automod rules.
+    tags:
+      - Moderation
+      - Content Management
+
+  - term: OAuth Scope
+    definition: >-
+      A permission token that defines what actions an OAuth 2.0 application can
+      perform on behalf of a user (e.g., read, submit, vote, modposts).
+    tags:
+      - Authentication
+      - Authorization
+
+  - term: Subreddit Type
+    definition: >-
+      The access mode of a subreddit: public (anyone can view and post),
+      restricted (anyone can view, approval required to post), or private.
+    tags:
+      - Access Control
+      - Community
+
+  - term: Hot
+    definition: >-
+      A listing sort order that shows trending posts based on recency and
+      vote score. Hot posts are the default view for most subreddits.
+    tags:
+      - Content Discovery
+      - Algorithms
+
+  - term: Advertiser Account
+    definition: >-
+      An ads.reddit.com account (t2_ prefixed ID) used to manage Reddit advertising
+      campaigns, ad groups, ads, custom audiences, and billing.
+    tags:
+      - Advertising
+
+  - term: Custom Audience
+    definition: >-
+      A targeting audience in Reddit Ads built from email lists, mobile device IDs,
+      or pixel-based website visitor data for retargeting campaigns.
+    tags:
+      - Advertising
+      - Targeting
+
+  - term: oEmbed
+    definition: >-
+      A standard for allowing websites to display embedded representations of
+      content from URLs. Reddit supports oEmbed for embedding posts in external sites.
+    tags:
+      - Embedding
+      - Integration
