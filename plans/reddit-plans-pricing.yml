@@ -4,175 +4,62 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Reddit
 providerId: reddit
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Advertising
-  - Communities
-  - Content
   - Social Media
-  - Social News
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+  - Content
+  - Community
+description: The Reddit Data API has a free OAuth-authenticated tier intended for non-commercial
+  use and a commercial enterprise tier sold through contact-sales. Reddit's public developer
+  pages are protected against automated fetch, so concrete commercial rates could not be reconciled
+  from the live source.
+sources:
+  - https://www.reddit.com/wiki/api
+notes: Reddit developer/policy pages are gated against automated fetch; concrete commercial
+  pricing for the Reddit Data API is not publicly listed and must be obtained through Reddit
+  sales. Free non-commercial tier exists but its exact terms could not be verified live.
 plans:
-  - id: reddit-free
-    name: Free
+  - id: reddit-data-api-free
+    name: Reddit Data API — Free (non-commercial)
     type: freemium
-    description: Free entry tier for the Reddit API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free OAuth-authenticated tier for non-commercial integrations. Specific QPM
+      / QPS allowances and qualified-researcher carve-outs are documented in Reddit's developer
+      policies.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: Reddit Data API
-      - name: Reddit Ads API
-      - name: Reddit Embeds (oEmbed)
-      - name: Reddit OAuth 2.0 Authorization
-  - id: reddit-pro
-    name: Professional
-    type: paid
-    description: Production tier for Reddit. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
-    entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
+      - label: Free non-commercial access
+        name: free_noncommercial
+        type: subscription
+        metric: month
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Reddit Data API
-      - name: Reddit Ads API
-      - name: Reddit Embeds (oEmbed)
-      - name: Reddit OAuth 2.0 Authorization
-  - id: reddit-enterprise
-    name: Enterprise
+      - name: OAuth-authenticated access
+      - name: Non-commercial use only
+  - id: reddit-data-api-commercial
+    name: Reddit Data API — Commercial
     type: enterprise
-    description: Custom-negotiated tier for Reddit. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+    description: Commercial / enterprise access to the Reddit Data API is sold via Reddit's
+      sales team; rates and call ceilings are quoted per contract.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Custom contract
+        name: custom
+        type: subscription
+        metric: contract
         limit: -1
-        timeFrame: month
-        geo: configurable
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
+        timeFrame: year
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://oauth.reddit.com
-          - https://ads-api.reddit.com/api/v3
-          - https://www.reddit.com
-          - https://www.reddit.com/api/v1
-        unit: 1
-        price: custom
+        price: contact sales
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Reddit Data API
-      - name: Reddit Ads API
-      - name: Reddit Embeds (oEmbed)
-      - name: Reddit OAuth 2.0 Authorization
+      - name: Commercial-use entitlement
+      - name: Negotiated call volume
+      - name: Direct support relationship
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

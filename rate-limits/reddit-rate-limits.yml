@@ -4,101 +4,40 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Reddit
 providerId: reddit
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Advertising
-  - Communities
-  - Content
   - Social Media
-  - Social News
+  - Content
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Reddit API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: The Reddit Data API enforces per-OAuth-client rate limits and returns 429 when
+  exceeded. Reddit's public developer documentation pages were not fetchable from this run, so
+  exact numeric ceilings have not been reconciled live; commercial tier ceilings are negotiated.
+sources:
+  - https://www.reddit.com/wiki/api
+notes: Reddit's developer documentation surface is gated against automated fetch; exact rate-limit
+  numbers and header names could not be reconciled in this pass.
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Reddit Data API
-      - Reddit Ads API
-      - Reddit Embeds (oEmbed)
-      - Reddit OAuth 2.0 Authorization
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Reddit Data API
-      - Reddit Ads API
-      - Reddit Embeds (oEmbed)
-      - Reddit OAuth 2.0 Authorization
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Reddit Data API
-      - Reddit Ads API
-      - Reddit Embeds (oEmbed)
-      - Reddit OAuth 2.0 Authorization
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Reddit Data API
-      - Reddit Ads API
-      - Reddit Embeds (oEmbed)
-      - Reddit OAuth 2.0 Authorization
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
+  - name: OAuth client rate limit
+    scope: oauth-client
+    metric: varies
+    limit: 'enforced per OAuth client; see Reddit /wiki/api for current per-minute allowances'
+  - name: Commercial contract limit
     scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Reddit Data API
-      - Reddit Ads API
-      - Reddit Embeds (oEmbed)
-      - Reddit OAuth 2.0 Authorization
+    metric: varies
+    limit: 'negotiated per commercial contract'
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: OAuth Required
+    description: All non-trivial Data API access requires OAuth authentication; rate-limit
+      counters are tracked per client_id.
+  - name: 429 Backoff
+    description: When throttled, Reddit returns HTTP 429; clients should honor any Retry-After
+      response and apply exponential backoff with jitter.
+  - name: Commercial Use Requires Contract
+    description: Commercial usage above the free tier requires a Reddit Data API commercial
+      agreement; ceilings and pricing are negotiated.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
