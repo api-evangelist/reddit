@@ -3,11 +3,11 @@
   "feeds": [
     {
       "source": "https://www.redditinc.com/blog",
-      "feed_url": "https://redditinc.com/news/rss.xml",
-      "saved": 10,
-      "title": "Reddit Inc Blog Homepage"
+      "feed_url": "https://www.redditinc.com/blog/atom.xml",
+      "title": "Reddit Inc Blog Homepage",
+      "saved": 0
     }
   ],
   "post_count": 10,
-  "fetched": "2026-05-03T23:34:38Z"
+  "fetched": "2026-05-09T20:17:51Z"
 }
