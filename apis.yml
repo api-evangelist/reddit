@@ -49,7 +49,7 @@ apis:
         url: https://www.reddit.com/dev/api
       - type: Authentication
         url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-      - type: Terms of Service
+      - type: TermsOfService
         url: https://www.redditinc.com/policies/data-api-terms
       - type: OpenAPI
         url: openapi/reddit-data-api-openapi.yml
@@ -75,7 +75,7 @@ apis:
     properties:
       - type: Documentation
         url: https://ads-api.reddit.com/docs/
-      - type: Terms of Service
+      - type: TermsOfService
         url: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
       - type: OpenAPI
         url: openapi/reddit-ads-api-openapi.yml
@@ -135,19 +135,19 @@ common:
     url: https://www.reddit.com/dev/api
   - type: Documentation
     url: https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/reddit-archive
   - type: Blog
     url: https://www.redditinc.com/blog
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.reddit.com/policies/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.redditinc.com/policies/user-agreement
-  - type: Status
+  - type: StatusPage
     url: https://www.redditstatus.com/
   - type: Support
     url: https://support.reddithelp.com/hc/en-us
-  - type: Sign Up
+  - type: SignUp
     url: https://www.reddit.com/register
   - type: OpenAPI
     url: openapi/reddit-data-api-openapi.yml
