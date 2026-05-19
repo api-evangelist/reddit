@@ -1,0 +1,112 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Ads API — Conversions
+  description: 'Reddit Ads API — Conversions. 2 operations. Lead operation: Send Conversion Events. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Conversions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ads-conversions
+    baseUri: https://ads-api.reddit.com/api/v3
+    description: Reddit Ads API — Conversions business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-account_id-conversions-events
+      path: /accounts/{account_id}/conversions/events
+      operations:
+      - name: sendconversionevents
+        method: POST
+        description: Send Conversion Events
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: accounts-account_id-pixels
+      path: /accounts/{account_id}/pixels
+      operations:
+      - name: listpixels
+        method: GET
+        description: List Conversion Pixels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ads-conversions-rest
+    port: 8080
+    description: REST adapter for Reddit Ads API — Conversions. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/accounts/{account-id}/conversions/events
+      name: accounts-account-id-conversions-events
+      description: REST surface for accounts-account_id-conversions-events.
+      operations:
+      - method: POST
+        name: sendconversionevents
+        description: Send Conversion Events
+        call: ads-conversions.sendconversionevents
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{account-id}/pixels
+      name: accounts-account-id-pixels
+      description: REST surface for accounts-account_id-pixels.
+      operations:
+      - method: GET
+        name: listpixels
+        description: List Conversion Pixels
+        call: ads-conversions.listpixels
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ads-conversions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Ads API — Conversions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: send-conversion-events
+      description: Send Conversion Events
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ads-conversions.sendconversionevents
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-conversion-pixels
+      description: List Conversion Pixels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ads-conversions.listpixels
+      outputParameters:
+      - type: object
+        mapping: $.

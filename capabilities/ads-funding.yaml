@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Ads API — Funding
+  description: 'Reddit Ads API — Funding. 1 operations. Lead operation: List Funding Instruments. Self-contained Naftiko capability
+    covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Funding
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ads-funding
+    baseUri: https://ads-api.reddit.com/api/v3
+    description: Reddit Ads API — Funding business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-account_id-funding_instruments
+      path: /accounts/{account_id}/funding_instruments
+      operations:
+      - name: listfundinginstruments
+        method: GET
+        description: List Funding Instruments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ads-funding-rest
+    port: 8080
+    description: REST adapter for Reddit Ads API — Funding. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/accounts/{account-id}/funding-instruments
+      name: accounts-account-id-funding-instruments
+      description: REST surface for accounts-account_id-funding_instruments.
+      operations:
+      - method: GET
+        name: listfundinginstruments
+        description: List Funding Instruments
+        call: ads-funding.listfundinginstruments
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ads-funding-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Ads API — Funding. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-funding-instruments
+      description: List Funding Instruments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ads-funding.listfundinginstruments
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,101 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Embeds — oEmbed
+  description: 'Reddit Embeds — oEmbed. 1 operations. Lead operation: Get Oembed Data for a Reddit Url. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - oEmbed
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: embeds-oembed
+    baseUri: https://www.reddit.com
+    description: Reddit Embeds — oEmbed business capability. Self-contained, no shared references.
+    resources:
+    - name: oembed
+      path: /oembed
+      operations:
+      - name: getoembed
+        method: GET
+        description: Get Oembed Data for a Reddit Url
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: url
+          in: query
+          type: string
+          description: The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.
+          required: true
+        - name: format
+          in: query
+          type: string
+          description: The response format. Defaults to JSON.
+        - name: maxwidth
+          in: query
+          type: integer
+          description: The maximum width of the embed in pixels. The embed will be scaled to fit within this width.
+        - name: maxheight
+          in: query
+          type: integer
+          description: The maximum height of the embed in pixels.
+        - name: parent
+          in: query
+          type: string
+          description: The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.
+  exposes:
+  - type: rest
+    namespace: embeds-oembed-rest
+    port: 8080
+    description: REST adapter for Reddit Embeds — oEmbed. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/oembed
+      name: oembed
+      description: REST surface for oembed.
+      operations:
+      - method: GET
+        name: getoembed
+        description: Get Oembed Data for a Reddit Url
+        call: embeds-oembed.getoembed
+        with:
+          url: rest.url
+          format: rest.format
+          maxwidth: rest.maxwidth
+          maxheight: rest.maxheight
+          parent: rest.parent
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: embeds-oembed-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Embeds — oEmbed. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-oembed-data-reddit-url
+      description: Get Oembed Data for a Reddit Url
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: embeds-oembed.getoembed
+      with:
+        url: tools.url
+        format: tools.format
+        maxwidth: tools.maxwidth
+        maxheight: tools.maxheight
+        parent: tools.parent
+      outputParameters:
+      - type: object
+        mapping: $.

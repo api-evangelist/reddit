@@ -1,0 +1,224 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Ads API — Custom Audiences
+  description: 'Reddit Ads API — Custom Audiences. 5 operations. Lead operation: List Custom Audiences. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Custom Audiences
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ads-custom-audiences
+    baseUri: https://ads-api.reddit.com/api/v3
+    description: Reddit Ads API — Custom Audiences business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-account_id-custom_audiences
+      path: /accounts/{account_id}/custom_audiences
+      operations:
+      - name: listcustomaudiences
+        method: GET
+        description: List Custom Audiences
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcustomaudience
+        method: POST
+        description: Create a Custom Audience
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: accounts-account_id-custom_audiences-audience_id
+      path: /accounts/{account_id}/custom_audiences/{audience_id}
+      operations:
+      - name: getcustomaudience
+        method: GET
+        description: Get a Custom Audience
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: audience_id
+          in: path
+          type: string
+          description: The unique identifier of the custom audience.
+          required: true
+      - name: updatecustomaudience
+        method: PUT
+        description: Update a Custom Audience
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: audience_id
+          in: path
+          type: string
+          description: The unique identifier of the custom audience.
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletecustomaudience
+        method: DELETE
+        description: Delete a Custom Audience
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: audience_id
+          in: path
+          type: string
+          description: The unique identifier of the custom audience.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ads-custom-audiences-rest
+    port: 8080
+    description: REST adapter for Reddit Ads API — Custom Audiences. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/accounts/{account-id}/custom-audiences
+      name: accounts-account-id-custom-audiences
+      description: REST surface for accounts-account_id-custom_audiences.
+      operations:
+      - method: GET
+        name: listcustomaudiences
+        description: List Custom Audiences
+        call: ads-custom-audiences.listcustomaudiences
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcustomaudience
+        description: Create a Custom Audience
+        call: ads-custom-audiences.createcustomaudience
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounts/{account-id}/custom-audiences/{audience-id}
+      name: accounts-account-id-custom-audiences-audience-id
+      description: REST surface for accounts-account_id-custom_audiences-audience_id.
+      operations:
+      - method: GET
+        name: getcustomaudience
+        description: Get a Custom Audience
+        call: ads-custom-audiences.getcustomaudience
+        with:
+          audience_id: rest.audience_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecustomaudience
+        description: Update a Custom Audience
+        call: ads-custom-audiences.updatecustomaudience
+        with:
+          audience_id: rest.audience_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletecustomaudience
+        description: Delete a Custom Audience
+        call: ads-custom-audiences.deletecustomaudience
+        with:
+          audience_id: rest.audience_id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ads-custom-audiences-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Ads API — Custom Audiences. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-custom-audiences
+      description: List Custom Audiences
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ads-custom-audiences.listcustomaudiences
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-custom-audience
+      description: Create a Custom Audience
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ads-custom-audiences.createcustomaudience
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-custom-audience
+      description: Get a Custom Audience
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: ads-custom-audiences.getcustomaudience
+      with:
+        audience_id: tools.audience_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-custom-audience
+      description: Update a Custom Audience
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: ads-custom-audiences.updatecustomaudience
+      with:
+        audience_id: tools.audience_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-custom-audience
+      description: Delete a Custom Audience
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: ads-custom-audiences.deletecustomaudience
+      with:
+        audience_id: tools.audience_id
+      outputParameters:
+      - type: object
+        mapping: $.

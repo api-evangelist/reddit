@@ -1,0 +1,579 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Data API — Links & Comments
+  description: 'Reddit Data API — Links & Comments. 12 operations. Lead operation: Submit a New Comment. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Links & Comments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-links-comments
+    baseUri: https://oauth.reddit.com
+    description: Reddit Data API — Links & Comments business capability. Self-contained, no shared references.
+    resources:
+    - name: api-comment
+      path: /api/comment
+      operations:
+      - name: comment
+        method: POST
+        description: Submit a New Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-del
+      path: /api/del
+      operations:
+      - name: del
+        method: POST
+        description: Delete a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-editusertext
+      path: /api/editusertext
+      operations:
+      - name: editusertext
+        method: POST
+        description: Edit a Self-post or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-hide
+      path: /api/hide
+      operations:
+      - name: hide
+        method: POST
+        description: Hide a Submission
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-morechildren
+      path: /api/morechildren
+      operations:
+      - name: getmorechildren
+        method: GET
+        description: Retrieve Additional Comments
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: link_id
+          in: query
+          type: string
+          description: The fullname (t3_ prefix) of the submission.
+          required: true
+        - name: children
+          in: query
+          type: string
+          description: A comma-delimited list of comment ID36s to be fetched.
+          required: true
+        - name: sort
+          in: query
+          type: string
+          description: The sorting method for comments.
+        - name: api_type
+          in: query
+          type: string
+          description: The string json to request JSON response.
+    - name: api-report
+      path: /api/report
+      operations:
+      - name: report
+        method: POST
+        description: Report a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-save
+      path: /api/save
+      operations:
+      - name: save
+        method: POST
+        description: Save a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-submit
+      path: /api/submit
+      operations:
+      - name: submit
+        method: POST
+        description: Submit a New Link or Self-post
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-unhide
+      path: /api/unhide
+      operations:
+      - name: unhide
+        method: POST
+        description: Unhide a Submission
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-unsave
+      path: /api/unsave
+      operations:
+      - name: unsave
+        method: POST
+        description: Unsave a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-vote
+      path: /api/vote
+      operations:
+      - name: vote
+        method: POST
+        description: Vote on a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: comments-article
+      path: /comments/{article}
+      operations:
+      - name: getcomments
+        method: GET
+        description: Get Comments for a Submission
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: article
+          in: path
+          type: string
+          description: The ID36 of the submission to retrieve comments for.
+          required: true
+        - name: sort
+          in: query
+          type: string
+          description: The sorting method for comments.
+        - name: depth
+          in: query
+          type: integer
+          description: Maximum depth of subtrees in the thread.
+        - name: context
+          in: query
+          type: integer
+          description: Number of levels of parent comments to include for a comment permalink.
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-links-comments-rest
+    port: 8080
+    description: REST adapter for Reddit Data API — Links & Comments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/api/comment
+      name: api-comment
+      description: REST surface for api-comment.
+      operations:
+      - method: POST
+        name: comment
+        description: Submit a New Comment
+        call: data-links-comments.comment
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/del
+      name: api-del
+      description: REST surface for api-del.
+      operations:
+      - method: POST
+        name: del
+        description: Delete a Submission or Comment
+        call: data-links-comments.del
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/editusertext
+      name: api-editusertext
+      description: REST surface for api-editusertext.
+      operations:
+      - method: POST
+        name: editusertext
+        description: Edit a Self-post or Comment
+        call: data-links-comments.editusertext
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/hide
+      name: api-hide
+      description: REST surface for api-hide.
+      operations:
+      - method: POST
+        name: hide
+        description: Hide a Submission
+        call: data-links-comments.hide
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/morechildren
+      name: api-morechildren
+      description: REST surface for api-morechildren.
+      operations:
+      - method: GET
+        name: getmorechildren
+        description: Retrieve Additional Comments
+        call: data-links-comments.getmorechildren
+        with:
+          link_id: rest.link_id
+          children: rest.children
+          sort: rest.sort
+          api_type: rest.api_type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/report
+      name: api-report
+      description: REST surface for api-report.
+      operations:
+      - method: POST
+        name: report
+        description: Report a Submission or Comment
+        call: data-links-comments.report
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/save
+      name: api-save
+      description: REST surface for api-save.
+      operations:
+      - method: POST
+        name: save
+        description: Save a Submission or Comment
+        call: data-links-comments.save
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/submit
+      name: api-submit
+      description: REST surface for api-submit.
+      operations:
+      - method: POST
+        name: submit
+        description: Submit a New Link or Self-post
+        call: data-links-comments.submit
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/unhide
+      name: api-unhide
+      description: REST surface for api-unhide.
+      operations:
+      - method: POST
+        name: unhide
+        description: Unhide a Submission
+        call: data-links-comments.unhide
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/unsave
+      name: api-unsave
+      description: REST surface for api-unsave.
+      operations:
+      - method: POST
+        name: unsave
+        description: Unsave a Submission or Comment
+        call: data-links-comments.unsave
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/vote
+      name: api-vote
+      description: REST surface for api-vote.
+      operations:
+      - method: POST
+        name: vote
+        description: Vote on a Submission or Comment
+        call: data-links-comments.vote
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/{article}
+      name: comments-article
+      description: REST surface for comments-article.
+      operations:
+      - method: GET
+        name: getcomments
+        description: Get Comments for a Submission
+        call: data-links-comments.getcomments
+        with:
+          article: rest.article
+          sort: rest.sort
+          depth: rest.depth
+          context: rest.context
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-links-comments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Data API — Links & Comments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: submit-new-comment
+      description: Submit a New Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.comment
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-submission-comment
+      description: Delete a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.del
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-self-post-comment
+      description: Edit a Self-post or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.editusertext
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: hide-submission
+      description: Hide a Submission
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.hide
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: retrieve-additional-comments
+      description: Retrieve Additional Comments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-links-comments.getmorechildren
+      with:
+        link_id: tools.link_id
+        children: tools.children
+        sort: tools.sort
+        api_type: tools.api_type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: report-submission-comment
+      description: Report a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.report
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: save-submission-comment
+      description: Save a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.save
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: submit-new-link-self-post
+      description: Submit a New Link or Self-post
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.submit
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unhide-submission
+      description: Unhide a Submission
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.unhide
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unsave-submission-comment
+      description: Unsave a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.unsave
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: vote-submission-comment
+      description: Vote on a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-links-comments.vote
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-comments-submission
+      description: Get Comments for a Submission
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-links-comments.getcomments
+      with:
+        article: tools.article
+        sort: tools.sort
+        depth: tools.depth
+        context: tools.context
+      outputParameters:
+      - type: object
+        mapping: $.

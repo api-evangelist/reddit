@@ -1,0 +1,122 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Data API — Flair
+  description: 'Reddit Data API — Flair. 2 operations. Lead operation: Set User Flair. Self-contained Naftiko capability covering
+    one Reddit business surface.'
+  tags:
+  - Reddit
+  - Flair
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-flair
+    baseUri: https://oauth.reddit.com
+    description: Reddit Data API — Flair business capability. Self-contained, no shared references.
+    resources:
+    - name: r-subreddit-api-flair
+      path: /r/{subreddit}/api/flair
+      operations:
+      - name: setflair
+        method: POST
+        description: Set User Flair
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: r-subreddit-api-flairselector
+      path: /r/{subreddit}/api/flairselector
+      operations:
+      - name: getflairselector
+        method: POST
+        description: Get Available Flair Options
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-flair-rest
+    port: 8080
+    description: REST adapter for Reddit Data API — Flair. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/r/{subreddit}/api/flair
+      name: r-subreddit-api-flair
+      description: REST surface for r-subreddit-api-flair.
+      operations:
+      - method: POST
+        name: setflair
+        description: Set User Flair
+        call: data-flair.setflair
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/api/flairselector
+      name: r-subreddit-api-flairselector
+      description: REST surface for r-subreddit-api-flairselector.
+      operations:
+      - method: POST
+        name: getflairselector
+        description: Get Available Flair Options
+        call: data-flair.getflairselector
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-flair-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Data API — Flair. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: set-user-flair
+      description: Set User Flair
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-flair.setflair
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-available-flair-options
+      description: Get Available Flair Options
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: data-flair.getflairselector
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,338 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Data API — Moderation
+  description: 'Reddit Data API — Moderation. 8 operations. Lead operation: Approve a Submission or Comment. Self-contained
+    Naftiko capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Moderation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-moderation
+    baseUri: https://oauth.reddit.com
+    description: Reddit Data API — Moderation business capability. Self-contained, no shared references.
+    resources:
+    - name: api-approve
+      path: /api/approve
+      operations:
+      - name: approve
+        method: POST
+        description: Approve a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-remove
+      path: /api/remove
+      operations:
+      - name: remove
+        method: POST
+        description: Remove a Submission or Comment
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: r-subreddit-about-banned
+      path: /r/{subreddit}/about/banned
+      operations:
+      - name: getbannedusers
+        method: GET
+        description: Get Banned Users
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-about-log
+      path: /r/{subreddit}/about/log
+      operations:
+      - name: getmodlog
+        method: GET
+        description: Get Moderation Log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: mod
+          in: query
+          type: string
+          description: Filter by moderator username.
+        - name: type
+          in: query
+          type: string
+          description: Filter by moderation action type.
+    - name: r-subreddit-about-moderators
+      path: /r/{subreddit}/about/moderators
+      operations:
+      - name: getsubredditmoderators
+        method: GET
+        description: Get Subreddit Moderators
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-about-modqueue
+      path: /r/{subreddit}/about/modqueue
+      operations:
+      - name: getmodqueue
+        method: GET
+        description: Get Moderation Queue
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: type
+          in: query
+          type: string
+          description: Filter by type of content in the queue.
+    - name: r-subreddit-about-reports
+      path: /r/{subreddit}/about/reports
+      operations:
+      - name: getreports
+        method: GET
+        description: Get Reported Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-about-spam
+      path: /r/{subreddit}/about/spam
+      operations:
+      - name: getspam
+        method: GET
+        description: Get Spam Items
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-moderation-rest
+    port: 8080
+    description: REST adapter for Reddit Data API — Moderation. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/approve
+      name: api-approve
+      description: REST surface for api-approve.
+      operations:
+      - method: POST
+        name: approve
+        description: Approve a Submission or Comment
+        call: data-moderation.approve
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/remove
+      name: api-remove
+      description: REST surface for api-remove.
+      operations:
+      - method: POST
+        name: remove
+        description: Remove a Submission or Comment
+        call: data-moderation.remove
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/banned
+      name: r-subreddit-about-banned
+      description: REST surface for r-subreddit-about-banned.
+      operations:
+      - method: GET
+        name: getbannedusers
+        description: Get Banned Users
+        call: data-moderation.getbannedusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/log
+      name: r-subreddit-about-log
+      description: REST surface for r-subreddit-about-log.
+      operations:
+      - method: GET
+        name: getmodlog
+        description: Get Moderation Log
+        call: data-moderation.getmodlog
+        with:
+          mod: rest.mod
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/moderators
+      name: r-subreddit-about-moderators
+      description: REST surface for r-subreddit-about-moderators.
+      operations:
+      - method: GET
+        name: getsubredditmoderators
+        description: Get Subreddit Moderators
+        call: data-moderation.getsubredditmoderators
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/modqueue
+      name: r-subreddit-about-modqueue
+      description: REST surface for r-subreddit-about-modqueue.
+      operations:
+      - method: GET
+        name: getmodqueue
+        description: Get Moderation Queue
+        call: data-moderation.getmodqueue
+        with:
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/reports
+      name: r-subreddit-about-reports
+      description: REST surface for r-subreddit-about-reports.
+      operations:
+      - method: GET
+        name: getreports
+        description: Get Reported Items
+        call: data-moderation.getreports
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/about/spam
+      name: r-subreddit-about-spam
+      description: REST surface for r-subreddit-about-spam.
+      operations:
+      - method: GET
+        name: getspam
+        description: Get Spam Items
+        call: data-moderation.getspam
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-moderation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Data API — Moderation. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: approve-submission-comment
+      description: Approve a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-moderation.approve
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: remove-submission-comment
+      description: Remove a Submission or Comment
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-moderation.remove
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-banned-users
+      description: Get Banned Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getbannedusers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-moderation-log
+      description: Get Moderation Log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getmodlog
+      with:
+        mod: tools.mod
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-subreddit-moderators
+      description: Get Subreddit Moderators
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getsubredditmoderators
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-moderation-queue
+      description: Get Moderation Queue
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getmodqueue
+      with:
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reported-items
+      description: Get Reported Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getreports
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-spam-items
+      description: Get Spam Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-moderation.getspam
+      outputParameters:
+      - type: object
+        mapping: $.

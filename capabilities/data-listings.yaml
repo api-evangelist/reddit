@@ -1,0 +1,207 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Data API — Listings
+  description: 'Reddit Data API — Listings. 5 operations. Lead operation: Get Controversial Listings. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Listings
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-listings
+    baseUri: https://oauth.reddit.com
+    description: Reddit Data API — Listings business capability. Self-contained, no shared references.
+    resources:
+    - name: r-subreddit-controversial
+      path: /r/{subreddit}/controversial
+      operations:
+      - name: getcontroversiallistings
+        method: GET
+        description: Get Controversial Listings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-hot
+      path: /r/{subreddit}/hot
+      operations:
+      - name: gethotlistings
+        method: GET
+        description: Get Hot Listings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: g
+          in: query
+          type: string
+          description: Geolocation filter for location-specific hot listings.
+    - name: r-subreddit-new
+      path: /r/{subreddit}/new
+      operations:
+      - name: getnewlistings
+        method: GET
+        description: Get New Listings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-rising
+      path: /r/{subreddit}/rising
+      operations:
+      - name: getrisinglistings
+        method: GET
+        description: Get Rising Listings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-top
+      path: /r/{subreddit}/top
+      operations:
+      - name: gettoplistings
+        method: GET
+        description: Get Top Listings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-listings-rest
+    port: 8080
+    description: REST adapter for Reddit Data API — Listings. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/r/{subreddit}/controversial
+      name: r-subreddit-controversial
+      description: REST surface for r-subreddit-controversial.
+      operations:
+      - method: GET
+        name: getcontroversiallistings
+        description: Get Controversial Listings
+        call: data-listings.getcontroversiallistings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/hot
+      name: r-subreddit-hot
+      description: REST surface for r-subreddit-hot.
+      operations:
+      - method: GET
+        name: gethotlistings
+        description: Get Hot Listings
+        call: data-listings.gethotlistings
+        with:
+          g: rest.g
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/new
+      name: r-subreddit-new
+      description: REST surface for r-subreddit-new.
+      operations:
+      - method: GET
+        name: getnewlistings
+        description: Get New Listings
+        call: data-listings.getnewlistings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/rising
+      name: r-subreddit-rising
+      description: REST surface for r-subreddit-rising.
+      operations:
+      - method: GET
+        name: getrisinglistings
+        description: Get Rising Listings
+        call: data-listings.getrisinglistings
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/top
+      name: r-subreddit-top
+      description: REST surface for r-subreddit-top.
+      operations:
+      - method: GET
+        name: gettoplistings
+        description: Get Top Listings
+        call: data-listings.gettoplistings
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-listings-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Data API — Listings. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-controversial-listings
+      description: Get Controversial Listings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-listings.getcontroversiallistings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-hot-listings
+      description: Get Hot Listings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-listings.gethotlistings
+      with:
+        g: tools.g
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-new-listings
+      description: Get New Listings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-listings.getnewlistings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rising-listings
+      description: Get Rising Listings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-listings.getrisinglistings
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-top-listings
+      description: Get Top Listings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-listings.gettoplistings
+      outputParameters:
+      - type: object
+        mapping: $.

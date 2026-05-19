@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Ads API — Reporting
+  description: 'Reddit Ads API — Reporting. 1 operations. Lead operation: Create a Performance Report. Self-contained Naftiko
+    capability covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Reporting
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ads-reporting
+    baseUri: https://ads-api.reddit.com/api/v3
+    description: Reddit Ads API — Reporting business capability. Self-contained, no shared references.
+    resources:
+    - name: accounts-account_id-reports
+      path: /accounts/{account_id}/reports
+      operations:
+      - name: createreport
+        method: POST
+        description: Create a Performance Report
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: ads-reporting-rest
+    port: 8080
+    description: REST adapter for Reddit Ads API — Reporting. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/accounts/{account-id}/reports
+      name: accounts-account-id-reports
+      description: REST surface for accounts-account_id-reports.
+      operations:
+      - method: POST
+        name: createreport
+        description: Create a Performance Report
+        call: ads-reporting.createreport
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ads-reporting-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Ads API — Reporting. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: create-performance-report
+      description: Create a Performance Report
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ads-reporting.createreport
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

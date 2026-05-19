@@ -1,0 +1,196 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Reddit Data API — Wiki
+  description: 'Reddit Data API — Wiki. 4 operations. Lead operation: Edit a Wiki Page. Self-contained Naftiko capability
+    covering one Reddit business surface.'
+  tags:
+  - Reddit
+  - Wiki
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    REDDIT_API_KEY: REDDIT_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-wiki
+    baseUri: https://oauth.reddit.com
+    description: Reddit Data API — Wiki business capability. Self-contained, no shared references.
+    resources:
+    - name: r-subreddit-api-wiki-edit
+      path: /r/{subreddit}/api/wiki/edit
+      operations:
+      - name: editwikipage
+        method: POST
+        description: Edit a Wiki Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: r-subreddit-wiki-pages
+      path: /r/{subreddit}/wiki/pages
+      operations:
+      - name: getwikipages
+        method: GET
+        description: List Wiki Pages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: r-subreddit-wiki-revisions-page
+      path: /r/{subreddit}/wiki/revisions/{page}
+      operations:
+      - name: getwikipagerevisions
+        method: GET
+        description: Get Wiki Page Revision History
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: path
+          type: string
+          description: The name of the wiki page.
+          required: true
+    - name: r-subreddit-wiki-page
+      path: /r/{subreddit}/wiki/{page}
+      operations:
+      - name: getwikipage
+        method: GET
+        description: Get a Wiki Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: path
+          type: string
+          description: The name of the wiki page.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.REDDIT_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-wiki-rest
+    port: 8080
+    description: REST adapter for Reddit Data API — Wiki. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/r/{subreddit}/api/wiki/edit
+      name: r-subreddit-api-wiki-edit
+      description: REST surface for r-subreddit-api-wiki-edit.
+      operations:
+      - method: POST
+        name: editwikipage
+        description: Edit a Wiki Page
+        call: data-wiki.editwikipage
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/wiki/pages
+      name: r-subreddit-wiki-pages
+      description: REST surface for r-subreddit-wiki-pages.
+      operations:
+      - method: GET
+        name: getwikipages
+        description: List Wiki Pages
+        call: data-wiki.getwikipages
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/wiki/revisions/{page}
+      name: r-subreddit-wiki-revisions-page
+      description: REST surface for r-subreddit-wiki-revisions-page.
+      operations:
+      - method: GET
+        name: getwikipagerevisions
+        description: Get Wiki Page Revision History
+        call: data-wiki.getwikipagerevisions
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/r/{subreddit}/wiki/{page}
+      name: r-subreddit-wiki-page
+      description: REST surface for r-subreddit-wiki-page.
+      operations:
+      - method: GET
+        name: getwikipage
+        description: Get a Wiki Page
+        call: data-wiki.getwikipage
+        with:
+          page: rest.page
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-wiki-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Reddit Data API — Wiki. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: edit-wiki-page
+      description: Edit a Wiki Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: data-wiki.editwikipage
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-wiki-pages
+      description: List Wiki Pages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-wiki.getwikipages
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-wiki-page-revision-history
+      description: Get Wiki Page Revision History
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-wiki.getwikipagerevisions
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-wiki-page
+      description: Get a Wiki Page
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-wiki.getwikipage
+      with:
+        page: tools.page
+      outputParameters:
+      - type: object
+        mapping: $.
