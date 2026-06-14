@@ -1,0 +1,1138 @@
+# Reddit GraphQL Schema
+# Conceptual schema derived from the Reddit Data API (https://www.reddit.com/dev/api/)
+# and Reddit OAuth 2.0 documentation.
+
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum PostType {
+  LINK
+  TEXT
+  GALLERY
+  VIDEO
+  CROSSPOST
+}
+
+enum VoteDirection {
+  UP
+  DOWN
+  NONE
+}
+
+enum SortOrder {
+  HOT
+  NEW
+  RISING
+  TOP
+  CONTROVERSIAL
+  BEST
+}
+
+enum TopTimeRange {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  YEAR
+  ALL
+}
+
+enum SubredditType {
+  PUBLIC
+  RESTRICTED
+  PRIVATE
+  EMPLOYEES_ONLY
+  GOLD_RESTRICTED
+  ARCHIVED
+}
+
+enum ModActionType {
+  APPROVE_LINK
+  REMOVE_LINK
+  SPAM_LINK
+  APPROVE_COMMENT
+  REMOVE_COMMENT
+  SPAM_COMMENT
+  BAN_USER
+  UNBAN_USER
+  MUTE_USER
+  UNMUTE_USER
+  ADD_MODERATOR
+  REMOVE_MODERATOR
+  EDIT_FLAIR
+  EDIT_SETTINGS
+  EDIT_WIKI
+  LOCK
+  UNLOCK
+  STICKY
+  UNSTICKY
+  MARK_NSFW
+  UNMARK_NSFW
+}
+
+enum SearchType {
+  POST
+  COMMENT
+  SUBREDDIT
+  USER
+}
+
+enum OAuthGrantType {
+  AUTHORIZATION_CODE
+  CLIENT_CREDENTIALS
+  IMPLICIT
+  PASSWORD
+}
+
+enum MessageType {
+  INBOX
+  SENT
+  MENTION
+  COMMENT_REPLY
+  POST_REPLY
+}
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar URL
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Subreddit Types
+# ---------------------------------------------------------------------------
+
+type Subreddit {
+  id: ID!
+  name: String!
+  displayName: String!
+  displayNamePrefixed: String!
+  title: String!
+  description: String
+  publicDescription: String
+  subredditType: SubredditType!
+  subscribers: Int!
+  activeUserCount: Int
+  over18: Boolean!
+  quarantine: Boolean!
+  spoilersEnabled: Boolean!
+  created: DateTime!
+  url: URL!
+  iconImg: URL
+  bannerImg: URL
+  headerImg: URL
+  allowedPostTypes: [PostType!]
+  flairEnabled: Boolean!
+  wikiEnabled: Boolean!
+  details: SubredditDetails
+  rules: [SubredditRule!]
+  flairTemplates: [SubredditFlair!]
+  style: SubredditStyle
+  wiki: SubredditWiki
+  moderators: [Moderator!]
+  modLog(limit: Int, after: String): ModLog
+}
+
+type SubredditDetails {
+  id: ID!
+  subredditId: ID!
+  submitText: String
+  submitLinkLabel: String
+  submitTextLabel: String
+  headerTitle: String
+  communityIcon: URL
+  mobileBannerImage: URL
+  keyColor: String
+  primaryColor: String
+  restrictPosting: Boolean!
+  restrictCommenting: Boolean!
+  freeFormReports: Boolean!
+  allowVideos: Boolean!
+  allowImages: Boolean!
+  allowGalleries: Boolean!
+  allowPolls: Boolean!
+  allowPredictionsTournaments: Boolean!
+  suggestedCommentSort: SortOrder
+  commentScoreHideMins: Int
+  language: String
+}
+
+type SubredditRule {
+  id: ID!
+  subredditId: ID!
+  shortName: String!
+  name: String!
+  description: String
+  descriptionHtml: String
+  violationReason: String
+  priority: Int!
+  kind: String!
+  createdUtc: DateTime!
+}
+
+type SubredditFlair {
+  id: ID!
+  subredditId: ID!
+  text: String
+  textEditable: Boolean!
+  textColor: String
+  backgroundColor: String
+  cssClass: String
+  modOnly: Boolean!
+  allowableContent: String
+  maxEmojis: Int
+}
+
+type SubredditStyle {
+  subredditId: ID!
+  stylesheet: String
+  bannerBackgroundColor: String
+  bannerBackgroundImage: URL
+  bannerPositionedImage: URL
+  mobileBannerImage: URL
+  icon: URL
+  secondaryBannerPositionedImage: URL
+  headerColor: String
+}
+
+type SubredditWiki {
+  subredditId: ID!
+  pages: [WikiPage!]!
+  editingPermission: Int!
+  createsOnlyBots: Boolean!
+}
+
+type WikiPage {
+  id: ID!
+  subredditId: ID!
+  name: String!
+  content: String!
+  contentMd: String!
+  contentHtml: String!
+  revisionDate: DateTime!
+  revisionBy: RedditUser
+  revisionReason: String
+  revisions: [WikiRevision!]
+  mayRevise: Boolean!
+}
+
+type WikiRevision {
+  id: ID!
+  wikiPageId: ID!
+  author: RedditUser!
+  timestamp: DateTime!
+  reason: String
+  hidden: Boolean!
+  page: String!
+}
+
+# ---------------------------------------------------------------------------
+# Multireddit Types
+# ---------------------------------------------------------------------------
+
+type Multireddit {
+  id: ID!
+  name: String!
+  displayName: String!
+  path: String!
+  descriptionMd: String
+  descriptionHtml: String
+  over18: Boolean!
+  visibility: String!
+  iconName: String
+  keyColor: String
+  weighting: Int
+  owner: String!
+  ownerId: ID!
+  created: DateTime!
+  copied: Boolean!
+  subreddits: [MultiredditSub!]!
+}
+
+type MultiredditSub {
+  name: String!
+  subreddit: Subreddit
+}
+
+# ---------------------------------------------------------------------------
+# Post Types
+# ---------------------------------------------------------------------------
+
+type Post {
+  id: ID!
+  name: String!
+  title: String!
+  author: RedditUser
+  authorName: String!
+  subreddit: Subreddit
+  subredditName: String!
+  subredditNamePrefixed: String!
+  postType: PostType!
+  score: Int!
+  upvoteRatio: Float!
+  ups: Int!
+  downs: Int!
+  numComments: Int!
+  numCrossposts: Int!
+  created: DateTime!
+  edited: DateTime
+  selftext: String
+  selftextHtml: String
+  url: URL
+  permalink: String!
+  domain: String
+  isSelf: Boolean!
+  isVideo: Boolean!
+  isGallery: Boolean!
+  over18: Boolean!
+  spoiler: Boolean!
+  locked: Boolean!
+  archived: Boolean!
+  stickied: Boolean!
+  saved: Boolean!
+  hidden: Boolean!
+  clicked: Boolean!
+  distinguished: String
+  flair: PostFlair
+  awards: [Award!]
+  totalAwardsReceived: Int!
+  details: PostDetails
+  comments(sort: SortOrder, limit: Int, after: String): CommentTree
+}
+
+type LinkPost {
+  id: ID!
+  post: Post!
+  url: URL!
+  domain: String!
+  thumbnail: URL
+  thumbnailWidth: Int
+  thumbnailHeight: Int
+  preview: JSON
+  secureMedia: JSON
+  mediaEmbed: JSON
+}
+
+type TextPost {
+  id: ID!
+  post: Post!
+  selftext: String!
+  selftextHtml: String!
+}
+
+type GalleryPost {
+  id: ID!
+  post: Post!
+  galleryData: JSON
+  mediaMetadata: JSON
+  items: [GalleryItem!]
+}
+
+type GalleryItem {
+  mediaId: String!
+  id: Int!
+  caption: String
+  outboundUrl: URL
+}
+
+type VideoPost {
+  id: ID!
+  post: Post!
+  media: VideoMedia!
+  secureMedia: VideoMedia
+  isVideo: Boolean!
+}
+
+type VideoMedia {
+  type: String!
+  redditVideo: RedditVideo
+}
+
+type RedditVideo {
+  bitrateKbps: Int!
+  fallbackUrl: URL!
+  height: Int!
+  width: Int!
+  scrubberMediaUrl: URL
+  dashUrl: URL
+  duration: Int!
+  hlsUrl: URL
+  isGif: Boolean!
+  transcodingStatus: String!
+}
+
+type CrossPost {
+  id: ID!
+  post: Post!
+  crosspostParentId: ID!
+  crosspostParent: Post
+  crosspostParentList: [Post!]
+}
+
+type PostDetails {
+  postId: ID!
+  suggestedSort: SortOrder
+  viewCount: Int
+  visited: Boolean!
+  noFollow: Boolean!
+  sendReplies: Boolean!
+  contestMode: Boolean!
+  hideScore: Boolean!
+  mediaOnly: Boolean!
+  canGild: Boolean!
+  canModPost: Boolean!
+  pinned: Boolean!
+  removeReasonTitle: String
+  bannedBy: String
+  approvedBy: String
+  reportReasons: [String]
+  numReports: Int
+  modReports: [[String]]
+  userReports: [[String]]
+  preview: PostPreview
+}
+
+type PostPreview {
+  images: [PreviewImage!]!
+  enabled: Boolean!
+}
+
+type PreviewImage {
+  source: ImageSource!
+  resolutions: [ImageSource!]!
+  id: String!
+}
+
+type ImageSource {
+  url: URL!
+  width: Int!
+  height: Int!
+}
+
+type PostFlair {
+  id: ID
+  postId: ID!
+  text: String
+  textColor: String
+  backgroundColor: String
+  cssClass: String
+  richtext: JSON
+  templateId: ID
+}
+
+type SavedPost {
+  id: ID!
+  userId: ID!
+  post: Post!
+  savedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Comment Types
+# ---------------------------------------------------------------------------
+
+type Comment {
+  id: ID!
+  name: String!
+  author: RedditUser
+  authorName: String!
+  body: String!
+  bodyHtml: String!
+  post: Post
+  postId: ID!
+  postTitle: String
+  subreddit: Subreddit
+  subredditName: String!
+  parentId: ID!
+  depth: Int!
+  score: Int!
+  ups: Int!
+  downs: Int!
+  created: DateTime!
+  edited: DateTime
+  saved: Boolean!
+  stickied: Boolean!
+  locked: Boolean!
+  archived: Boolean!
+  distinguished: String
+  collapsed: Boolean!
+  collapsedReason: String
+  scoreHidden: Boolean!
+  sendReplies: Boolean!
+  canGild: Boolean!
+  awards: [Award!]
+  totalAwardsReceived: Int!
+  replies: CommentTree
+  userFlair: UserFlair
+}
+
+type CommentTree {
+  postId: ID!
+  comments: [Comment!]!
+  moreComments: MoreComments
+  before: String
+  after: String
+  count: Int!
+}
+
+type MoreComments {
+  id: ID!
+  parentId: ID!
+  name: String!
+  count: Int!
+  depth: Int!
+  children: [String!]!
+}
+
+type CommentCollapse {
+  commentId: ID!
+  collapsed: Boolean!
+  collapsedReason: String
+  collapsedBecauseCrowded: Boolean
+}
+
+type Reply {
+  id: ID!
+  comment: Comment!
+  parentCommentId: ID!
+  depth: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Voting & Awards
+# ---------------------------------------------------------------------------
+
+type Vote {
+  id: ID!
+  thingId: ID!
+  direction: VoteDirection!
+  userId: ID!
+  createdAt: DateTime!
+}
+
+type Upvote {
+  id: ID!
+  thingId: ID!
+  userId: ID!
+  createdAt: DateTime!
+}
+
+type Downvote {
+  id: ID!
+  thingId: ID!
+  userId: ID!
+  createdAt: DateTime!
+}
+
+type Reaction {
+  id: ID!
+  thingId: ID!
+  emoji: String!
+  count: Int!
+  userReacted: Boolean!
+}
+
+type Award {
+  id: ID!
+  name: String!
+  description: String!
+  awardType: String!
+  coinPrice: Int!
+  coinReward: Int
+  count: Int!
+  iconUrl: URL!
+  iconWidth: Int!
+  iconHeight: Int!
+  staticIconUrl: URL!
+  resizedIcons: [ImageSource!]
+  daysOfPremium: Int
+  daysOfDrip: Int
+  coinRewardAmount: Int
+  isEnabled: Boolean!
+  isNew: Boolean!
+  subredditCoinReward: Int
+  givenAt: DateTime
+}
+
+type Trophy {
+  id: ID!
+  name: String!
+  description: String
+  iconUrl: URL!
+  icon70: URL
+  icon40: URL
+  awardId: String
+  url: URL
+  grantedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# User Types
+# ---------------------------------------------------------------------------
+
+type User {
+  id: ID!
+  name: String!
+  accountId: String!
+}
+
+type RedditUser {
+  id: ID!
+  name: String!
+  iconImg: URL
+  snoovatarImg: URL
+  created: DateTime!
+  linkKarma: Int!
+  commentKarma: Int!
+  totalKarma: Int!
+  awardeeKarma: Int!
+  awarderKarma: Int!
+  isFriend: Boolean!
+  isEmployee: Boolean!
+  isMod: Boolean!
+  isGold: Boolean!
+  hasVerifiedEmail: Boolean!
+  over18: Boolean!
+  hideFromRobots: Boolean!
+  suspended: Boolean!
+  acceptFollowers: Boolean!
+  profile: UserProfile
+  karma: Karma
+  premium: RedditPremium
+  trophies: [UserTrophy!]
+  feed: UserFeed
+}
+
+type UserProfile {
+  userId: ID!
+  displayName: String
+  subreddit: Subreddit
+  description: String
+  publicDescription: String
+  iconImg: URL
+  bannerImg: URL
+  headerImg: URL
+  keyColor: String
+  primaryColor: String
+  over18: Boolean!
+  isEmployee: Boolean!
+}
+
+type Karma {
+  userId: ID!
+  linkKarma: Int!
+  commentKarma: Int!
+  awardeeKarma: Int!
+  awarderKarma: Int!
+  totalKarma: Int!
+  subredditBreakdown: [SubredditKarma!]
+}
+
+type SubredditKarma {
+  subredditName: String!
+  linkKarma: Int!
+  commentKarma: Int!
+}
+
+type UserFlair {
+  userId: ID!
+  subredditId: ID!
+  text: String
+  cssClass: String
+  backgroundColor: String
+  textColor: String
+  templateId: ID
+  enabled: Boolean!
+}
+
+type RedditPremium {
+  userId: ID!
+  isSubscriber: Boolean!
+  willRenew: Boolean
+  endDate: DateTime
+  coinBalance: Int!
+}
+
+type UserTrophy {
+  userId: ID!
+  trophy: Trophy!
+  grantedAt: DateTime
+}
+
+type UserFeed {
+  userId: ID!
+  posts(sort: SortOrder, limit: Int, after: String): PostConnection!
+  savedPosts(limit: Int, after: String): PostConnection!
+  upvotedPosts(limit: Int, after: String): PostConnection!
+  downvotedPosts(limit: Int, after: String): PostConnection!
+  hiddenPosts(limit: Int, after: String): PostConnection!
+  comments(sort: SortOrder, limit: Int, after: String): CommentConnection!
+}
+
+type PostConnection {
+  nodes: [Post!]!
+  pageInfo: PageInfo!
+}
+
+type CommentConnection {
+  nodes: [Comment!]!
+  pageInfo: PageInfo!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+  count: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Moderation Types
+# ---------------------------------------------------------------------------
+
+type Moderator {
+  id: ID!
+  user: RedditUser!
+  subredditId: ID!
+  permissions: [String!]!
+  addedAt: DateTime!
+  addedBy: String
+  modHash: String
+}
+
+type ModeratorAction {
+  id: ID!
+  subredditId: ID!
+  subredditName: String!
+  modId: ID!
+  modName: String!
+  action: ModActionType!
+  targetId: ID
+  targetAuthor: String
+  targetTitle: String
+  targetPermalink: String
+  targetBody: String
+  details: String
+  description: String
+  createdUtc: DateTime!
+}
+
+type ModLog {
+  subredditId: ID!
+  actions: [ModeratorAction!]!
+  before: String
+  after: String
+  count: Int!
+}
+
+type Ban {
+  id: ID!
+  subredditId: ID!
+  userId: ID!
+  username: String!
+  banDate: DateTime!
+  bannedBy: String!
+  note: String
+}
+
+type ModBan {
+  id: ID!
+  ban: Ban!
+  banMessage: String
+  banMessageHtml: String
+  isPermanent: Boolean!
+  daysLeft: Int
+  endDate: DateTime
+}
+
+type MutedUser {
+  id: ID!
+  subredditId: ID!
+  userId: ID!
+  username: String!
+  mutedAt: DateTime!
+  mutedBy: String!
+  note: String
+}
+
+type Report {
+  id: ID!
+  thingId: ID!
+  thingType: String!
+  reason: ReportReason
+  customReason: String
+  reportedBy: String
+  createdAt: DateTime!
+  subredditId: ID!
+  subredditName: String!
+  processed: Boolean!
+}
+
+type ReportReason {
+  id: ID!
+  text: String!
+  reasonId: String!
+  subredditId: ID
+  isGlobal: Boolean!
+}
+
+type SpamFilter {
+  subredditId: ID!
+  spamLinks: String!
+  spamComments: String!
+  spamSelfposts: String!
+}
+
+type ContentPolicy {
+  id: ID!
+  policyText: String!
+  policyUrl: URL!
+  version: String!
+  effectiveDate: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Messaging & Notification Types
+# ---------------------------------------------------------------------------
+
+type Message {
+  id: ID!
+  name: String!
+  author: String!
+  authorId: ID
+  subject: String!
+  body: String!
+  bodyHtml: String!
+  dest: String!
+  subredditName: String
+  subredditNamePrefixed: String
+  type: MessageType!
+  created: DateTime!
+  wasComment: Boolean!
+  new: Boolean!
+  replies: [Message!]
+  context: String
+  firstMessage: ID
+  firstMessageName: String
+  parentId: ID
+}
+
+type ComposedMessage {
+  to: String!
+  subject: String!
+  text: String!
+  fromSrName: String
+}
+
+type Inbox {
+  userId: ID!
+  all(limit: Int, after: String, mark: Boolean): [Message!]!
+  unread(limit: Int, after: String): [Message!]!
+  messages(limit: Int, after: String): [Message!]!
+  sent(limit: Int, after: String): [Message!]!
+  commentReplies(limit: Int, after: String): [Message!]!
+  postReplies(limit: Int, after: String): [Message!]!
+  mentions(limit: Int, after: String): [Message!]!
+  unreadCount: Int!
+}
+
+type Notification {
+  id: ID!
+  userId: ID!
+  type: String!
+  subject: String!
+  body: String!
+  link: URL
+  read: Boolean!
+  createdAt: DateTime!
+  thingId: ID
+}
+
+# ---------------------------------------------------------------------------
+# Search Types
+# ---------------------------------------------------------------------------
+
+type Search {
+  query: String!
+  type: SearchType
+  subreddit: String
+  sort: SortOrder
+  timeRange: TopTimeRange
+  restrictSr: Boolean
+  before: String
+  after: String
+  count: Int
+  limit: Int
+}
+
+type SearchResult {
+  id: ID!
+  kind: SearchType!
+  post: Post
+  comment: Comment
+  subreddit: Subreddit
+  user: RedditUser
+}
+
+type SearchConnection {
+  nodes: [SearchResult!]!
+  pageInfo: PageInfo!
+  query: String!
+  facets: SearchFacets
+}
+
+type SearchFacets {
+  subreddits: [FacetValue!]
+  postTypes: [FacetValue!]
+}
+
+type FacetValue {
+  value: String!
+  count: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Auth & API Management Types
+# ---------------------------------------------------------------------------
+
+type OAuthApp {
+  id: ID!
+  name: String!
+  description: String
+  aboutUrl: URL
+  iconUrl: URL
+  clientId: String!
+  redirectUri: URL!
+  appType: String!
+  isDeveloperApp: Boolean!
+  created: DateTime!
+  scopes: [Scope!]
+}
+
+type AccessToken {
+  accessToken: String!
+  tokenType: String!
+  expiresIn: Int!
+  scope: String!
+  refreshToken: String
+}
+
+type RefreshToken {
+  refreshToken: String!
+  userId: ID!
+  clientId: String!
+  scopes: [Scope!]!
+  issuedAt: DateTime!
+}
+
+type Scope {
+  id: ID!
+  name: String!
+  description: String!
+  isDefault: Boolean!
+}
+
+type APIKey {
+  clientId: String!
+  clientSecret: String!
+  appType: String!
+  appName: String!
+  ownerId: ID!
+}
+
+type RateLimit {
+  remaining: Int!
+  used: Int!
+  reset: Int!
+  limit: Int!
+  period: Int!
+}
+
+type Webhook {
+  id: ID!
+  url: URL!
+  events: [String!]!
+  subredditId: ID
+  secret: String
+  enabled: Boolean!
+  createdAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Root Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Subreddits
+  subreddit(name: String!): Subreddit
+  subreddits(names: [String!]!): [Subreddit!]
+  popularSubreddits(limit: Int, after: String): [Subreddit!]
+  newSubreddits(limit: Int, after: String): [Subreddit!]
+  defaultSubreddits: [Subreddit!]
+  subscribed(limit: Int, after: String): [Subreddit!]
+  subredditRules(subredditName: String!): [SubredditRule!]
+  subredditFlairTemplates(subredditName: String!): [SubredditFlair!]
+  subredditWiki(subredditName: String!): SubredditWiki
+  wikiPage(subredditName: String!, page: String!): WikiPage
+  wikiRevisions(subredditName: String!, page: String!, limit: Int): [WikiRevision!]
+
+  # Posts
+  post(id: ID!): Post
+  posts(ids: [ID!]!): [Post!]
+  subredditPosts(subredditName: String!, sort: SortOrder, timeRange: TopTimeRange, limit: Int, after: String): [Post!]
+  frontPage(sort: SortOrder, limit: Int, after: String): [Post!]
+  popularPosts(limit: Int, after: String): [Post!]
+  allPosts(sort: SortOrder, limit: Int, after: String): [Post!]
+
+  # Comments
+  comment(id: ID!): Comment
+  postComments(postId: ID!, sort: SortOrder, limit: Int): CommentTree
+  moreComments(postId: ID!, linkId: ID!, children: [String!]!): [Comment!]
+
+  # Users
+  user(username: String!): RedditUser
+  me: RedditUser
+  userKarma(username: String!): Karma
+  userTrophies(username: String!): [UserTrophy!]
+  userPosts(username: String!, sort: SortOrder, limit: Int, after: String): PostConnection
+  userComments(username: String!, sort: SortOrder, limit: Int, after: String): CommentConnection
+  userFeed: UserFeed
+
+  # Inbox & Messages
+  inbox: Inbox
+  message(id: ID!): Message
+  unreadCount: Int!
+
+  # Multireddits
+  multireddit(username: String!, multiName: String!): Multireddit
+  myMultireddits: [Multireddit!]
+  userMultireddits(username: String!): [Multireddit!]
+
+  # Search
+  search(query: String!, type: SearchType, subreddit: String, sort: SortOrder, timeRange: TopTimeRange, limit: Int, after: String): SearchConnection
+
+  # Moderation
+  moderators(subredditName: String!, limit: Int, after: String): [Moderator!]
+  modLog(subredditName: String!, type: ModActionType, moderator: String, limit: Int, after: String): ModLog
+  bannedUsers(subredditName: String!, limit: Int, after: String): [ModBan!]
+  mutedUsers(subredditName: String!, limit: Int, after: String): [MutedUser!]
+  reports(subredditName: String!, limit: Int, after: String): [Report!]
+  spamFilter(subredditName: String!): SpamFilter
+
+  # Auth
+  oauthApps: [OAuthApp!]
+  oauthScopes: [Scope!]
+  rateLimit: RateLimit
+
+  # Awards
+  postAwards(postId: ID!): [Award!]
+  commentAwards(commentId: ID!): [Award!]
+  myTrophies: [Trophy!]
+}
+
+# ---------------------------------------------------------------------------
+# Root Mutation
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Posts
+  submitLinkPost(subredditName: String!, title: String!, url: URL!, flairId: ID, nsfw: Boolean, spoiler: Boolean, sendReplies: Boolean): Post
+  submitTextPost(subredditName: String!, title: String!, text: String!, flairId: ID, nsfw: Boolean, spoiler: Boolean, sendReplies: Boolean): TextPost
+  submitGalleryPost(subredditName: String!, title: String!, items: [GalleryItemInput!]!, flairId: ID, nsfw: Boolean, spoiler: Boolean): GalleryPost
+  editPost(postId: ID!, text: String!): Post
+  deletePost(postId: ID!): Boolean!
+  hidePost(postId: ID!): Boolean!
+  unhidePost(postId: ID!): Boolean!
+  lockPost(postId: ID!): Boolean!
+  unlockPost(postId: ID!): Boolean!
+  markNsfw(postId: ID!): Boolean!
+  unmarkNsfw(postId: ID!): Boolean!
+  stickyPost(postId: ID!, sticky: Boolean!, num: Int): Boolean!
+  setSuggestedSort(postId: ID!, sort: SortOrder): Boolean!
+
+  # Comments
+  submitComment(thingId: ID!, text: String!): Comment
+  editComment(commentId: ID!, text: String!): Comment
+  deleteComment(commentId: ID!): Boolean!
+  saveComment(commentId: ID!): Boolean!
+  unsaveComment(commentId: ID!): Boolean!
+
+  # Voting
+  vote(thingId: ID!, direction: VoteDirection!): Vote
+
+  # Saving
+  savePost(postId: ID!): Boolean!
+  unsavePost(postId: ID!): Boolean!
+
+  # Subreddit subscription
+  subscribe(subredditName: String!): Boolean!
+  unsubscribe(subredditName: String!): Boolean!
+
+  # Multireddits
+  createMultireddit(name: String!, displayName: String!, subreddits: [String!]!, visibility: String, descriptionMd: String): Multireddit
+  updateMultireddit(multipath: String!, subreddits: [String!], displayName: String, descriptionMd: String, visibility: String): Multireddit
+  deleteMultireddit(multipath: String!): Boolean!
+  addSubredditToMultireddit(multipath: String!, subredditName: String!): Boolean!
+  removeSubredditFromMultireddit(multipath: String!, subredditName: String!): Boolean!
+
+  # Messaging
+  sendMessage(to: String!, subject: String!, text: String!, fromSrName: String): Boolean!
+  readMessage(messageId: ID!): Boolean!
+  readAllMessages: Boolean!
+  deleteMessage(messageId: ID!): Boolean!
+
+  # Flair
+  selectPostFlair(postId: ID!, flairTemplateId: ID!, text: String): Boolean!
+  selectUserFlair(subredditName: String!, flairTemplateId: ID!, text: String): Boolean!
+  clearUserFlair(subredditName: String!): Boolean!
+
+  # Awards
+  giveAward(thingId: ID!, awardId: String!, message: String): Boolean!
+
+  # Reporting
+  report(thingId: ID!, reason: String!, siteReason: String, otherReason: String, usernames: String): Boolean!
+
+  # Moderation
+  approve(thingId: ID!): Boolean!
+  remove(thingId: ID!, spam: Boolean): Boolean!
+  distinguishMod(thingId: ID!, how: String!): Boolean!
+  ignoreReports(thingId: ID!): Boolean!
+  unignoreReports(thingId: ID!): Boolean!
+  banUser(subredditName: String!, username: String!, duration: Int, message: String, note: String, reason: String): ModBan
+  unbanUser(subredditName: String!, username: String!): Boolean!
+  muteUser(subredditName: String!, username: String!, note: String): MutedUser
+  unmuteUser(subredditName: String!, username: String!): Boolean!
+  addModerator(subredditName: String!, username: String!, permissions: [String!]): Boolean!
+  removeModerator(subredditName: String!, username: String!): Boolean!
+  updateModPermissions(subredditName: String!, username: String!, permissions: [String!]!): Boolean!
+  setSpamFilter(subredditName: String!, spamLinks: String!, spamComments: String!, spamSelfposts: String!): Boolean!
+
+  # OAuth Apps
+  createOAuthApp(name: String!, redirectUri: URL!, appType: String!, description: String, aboutUrl: URL): OAuthApp
+  updateOAuthApp(clientId: String!, name: String, redirectUri: URL, description: String): OAuthApp
+  deleteOAuthApp(clientId: String!): Boolean!
+  revokeToken(token: String!, tokenTypeHint: String): Boolean!
+
+  # Webhooks
+  createWebhook(url: URL!, events: [String!]!, subredditName: String, secret: String): Webhook
+  deleteWebhook(webhookId: ID!): Boolean!
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input GalleryItemInput {
+  mediaId: String!
+  caption: String
+  outboundUrl: URL
+}

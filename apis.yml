@@ -1,11 +1,13 @@
 aid: reddit
 name: Reddit
-description: Reddit is a social news aggregation, discussion, and community platform where users submit, vote, and comment
-  on content organized into topic-based communities called subreddits. Reddit provides developer APIs for accessing platform
-  data, managing communities, running advertising campaigns, and embedding content. The Reddit Data API provides access to
-  posts, comments, subreddits, user profiles, and moderation tools via OAuth 2.0. The Reddit Ads API enables programmatic
-  management of advertising campaigns, audiences, and conversion tracking. All API access requires OAuth 2.0 authentication
-  via the oauth.reddit.com server at 60 requests per minute.
+description: Reddit is a social news aggregation, discussion, and community platform
+  where users submit, vote, and comment on content organized into topic-based communities
+  called subreddits. Reddit provides developer APIs for accessing platform data, managing
+  communities, running advertising campaigns, and embedding content. The Reddit Data
+  API provides access to posts, comments, subreddits, user profiles, and moderation
+  tools via OAuth 2.0. The Reddit Ads API enables programmatic management of advertising
+  campaigns, audiences, and conversion tracking. All API access requires OAuth 2.0
+  authentication via the oauth.reddit.com server at 60 requests per minute.
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
@@ -21,10 +23,12 @@ specificationVersion: '0.19'
 apis:
 - aid: reddit:data-api
   name: Reddit Data API
-  description: The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user
-    profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the
-    platform, interact with Reddit communities, handle private messages, and manage flair. All requests require OAuth 2.0
-    authentication via oauth.reddit.com with rate limits of 60 requests per minute for authenticated clients. A Data API Terms
+  description: The Reddit Data API provides programmatic access to Reddit content
+    including subreddits, posts, comments, user profiles, and voting data. Developers
+    can use the API to read and submit content, manage subreddits, search across the
+    platform, interact with Reddit communities, handle private messages, and manage
+    flair. All requests require OAuth 2.0 authentication via oauth.reddit.com with
+    rate limits of 60 requests per minute for authenticated clients. A Data API Terms
     agreement is required for high-volume access.
   humanURL: https://www.reddit.com/dev/api
   baseURL: https://oauth.reddit.com
@@ -44,33 +48,16 @@ apis:
     url: https://www.redditinc.com/policies/data-api-terms
   - type: OpenAPI
     url: openapi/reddit-data-api-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/data-account.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-flair.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-links-comments.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-listings.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-messages.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-moderation.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-search.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-subreddits.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-users.yaml
-  - type: NaftikoCapability
-    url: capabilities/data-wiki.yaml
+  - url: graphql/reddit-graphql.md
+    type: GraphQL
 - aid: reddit:ads-api
   name: Reddit Ads API
-  description: The Reddit Ads API allows advertisers and their marketing partners to programmatically create, edit, manage,
-    and report on advertising campaigns on the Reddit platform. It provides endpoints for managing ad accounts, campaigns,
-    ad groups, ads, creatives, targeting configurations, custom audiences (email lists, mobile IDs, pixel-based), conversion
-    pixels, and performance reporting. Authentication uses OAuth 2.0 with a rate limit of one request per second per advertiser
-    account.
+  description: The Reddit Ads API allows advertisers and their marketing partners
+    to programmatically create, edit, manage, and report on advertising campaigns
+    on the Reddit platform. It provides endpoints for managing ad accounts, campaigns,
+    ad groups, ads, creatives, targeting configurations, custom audiences (email lists,
+    mobile IDs, pixel-based), conversion pixels, and performance reporting. Authentication
+    uses OAuth 2.0 with a rate limit of one request per second per advertiser account.
   humanURL: https://ads-api.reddit.com/docs/
   baseURL: https://ads-api.reddit.com/api/v3
   tags:
@@ -86,30 +73,14 @@ apis:
     url: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
   - type: OpenAPI
     url: openapi/reddit-ads-api-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/ads-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-ad-groups.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-ads.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-campaigns.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-conversions.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-custom-audiences.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-funding.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-reporting.yaml
-  - type: NaftikoCapability
-    url: capabilities/ads-targeting.yaml
 - aid: reddit:embeds
   name: Reddit Embeds (oEmbed)
-  description: Reddit Embeds allows developers and content creators to embed Reddit posts and comments directly into external
-    websites and applications. The service provides oEmbed endpoints that return embed codes and metadata for rendering Reddit
-    content in a visually consistent format outside of the Reddit platform. It follows the oEmbed specification for content
-    discovery and embedding, returning HTML embed code for any Reddit post or comment URL.
+  description: Reddit Embeds allows developers and content creators to embed Reddit
+    posts and comments directly into external websites and applications. The service
+    provides oEmbed endpoints that return embed codes and metadata for rendering Reddit
+    content in a visually consistent format outside of the Reddit platform. It follows
+    the oEmbed specification for content discovery and embedding, returning HTML embed
+    code for any Reddit post or comment URL.
   humanURL: https://oembed.com/
   baseURL: https://www.reddit.com
   tags:
@@ -122,15 +93,15 @@ apis:
     url: https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
   - type: OpenAPI
     url: openapi/reddit-embeds-openapi.yml
-  - type: NaftikoCapability
-    url: capabilities/embeds-oembed.yaml
 - aid: reddit:oauth
   name: Reddit OAuth 2.0 Authorization
-  description: Reddit's OAuth 2.0 authorization system provides authentication for all Reddit API access. Developers register
-    applications at reddit.com/prefs/apps to obtain client credentials. Supported grant types include authorization_code (for
-    user-delegated access), client_credentials (for app-only access), and implicit (for installed apps). Access tokens are
-    obtained from https://www.reddit.com/api/v1/access_token and must be refreshed using refresh tokens. All scopes and permissions
-    are listed at https://www.reddit.com/api/v1/scopes.
+  description: Reddit's OAuth 2.0 authorization system provides authentication for
+    all Reddit API access. Developers register applications at reddit.com/prefs/apps
+    to obtain client credentials. Supported grant types include authorization_code
+    (for user-delegated access), client_credentials (for app-only access), and implicit
+    (for installed apps). Access tokens are obtained from https://www.reddit.com/api/v1/access_token
+    and must be refreshed using refresh tokens. All scopes and permissions are listed
+    at https://www.reddit.com/api/v1/scopes.
   humanURL: https://github.com/reddit-archive/reddit/wiki/OAuth2
   baseURL: https://www.reddit.com/api/v1
   tags:
