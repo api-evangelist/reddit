@@ -1,0 +1,796 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific Reddit Ads account including attribution settings, status, and account configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return per page (default 25, max 100)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor for retrieving the next page of results."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter campaigns by status."
+              }
+            ]
+          },
+          "docs": "Lists all campaigns in a Reddit Ads account with filtering, pagination, and sorting. Returns campaign IDs, names, status, objectives, budgets, and schedule information."
+        },
+        {
+          "info": {
+            "name": "Create a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new advertising campaign in the specified Reddit Ads account."
+        },
+        {
+          "info": {
+            "name": "Get a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific Reddit Ads campaign including status, budget, schedule, and targeting configuration."
+        },
+        {
+          "info": {
+            "name": "Update a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the campaign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing campaign's configuration, including name, budget, schedule, and status."
+        },
+        {
+          "info": {
+            "name": "Delete a Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the campaign."
+              }
+            ]
+          },
+          "docs": "Deletes an advertising campaign. The campaign must be in a non-active state to be deleted."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ad Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ad Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ad_groups",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return per page (default 25, max 100)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor for retrieving the next page of results."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter ad groups by campaign ID."
+              }
+            ]
+          },
+          "docs": "Lists ad groups in a Reddit Ads account or campaign, with ad groups containing targeting settings and grouping related ads."
+        },
+        {
+          "info": {
+            "name": "Create an Ad Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ad_groups",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ad group within a campaign with targeting and bidding configuration."
+        },
+        {
+          "info": {
+            "name": "Get an Ad Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ad_groups/:ad_group_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad group."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific ad group including targeting settings, bid configuration, and schedule."
+        },
+        {
+          "info": {
+            "name": "Update an Ad Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ad_groups/:ad_group_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad group."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing ad group's configuration, including targeting, bidding, and scheduling."
+        },
+        {
+          "info": {
+            "name": "Delete an Ad Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ad_groups/:ad_group_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_group_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad group."
+              }
+            ]
+          },
+          "docs": "Deletes an ad group from a campaign."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Ads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Ads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return per page (default 25, max 100)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor for retrieving the next page of results."
+              },
+              {
+                "name": "ad_group_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter ads by ad group ID."
+              }
+            ]
+          },
+          "docs": "Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status."
+        },
+        {
+          "info": {
+            "name": "Create an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ad with creative content within an ad group."
+        },
+        {
+          "info": {
+            "name": "Get an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific ad including creative content, status, and review information."
+        },
+        {
+          "info": {
+            "name": "Update an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing ad's creative content and configuration."
+        },
+        {
+          "info": {
+            "name": "Delete an Ad",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "ad_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the ad."
+              }
+            ]
+          },
+          "docs": "Deletes an ad from an ad group."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Custom Audiences",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Custom Audiences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return per page (default 25, max 100)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A pagination cursor for retrieving the next page of results."
+              }
+            ]
+          },
+          "docs": "Lists custom audiences in a Reddit Ads account. Custom audiences allow targeting specific users based on email lists, mobile device IDs, or website visitor data."
+        },
+        {
+          "info": {
+            "name": "Create a Custom Audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new custom audience for targeting in ad campaigns."
+        },
+        {
+          "info": {
+            "name": "Get a Custom Audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "audience_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the custom audience."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific custom audience."
+        },
+        {
+          "info": {
+            "name": "Update a Custom Audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "audience_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the custom audience."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing custom audience's configuration and user list."
+        },
+        {
+          "info": {
+            "name": "Delete a Custom Audience",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              },
+              {
+                "name": "audience_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the custom audience."
+              }
+            ]
+          },
+          "docs": "Deletes a custom audience from the account."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Conversions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Conversion Pixels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/pixels",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ]
+          },
+          "docs": "Lists conversion pixels (Reddit Pixel) in a Reddit Ads account. Pixels are used to track website visitors and conversions for attribution and optimization."
+        },
+        {
+          "info": {
+            "name": "Send Conversion Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/conversions/events",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends server-side conversion events to the Reddit Ads Conversions API (CAPI). This enables advertisers to track conversions that occur on their servers without relying solely on the Reddit Pixel."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Targeting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Interest Targeting Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/targeting/interests"
+          },
+          "docs": "Returns available interest categories for ad targeting on the Reddit platform."
+        },
+        {
+          "info": {
+            "name": "List Community Targeting Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/targeting/communities",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for filtering communities."
+              }
+            ]
+          },
+          "docs": "Returns subreddit communities available for ad targeting."
+        },
+        {
+          "info": {
+            "name": "List Location Targeting Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/targeting/locations",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query for filtering locations."
+              }
+            ]
+          },
+          "docs": "Returns available geographic locations for ad targeting, including countries, regions, and metro areas."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Performance Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/reports",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a performance report for campaigns, ad groups, or ads in the specified account. Reports include metrics such as impressions, clicks, conversions, and spend."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Funding",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Funding Instruments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/funding_instruments",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ]
+          },
+          "docs": "Lists the funding instruments (payment methods) associated with the specified Reddit Ads account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

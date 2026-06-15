@@ -1,0 +1,304 @@
+{
+  "item": [
+    {
+      "id": "3543dabf-5b94-4b30-a67c-e43645bcfcc7",
+      "name": "oEmbed",
+      "description": {
+        "content": "Endpoints implementing the oEmbed protocol for embedding Reddit content in external websites and applications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9afe93be-dc5a-41a0-8eca-ac3031ad6532",
+          "name": "Get Oembed Data for a Reddit Url",
+          "request": {
+            "name": "Get Oembed Data for a Reddit Url",
+            "description": {
+              "content": "Returns oEmbed-formatted embed data for a given Reddit URL. This endpoint follows the oEmbed specification and returns HTML embed code along with metadata about the content. Supports both JSON and XML response formats. The returned HTML can be used to embed Reddit posts and comments into external pages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oembed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "The response format. Defaults to JSON."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxwidth",
+                  "value": "<integer>",
+                  "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxheight",
+                  "value": "<integer>",
+                  "description": "The maximum height of the embed in pixels."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3a0d92ba-9ea1-41a7-8abd-6eeb3c8a018d",
+              "name": "oEmbed response with embed data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"rich\",\n  \"version\": \"1.0\",\n  \"title\": \"string\",\n  \"author_name\": \"string\",\n  \"author_url\": \"https://tTcViknLGpExBmLkqKa.toqWzsqciRopnYBJ8VutxPVoP\",\n  \"provider_name\": \"reddit\",\n  \"provider_url\": \"https://www.reddit.com/\",\n  \"html\": \"string\",\n  \"width\": 6275,\n  \"height\": 2151,\n  \"thumbnail_url\": \"https://ccSZMkMcZfiwVptsa.fbbaBWdW-\",\n  \"thumbnail_width\": 3086,\n  \"thumbnail_height\": 8103,\n  \"cache_age\": 1750\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d117d68-2777-4187-8dc7-883fa1a7218c",
+              "name": "Invalid URL or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1b95a213-f3db-44fc-8be7-33a10ad14755",
+              "name": "Content not found or not embeddable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "50d96135-e008-4b27-9b3a-b4c5c94715c0",
+              "name": "URL not supported for embedding",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.reddit.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b482ea14-32b6-4a34-8dfd-60038f218b53",
+    "name": "Reddit Embeds",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Reddit Embeds allows developers and content creators to embed Reddit posts and comments directly into external websites and applications. This service provides oEmbed endpoints that return embed codes and metadata for rendering Reddit content in a visually consistent format outside of the Reddit platform. It follows the oEmbed specification for content discovery and embedding.\n\nContact Support:\n Name: Reddit Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

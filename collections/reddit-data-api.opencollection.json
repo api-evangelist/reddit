@@ -1,0 +1,1861 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Data API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me"
+          },
+          "docs": "Returns the identity of the currently authenticated user, including username, karma, account age, and preferences."
+        },
+        {
+          "info": {
+            "name": "Get User Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me/prefs"
+          },
+          "docs": "Returns the preference settings of the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update User Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://oauth.reddit.com/api/v1/me/prefs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the preference settings of the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Karma Breakdown by Subreddit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me/karma"
+          },
+          "docs": "Returns a breakdown of the current user's karma by subreddit, including link karma and comment karma for each subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Current User Trophies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me/trophies"
+          },
+          "docs": "Returns a list of trophies for the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Friends List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me/friends"
+          },
+          "docs": "Returns a list of the current user's friends."
+        },
+        {
+          "info": {
+            "name": "Get Blocked Users List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/me/blocked"
+          },
+          "docs": "Returns a list of users blocked by the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Available Oauth Scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/v1/scopes"
+          },
+          "docs": "Returns a listing of all available OAuth scopes and their descriptions."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Hot Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/hot",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "Geolocation filter for location-specific hot listings."
+              }
+            ]
+          },
+          "docs": "Returns a listing of hot posts from the specified subreddit. Results are sorted by Reddit's hot ranking algorithm."
+        },
+        {
+          "info": {
+            "name": "Get New Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/new",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of new posts from the specified subreddit, sorted by submission time with newest first."
+        },
+        {
+          "info": {
+            "name": "Get Rising Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/rising",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of rising posts from the specified subreddit. Rising posts are those gaining upvotes at a rapid rate."
+        },
+        {
+          "info": {
+            "name": "Get Top Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/top",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              }
+            ]
+          },
+          "docs": "Returns a listing of top-scoring posts from the specified subreddit, filterable by time period."
+        },
+        {
+          "info": {
+            "name": "Get Controversial Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/controversial",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              }
+            ]
+          },
+          "docs": "Returns a listing of controversial posts from the specified subreddit, which are posts with a roughly even mix of upvotes and downvotes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Links & Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Comments for a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/comments/:article",
+            "params": [
+              {
+                "name": "article",
+                "value": "",
+                "type": "path",
+                "description": "The ID36 of the submission to retrieve comments for."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for comments."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Maximum depth of subtrees in the thread."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Number of levels of parent comments to include for a comment permalink."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              }
+            ]
+          },
+          "docs": "Returns comments for a given submission (article). The response includes both the submission data and a tree of comments. Use the sort parameter to control comment ordering."
+        },
+        {
+          "info": {
+            "name": "Retrieve Additional Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/api/morechildren",
+            "params": [
+              {
+                "name": "link_id",
+                "value": "",
+                "type": "query",
+                "description": "The fullname (t3_ prefix) of the submission."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of comment ID36s to be fetched."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for comments."
+              },
+              {
+                "name": "api_type",
+                "value": "",
+                "type": "query",
+                "description": "The string json to request JSON response."
+              }
+            ]
+          },
+          "docs": "Retrieves additional comments omitted from a base comment tree. Used to load more comments from a stub returned in a comment listing."
+        },
+        {
+          "info": {
+            "name": "Submit a New Link or Self-post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/submit",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "sr",
+                  "value": ""
+                },
+                {
+                  "name": "title",
+                  "value": ""
+                },
+                {
+                  "name": "kind",
+                  "value": ""
+                },
+                {
+                  "name": "url",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "richtext_json",
+                  "value": ""
+                },
+                {
+                  "name": "flair_id",
+                  "value": ""
+                },
+                {
+                  "name": "flair_text",
+                  "value": ""
+                },
+                {
+                  "name": "nsfw",
+                  "value": ""
+                },
+                {
+                  "name": "spoiler",
+                  "value": ""
+                },
+                {
+                  "name": "resubmit",
+                  "value": ""
+                },
+                {
+                  "name": "sendreplies",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a new link or self-post to a subreddit. Requires the submit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Submit a New Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/comment",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "richtext_json",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a new comment on a submission or in reply to another comment. Requires the submit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Vote on a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/vote",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "dir",
+                  "value": ""
+                },
+                {
+                  "name": "rank",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Casts a vote on a submission or comment. Direction values are 1 for upvote, -1 for downvote, and 0 to remove the vote. Requires the vote OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Save a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/save",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Saves a submission or comment to the authenticated user's saved items. Requires the save OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Unsave a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/unsave",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Removes a submission or comment from the authenticated user's saved items. Requires the save OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Hide a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/hide",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Hides a submission from the authenticated user's listings. Requires the report OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Unhide a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/unhide",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Unhides a previously hidden submission. Requires the report OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Delete a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/del",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deletes a submission or comment authored by the authenticated user. Requires the edit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Edit a Self-post or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/editusertext",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Edits the body text of a self-post or comment authored by the authenticated user. Requires the edit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Report a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/report",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "reason",
+                  "value": ""
+                },
+                {
+                  "name": "other_reason",
+                  "value": ""
+                },
+                {
+                  "name": "site_reason",
+                  "value": ""
+                },
+                {
+                  "name": "rule_reason",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Reports a submission or comment to the moderators of the subreddit. Requires the report OAuth scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Inbox Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/message/inbox",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "mark",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mark messages as read."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's inbox messages, including both private messages and comment replies. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Unread Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/message/unread",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "mark",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mark messages as read."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's unread messages. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Sent Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/message/sent",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's sent messages. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Compose a Private Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/compose",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "to",
+                  "value": ""
+                },
+                {
+                  "name": "subject",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Sends a private message to another user or a subreddit's moderators. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Mark Messages As Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/read_message",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Marks one or more messages as read. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Mark All Messages As Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/read_all_messages"
+          },
+          "docs": "Marks all of the authenticated user's messages as read. Requires the privatemessages OAuth scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Subreddits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subreddit Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns information about the specified subreddit, including subscriber count, description, rules, and settings."
+        },
+        {
+          "info": {
+            "name": "Get Subreddit Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/rules",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns the rules defined for the specified subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Subscribed Subreddits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/subreddits/mine/subscriber",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of subreddits the authenticated user is subscribed to. Requires the mysubreddits OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Subscribe or Unsubscribe From a Subreddit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/subscribe",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "sr_name",
+                  "value": ""
+                },
+                {
+                  "name": "skip_initial_defaults",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Subscribes to or unsubscribes from a subreddit. Requires the subscribe OAuth scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Subreddits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/subreddits/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Searches for subreddits by name and description."
+        },
+        {
+          "info": {
+            "name": "Search Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/search",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for search results."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              },
+              {
+                "name": "restrict_sr",
+                "value": "",
+                "type": "query",
+                "description": "Whether to restrict the search to the specified subreddit."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of results to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Searches for submissions within a specific subreddit or across all of Reddit. Supports sorting and time filtering."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/user/:username/about",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username of the user to look up."
+              }
+            ]
+          },
+          "docs": "Returns public information about the specified user, including karma, account age, and display preferences."
+        },
+        {
+          "info": {
+            "name": "Get User Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/user/:username/submitted",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username to get submissions for."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of submissions posted by the specified user."
+        },
+        {
+          "info": {
+            "name": "Get User Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/user/:username/comments",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username to get comments for."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of comments posted by the specified user."
+        },
+        {
+          "info": {
+            "name": "Get User Trophies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/user/:username/trophies",
+            "params": [
+              {
+                "name": "username",
+                "value": "",
+                "type": "path",
+                "description": "The username to get trophies for."
+              }
+            ]
+          },
+          "docs": "Returns a list of trophies for the specified user."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Moderation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subreddit Moderators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/moderators",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the moderators of the specified subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Moderation Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/modqueue",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by type of content in the queue."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of items in the subreddit's moderation queue. Items include submissions and comments that have been reported or caught by spam filters. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Reported Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/reports",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of reported items in the subreddit. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Spam Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/spam",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of items marked as spam in the subreddit. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Moderation Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/log",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "mod",
+                "value": "",
+                "type": "query",
+                "description": "Filter by moderator username."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by moderation action type."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of moderation actions taken in the subreddit. Requires the modlog OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Approve a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/approve",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Approves a submission or comment that was removed or reported. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Remove a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/api/remove",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "spam",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Removes a submission or comment from public listings. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Banned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/about/banned",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of users banned from the specified subreddit. Requires the modcontributors OAuth scope."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Flair",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Set User Flair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/r/:subreddit/api/flair",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "name",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "css_class",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Sets the flair for a user in the specified subreddit. Requires the modflair OAuth scope (or flair scope for self-flair)."
+        },
+        {
+          "info": {
+            "name": "Get Available Flair Options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/r/:subreddit/api/flairselector",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "link",
+                  "value": ""
+                },
+                {
+                  "name": "name",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Returns available flair options for a user or link in the specified subreddit."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wiki",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Wiki Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/wiki/:page",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "path",
+                "description": "The name of the wiki page."
+              }
+            ]
+          },
+          "docs": "Returns the content of a wiki page in the specified subreddit. Requires the wikiread OAuth scope."
+        },
+        {
+          "info": {
+            "name": "List Wiki Pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/wiki/pages",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns a listing of all wiki pages in the specified subreddit. Requires the wikiread OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Edit a Wiki Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://oauth.reddit.com/r/:subreddit/api/wiki/edit",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "page",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "value": ""
+                },
+                {
+                  "name": "reason",
+                  "value": ""
+                },
+                {
+                  "name": "previous",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Edits the content of a wiki page in the specified subreddit. Requires the wikiedit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Wiki Page Revision History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://oauth.reddit.com/r/:subreddit/wiki/revisions/:page",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "path",
+                "description": "The name of the wiki page."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns the revision history for a wiki page. Requires the wikiread OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
