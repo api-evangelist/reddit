@@ -9,7 +9,7 @@ description: Reddit is a social news aggregation, discussion, and community plat
   campaigns, audiences, and conversion tracking. All API access requires OAuth 2.0
   authentication via the oauth.reddit.com server at 60 requests per minute.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Advertising
 - Communities
