@@ -121,7 +121,7 @@ common:
   url: https://www.linkedin.com/company/reddit-com
 - type: Website
   url: https://www.reddit.com
-- type: Developer Portal
+- type: DeveloperPortal
   url: https://www.reddit.com/dev/api
 - type: Documentation
   url: https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
@@ -137,7 +137,7 @@ common:
   url: https://www.redditstatus.com/
 - type: Support
   url: https://support.reddithelp.com/hc/en-us
-- type: SignUp
+- type: Signup
   url: https://www.reddit.com/register
 - type: OpenAPI
   url: openapi/reddit-data-api-openapi.yml
