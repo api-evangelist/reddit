@@ -117,6 +117,10 @@ apis:
   - type: App Registration
     url: https://www.reddit.com/prefs/apps
 common:
+- type: VulnerabilityDisclosure
+  url: security/reddit-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/reddit-domain-security.yml
 - type: Authentication
   url: authentication/reddit-authentication.yml
 - type: OAuthScopes
