@@ -117,6 +117,10 @@ apis:
   - type: App Registration
     url: https://www.reddit.com/prefs/apps
 common:
+- type: Authentication
+  url: authentication/reddit-authentication.yml
+- type: OAuthScopes
+  url: scopes/reddit-scopes.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/reddit-com
 - type: Website

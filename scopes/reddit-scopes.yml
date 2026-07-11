@@ -1,0 +1,141 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/reddit-ads-api-openapi.yml, openapi/reddit-data-api-openapi.yml
+schemes:
+- name: oauth2
+  source: openapi/reddit-ads-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.reddit.com/api/v1/authorize
+    tokenUrl: https://www.reddit.com/api/v1/access_token
+  description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained
+    via the authorization code flow.
+- name: oauth2
+  source: openapi/reddit-data-api-openapi.yml
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://www.reddit.com/api/v1/authorize
+    tokenUrl: https://www.reddit.com/api/v1/access_token
+  description: Reddit uses OAuth 2.0 for authentication. All API requests must include a valid
+    access token obtained through one of the supported OAuth grant types.
+scopes:
+- scope: ads
+  description: Access to ads management endpoints
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-ads-api-openapi.yml
+- scope: edit
+  description: Edit and delete content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: flair
+  description: Set user and link flair
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: history
+  description: Access voting history
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: identity
+  description: Access user identity
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: modconfig
+  description: Manage subreddit configuration
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: modflair
+  description: Manage subreddit flair
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: modlog
+  description: Access moderation log
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: modposts
+  description: Approve and remove content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: modwiki
+  description: Manage wiki pages
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: mysubreddits
+  description: Access subscribed subreddits
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: privatemessages
+  description: Access private messages
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: read
+  description: Read content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: report
+  description: Report content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: save
+  description: Save and unsave content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: submit
+  description: Submit content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: subscribe
+  description: Manage subscriptions
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: vote
+  description: Vote on content
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: wikiedit
+  description: Edit wiki pages
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
+- scope: wikiread
+  description: Read wiki pages
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/reddit-data-api-openapi.yml
