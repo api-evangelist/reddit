@@ -1,0 +1,296 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Subreddits API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Subreddits
+  description: Endpoints for managing and retrieving information about subreddits, including subscription, creation, rules, and settings.
+paths:
+  /r/{subreddit}/about:
+    get:
+      operationId: getSubredditAbout
+      summary: Get Subreddit Information
+      description: Returns information about the specified subreddit, including subscriber count, description, rules, and settings.
+      tags:
+      - Subreddits
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      responses:
+        '200':
+          description: Subreddit information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subreddit'
+        '404':
+          description: Subreddit not found
+  /r/{subreddit}/about/rules:
+    get:
+      operationId: getSubredditRules
+      summary: Get Subreddit Rules
+      description: Returns the rules defined for the specified subreddit.
+      tags:
+      - Subreddits
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      responses:
+        '200':
+          description: Subreddit rules
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  rules:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SubredditRule'
+                  site_rules:
+                    type: array
+                    items:
+                      type: string
+  /subreddits/mine/subscriber:
+    get:
+      operationId: getMySubreddits
+      summary: Get Subscribed Subreddits
+      description: Returns a listing of subreddits the authenticated user is subscribed to. Requires the mysubreddits OAuth scope.
+      tags:
+      - Subreddits
+      parameters:
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of subscribed subreddits
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /api/subscribe:
+    post:
+      operationId: subscribe
+      summary: Subscribe or Unsubscribe From a Subreddit
+      description: Subscribes to or unsubscribes from a subreddit. Requires the subscribe OAuth scope.
+      tags:
+      - Subreddits
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - action
+              - sr_name
+              properties:
+                action:
+                  type: string
+                  description: The subscription action to perform.
+                  enum:
+                  - sub
+                  - unsub
+                sr_name:
+                  type: string
+                  description: The name of the subreddit.
+                skip_initial_defaults:
+                  type: boolean
+                  description: Whether to skip adding default subreddits for new accounts.
+      responses:
+        '200':
+          description: Subscription updated
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    SubredditRule:
+      type: object
+      description: Represents a rule defined for a subreddit.
+      properties:
+        kind:
+          type: string
+          description: The rule kind (link, comment, or all).
+          enum:
+          - link
+          - comment
+          - all
+        short_name:
+          type: string
+          description: A short name for the rule.
+        description:
+          type: string
+          description: The full description of the rule (markdown).
+        violation_reason:
+          type: string
+          description: The reason shown when content is reported for this rule.
+        created_utc:
+          type: number
+          format: double
+          description: The Unix timestamp of when the rule was created.
+        priority:
+          type: integer
+          description: The display priority of the rule.
+    Subreddit:
+      type: object
+      description: Represents a Reddit subreddit community with its configuration and metadata.
+      properties:
+        kind:
+          type: string
+          description: The thing kind, always t5.
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The subreddit's unique ID36.
+            display_name:
+              type: string
+              description: The subreddit's display name without the r/ prefix.
+            title:
+              type: string
+              description: The subreddit's title.
+            public_description:
+              type: string
+              description: The subreddit's public description shown in search results.
+            description:
+              type: string
+              description: The subreddit's full sidebar description (markdown).
+            subscribers:
+              type: integer
+              description: The number of subscribers.
+            accounts_active:
+              type: integer
+              description: The approximate number of users currently active.
+            created_utc:
+              type: number
+              format: double
+              description: The Unix timestamp of when the subreddit was created.
+            over18:
+              type: boolean
+              description: Whether the subreddit is marked as NSFW.
+            subreddit_type:
+              type: string
+              description: The subreddit's access type.
+              enum:
+              - public
+              - private
+              - restricted
+              - gold_restricted
+              - archived
+            url:
+              type: string
+              description: The subreddit's URL path (e.g., /r/example/).
+            icon_img:
+              type: string
+              format: uri
+              description: URL of the subreddit's icon image.
+            banner_img:
+              type: string
+              format: uri
+              description: URL of the subreddit's banner image.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

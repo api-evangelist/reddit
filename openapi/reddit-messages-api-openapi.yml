@@ -1,0 +1,247 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Messages API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Messages
+  description: Endpoints for managing private messages, including inbox, sent, unread messages, composing, and message actions.
+paths:
+  /message/inbox:
+    get:
+      operationId: getInbox
+      summary: Get Inbox Messages
+      description: Returns a listing of the authenticated user's inbox messages, including both private messages and comment replies. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      - name: mark
+        in: query
+        description: Whether to mark messages as read.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Listing of inbox messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /message/unread:
+    get:
+      operationId: getUnreadMessages
+      summary: Get Unread Messages
+      description: Returns a listing of the authenticated user's unread messages. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      - name: mark
+        in: query
+        description: Whether to mark messages as read.
+        schema:
+          type: boolean
+          default: true
+      responses:
+        '200':
+          description: Listing of unread messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /message/sent:
+    get:
+      operationId: getSentMessages
+      summary: Get Sent Messages
+      description: Returns a listing of the authenticated user's sent messages. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      parameters:
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of sent messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /api/compose:
+    post:
+      operationId: composeMessage
+      summary: Compose a Private Message
+      description: Sends a private message to another user or a subreddit's moderators. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - to
+              - subject
+              - text
+              properties:
+                to:
+                  type: string
+                  description: The recipient username or /r/subreddit for modmail.
+                subject:
+                  type: string
+                  description: The subject of the message (max 100 characters).
+                  maxLength: 100
+                text:
+                  type: string
+                  description: The body of the message (markdown).
+                api_type:
+                  type: string
+                  default: json
+      responses:
+        '200':
+          description: Message sent successfully
+        '403':
+          description: Permission denied
+  /api/read_message:
+    post:
+      operationId: readMessage
+      summary: Mark Messages As Read
+      description: Marks one or more messages as read. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: string
+                  description: A comma-separated list of message fullnames to mark as read.
+      responses:
+        '200':
+          description: Messages marked as read
+  /api/read_all_messages:
+    post:
+      operationId: readAllMessages
+      summary: Mark All Messages As Read
+      description: Marks all of the authenticated user's messages as read. Requires the privatemessages OAuth scope.
+      tags:
+      - Messages
+      responses:
+        '200':
+          description: All messages marked as read
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

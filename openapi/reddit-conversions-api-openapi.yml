@@ -1,0 +1,190 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Conversions API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Conversions
+  description: Endpoints for managing conversion pixels and sending server-side conversion events via the Conversions API (CAPI).
+paths:
+  /accounts/{account_id}/pixels:
+    get:
+      operationId: listPixels
+      summary: List Conversion Pixels
+      description: Lists conversion pixels (Reddit Pixel) in a Reddit Ads account. Pixels are used to track website visitors and conversions for attribution and optimization.
+      tags:
+      - Conversions
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: List of conversion pixels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ConversionPixel'
+        '401':
+          description: Authentication required
+  /accounts/{account_id}/conversions/events:
+    post:
+      operationId: sendConversionEvents
+      summary: Send Conversion Events
+      description: Sends server-side conversion events to the Reddit Ads Conversions API (CAPI). This enables advertisers to track conversions that occur on their servers without relying solely on the Reddit Pixel.
+      tags:
+      - Conversions
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConversionEventBatch'
+      responses:
+        '200':
+          description: Conversion events accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Confirmation message.
+        '400':
+          description: Invalid event data
+components:
+  schemas:
+    ConversionEvent:
+      type: object
+      description: A single server-side conversion event.
+      required:
+      - event_type
+      - event_at
+      properties:
+        event_type:
+          type: object
+          description: The type of conversion event.
+          properties:
+            tracking_type:
+              type: string
+              description: The tracking type of the event.
+              enum:
+              - Purchase
+              - SignUp
+              - Lead
+              - ViewContent
+              - AddToCart
+              - AddToWishlist
+              - Search
+              - Custom
+        event_at:
+          type: string
+          format: date-time
+          description: The timestamp when the conversion event occurred.
+        user:
+          type: object
+          description: User identification data for matching.
+          properties:
+            email:
+              type: string
+              description: SHA-256 hashed email address.
+            external_id:
+              type: string
+              description: SHA-256 hashed external user ID.
+            ip_address:
+              type: string
+              description: SHA-256 hashed IP address.
+            user_agent:
+              type: string
+              description: The user agent string.
+            click_id:
+              type: string
+              description: The Reddit click ID from the ad click.
+        event_metadata:
+          type: object
+          description: Additional metadata about the conversion event.
+          properties:
+            currency:
+              type: string
+              description: The currency code (ISO 4217).
+            value_decimal:
+              type: number
+              format: double
+              description: The monetary value of the conversion.
+            item_count:
+              type: integer
+              description: The number of items in the conversion.
+    ConversionEventBatch:
+      type: object
+      description: A batch of server-side conversion events for the Conversions API (CAPI).
+      required:
+      - events
+      properties:
+        events:
+          type: array
+          description: The list of conversion events to send.
+          items:
+            $ref: '#/components/schemas/ConversionEvent'
+    ConversionPixel:
+      type: object
+      description: A conversion pixel (Reddit Pixel) used to track website visitors and conversions.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the pixel.
+        name:
+          type: string
+          description: The name of the pixel.
+        pixel_id:
+          type: string
+          description: The pixel ID used in the tracking code.
+        status:
+          type: string
+          description: The pixel status.
+          enum:
+          - ACTIVE
+          - INACTIVE
+        last_fired_at:
+          type: string
+          format: date-time
+          description: The last time the pixel was triggered.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the pixel was created.
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

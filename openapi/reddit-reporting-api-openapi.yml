@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Reporting API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Reporting
+  description: Endpoints for retrieving campaign, ad group, and ad performance reporting data including impressions, clicks, and conversions.
+paths:
+  /accounts/{account_id}/reports:
+    post:
+      operationId: createReport
+      summary: Create a Performance Report
+      description: Generates a performance report for campaigns, ad groups, or ads in the specified account. Reports include metrics such as impressions, clicks, conversions, and spend.
+      tags:
+      - Reporting
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: Report data generated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        '400':
+          description: Invalid report parameters
+components:
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+  schemas:
+    ReportRequest:
+      type: object
+      description: Parameters for generating a performance report.
+      required:
+      - start_date
+      - end_date
+      - level
+      properties:
+        start_date:
+          type: string
+          format: date
+          description: The start date for the report period.
+        end_date:
+          type: string
+          format: date
+          description: The end date for the report period.
+        level:
+          type: string
+          description: The reporting level.
+          enum:
+          - ACCOUNT
+          - CAMPAIGN
+          - AD_GROUP
+          - AD
+        granularity:
+          type: string
+          description: The time granularity for report data.
+          enum:
+          - DAY
+          - WEEK
+          - MONTH
+          - TOTAL
+        campaign_ids:
+          type: array
+          description: Filter by specific campaign IDs.
+          items:
+            type: string
+        ad_group_ids:
+          type: array
+          description: Filter by specific ad group IDs.
+          items:
+            type: string
+    ReportResponse:
+      type: object
+      description: Performance report response data.
+      properties:
+        data:
+          type: array
+          description: The report data rows.
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+                description: The date for this data row.
+              impressions:
+                type: integer
+                description: The number of ad impressions.
+              clicks:
+                type: integer
+                description: The number of ad clicks.
+              spend_micro:
+                type: integer
+                format: int64
+                description: The amount spent in microcurrency units.
+              ctr:
+                type: number
+                format: double
+                description: The click-through rate.
+              cpm_micro:
+                type: integer
+                format: int64
+                description: The cost per thousand impressions in microcurrency.
+              cpc_micro:
+                type: integer
+                format: int64
+                description: The cost per click in microcurrency.
+              conversions:
+                type: integer
+                description: The number of conversions tracked.
+              video_views:
+                type: integer
+                description: The number of video views (for video ads).
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

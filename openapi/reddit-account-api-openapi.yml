@@ -1,0 +1,232 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Account
+  description: Endpoints related to the authenticated user account, including identity, preferences, karma, trophies, and friend management.
+paths:
+  /api/v1/me:
+    get:
+      operationId: getMe
+      summary: Get Current User Identity
+      description: Returns the identity of the currently authenticated user, including username, karma, account age, and preferences.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with user identity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          description: Authentication required
+  /api/v1/me/prefs:
+    get:
+      operationId: getMyPrefs
+      summary: Get User Preferences
+      description: Returns the preference settings of the currently authenticated user.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with user preferences
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Authentication required
+    patch:
+      operationId: updateMyPrefs
+      summary: Update User Preferences
+      description: Updates the preference settings of the currently authenticated user.
+      tags:
+      - Account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Preferences updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Authentication required
+  /api/v1/me/karma:
+    get:
+      operationId: getMyKarma
+      summary: Get Karma Breakdown by Subreddit
+      description: Returns a breakdown of the current user's karma by subreddit, including link karma and comment karma for each subreddit.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with karma breakdown
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/KarmaBreakdown'
+        '401':
+          description: Authentication required
+  /api/v1/me/trophies:
+    get:
+      operationId: getMyTrophies
+      summary: Get Current User Trophies
+      description: Returns a list of trophies for the currently authenticated user.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with trophies
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Authentication required
+  /api/v1/me/friends:
+    get:
+      operationId: getMyFriends
+      summary: Get Friends List
+      description: Returns a list of the current user's friends.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with friends list
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Authentication required
+  /api/v1/me/blocked:
+    get:
+      operationId: getMyBlocked
+      summary: Get Blocked Users List
+      description: Returns a list of users blocked by the currently authenticated user.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Successful response with blocked users
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Authentication required
+  /api/v1/scopes:
+    get:
+      operationId: getScopes
+      summary: Get Available Oauth Scopes
+      description: Returns a listing of all available OAuth scopes and their descriptions.
+      tags:
+      - Account
+      responses:
+        '200':
+          description: Available OAuth scopes
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    name:
+                      type: string
+components:
+  schemas:
+    Account:
+      type: object
+      description: Represents a Reddit user account with profile and karma information.
+      properties:
+        id:
+          type: string
+          description: The account's unique ID36.
+        name:
+          type: string
+          description: The account's username.
+        created_utc:
+          type: number
+          format: double
+          description: The Unix timestamp of when the account was created.
+        link_karma:
+          type: integer
+          description: Total link karma earned.
+        comment_karma:
+          type: integer
+          description: Total comment karma earned.
+        is_gold:
+          type: boolean
+          description: Whether the user has Reddit Premium.
+        is_mod:
+          type: boolean
+          description: Whether the user is a moderator of any subreddit.
+        has_verified_email:
+          type: boolean
+          description: Whether the user has a verified email address.
+        icon_img:
+          type: string
+          format: uri
+          description: URL of the user's avatar image.
+        subreddit:
+          type: object
+          description: The user's profile subreddit information.
+        over_18:
+          type: boolean
+          description: Whether the user has opted into viewing NSFW content.
+    KarmaBreakdown:
+      type: object
+      description: Karma breakdown for a single subreddit.
+      properties:
+        sr:
+          type: string
+          description: The subreddit name.
+        comment_karma:
+          type: integer
+          description: Comment karma earned in this subreddit.
+        link_karma:
+          type: integer
+          description: Link karma earned in this subreddit.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

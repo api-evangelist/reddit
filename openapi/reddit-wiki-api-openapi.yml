@@ -1,0 +1,251 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Wiki API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Wiki
+  description: Endpoints for managing subreddit wikis, including reading and editing wiki pages, revision history, and permissions.
+paths:
+  /r/{subreddit}/wiki/{page}:
+    get:
+      operationId: getWikiPage
+      summary: Get a Wiki Page
+      description: Returns the content of a wiki page in the specified subreddit. Requires the wikiread OAuth scope.
+      tags:
+      - Wiki
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - name: page
+        in: path
+        required: true
+        description: The name of the wiki page.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Wiki page content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WikiPage'
+        '404':
+          description: Wiki page not found
+  /r/{subreddit}/wiki/pages:
+    get:
+      operationId: getWikiPages
+      summary: List Wiki Pages
+      description: Returns a listing of all wiki pages in the specified subreddit. Requires the wikiread OAuth scope.
+      tags:
+      - Wiki
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      responses:
+        '200':
+          description: List of wiki pages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  kind:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: string
+  /r/{subreddit}/api/wiki/edit:
+    post:
+      operationId: editWikiPage
+      summary: Edit a Wiki Page
+      description: Edits the content of a wiki page in the specified subreddit. Requires the wikiedit OAuth scope.
+      tags:
+      - Wiki
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - page
+              - content
+              properties:
+                page:
+                  type: string
+                  description: The name of the wiki page to edit.
+                content:
+                  type: string
+                  description: The new content for the wiki page (markdown).
+                reason:
+                  type: string
+                  description: The edit reason (max 256 characters).
+                  maxLength: 256
+                previous:
+                  type: string
+                  description: The revision ID that this edit is based on.
+      responses:
+        '200':
+          description: Wiki page edited successfully
+  /r/{subreddit}/wiki/revisions/{page}:
+    get:
+      operationId: getWikiPageRevisions
+      summary: Get Wiki Page Revision History
+      description: Returns the revision history for a wiki page. Requires the wikiread OAuth scope.
+      tags:
+      - Wiki
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - name: page
+        in: path
+        required: true
+        description: The name of the wiki page.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Revision history listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+    WikiPage:
+      type: object
+      description: Represents a wiki page in a subreddit.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier.
+        data:
+          type: object
+          properties:
+            content_md:
+              type: string
+              description: The wiki page content in markdown format.
+            content_html:
+              type: string
+              description: The wiki page content rendered as HTML.
+            revision_by:
+              type: object
+              description: The user who made the last revision.
+            revision_date:
+              type: number
+              format: double
+              description: The Unix timestamp of the last revision.
+            may_revise:
+              type: boolean
+              description: Whether the current user can edit this wiki page.
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

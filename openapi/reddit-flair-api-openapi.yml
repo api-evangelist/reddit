@@ -1,0 +1,99 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Flair API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Flair
+  description: Endpoints for managing user and link flair within subreddits, including flair templates, assignments, and configuration.
+paths:
+  /r/{subreddit}/api/flair:
+    post:
+      operationId: setFlair
+      summary: Set User Flair
+      description: Sets the flair for a user in the specified subreddit. Requires the modflair OAuth scope (or flair scope for self-flair).
+      tags:
+      - Flair
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The username to set flair for.
+                text:
+                  type: string
+                  description: The flair text.
+                css_class:
+                  type: string
+                  description: The CSS class for the flair.
+                api_type:
+                  type: string
+                  default: json
+      responses:
+        '200':
+          description: Flair set successfully
+  /r/{subreddit}/api/flairselector:
+    post:
+      operationId: getFlairSelector
+      summary: Get Available Flair Options
+      description: Returns available flair options for a user or link in the specified subreddit.
+      tags:
+      - Flair
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                link:
+                  type: string
+                  description: The fullname of a link to get flair options for.
+                name:
+                  type: string
+                  description: The username to get flair options for.
+      responses:
+        '200':
+          description: Available flair options
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

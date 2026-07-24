@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Accounts API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Accounts
+  description: Endpoints for managing Reddit Ads accounts, including retrieving account details and configuration settings.
+paths:
+  /accounts/{account_id}:
+    get:
+      operationId: getAccount
+      summary: Get Account Details
+      description: Fetches detailed information about a specific Reddit Ads account including attribution settings, status, and account configuration.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: Account details retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '401':
+          description: Authentication required
+        '404':
+          description: Account not found
+components:
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+  schemas:
+    Account:
+      type: object
+      description: A Reddit Ads account containing campaigns and billing information.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the account.
+        name:
+          type: string
+          description: The name of the advertising account.
+        status:
+          type: string
+          description: The current status of the account.
+          enum:
+          - ACTIVE
+          - SUSPENDED
+          - CLOSED
+        currency:
+          type: string
+          description: The account's billing currency (ISO 4217).
+        timezone:
+          type: string
+          description: The account's timezone for reporting.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the account was created.
+        attribution_type:
+          type: string
+          description: The attribution model used for conversion tracking.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

@@ -1,0 +1,282 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Campaigns API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Campaigns
+  description: Endpoints for creating, reading, updating, and deleting advertising campaigns, including budget and schedule management.
+paths:
+  /accounts/{account_id}/campaigns:
+    get:
+      operationId: listCampaigns
+      summary: List Campaigns
+      description: Lists all campaigns in a Reddit Ads account with filtering, pagination, and sorting. Returns campaign IDs, names, status, objectives, budgets, and schedule information.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/cursor'
+      - name: status
+        in: query
+        description: Filter campaigns by status.
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - PAUSED
+          - COMPLETED
+          - DRAFT
+      responses:
+        '200':
+          description: List of campaigns
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Campaign'
+                  cursor:
+                    type: string
+                    description: Pagination cursor for the next page of results.
+        '401':
+          description: Authentication required
+    post:
+      operationId: createCampaign
+      summary: Create a Campaign
+      description: Creates a new advertising campaign in the specified Reddit Ads account.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampaignInput'
+      responses:
+        '201':
+          description: Campaign created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: Invalid campaign data
+        '401':
+          description: Authentication required
+  /accounts/{account_id}/campaigns/{campaign_id}:
+    get:
+      operationId: getCampaign
+      summary: Get a Campaign
+      description: Fetches detailed information about a specific Reddit Ads campaign including status, budget, schedule, and targeting configuration.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/campaignId'
+      responses:
+        '200':
+          description: Campaign details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '404':
+          description: Campaign not found
+    put:
+      operationId: updateCampaign
+      summary: Update a Campaign
+      description: Updates an existing campaign's configuration, including name, budget, schedule, and status.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/campaignId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CampaignInput'
+      responses:
+        '200':
+          description: Campaign updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Campaign'
+        '400':
+          description: Invalid campaign data
+        '404':
+          description: Campaign not found
+    delete:
+      operationId: deleteCampaign
+      summary: Delete a Campaign
+      description: Deletes an advertising campaign. The campaign must be in a non-active state to be deleted.
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/campaignId'
+      responses:
+        '204':
+          description: Campaign deleted successfully
+        '404':
+          description: Campaign not found
+components:
+  schemas:
+    Campaign:
+      type: object
+      description: An advertising campaign that contains ad groups and manages budget and scheduling.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the campaign.
+        name:
+          type: string
+          description: The name of the campaign.
+        status:
+          type: string
+          description: The current status of the campaign.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - COMPLETED
+          - DRAFT
+        objective:
+          type: string
+          description: The campaign objective.
+          enum:
+          - BRAND_AWARENESS
+          - TRAFFIC
+          - CONVERSIONS
+          - VIDEO_VIEWS
+          - APP_INSTALLS
+          - CATALOG_SALES
+          - REACH
+        daily_budget_micro:
+          type: integer
+          format: int64
+          description: The daily budget in microcurrency units (1/1,000,000 of the currency unit).
+        lifetime_budget_micro:
+          type: integer
+          format: int64
+          description: The lifetime budget in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The campaign start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The campaign end time.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the campaign was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the campaign was last updated.
+    CampaignInput:
+      type: object
+      description: Input for creating or updating a campaign.
+      required:
+      - name
+      - objective
+      properties:
+        name:
+          type: string
+          description: The name of the campaign.
+        objective:
+          type: string
+          description: The campaign objective.
+          enum:
+          - BRAND_AWARENESS
+          - TRAFFIC
+          - CONVERSIONS
+          - VIDEO_VIEWS
+          - APP_INSTALLS
+          - CATALOG_SALES
+          - REACH
+        daily_budget_micro:
+          type: integer
+          format: int64
+          description: The daily budget in microcurrency units.
+        lifetime_budget_micro:
+          type: integer
+          format: int64
+          description: The lifetime budget in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The campaign start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The campaign end time.
+        status:
+          type: string
+          description: The desired status of the campaign.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+  parameters:
+    campaignId:
+      name: campaign_id
+      in: path
+      required: true
+      description: The unique identifier of the campaign.
+      schema:
+        type: string
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to return per page (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    cursor:
+      name: cursor
+      in: query
+      description: A pagination cursor for retrieving the next page of results.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

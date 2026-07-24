@@ -1,0 +1,299 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Moderation API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Moderation
+  description: Endpoints for subreddit moderation tasks, including approving and removing content, managing bans, moderation logs, and modqueue.
+paths:
+  /r/{subreddit}/about/moderators:
+    get:
+      operationId: getSubredditModerators
+      summary: Get Subreddit Moderators
+      description: Returns a listing of the moderators of the specified subreddit.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      responses:
+        '200':
+          description: Moderator listing
+          content:
+            application/json:
+              schema:
+                type: object
+  /r/{subreddit}/about/modqueue:
+    get:
+      operationId: getModqueue
+      summary: Get Moderation Queue
+      description: Returns a listing of items in the subreddit's moderation queue. Items include submissions and comments that have been reported or caught by spam filters. Requires the modposts OAuth scope.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - name: type
+        in: query
+        description: Filter by type of content in the queue.
+        schema:
+          type: string
+          enum:
+          - links
+          - comments
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Moderation queue listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/about/reports:
+    get:
+      operationId: getReports
+      summary: Get Reported Items
+      description: Returns a listing of reported items in the subreddit. Requires the modposts OAuth scope.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of reported items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/about/spam:
+    get:
+      operationId: getSpam
+      summary: Get Spam Items
+      description: Returns a listing of items marked as spam in the subreddit. Requires the modposts OAuth scope.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of spam items
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/about/log:
+    get:
+      operationId: getModLog
+      summary: Get Moderation Log
+      description: Returns a listing of moderation actions taken in the subreddit. Requires the modlog OAuth scope.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - name: mod
+        in: query
+        description: Filter by moderator username.
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by moderation action type.
+        schema:
+          type: string
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Moderation log listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /api/approve:
+    post:
+      operationId: approve
+      summary: Approve a Submission or Comment
+      description: Approves a submission or comment that was removed or reported. Requires the modposts OAuth scope.
+      tags:
+      - Moderation
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - id
+              properties:
+                id:
+                  type: string
+                  description: The fullname of the thing to approve.
+      responses:
+        '200':
+          description: Item approved
+  /api/remove:
+    post:
+      operationId: remove
+      summary: Remove a Submission or Comment
+      description: Removes a submission or comment from public listings. Requires the modposts OAuth scope.
+      tags:
+      - Moderation
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - id
+              - spam
+              properties:
+                id:
+                  type: string
+                  description: The fullname of the thing to remove.
+                spam:
+                  type: boolean
+                  description: Whether to mark the item as spam.
+      responses:
+        '200':
+          description: Item removed
+  /r/{subreddit}/about/banned:
+    get:
+      operationId: getBannedUsers
+      summary: Get Banned Users
+      description: Returns a listing of users banned from the specified subreddit. Requires the modcontributors OAuth scope.
+      tags:
+      - Moderation
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of banned users
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

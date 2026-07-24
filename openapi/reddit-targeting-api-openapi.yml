@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Targeting API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Targeting
+  description: Endpoints for retrieving available targeting options including interests, communities, locations, and devices.
+paths:
+  /targeting/interests:
+    get:
+      operationId: listInterests
+      summary: List Interest Targeting Options
+      description: Returns available interest categories for ad targeting on the Reddit platform.
+      tags:
+      - Targeting
+      responses:
+        '200':
+          description: List of available interests
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Interest'
+  /targeting/communities:
+    get:
+      operationId: listTargetingCommunities
+      summary: List Community Targeting Options
+      description: Returns subreddit communities available for ad targeting.
+      tags:
+      - Targeting
+      parameters:
+      - name: q
+        in: query
+        description: Search query for filtering communities.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of targetable communities
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TargetingCommunity'
+  /targeting/locations:
+    get:
+      operationId: listLocations
+      summary: List Location Targeting Options
+      description: Returns available geographic locations for ad targeting, including countries, regions, and metro areas.
+      tags:
+      - Targeting
+      parameters:
+      - name: q
+        in: query
+        description: Search query for filtering locations.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of targetable locations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Location'
+components:
+  schemas:
+    Location:
+      type: object
+      description: A geographic location available for ad targeting.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the location.
+        name:
+          type: string
+          description: The name of the location.
+        type:
+          type: string
+          description: The type of location.
+          enum:
+          - COUNTRY
+          - REGION
+          - DMA
+          - CITY
+        country_code:
+          type: string
+          description: The ISO country code.
+    Interest:
+      type: object
+      description: An interest category available for ad targeting.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the interest.
+        name:
+          type: string
+          description: The name of the interest category.
+        parent_id:
+          type: string
+          nullable: true
+          description: The parent interest category ID, if applicable.
+    TargetingCommunity:
+      type: object
+      description: A Reddit community (subreddit) available for ad targeting.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the community.
+        name:
+          type: string
+          description: The community name (subreddit name).
+        subscriber_count:
+          type: integer
+          description: The number of subscribers.
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

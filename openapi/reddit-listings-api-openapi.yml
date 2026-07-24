@@ -1,0 +1,324 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Listings API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Listings
+  description: Endpoints for retrieving sorted listings of content from subreddits, including hot, new, rising, top, and controversial posts.
+paths:
+  /r/{subreddit}/hot:
+    get:
+      operationId: getHotListings
+      summary: Get Hot Listings
+      description: Returns a listing of hot posts from the specified subreddit. Results are sorted by Reddit's hot ranking algorithm.
+      tags:
+      - Listings
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      - name: g
+        in: query
+        description: Geolocation filter for location-specific hot listings.
+        schema:
+          type: string
+          enum:
+          - GLOBAL
+          - US
+          - AR
+          - AU
+          - BG
+          - CA
+          - CL
+          - CO
+          - HR
+          - CZ
+          - FI
+          - FR
+          - DE
+          - GR
+          - HU
+          - IS
+          - IN
+          - IE
+          - IT
+          - JP
+          - MY
+          - MX
+          - NZ
+          - PH
+          - PL
+          - PT
+          - PR
+          - RO
+          - RS
+          - SG
+          - ES
+          - SE
+          - TW
+          - TH
+          - TR
+          - GB
+          - US_WA
+          - US_DE
+          - US_DC
+          - US_WI
+          - US_WV
+          - US_HI
+          - US_FL
+          - US_NH
+          - US_NJ
+          - US_NM
+          - US_TX
+          - US_LA
+          - US_NC
+          - US_ND
+          - US_NE
+          - US_TN
+          - US_NY
+          - US_PA
+          - US_CA
+          - US_NV
+          - US_VA
+          - US_CO
+          - US_AK
+          - US_AL
+          - US_AR
+          - US_VT
+          - US_IL
+          - US_GA
+          - US_IN
+          - US_IA
+          - US_OK
+          - US_AZ
+          - US_ID
+          - US_CT
+          - US_ME
+          - US_MD
+          - US_MA
+          - US_OH
+          - US_UT
+          - US_MO
+          - US_MN
+          - US_MI
+          - US_RI
+          - US_KS
+          - US_MT
+          - US_MS
+          - US_SC
+          - US_KY
+          - US_OR
+          - US_SD
+      responses:
+        '200':
+          description: Listing of hot posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/new:
+    get:
+      operationId: getNewListings
+      summary: Get New Listings
+      description: Returns a listing of new posts from the specified subreddit, sorted by submission time with newest first.
+      tags:
+      - Listings
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of new posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/rising:
+    get:
+      operationId: getRisingListings
+      summary: Get Rising Listings
+      description: Returns a listing of rising posts from the specified subreddit. Rising posts are those gaining upvotes at a rapid rate.
+      tags:
+      - Listings
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of rising posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/top:
+    get:
+      operationId: getTopListings
+      summary: Get Top Listings
+      description: Returns a listing of top-scoring posts from the specified subreddit, filterable by time period.
+      tags:
+      - Listings
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/t'
+      responses:
+        '200':
+          description: Listing of top posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /r/{subreddit}/controversial:
+    get:
+      operationId: getControversialListings
+      summary: Get Controversial Listings
+      description: Returns a listing of controversial posts from the specified subreddit, which are posts with a roughly even mix of upvotes and downvotes.
+      tags:
+      - Listings
+      parameters:
+      - $ref: '#/components/parameters/subreddit'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      - $ref: '#/components/parameters/t'
+      responses:
+        '200':
+          description: Listing of controversial posts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    t:
+      name: t
+      in: query
+      description: The time period for filtering results.
+      schema:
+        type: string
+        enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+        - all
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

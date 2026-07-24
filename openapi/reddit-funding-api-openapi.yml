@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Funding API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Funding
+  description: Endpoints for managing account funding instruments and billing information.
+paths:
+  /accounts/{account_id}/funding_instruments:
+    get:
+      operationId: listFundingInstruments
+      summary: List Funding Instruments
+      description: Lists the funding instruments (payment methods) associated with the specified Reddit Ads account.
+      tags:
+      - Funding
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      responses:
+        '200':
+          description: List of funding instruments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/FundingInstrument'
+components:
+  schemas:
+    FundingInstrument:
+      type: object
+      description: A funding instrument (payment method) associated with an advertising account.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the funding instrument.
+        type:
+          type: string
+          description: The type of funding instrument.
+          enum:
+          - CREDIT_CARD
+          - PREPAID
+          - INVOICED
+        status:
+          type: string
+          description: The status of the funding instrument.
+          enum:
+          - ACTIVE
+          - INACTIVE
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the funding instrument was created.
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

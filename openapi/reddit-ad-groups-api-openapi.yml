@@ -1,0 +1,330 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Ad Groups API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Ad Groups
+  description: Endpoints for managing ad groups within campaigns, including targeting, bidding, and scheduling configuration.
+paths:
+  /accounts/{account_id}/ad_groups:
+    get:
+      operationId: listAdGroups
+      summary: List Ad Groups
+      description: Lists ad groups in a Reddit Ads account or campaign, with ad groups containing targeting settings and grouping related ads.
+      tags:
+      - Ad Groups
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/cursor'
+      - name: campaign_id
+        in: query
+        description: Filter ad groups by campaign ID.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of ad groups
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AdGroup'
+                  cursor:
+                    type: string
+                    description: Pagination cursor for the next page.
+        '401':
+          description: Authentication required
+    post:
+      operationId: createAdGroup
+      summary: Create an Ad Group
+      description: Creates a new ad group within a campaign with targeting and bidding configuration.
+      tags:
+      - Ad Groups
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdGroupInput'
+      responses:
+        '201':
+          description: Ad group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdGroup'
+        '400':
+          description: Invalid ad group data
+  /accounts/{account_id}/ad_groups/{ad_group_id}:
+    get:
+      operationId: getAdGroup
+      summary: Get an Ad Group
+      description: Fetches detailed information about a specific ad group including targeting settings, bid configuration, and schedule.
+      tags:
+      - Ad Groups
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adGroupId'
+      responses:
+        '200':
+          description: Ad group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdGroup'
+        '404':
+          description: Ad group not found
+    put:
+      operationId: updateAdGroup
+      summary: Update an Ad Group
+      description: Updates an existing ad group's configuration, including targeting, bidding, and scheduling.
+      tags:
+      - Ad Groups
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adGroupId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdGroupInput'
+      responses:
+        '200':
+          description: Ad group updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdGroup'
+        '400':
+          description: Invalid ad group data
+    delete:
+      operationId: deleteAdGroup
+      summary: Delete an Ad Group
+      description: Deletes an ad group from a campaign.
+      tags:
+      - Ad Groups
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adGroupId'
+      responses:
+        '204':
+          description: Ad group deleted successfully
+        '404':
+          description: Ad group not found
+components:
+  parameters:
+    adGroupId:
+      name: ad_group_id
+      in: path
+      required: true
+      description: The unique identifier of the ad group.
+      schema:
+        type: string
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to return per page (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    cursor:
+      name: cursor
+      in: query
+      description: A pagination cursor for retrieving the next page of results.
+      schema:
+        type: string
+  schemas:
+    AdGroupInput:
+      type: object
+      description: Input for creating or updating an ad group.
+      required:
+      - campaign_id
+      - name
+      properties:
+        campaign_id:
+          type: string
+          description: The campaign to create the ad group in.
+        name:
+          type: string
+          description: The name of the ad group.
+        bid_strategy:
+          type: string
+          description: The bidding strategy.
+          enum:
+          - AUTOMATIC
+          - MANUAL_CPC
+          - MANUAL_CPM
+          - MANUAL_CPV
+        bid_micro:
+          type: integer
+          format: int64
+          description: The bid amount in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The ad group start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The ad group end time.
+        targeting:
+          $ref: '#/components/schemas/Targeting'
+        status:
+          type: string
+          description: The desired status.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+    AdGroup:
+      type: object
+      description: An ad group within a campaign that contains ads and targeting configuration.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the ad group.
+        campaign_id:
+          type: string
+          description: The campaign this ad group belongs to.
+        name:
+          type: string
+          description: The name of the ad group.
+        status:
+          type: string
+          description: The current status of the ad group.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+        bid_strategy:
+          type: string
+          description: The bidding strategy for the ad group.
+          enum:
+          - AUTOMATIC
+          - MANUAL_CPC
+          - MANUAL_CPM
+          - MANUAL_CPV
+        bid_micro:
+          type: integer
+          format: int64
+          description: The bid amount in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The ad group start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The ad group end time.
+        targeting:
+          $ref: '#/components/schemas/Targeting'
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the ad group was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the ad group was last updated.
+    Targeting:
+      type: object
+      description: Targeting configuration for an ad group specifying the audience to reach.
+      properties:
+        locations:
+          type: array
+          description: Geographic locations to target.
+          items:
+            type: string
+        interests:
+          type: array
+          description: Interest categories to target.
+          items:
+            type: string
+        communities:
+          type: array
+          description: Subreddit communities to target.
+          items:
+            type: string
+        devices:
+          type: array
+          description: Device types to target.
+          items:
+            type: string
+            enum:
+            - DESKTOP
+            - MOBILE
+            - TABLET
+        os:
+          type: array
+          description: Operating systems to target.
+          items:
+            type: string
+            enum:
+            - IOS
+            - ANDROID
+            - WINDOWS
+            - MACOS
+        custom_audience_ids:
+          type: array
+          description: Custom audience IDs to include in targeting.
+          items:
+            type: string
+        excluded_custom_audience_ids:
+          type: array
+          description: Custom audience IDs to exclude from targeting.
+          items:
+            type: string
+        age_ranges:
+          type: array
+          description: Age ranges to target.
+          items:
+            type: string
+        genders:
+          type: array
+          description: Gender targeting.
+          items:
+            type: string
+            enum:
+            - MALE
+            - FEMALE
+            - ALL
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

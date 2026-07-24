@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Custom Audiences API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Custom Audiences
+  description: Endpoints for managing custom audiences for targeting, including email lists, mobile device IDs, and website visitor audiences.
+paths:
+  /accounts/{account_id}/custom_audiences:
+    get:
+      operationId: listCustomAudiences
+      summary: List Custom Audiences
+      description: Lists custom audiences in a Reddit Ads account. Custom audiences allow targeting specific users based on email lists, mobile device IDs, or website visitor data.
+      tags:
+      - Custom Audiences
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/cursor'
+      responses:
+        '200':
+          description: List of custom audiences
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/CustomAudience'
+                  cursor:
+                    type: string
+                    description: Pagination cursor for the next page.
+        '401':
+          description: Authentication required
+    post:
+      operationId: createCustomAudience
+      summary: Create a Custom Audience
+      description: Creates a new custom audience for targeting in ad campaigns.
+      tags:
+      - Custom Audiences
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAudienceInput'
+      responses:
+        '201':
+          description: Custom audience created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAudience'
+        '400':
+          description: Invalid audience data
+  /accounts/{account_id}/custom_audiences/{audience_id}:
+    get:
+      operationId: getCustomAudience
+      summary: Get a Custom Audience
+      description: Fetches detailed information about a specific custom audience.
+      tags:
+      - Custom Audiences
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - name: audience_id
+        in: path
+        required: true
+        description: The unique identifier of the custom audience.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Custom audience details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAudience'
+        '404':
+          description: Custom audience not found
+    put:
+      operationId: updateCustomAudience
+      summary: Update a Custom Audience
+      description: Updates an existing custom audience's configuration and user list.
+      tags:
+      - Custom Audiences
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - name: audience_id
+        in: path
+        required: true
+        description: The unique identifier of the custom audience.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomAudienceInput'
+      responses:
+        '200':
+          description: Custom audience updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomAudience'
+    delete:
+      operationId: deleteCustomAudience
+      summary: Delete a Custom Audience
+      description: Deletes a custom audience from the account.
+      tags:
+      - Custom Audiences
+      parameters:
+      - $ref: '#/components/parameters/accountId'
+      - name: audience_id
+        in: path
+        required: true
+        description: The unique identifier of the custom audience.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Custom audience deleted
+        '404':
+          description: Custom audience not found
+components:
+  schemas:
+    CustomAudience:
+      type: object
+      description: A custom audience for targeting specific users based on uploaded data or pixel tracking.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the custom audience.
+        name:
+          type: string
+          description: The name of the custom audience.
+        type:
+          type: string
+          description: The type of custom audience.
+          enum:
+          - CUSTOMER_LIST
+          - WEBSITE_VISITORS
+          - MOBILE_ADVERTISER_ID
+          - LOOKALIKE
+        status:
+          type: string
+          description: The status of the audience.
+        estimated_size:
+          type: integer
+          description: The estimated audience size.
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the audience was created.
+    CustomAudienceInput:
+      type: object
+      description: Input for creating or updating a custom audience.
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: The name of the custom audience.
+        type:
+          type: string
+          description: The type of custom audience.
+          enum:
+          - CUSTOMER_LIST
+          - WEBSITE_VISITORS
+          - MOBILE_ADVERTISER_ID
+          - LOOKALIKE
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to return per page (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    cursor:
+      name: cursor
+      in: query
+      description: A pagination cursor for retrieving the next page of results.
+      schema:
+        type: string
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

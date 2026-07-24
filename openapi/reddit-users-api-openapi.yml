@@ -1,0 +1,278 @@
+openapi: 3.1.0
+info:
+  title: Reddit Ads Account Users API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
+  version: '3'
+  contact:
+    name: Reddit Ads Support
+    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
+  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+servers:
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
+security:
+- oauth2: []
+tags:
+- name: Users
+  description: Endpoints for retrieving information about Reddit users, including profiles, post history, comment history, and trophies.
+paths:
+  /user/{username}/about:
+    get:
+      operationId: getUserAbout
+      summary: Get User Profile
+      description: Returns public information about the specified user, including karma, account age, and display preferences.
+      tags:
+      - Users
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: The username of the user to look up.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User profile information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          description: User not found
+  /user/{username}/submitted:
+    get:
+      operationId: getUserSubmitted
+      summary: Get User Submissions
+      description: Returns a listing of submissions posted by the specified user.
+      tags:
+      - Users
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: The username to get submissions for.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: The sorting method.
+        schema:
+          type: string
+          enum:
+          - hot
+          - new
+          - top
+          - controversial
+      - $ref: '#/components/parameters/t'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of user submissions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /user/{username}/comments:
+    get:
+      operationId: getUserComments
+      summary: Get User Comments
+      description: Returns a listing of comments posted by the specified user.
+      tags:
+      - Users
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: The username to get comments for.
+        schema:
+          type: string
+      - name: sort
+        in: query
+        description: The sorting method.
+        schema:
+          type: string
+          enum:
+          - hot
+          - new
+          - top
+          - controversial
+      - $ref: '#/components/parameters/t'
+      - $ref: '#/components/parameters/after'
+      - $ref: '#/components/parameters/before'
+      - $ref: '#/components/parameters/limit'
+      - $ref: '#/components/parameters/count'
+      responses:
+        '200':
+          description: Listing of user comments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listing'
+  /user/{username}/trophies:
+    get:
+      operationId: getUserTrophies
+      summary: Get User Trophies
+      description: Returns a list of trophies for the specified user.
+      tags:
+      - Users
+      parameters:
+      - name: username
+        in: path
+        required: true
+        description: The username to get trophies for.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User trophies
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+    Listing:
+      type: object
+      description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier, always "Listing".
+          enum:
+          - Listing
+        data:
+          type: object
+          properties:
+            after:
+              type: string
+              nullable: true
+              description: The fullname of the next item for forward pagination.
+            before:
+              type: string
+              nullable: true
+              description: The fullname of the previous item for backward pagination.
+            dist:
+              type: integer
+              description: The number of items in this listing.
+            modhash:
+              type: string
+              description: A modhash for CSRF protection.
+            children:
+              type: array
+              description: The list of things in this listing.
+              items:
+                $ref: '#/components/schemas/Thing'
+    Account:
+      type: object
+      description: Represents a Reddit user account with profile and karma information.
+      properties:
+        id:
+          type: string
+          description: The account's unique ID36.
+        name:
+          type: string
+          description: The account's username.
+        created_utc:
+          type: number
+          format: double
+          description: The Unix timestamp of when the account was created.
+        link_karma:
+          type: integer
+          description: Total link karma earned.
+        comment_karma:
+          type: integer
+          description: Total comment karma earned.
+        is_gold:
+          type: boolean
+          description: Whether the user has Reddit Premium.
+        is_mod:
+          type: boolean
+          description: Whether the user is a moderator of any subreddit.
+        has_verified_email:
+          type: boolean
+          description: Whether the user has a verified email address.
+        icon_img:
+          type: string
+          format: uri
+          description: URL of the user's avatar image.
+        subreddit:
+          type: object
+          description: The user's profile subreddit information.
+        over_18:
+          type: boolean
+          description: Whether the user has opted into viewing NSFW content.
+  parameters:
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    t:
+      name: t
+      in: query
+      description: The time period for filtering results.
+      schema:
+        type: string
+        enum:
+        - hour
+        - day
+        - week
+        - month
+        - year
+        - all
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/

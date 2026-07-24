@@ -1,364 +1,37 @@
 openapi: 3.1.0
 info:
-  title: Reddit Ads API
-  description: >-
-    The Reddit Ads API allows advertisers and their partners to
-    programmatically create, edit, and manage advertising campaigns and
-    audiences on the Reddit platform. It provides endpoints for managing
-    ad accounts, campaigns, ad groups, ads, creatives, targeting, custom
-    audiences, conversion pixels, and reporting. Authentication is handled
-    via OAuth 2.0, and rate limits are set at one request per second.
+  title: Reddit Account Ads API
+  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
   version: '3'
   contact:
     name: Reddit Ads Support
     url: https://business.reddithelp.com/s/article/Reddit-Ads-API
   termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
-externalDocs:
-  description: Reddit Ads API Documentation
-  url: https://ads-api.reddit.com/docs/
 servers:
-  - url: https://ads-api.reddit.com/api/v3
-    description: Reddit Ads API v3 Production Server
-tags:
-  - name: Accounts
-    description: >-
-      Endpoints for managing Reddit Ads accounts, including retrieving
-      account details and configuration settings.
-  - name: Ad Groups
-    description: >-
-      Endpoints for managing ad groups within campaigns, including
-      targeting, bidding, and scheduling configuration.
-  - name: Ads
-    description: >-
-      Endpoints for creating and managing individual ads and their
-      associated creative content.
-  - name: Campaigns
-    description: >-
-      Endpoints for creating, reading, updating, and deleting advertising
-      campaigns, including budget and schedule management.
-  - name: Conversions
-    description: >-
-      Endpoints for managing conversion pixels and sending server-side
-      conversion events via the Conversions API (CAPI).
-  - name: Custom Audiences
-    description: >-
-      Endpoints for managing custom audiences for targeting, including
-      email lists, mobile device IDs, and website visitor audiences.
-  - name: Funding
-    description: >-
-      Endpoints for managing account funding instruments and billing
-      information.
-  - name: Reporting
-    description: >-
-      Endpoints for retrieving campaign, ad group, and ad performance
-      reporting data including impressions, clicks, and conversions.
-  - name: Targeting
-    description: >-
-      Endpoints for retrieving available targeting options including
-      interests, communities, locations, and devices.
+- url: https://ads-api.reddit.com/api/v3
+  description: Reddit Ads API v3 Production Server
 security:
-  - oauth2: []
+- oauth2: []
+tags:
+- name: Ads
+  description: Endpoints for creating and managing individual ads and their associated creative content.
 paths:
-  /accounts/{account_id}:
-    get:
-      operationId: getAccount
-      summary: Get Account Details
-      description: >-
-        Fetches detailed information about a specific Reddit Ads account
-        including attribution settings, status, and account configuration.
-      tags:
-        - Accounts
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      responses:
-        '200':
-          description: Account details retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Account'
-        '401':
-          description: Authentication required
-        '404':
-          description: Account not found
-  /accounts/{account_id}/campaigns:
-    get:
-      operationId: listCampaigns
-      summary: List Campaigns
-      description: >-
-        Lists all campaigns in a Reddit Ads account with filtering,
-        pagination, and sorting. Returns campaign IDs, names, status,
-        objectives, budgets, and schedule information.
-      tags:
-        - Campaigns
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/cursor'
-        - name: status
-          in: query
-          description: >-
-            Filter campaigns by status.
-          schema:
-            type: string
-            enum:
-              - ACTIVE
-              - PAUSED
-              - COMPLETED
-              - DRAFT
-      responses:
-        '200':
-          description: List of campaigns
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Campaign'
-                  cursor:
-                    type: string
-                    description: >-
-                      Pagination cursor for the next page of results.
-        '401':
-          description: Authentication required
-    post:
-      operationId: createCampaign
-      summary: Create a Campaign
-      description: >-
-        Creates a new advertising campaign in the specified Reddit Ads
-        account.
-      tags:
-        - Campaigns
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CampaignInput'
-      responses:
-        '201':
-          description: Campaign created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Campaign'
-        '400':
-          description: Invalid campaign data
-        '401':
-          description: Authentication required
-  /accounts/{account_id}/campaigns/{campaign_id}:
-    get:
-      operationId: getCampaign
-      summary: Get a Campaign
-      description: >-
-        Fetches detailed information about a specific Reddit Ads campaign
-        including status, budget, schedule, and targeting configuration.
-      tags:
-        - Campaigns
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/campaignId'
-      responses:
-        '200':
-          description: Campaign details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Campaign'
-        '404':
-          description: Campaign not found
-    put:
-      operationId: updateCampaign
-      summary: Update a Campaign
-      description: >-
-        Updates an existing campaign's configuration, including name,
-        budget, schedule, and status.
-      tags:
-        - Campaigns
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/campaignId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CampaignInput'
-      responses:
-        '200':
-          description: Campaign updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Campaign'
-        '400':
-          description: Invalid campaign data
-        '404':
-          description: Campaign not found
-    delete:
-      operationId: deleteCampaign
-      summary: Delete a Campaign
-      description: >-
-        Deletes an advertising campaign. The campaign must be in a
-        non-active state to be deleted.
-      tags:
-        - Campaigns
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/campaignId'
-      responses:
-        '204':
-          description: Campaign deleted successfully
-        '404':
-          description: Campaign not found
-  /accounts/{account_id}/ad_groups:
-    get:
-      operationId: listAdGroups
-      summary: List Ad Groups
-      description: >-
-        Lists ad groups in a Reddit Ads account or campaign, with ad
-        groups containing targeting settings and grouping related ads.
-      tags:
-        - Ad Groups
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/cursor'
-        - name: campaign_id
-          in: query
-          description: >-
-            Filter ad groups by campaign ID.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: List of ad groups
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/AdGroup'
-                  cursor:
-                    type: string
-                    description: >-
-                      Pagination cursor for the next page.
-        '401':
-          description: Authentication required
-    post:
-      operationId: createAdGroup
-      summary: Create an Ad Group
-      description: >-
-        Creates a new ad group within a campaign with targeting and
-        bidding configuration.
-      tags:
-        - Ad Groups
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdGroupInput'
-      responses:
-        '201':
-          description: Ad group created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdGroup'
-        '400':
-          description: Invalid ad group data
-  /accounts/{account_id}/ad_groups/{ad_group_id}:
-    get:
-      operationId: getAdGroup
-      summary: Get an Ad Group
-      description: >-
-        Fetches detailed information about a specific ad group including
-        targeting settings, bid configuration, and schedule.
-      tags:
-        - Ad Groups
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adGroupId'
-      responses:
-        '200':
-          description: Ad group details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdGroup'
-        '404':
-          description: Ad group not found
-    put:
-      operationId: updateAdGroup
-      summary: Update an Ad Group
-      description: >-
-        Updates an existing ad group's configuration, including targeting,
-        bidding, and scheduling.
-      tags:
-        - Ad Groups
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adGroupId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AdGroupInput'
-      responses:
-        '200':
-          description: Ad group updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdGroup'
-        '400':
-          description: Invalid ad group data
-    delete:
-      operationId: deleteAdGroup
-      summary: Delete an Ad Group
-      description: >-
-        Deletes an ad group from a campaign.
-      tags:
-        - Ad Groups
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adGroupId'
-      responses:
-        '204':
-          description: Ad group deleted successfully
-        '404':
-          description: Ad group not found
   /accounts/{account_id}/ads:
     get:
       operationId: listAds
       summary: List Ads
-      description: >-
-        Lists ads in a Reddit Ads account or ad group, returning ad IDs,
-        names, status, creative content, and review status.
+      description: Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status.
       tags:
-        - Ads
+      - Ads
       parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/cursor'
-        - name: ad_group_id
-          in: query
-          description: >-
-            Filter ads by ad group ID.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/pageSize'
+      - $ref: '#/components/parameters/cursor'
+      - name: ad_group_id
+        in: query
+        description: Filter ads by ad group ID.
+        schema:
+          type: string
       responses:
         '200':
           description: List of ads
@@ -373,19 +46,17 @@ paths:
                       $ref: '#/components/schemas/Ad'
                   cursor:
                     type: string
-                    description: >-
-                      Pagination cursor for the next page.
+                    description: Pagination cursor for the next page.
         '401':
           description: Authentication required
     post:
       operationId: createAd
       summary: Create an Ad
-      description: >-
-        Creates a new ad with creative content within an ad group.
+      description: Creates a new ad with creative content within an ad group.
       tags:
-        - Ads
+      - Ads
       parameters:
-        - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/accountId'
       requestBody:
         required: true
         content:
@@ -405,14 +76,12 @@ paths:
     get:
       operationId: getAd
       summary: Get an Ad
-      description: >-
-        Fetches detailed information about a specific ad including
-        creative content, status, and review information.
+      description: Fetches detailed information about a specific ad including creative content, status, and review information.
       tags:
-        - Ads
+      - Ads
       parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adId'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adId'
       responses:
         '200':
           description: Ad details
@@ -425,13 +94,12 @@ paths:
     put:
       operationId: updateAd
       summary: Update an Ad
-      description: >-
-        Updates an existing ad's creative content and configuration.
+      description: Updates an existing ad's creative content and configuration.
       tags:
-        - Ads
+      - Ads
       parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adId'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adId'
       requestBody:
         required: true
         content:
@@ -450,385 +118,37 @@ paths:
     delete:
       operationId: deleteAd
       summary: Delete an Ad
-      description: >-
-        Deletes an ad from an ad group.
+      description: Deletes an ad from an ad group.
       tags:
-        - Ads
+      - Ads
       parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/adId'
+      - $ref: '#/components/parameters/accountId'
+      - $ref: '#/components/parameters/adId'
       responses:
         '204':
           description: Ad deleted successfully
         '404':
           description: Ad not found
-  /accounts/{account_id}/custom_audiences:
-    get:
-      operationId: listCustomAudiences
-      summary: List Custom Audiences
-      description: >-
-        Lists custom audiences in a Reddit Ads account. Custom audiences
-        allow targeting specific users based on email lists, mobile
-        device IDs, or website visitor data.
-      tags:
-        - Custom Audiences
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/cursor'
-      responses:
-        '200':
-          description: List of custom audiences
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/CustomAudience'
-                  cursor:
-                    type: string
-                    description: >-
-                      Pagination cursor for the next page.
-        '401':
-          description: Authentication required
-    post:
-      operationId: createCustomAudience
-      summary: Create a Custom Audience
-      description: >-
-        Creates a new custom audience for targeting in ad campaigns.
-      tags:
-        - Custom Audiences
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CustomAudienceInput'
-      responses:
-        '201':
-          description: Custom audience created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomAudience'
-        '400':
-          description: Invalid audience data
-  /accounts/{account_id}/custom_audiences/{audience_id}:
-    get:
-      operationId: getCustomAudience
-      summary: Get a Custom Audience
-      description: >-
-        Fetches detailed information about a specific custom audience.
-      tags:
-        - Custom Audiences
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - name: audience_id
-          in: path
-          required: true
-          description: >-
-            The unique identifier of the custom audience.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Custom audience details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomAudience'
-        '404':
-          description: Custom audience not found
-    put:
-      operationId: updateCustomAudience
-      summary: Update a Custom Audience
-      description: >-
-        Updates an existing custom audience's configuration and user list.
-      tags:
-        - Custom Audiences
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - name: audience_id
-          in: path
-          required: true
-          description: >-
-            The unique identifier of the custom audience.
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CustomAudienceInput'
-      responses:
-        '200':
-          description: Custom audience updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CustomAudience'
-    delete:
-      operationId: deleteCustomAudience
-      summary: Delete a Custom Audience
-      description: >-
-        Deletes a custom audience from the account.
-      tags:
-        - Custom Audiences
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - name: audience_id
-          in: path
-          required: true
-          description: >-
-            The unique identifier of the custom audience.
-          schema:
-            type: string
-      responses:
-        '204':
-          description: Custom audience deleted
-        '404':
-          description: Custom audience not found
-  /accounts/{account_id}/pixels:
-    get:
-      operationId: listPixels
-      summary: List Conversion Pixels
-      description: >-
-        Lists conversion pixels (Reddit Pixel) in a Reddit Ads account.
-        Pixels are used to track website visitors and conversions for
-        attribution and optimization.
-      tags:
-        - Conversions
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      responses:
-        '200':
-          description: List of conversion pixels
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ConversionPixel'
-        '401':
-          description: Authentication required
-  /accounts/{account_id}/conversions/events:
-    post:
-      operationId: sendConversionEvents
-      summary: Send Conversion Events
-      description: >-
-        Sends server-side conversion events to the Reddit Ads Conversions
-        API (CAPI). This enables advertisers to track conversions that
-        occur on their servers without relying solely on the Reddit Pixel.
-      tags:
-        - Conversions
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ConversionEventBatch'
-      responses:
-        '200':
-          description: Conversion events accepted
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    description: >-
-                      Confirmation message.
-        '400':
-          description: Invalid event data
-  /targeting/interests:
-    get:
-      operationId: listInterests
-      summary: List Interest Targeting Options
-      description: >-
-        Returns available interest categories for ad targeting on the
-        Reddit platform.
-      tags:
-        - Targeting
-      responses:
-        '200':
-          description: List of available interests
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Interest'
-  /targeting/communities:
-    get:
-      operationId: listTargetingCommunities
-      summary: List Community Targeting Options
-      description: >-
-        Returns subreddit communities available for ad targeting.
-      tags:
-        - Targeting
-      parameters:
-        - name: q
-          in: query
-          description: >-
-            Search query for filtering communities.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: List of targetable communities
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TargetingCommunity'
-  /targeting/locations:
-    get:
-      operationId: listLocations
-      summary: List Location Targeting Options
-      description: >-
-        Returns available geographic locations for ad targeting,
-        including countries, regions, and metro areas.
-      tags:
-        - Targeting
-      parameters:
-        - name: q
-          in: query
-          description: >-
-            Search query for filtering locations.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: List of targetable locations
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Location'
-  /accounts/{account_id}/reports:
-    post:
-      operationId: createReport
-      summary: Create a Performance Report
-      description: >-
-        Generates a performance report for campaigns, ad groups, or ads
-        in the specified account. Reports include metrics such as
-        impressions, clicks, conversions, and spend.
-      tags:
-        - Reporting
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReportRequest'
-      responses:
-        '200':
-          description: Report data generated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ReportResponse'
-        '400':
-          description: Invalid report parameters
-  /accounts/{account_id}/funding_instruments:
-    get:
-      operationId: listFundingInstruments
-      summary: List Funding Instruments
-      description: >-
-        Lists the funding instruments (payment methods) associated
-        with the specified Reddit Ads account.
-      tags:
-        - Funding
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-      responses:
-        '200':
-          description: List of funding instruments
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/FundingInstrument'
 components:
-  securitySchemes:
-    oauth2:
-      type: oauth2
-      description: >-
-        Reddit Ads API uses OAuth 2.0 for authentication. Access tokens
-        are obtained via the authorization code flow.
-      flows:
-        authorizationCode:
-          authorizationUrl: https://www.reddit.com/api/v1/authorize
-          tokenUrl: https://www.reddit.com/api/v1/access_token
-          scopes:
-            ads: Access to ads management endpoints
   parameters:
-    accountId:
-      name: account_id
-      in: path
-      required: true
-      description: >-
-        The unique identifier of the Reddit Ads account.
-      schema:
-        type: string
-    campaignId:
-      name: campaign_id
-      in: path
-      required: true
-      description: >-
-        The unique identifier of the campaign.
-      schema:
-        type: string
-    adGroupId:
-      name: ad_group_id
-      in: path
-      required: true
-      description: >-
-        The unique identifier of the ad group.
-      schema:
-        type: string
     adId:
       name: ad_id
       in: path
       required: true
-      description: >-
-        The unique identifier of the ad.
+      description: The unique identifier of the ad.
+      schema:
+        type: string
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
       schema:
         type: string
     pageSize:
       name: page_size
       in: query
-      description: >-
-        The maximum number of items to return per page (default 25, max 100).
+      description: The maximum number of items to return per page (default 25, max 100).
       schema:
         type: integer
         default: 25
@@ -837,814 +157,95 @@ components:
     cursor:
       name: cursor
       in: query
-      description: >-
-        A pagination cursor for retrieving the next page of results.
+      description: A pagination cursor for retrieving the next page of results.
       schema:
         type: string
   schemas:
-    Account:
-      type: object
-      description: >-
-        A Reddit Ads account containing campaigns and billing information.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the account.
-        name:
-          type: string
-          description: >-
-            The name of the advertising account.
-        status:
-          type: string
-          description: >-
-            The current status of the account.
-          enum:
-            - ACTIVE
-            - SUSPENDED
-            - CLOSED
-        currency:
-          type: string
-          description: >-
-            The account's billing currency (ISO 4217).
-        timezone:
-          type: string
-          description: >-
-            The account's timezone for reporting.
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the account was created.
-        attribution_type:
-          type: string
-          description: >-
-            The attribution model used for conversion tracking.
-    Campaign:
-      type: object
-      description: >-
-        An advertising campaign that contains ad groups and manages
-        budget and scheduling.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the campaign.
-        name:
-          type: string
-          description: >-
-            The name of the campaign.
-        status:
-          type: string
-          description: >-
-            The current status of the campaign.
-          enum:
-            - ACTIVE
-            - PAUSED
-            - COMPLETED
-            - DRAFT
-        objective:
-          type: string
-          description: >-
-            The campaign objective.
-          enum:
-            - BRAND_AWARENESS
-            - TRAFFIC
-            - CONVERSIONS
-            - VIDEO_VIEWS
-            - APP_INSTALLS
-            - CATALOG_SALES
-            - REACH
-        daily_budget_micro:
-          type: integer
-          format: int64
-          description: >-
-            The daily budget in microcurrency units (1/1,000,000 of
-            the currency unit).
-        lifetime_budget_micro:
-          type: integer
-          format: int64
-          description: >-
-            The lifetime budget in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: >-
-            The campaign start time.
-        end_time:
-          type: string
-          format: date-time
-          description: >-
-            The campaign end time.
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the campaign was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the campaign was last updated.
-    CampaignInput:
-      type: object
-      description: >-
-        Input for creating or updating a campaign.
-      required:
-        - name
-        - objective
-      properties:
-        name:
-          type: string
-          description: >-
-            The name of the campaign.
-        objective:
-          type: string
-          description: >-
-            The campaign objective.
-          enum:
-            - BRAND_AWARENESS
-            - TRAFFIC
-            - CONVERSIONS
-            - VIDEO_VIEWS
-            - APP_INSTALLS
-            - CATALOG_SALES
-            - REACH
-        daily_budget_micro:
-          type: integer
-          format: int64
-          description: >-
-            The daily budget in microcurrency units.
-        lifetime_budget_micro:
-          type: integer
-          format: int64
-          description: >-
-            The lifetime budget in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: >-
-            The campaign start time.
-        end_time:
-          type: string
-          format: date-time
-          description: >-
-            The campaign end time.
-        status:
-          type: string
-          description: >-
-            The desired status of the campaign.
-          enum:
-            - ACTIVE
-            - PAUSED
-            - DRAFT
-    AdGroup:
-      type: object
-      description: >-
-        An ad group within a campaign that contains ads and targeting
-        configuration.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the ad group.
-        campaign_id:
-          type: string
-          description: >-
-            The campaign this ad group belongs to.
-        name:
-          type: string
-          description: >-
-            The name of the ad group.
-        status:
-          type: string
-          description: >-
-            The current status of the ad group.
-          enum:
-            - ACTIVE
-            - PAUSED
-            - DRAFT
-        bid_strategy:
-          type: string
-          description: >-
-            The bidding strategy for the ad group.
-          enum:
-            - AUTOMATIC
-            - MANUAL_CPC
-            - MANUAL_CPM
-            - MANUAL_CPV
-        bid_micro:
-          type: integer
-          format: int64
-          description: >-
-            The bid amount in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: >-
-            The ad group start time.
-        end_time:
-          type: string
-          format: date-time
-          description: >-
-            The ad group end time.
-        targeting:
-          $ref: '#/components/schemas/Targeting'
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the ad group was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the ad group was last updated.
-    AdGroupInput:
-      type: object
-      description: >-
-        Input for creating or updating an ad group.
-      required:
-        - campaign_id
-        - name
-      properties:
-        campaign_id:
-          type: string
-          description: >-
-            The campaign to create the ad group in.
-        name:
-          type: string
-          description: >-
-            The name of the ad group.
-        bid_strategy:
-          type: string
-          description: >-
-            The bidding strategy.
-          enum:
-            - AUTOMATIC
-            - MANUAL_CPC
-            - MANUAL_CPM
-            - MANUAL_CPV
-        bid_micro:
-          type: integer
-          format: int64
-          description: >-
-            The bid amount in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: >-
-            The ad group start time.
-        end_time:
-          type: string
-          format: date-time
-          description: >-
-            The ad group end time.
-        targeting:
-          $ref: '#/components/schemas/Targeting'
-        status:
-          type: string
-          description: >-
-            The desired status.
-          enum:
-            - ACTIVE
-            - PAUSED
-            - DRAFT
     Ad:
       type: object
-      description: >-
-        An individual ad with creative content and review status.
+      description: An individual ad with creative content and review status.
       properties:
         id:
           type: string
-          description: >-
-            The unique identifier of the ad.
+          description: The unique identifier of the ad.
         ad_group_id:
           type: string
-          description: >-
-            The ad group this ad belongs to.
+          description: The ad group this ad belongs to.
         name:
           type: string
-          description: >-
-            The name of the ad.
+          description: The name of the ad.
         status:
           type: string
-          description: >-
-            The current status of the ad.
+          description: The current status of the ad.
           enum:
-            - ACTIVE
-            - PAUSED
-            - DRAFT
-            - PENDING_REVIEW
-            - APPROVED
-            - REJECTED
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+          - PENDING_REVIEW
+          - APPROVED
+          - REJECTED
         post_id:
           type: string
-          description: >-
-            The Reddit post ID used as the ad creative.
+          description: The Reddit post ID used as the ad creative.
         post_url:
           type: string
           format: uri
-          description: >-
-            The URL of the Reddit post serving as the ad.
+          description: The URL of the Reddit post serving as the ad.
         click_url:
           type: string
           format: uri
-          description: >-
-            The destination URL when the ad is clicked.
+          description: The destination URL when the ad is clicked.
         review_status:
           type: string
-          description: >-
-            The ad review status.
+          description: The ad review status.
           enum:
-            - PENDING
-            - APPROVED
-            - REJECTED
+          - PENDING
+          - APPROVED
+          - REJECTED
         rejection_reason:
           type: string
-          description: >-
-            The reason for ad rejection, if applicable.
+          description: The reason for ad rejection, if applicable.
         created_at:
           type: string
           format: date-time
-          description: >-
-            The timestamp when the ad was created.
+          description: The timestamp when the ad was created.
     AdInput:
       type: object
-      description: >-
-        Input for creating or updating an ad.
+      description: Input for creating or updating an ad.
       required:
-        - ad_group_id
-        - name
+      - ad_group_id
+      - name
       properties:
         ad_group_id:
           type: string
-          description: >-
-            The ad group to create the ad in.
+          description: The ad group to create the ad in.
         name:
           type: string
-          description: >-
-            The name of the ad.
+          description: The name of the ad.
         post_id:
           type: string
-          description: >-
-            The Reddit post ID to use as the ad creative.
+          description: The Reddit post ID to use as the ad creative.
         click_url:
           type: string
           format: uri
-          description: >-
-            The destination URL when the ad is clicked.
+          description: The destination URL when the ad is clicked.
         status:
           type: string
-          description: >-
-            The desired status.
+          description: The desired status.
           enum:
-            - ACTIVE
-            - PAUSED
-            - DRAFT
-    Targeting:
-      type: object
-      description: >-
-        Targeting configuration for an ad group specifying the audience
-        to reach.
-      properties:
-        locations:
-          type: array
-          description: >-
-            Geographic locations to target.
-          items:
-            type: string
-        interests:
-          type: array
-          description: >-
-            Interest categories to target.
-          items:
-            type: string
-        communities:
-          type: array
-          description: >-
-            Subreddit communities to target.
-          items:
-            type: string
-        devices:
-          type: array
-          description: >-
-            Device types to target.
-          items:
-            type: string
-            enum:
-              - DESKTOP
-              - MOBILE
-              - TABLET
-        os:
-          type: array
-          description: >-
-            Operating systems to target.
-          items:
-            type: string
-            enum:
-              - IOS
-              - ANDROID
-              - WINDOWS
-              - MACOS
-        custom_audience_ids:
-          type: array
-          description: >-
-            Custom audience IDs to include in targeting.
-          items:
-            type: string
-        excluded_custom_audience_ids:
-          type: array
-          description: >-
-            Custom audience IDs to exclude from targeting.
-          items:
-            type: string
-        age_ranges:
-          type: array
-          description: >-
-            Age ranges to target.
-          items:
-            type: string
-        genders:
-          type: array
-          description: >-
-            Gender targeting.
-          items:
-            type: string
-            enum:
-              - MALE
-              - FEMALE
-              - ALL
-    CustomAudience:
-      type: object
-      description: >-
-        A custom audience for targeting specific users based on
-        uploaded data or pixel tracking.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the custom audience.
-        name:
-          type: string
-          description: >-
-            The name of the custom audience.
-        type:
-          type: string
-          description: >-
-            The type of custom audience.
-          enum:
-            - CUSTOMER_LIST
-            - WEBSITE_VISITORS
-            - MOBILE_ADVERTISER_ID
-            - LOOKALIKE
-        status:
-          type: string
-          description: >-
-            The status of the audience.
-        estimated_size:
-          type: integer
-          description: >-
-            The estimated audience size.
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the audience was created.
-    CustomAudienceInput:
-      type: object
-      description: >-
-        Input for creating or updating a custom audience.
-      required:
-        - name
-        - type
-      properties:
-        name:
-          type: string
-          description: >-
-            The name of the custom audience.
-        type:
-          type: string
-          description: >-
-            The type of custom audience.
-          enum:
-            - CUSTOMER_LIST
-            - WEBSITE_VISITORS
-            - MOBILE_ADVERTISER_ID
-            - LOOKALIKE
-    ConversionPixel:
-      type: object
-      description: >-
-        A conversion pixel (Reddit Pixel) used to track website visitors
-        and conversions.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the pixel.
-        name:
-          type: string
-          description: >-
-            The name of the pixel.
-        pixel_id:
-          type: string
-          description: >-
-            The pixel ID used in the tracking code.
-        status:
-          type: string
-          description: >-
-            The pixel status.
-          enum:
-            - ACTIVE
-            - INACTIVE
-        last_fired_at:
-          type: string
-          format: date-time
-          description: >-
-            The last time the pixel was triggered.
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the pixel was created.
-    ConversionEventBatch:
-      type: object
-      description: >-
-        A batch of server-side conversion events for the Conversions
-        API (CAPI).
-      required:
-        - events
-      properties:
-        events:
-          type: array
-          description: >-
-            The list of conversion events to send.
-          items:
-            $ref: '#/components/schemas/ConversionEvent'
-    ConversionEvent:
-      type: object
-      description: >-
-        A single server-side conversion event.
-      required:
-        - event_type
-        - event_at
-      properties:
-        event_type:
-          type: object
-          description: >-
-            The type of conversion event.
-          properties:
-            tracking_type:
-              type: string
-              description: >-
-                The tracking type of the event.
-              enum:
-                - Purchase
-                - SignUp
-                - Lead
-                - ViewContent
-                - AddToCart
-                - AddToWishlist
-                - Search
-                - Custom
-        event_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the conversion event occurred.
-        user:
-          type: object
-          description: >-
-            User identification data for matching.
-          properties:
-            email:
-              type: string
-              description: >-
-                SHA-256 hashed email address.
-            external_id:
-              type: string
-              description: >-
-                SHA-256 hashed external user ID.
-            ip_address:
-              type: string
-              description: >-
-                SHA-256 hashed IP address.
-            user_agent:
-              type: string
-              description: >-
-                The user agent string.
-            click_id:
-              type: string
-              description: >-
-                The Reddit click ID from the ad click.
-        event_metadata:
-          type: object
-          description: >-
-            Additional metadata about the conversion event.
-          properties:
-            currency:
-              type: string
-              description: >-
-                The currency code (ISO 4217).
-            value_decimal:
-              type: number
-              format: double
-              description: >-
-                The monetary value of the conversion.
-            item_count:
-              type: integer
-              description: >-
-                The number of items in the conversion.
-    Interest:
-      type: object
-      description: >-
-        An interest category available for ad targeting.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the interest.
-        name:
-          type: string
-          description: >-
-            The name of the interest category.
-        parent_id:
-          type: string
-          nullable: true
-          description: >-
-            The parent interest category ID, if applicable.
-    TargetingCommunity:
-      type: object
-      description: >-
-        A Reddit community (subreddit) available for ad targeting.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the community.
-        name:
-          type: string
-          description: >-
-            The community name (subreddit name).
-        subscriber_count:
-          type: integer
-          description: >-
-            The number of subscribers.
-    Location:
-      type: object
-      description: >-
-        A geographic location available for ad targeting.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the location.
-        name:
-          type: string
-          description: >-
-            The name of the location.
-        type:
-          type: string
-          description: >-
-            The type of location.
-          enum:
-            - COUNTRY
-            - REGION
-            - DMA
-            - CITY
-        country_code:
-          type: string
-          description: >-
-            The ISO country code.
-    ReportRequest:
-      type: object
-      description: >-
-        Parameters for generating a performance report.
-      required:
-        - start_date
-        - end_date
-        - level
-      properties:
-        start_date:
-          type: string
-          format: date
-          description: >-
-            The start date for the report period.
-        end_date:
-          type: string
-          format: date
-          description: >-
-            The end date for the report period.
-        level:
-          type: string
-          description: >-
-            The reporting level.
-          enum:
-            - ACCOUNT
-            - CAMPAIGN
-            - AD_GROUP
-            - AD
-        granularity:
-          type: string
-          description: >-
-            The time granularity for report data.
-          enum:
-            - DAY
-            - WEEK
-            - MONTH
-            - TOTAL
-        campaign_ids:
-          type: array
-          description: >-
-            Filter by specific campaign IDs.
-          items:
-            type: string
-        ad_group_ids:
-          type: array
-          description: >-
-            Filter by specific ad group IDs.
-          items:
-            type: string
-    ReportResponse:
-      type: object
-      description: >-
-        Performance report response data.
-      properties:
-        data:
-          type: array
-          description: >-
-            The report data rows.
-          items:
-            type: object
-            properties:
-              date:
-                type: string
-                format: date
-                description: >-
-                  The date for this data row.
-              impressions:
-                type: integer
-                description: >-
-                  The number of ad impressions.
-              clicks:
-                type: integer
-                description: >-
-                  The number of ad clicks.
-              spend_micro:
-                type: integer
-                format: int64
-                description: >-
-                  The amount spent in microcurrency units.
-              ctr:
-                type: number
-                format: double
-                description: >-
-                  The click-through rate.
-              cpm_micro:
-                type: integer
-                format: int64
-                description: >-
-                  The cost per thousand impressions in microcurrency.
-              cpc_micro:
-                type: integer
-                format: int64
-                description: >-
-                  The cost per click in microcurrency.
-              conversions:
-                type: integer
-                description: >-
-                  The number of conversions tracked.
-              video_views:
-                type: integer
-                description: >-
-                  The number of video views (for video ads).
-    FundingInstrument:
-      type: object
-      description: >-
-        A funding instrument (payment method) associated with an
-        advertising account.
-      properties:
-        id:
-          type: string
-          description: >-
-            The unique identifier of the funding instrument.
-        type:
-          type: string
-          description: >-
-            The type of funding instrument.
-          enum:
-            - CREDIT_CARD
-            - PREPAID
-            - INVOICED
-        status:
-          type: string
-          description: >-
-            The status of the funding instrument.
-          enum:
-            - ACTIVE
-            - INACTIVE
-        created_at:
-          type: string
-          format: date-time
-          description: >-
-            The timestamp when the funding instrument was created.
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      flows:
+        authorizationCode:
+          authorizationUrl: https://www.reddit.com/api/v1/authorize
+          tokenUrl: https://www.reddit.com/api/v1/access_token
+          scopes:
+            ads: Access to ads management endpoints
+externalDocs:
+  description: Reddit Ads API Documentation
+  url: https://ads-api.reddit.com/docs/
