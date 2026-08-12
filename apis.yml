@@ -545,11 +545,11 @@ common:
 - type: Signup
   url: https://www.reddit.com/register
 - type: OpenAPI
-  url: openapi/reddit-data-api-openapi.yml
+  url: openapi/_original/reddit-data-api-openapi.yml
 - type: OpenAPI
   url: openapi/reddit-ads-api-openapi.yml
 - type: OpenAPI
-  url: openapi/reddit-embeds-openapi.yml
+  url: openapi/_original/reddit-embeds-openapi.yml
 - type: JSONSchema
   url: json-schema/reddit-post-schema.json
 - type: JSONSchema
