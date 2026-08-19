@@ -1,0 +1,229 @@
+{
+  "item": [
+    {
+      "id": "386343c7-8c62-4b5d-911e-800943037017",
+      "name": "Reporting",
+      "description": {
+        "content": "Endpoints for retrieving campaign, ad group, and ad performance reporting data including impressions, clicks, and conversions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64d8967c-0fab-471a-a383-eee28abdbebc",
+          "name": "Create a Performance Report",
+          "request": {
+            "name": "Create a Performance Report",
+            "description": {
+              "content": "Generates a performance report for campaigns, ad groups, or ads in the specified account. Reports include metrics such as impressions, clicks, conversions, and spend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) The unique identifier of the Reddit Ads account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"level\": \"<string>\",\n  \"granularity\": \"<string>\",\n  \"campaign_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ad_group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "64b78a4d-192c-43b8-9da7-b7205dc867f3",
+              "name": "Report data generated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"level\": \"<string>\",\n  \"granularity\": \"<string>\",\n  \"campaign_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ad_group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"date\": \"1974-10-08\",\n      \"impressions\": 3203,\n      \"clicks\": 2797,\n      \"spend_micro\": 8328,\n      \"ctr\": 2257.028870208877,\n      \"cpm_micro\": 2303,\n      \"cpc_micro\": 5663,\n      \"conversions\": 9009,\n      \"video_views\": 582\n    },\n    {\n      \"date\": \"2001-12-14\",\n      \"impressions\": 8179,\n      \"clicks\": 7283,\n      \"spend_micro\": 7088,\n      \"ctr\": 4745.606833653646,\n      \"cpm_micro\": 4702,\n      \"cpc_micro\": 9488,\n      \"conversions\": 210,\n      \"video_views\": 5058\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1f9b852d-0e8e-4f0a-a0f5-198c77af6b30",
+              "name": "Invalid report parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"start_date\": \"<date>\",\n  \"end_date\": \"<date>\",\n  \"level\": \"<string>\",\n  \"granularity\": \"<string>\",\n  \"campaign_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"ad_group_ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "00f0d54a-e958-444b-b25c-c34dc309a771",
+    "name": "Reddit Ads Account Reporting API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Accounts API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Account Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ]
+          },
+          "docs": "Fetches detailed information about a specific Reddit Ads account including attribution settings, status, and account configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

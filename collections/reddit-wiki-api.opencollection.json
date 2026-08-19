@@ -1,0 +1,163 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Wiki API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wiki",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Wiki Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/wiki/:page",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "path",
+                "description": "The name of the wiki page."
+              }
+            ]
+          },
+          "docs": "Returns the content of a wiki page in the specified subreddit. Requires the wikiread OAuth scope."
+        },
+        {
+          "info": {
+            "name": "List Wiki Pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/wiki/pages",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns a listing of all wiki pages in the specified subreddit. Requires the wikiread OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Edit a Wiki Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/api/wiki/edit",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "page",
+                  "value": ""
+                },
+                {
+                  "name": "content",
+                  "value": ""
+                },
+                {
+                  "name": "reason",
+                  "value": ""
+                },
+                {
+                  "name": "previous",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Edits the content of a wiki page in the specified subreddit. Requires the wikiedit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Wiki Page Revision History",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/wiki/revisions/:page",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "path",
+                "description": "The name of the wiki page."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns the revision history for a wiki page. Requires the wikiread OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

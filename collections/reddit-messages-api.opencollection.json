@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Messages API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Inbox Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/message/inbox",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "mark",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mark messages as read."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's inbox messages, including both private messages and comment replies. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Unread Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/message/unread",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "mark",
+                "value": "",
+                "type": "query",
+                "description": "Whether to mark messages as read."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's unread messages. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Sent Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/message/sent",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the authenticated user's sent messages. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Compose a Private Message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/compose",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "to",
+                  "value": ""
+                },
+                {
+                  "name": "subject",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Sends a private message to another user or a subreddit's moderators. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Mark Messages As Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/read_message",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Marks one or more messages as read. Requires the privatemessages OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Mark All Messages As Read",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/read_all_messages"
+          },
+          "docs": "Marks all of the authenticated user's messages as read. Requires the privatemessages OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,375 @@
+{
+  "item": [
+    {
+      "id": "8e8fdd57-65be-4947-bbcb-0420e38d34b9",
+      "name": "Search",
+      "description": {
+        "content": "Endpoints for searching Reddit content including submissions, subreddits, and users across the platform.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "be9d7b39-a40d-4f08-939c-b8a275afb143",
+          "name": "Search Subreddits",
+          "request": {
+            "name": "Search Subreddits",
+            "description": {
+              "content": "Searches for subreddits by name and description.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subreddits",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) The search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17a4dbdd-519b-4e86-96e1-277291a8f728",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subreddits",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 9998,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3df139bc-ea9e-44ee-b50b-513ecb77540f",
+          "name": "Search Submissions",
+          "request": {
+            "name": "Search Submissions",
+            "description": {
+              "content": "Searches for submissions within a specific subreddit or across all of Reddit. Supports sorting and time filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) The search query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>",
+                  "description": "The sorting method for search results."
+                },
+                {
+                  "disabled": false,
+                  "key": "t",
+                  "value": "<string>",
+                  "description": "The time period for filtering results."
+                },
+                {
+                  "disabled": false,
+                  "key": "restrict_sr",
+                  "value": "true",
+                  "description": "Whether to restrict the search to the specified subreddit."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "The type of results to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c259bbb4-71df-4071-8daf-5727526dd0c7",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "t",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "restrict_sr",
+                      "value": "true"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 9998,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "87ae1c00-34ca-4cef-9f22-111a2293f893",
+    "name": "Reddit Ads Account Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

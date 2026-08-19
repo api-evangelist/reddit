@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Reporting API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reporting",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Performance Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/reports",
+            "params": [
+              {
+                "name": "account_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the Reddit Ads account."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a performance report for campaigns, ad groups, or ads in the specified account. Reports include metrics such as impressions, clicks, conversions, and spend."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

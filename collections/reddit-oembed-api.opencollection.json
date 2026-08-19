@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account oEmbed API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "oEmbed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Oembed Data for a Reddit Url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/oembed",
+            "params": [
+              {
+                "name": "url",
+                "value": "",
+                "type": "query",
+                "description": "The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "The response format. Defaults to JSON."
+              },
+              {
+                "name": "maxwidth",
+                "value": "",
+                "type": "query",
+                "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width."
+              },
+              {
+                "name": "maxheight",
+                "value": "",
+                "type": "query",
+                "description": "The maximum height of the embed in pixels."
+              },
+              {
+                "name": "parent",
+                "value": "",
+                "type": "query",
+                "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality."
+              }
+            ]
+          },
+          "docs": "Returns oEmbed-formatted embed data for a given Reddit URL. This endpoint follows the oEmbed specification and returns HTML embed code along with metadata about the content. Supports both JSON and XML response formats. The returned HTML can be used to embed Reddit posts and comments into external pages."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

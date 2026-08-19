@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Search API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Subreddits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/subreddits/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Searches for subreddits by name and description."
+        },
+        {
+          "info": {
+            "name": "Search Submissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/search",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "The search query string."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for search results."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              },
+              {
+                "name": "restrict_sr",
+                "value": "",
+                "type": "query",
+                "description": "Whether to restrict the search to the specified subreddit."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "The type of results to return."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Searches for submissions within a specific subreddit or across all of Reddit. Supports sorting and time filtering."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

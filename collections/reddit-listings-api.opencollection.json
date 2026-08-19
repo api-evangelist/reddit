@@ -1,0 +1,263 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Listings API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Listings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Hot Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/hot",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "g",
+                "value": "",
+                "type": "query",
+                "description": "Geolocation filter for location-specific hot listings."
+              }
+            ]
+          },
+          "docs": "Returns a listing of hot posts from the specified subreddit. Results are sorted by Reddit's hot ranking algorithm."
+        },
+        {
+          "info": {
+            "name": "Get New Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/new",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of new posts from the specified subreddit, sorted by submission time with newest first."
+        },
+        {
+          "info": {
+            "name": "Get Rising Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/rising",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of rising posts from the specified subreddit. Rising posts are those gaining upvotes at a rapid rate."
+        },
+        {
+          "info": {
+            "name": "Get Top Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/top",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              }
+            ]
+          },
+          "docs": "Returns a listing of top-scoring posts from the specified subreddit, filterable by time period."
+        },
+        {
+          "info": {
+            "name": "Get Controversial Listings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/controversial",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              },
+              {
+                "name": "t",
+                "value": "",
+                "type": "query",
+                "description": "The time period for filtering results."
+              }
+            ]
+          },
+          "docs": "Returns a listing of controversial posts from the specified subreddit, which are posts with a roughly even mix of upvotes and downvotes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

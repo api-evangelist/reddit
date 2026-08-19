@@ -1,0 +1,410 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Links & Comments API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Links & Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Comments for a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/comments/:article",
+            "params": [
+              {
+                "name": "article",
+                "value": "",
+                "type": "path",
+                "description": "The ID36 of the submission to retrieve comments for."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for comments."
+              },
+              {
+                "name": "depth",
+                "value": "",
+                "type": "query",
+                "description": "Maximum depth of subtrees in the thread."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Number of levels of parent comments to include for a comment permalink."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              }
+            ]
+          },
+          "docs": "Returns comments for a given submission (article). The response includes both the submission data and a tree of comments. Use the sort parameter to control comment ordering."
+        },
+        {
+          "info": {
+            "name": "Retrieve Additional Comments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/morechildren",
+            "params": [
+              {
+                "name": "link_id",
+                "value": "",
+                "type": "query",
+                "description": "The fullname (t3_ prefix) of the submission."
+              },
+              {
+                "name": "children",
+                "value": "",
+                "type": "query",
+                "description": "A comma-delimited list of comment ID36s to be fetched."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "The sorting method for comments."
+              },
+              {
+                "name": "api_type",
+                "value": "",
+                "type": "query",
+                "description": "The string json to request JSON response."
+              }
+            ]
+          },
+          "docs": "Retrieves additional comments omitted from a base comment tree. Used to load more comments from a stub returned in a comment listing."
+        },
+        {
+          "info": {
+            "name": "Submit a New Link or Self-post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/submit",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "sr",
+                  "value": ""
+                },
+                {
+                  "name": "title",
+                  "value": ""
+                },
+                {
+                  "name": "kind",
+                  "value": ""
+                },
+                {
+                  "name": "url",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "richtext_json",
+                  "value": ""
+                },
+                {
+                  "name": "flair_id",
+                  "value": ""
+                },
+                {
+                  "name": "flair_text",
+                  "value": ""
+                },
+                {
+                  "name": "nsfw",
+                  "value": ""
+                },
+                {
+                  "name": "spoiler",
+                  "value": ""
+                },
+                {
+                  "name": "resubmit",
+                  "value": ""
+                },
+                {
+                  "name": "sendreplies",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a new link or self-post to a subreddit. Requires the submit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Submit a New Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/comment",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "richtext_json",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Submits a new comment on a submission or in reply to another comment. Requires the submit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Vote on a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/vote",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "dir",
+                  "value": ""
+                },
+                {
+                  "name": "rank",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Casts a vote on a submission or comment. Direction values are 1 for upvote, -1 for downvote, and 0 to remove the vote. Requires the vote OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Save a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/save",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "category",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Saves a submission or comment to the authenticated user's saved items. Requires the save OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Unsave a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/unsave",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Removes a submission or comment from the authenticated user's saved items. Requires the save OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Hide a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/hide",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Hides a submission from the authenticated user's listings. Requires the report OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Unhide a Submission",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/unhide",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Unhides a previously hidden submission. Requires the report OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Delete a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/del",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deletes a submission or comment authored by the authenticated user. Requires the edit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Edit a Self-post or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/editusertext",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "text",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Edits the body text of a self-post or comment authored by the authenticated user. Requires the edit OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Report a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/report",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "thing_id",
+                  "value": ""
+                },
+                {
+                  "name": "reason",
+                  "value": ""
+                },
+                {
+                  "name": "other_reason",
+                  "value": ""
+                },
+                {
+                  "name": "site_reason",
+                  "value": ""
+                },
+                {
+                  "name": "rule_reason",
+                  "value": ""
+                },
+                {
+                  "name": "api_type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Reports a submission or comment to the moderators of the subreddit. Requires the report OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

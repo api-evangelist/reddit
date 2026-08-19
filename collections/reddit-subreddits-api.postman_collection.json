@@ -1,0 +1,554 @@
+{
+  "item": [
+    {
+      "id": "e9a39851-55d7-4be8-a91f-77be4efef1ed",
+      "name": "Subreddits",
+      "description": {
+        "content": "Endpoints for managing and retrieving information about subreddits, including subscription, creation, rules, and settings.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f3d99a7-e50d-459c-b2dd-8a99b12b2382",
+          "name": "Get Subreddit Information",
+          "request": {
+            "name": "Get Subreddit Information",
+            "description": {
+              "content": "Returns information about the specified subreddit, including subscriber count, description, rules, and settings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "about"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7d66466b-6b00-46a5-9ee3-785c9a1e5ad8",
+              "name": "Subreddit information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "about"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"string\",\n  \"data\": {\n    \"id\": \"string\",\n    \"display_name\": \"string\",\n    \"title\": \"string\",\n    \"public_description\": \"string\",\n    \"description\": \"string\",\n    \"subscribers\": 2264,\n    \"accounts_active\": 5736,\n    \"created_utc\": 3910.0822763985852,\n    \"over18\": true,\n    \"subreddit_type\": \"private\",\n    \"url\": \"string\",\n    \"icon_img\": \"http://EAXnkCEkYctDsQGhUZUlPUQBx.qiUKr3bMi8M1sEBOYQODjeE35gY4r9XoupjNGYJheudh1qFjIWOuT1eeKfNdFfN\",\n    \"banner_img\": \"https://lVnfMSOoDqcshESRcRdJLLUHIiD.fkzwFbG0T6m3Xv,m4qb.GaPcs5eWgGOjmZPUs4ot,\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "57db6c7a-66d4-492f-8d46-8f3ff2dc264f",
+              "name": "Subreddit not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "about"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "87f44cd5-976e-4c15-aeda-169bfc736537",
+          "name": "Get Subreddit Rules",
+          "request": {
+            "name": "Get Subreddit Rules",
+            "description": {
+              "content": "Returns the rules defined for the specified subreddit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "about",
+                "rules"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "750716ac-1b81-4bd3-8a1b-e69402f2f181",
+              "name": "Subreddit rules",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "about",
+                    "rules"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"rules\": [\n    {\n      \"kind\": \"link\",\n      \"short_name\": \"string\",\n      \"description\": \"string\",\n      \"violation_reason\": \"string\",\n      \"created_utc\": 82.67788072049642,\n      \"priority\": 566\n    },\n    {\n      \"kind\": \"comment\",\n      \"short_name\": \"string\",\n      \"description\": \"string\",\n      \"violation_reason\": \"string\",\n      \"created_utc\": 3787.4193486515474,\n      \"priority\": 9959\n    }\n  ],\n  \"site_rules\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b49dd11-c836-4497-abf4-a5f56da52902",
+          "name": "Get Subscribed Subreddits",
+          "request": {
+            "name": "Get Subscribed Subreddits",
+            "description": {
+              "content": "Returns a listing of subreddits the authenticated user is subscribed to. Requires the mysubreddits OAuth scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "subreddits",
+                "mine",
+                "subscriber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "439ef9b3-20eb-4097-871f-e764a0cf2af3",
+              "name": "Listing of subscribed subreddits",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "subreddits",
+                    "mine",
+                    "subscriber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 4076,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t6\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cdab354-f78e-4292-8869-c3697992f1da",
+          "name": "Subscribe or Unsubscribe From a Subreddit",
+          "request": {
+            "name": "Subscribe or Unsubscribe From a Subreddit",
+            "description": {
+              "content": "Subscribes to or unsubscribes from a subreddit. Requires the subscribe OAuth scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "subscribe"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "action",
+                  "value": "<string>",
+                  "description": "(Required) The subscription action to perform."
+                },
+                {
+                  "disabled": false,
+                  "key": "sr_name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the subreddit."
+                },
+                {
+                  "disabled": false,
+                  "key": "skip_initial_defaults",
+                  "value": "<boolean>",
+                  "description": "Whether to skip adding default subreddits for new accounts."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ade86115-c673-42df-9fc5-4f7a06fcc59a",
+              "name": "Subscription updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "subscribe"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The subscription action to perform.",
+                        "type": "text/plain"
+                      },
+                      "key": "action",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The name of the subreddit.",
+                        "type": "text/plain"
+                      },
+                      "key": "sr_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to skip adding default subreddits for new accounts.",
+                        "type": "text/plain"
+                      },
+                      "key": "skip_initial_defaults",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1a5e961f-6269-49bf-b169-ad92e96677f6",
+    "name": "Reddit Ads Account Subreddits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

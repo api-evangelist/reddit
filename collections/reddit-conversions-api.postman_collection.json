@@ -1,0 +1,379 @@
+{
+  "item": [
+    {
+      "id": "a2191123-2cb2-4cc9-8635-74579179016b",
+      "name": "Conversions",
+      "description": {
+        "content": "Endpoints for managing conversion pixels and sending server-side conversion events via the Conversions API (CAPI).",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ddd75da8-b95f-4db9-92d6-45eab2f72ffc",
+          "name": "List Conversion Pixels",
+          "request": {
+            "name": "List Conversion Pixels",
+            "description": {
+              "content": "Lists conversion pixels (Reddit Pixel) in a Reddit Ads account. Pixels are used to track website visitors and conversions for attribution and optimization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "pixels"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) The unique identifier of the Reddit Ads account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44cd8a2e-c959-4cc1-b328-639351b61eae",
+              "name": "List of conversion pixels",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "pixels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"pixel_id\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"last_fired_at\": \"1999-01-11T05:35:47.168Z\",\n      \"created_at\": \"2010-06-14T17:40:00.829Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"pixel_id\": \"string\",\n      \"status\": \"ACTIVE\",\n      \"last_fired_at\": \"2004-01-29T09:30:04.485Z\",\n      \"created_at\": \"1981-10-02T14:54:48.711Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "281509b2-3885-4a5d-924d-047ac449cfd1",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "pixels"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5156907c-69e9-42ec-a976-fddcf7d0d4e6",
+          "name": "Send Conversion Events",
+          "request": {
+            "name": "Send Conversion Events",
+            "description": {
+              "content": "Sends server-side conversion events to the Reddit Ads Conversions API (CAPI). This enables advertisers to track conversions that occur on their servers without relying solely on the Reddit Pixel.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "conversions",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) The unique identifier of the Reddit Ads account."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": [\n    {\n      \"event_type\": {\n        \"tracking_type\": \"<string>\"\n      },\n      \"event_at\": \"<dateTime>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"external_id\": \"<string>\",\n        \"ip_address\": \"<string>\",\n        \"user_agent\": \"<string>\",\n        \"click_id\": \"<string>\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"<string>\",\n        \"value_decimal\": \"<double>\",\n        \"item_count\": \"<integer>\"\n      }\n    },\n    {\n      \"event_type\": {\n        \"tracking_type\": \"<string>\"\n      },\n      \"event_at\": \"<dateTime>\",\n      \"user\": {\n        \"email\": \"<string>\",\n        \"external_id\": \"<string>\",\n        \"ip_address\": \"<string>\",\n        \"user_agent\": \"<string>\",\n        \"click_id\": \"<string>\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"<string>\",\n        \"value_decimal\": \"<double>\",\n        \"item_count\": \"<integer>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "22bc37ad-d6ff-432d-9a6f-3f7a4e878825",
+              "name": "Conversion events accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "conversions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"event_type\": {\n        \"tracking_type\": \"AddToWishlist\"\n      },\n      \"event_at\": \"2001-08-29T01:58:34.750Z\",\n      \"user\": {\n        \"email\": \"string\",\n        \"external_id\": \"string\",\n        \"ip_address\": \"string\",\n        \"user_agent\": \"string\",\n        \"click_id\": \"string\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"string\",\n        \"value_decimal\": 4560.290411801406,\n        \"item_count\": 7176\n      }\n    },\n    {\n      \"event_type\": {\n        \"tracking_type\": \"SignUp\"\n      },\n      \"event_at\": \"2011-04-09T07:11:29.797Z\",\n      \"user\": {\n        \"email\": \"string\",\n        \"external_id\": \"string\",\n        \"ip_address\": \"string\",\n        \"user_agent\": \"string\",\n        \"click_id\": \"string\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"string\",\n        \"value_decimal\": 4760.927080978323,\n        \"item_count\": 1558\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12a69ce0-754d-45f6-a358-38fba038c2ff",
+              "name": "Invalid event data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "conversions",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": [\n    {\n      \"event_type\": {\n        \"tracking_type\": \"AddToWishlist\"\n      },\n      \"event_at\": \"2001-08-29T01:58:34.750Z\",\n      \"user\": {\n        \"email\": \"string\",\n        \"external_id\": \"string\",\n        \"ip_address\": \"string\",\n        \"user_agent\": \"string\",\n        \"click_id\": \"string\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"string\",\n        \"value_decimal\": 4560.290411801406,\n        \"item_count\": 7176\n      }\n    },\n    {\n      \"event_type\": {\n        \"tracking_type\": \"SignUp\"\n      },\n      \"event_at\": \"2011-04-09T07:11:29.797Z\",\n      \"user\": {\n        \"email\": \"string\",\n        \"external_id\": \"string\",\n        \"ip_address\": \"string\",\n        \"user_agent\": \"string\",\n        \"click_id\": \"string\"\n      },\n      \"event_metadata\": {\n        \"currency\": \"string\",\n        \"value_decimal\": 4760.927080978323,\n        \"item_count\": 1558\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "712a8fdd-fdec-4a4a-979b-60f2702065f8",
+    "name": "Reddit Ads Account Conversions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

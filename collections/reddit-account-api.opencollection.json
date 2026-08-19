@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User Identity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me"
+          },
+          "docs": "Returns the identity of the currently authenticated user, including username, karma, account age, and preferences."
+        },
+        {
+          "info": {
+            "name": "Get User Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/prefs"
+          },
+          "docs": "Returns the preference settings of the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Update User Preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/prefs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the preference settings of the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Karma Breakdown by Subreddit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/karma"
+          },
+          "docs": "Returns a breakdown of the current user's karma by subreddit, including link karma and comment karma for each subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Current User Trophies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/trophies"
+          },
+          "docs": "Returns a list of trophies for the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Friends List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/friends"
+          },
+          "docs": "Returns a list of the current user's friends."
+        },
+        {
+          "info": {
+            "name": "Get Blocked Users List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/me/blocked"
+          },
+          "docs": "Returns a list of users blocked by the currently authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Available Oauth Scopes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/api/v1/scopes"
+          },
+          "docs": "Returns a listing of all available OAuth scopes and their descriptions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

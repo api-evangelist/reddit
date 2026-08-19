@@ -1,0 +1,326 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Moderation API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Moderation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subreddit Moderators",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/moderators",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns a listing of the moderators of the specified subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Moderation Queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/modqueue",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by type of content in the queue."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of items in the subreddit's moderation queue. Items include submissions and comments that have been reported or caught by spam filters. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Reported Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/reports",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of reported items in the subreddit. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Spam Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/spam",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of items marked as spam in the subreddit. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Moderation Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/log",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "mod",
+                "value": "",
+                "type": "query",
+                "description": "Filter by moderator username."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by moderation action type."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of moderation actions taken in the subreddit. Requires the modlog OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Approve a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/approve",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Approves a submission or comment that was removed or reported. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Remove a Submission or Comment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/remove",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "id",
+                  "value": ""
+                },
+                {
+                  "name": "spam",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Removes a submission or comment from public listings. Requires the modposts OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Get Banned Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/banned",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              },
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of users banned from the specified subreddit. Requires the modcontributors OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

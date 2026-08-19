@@ -1,0 +1,363 @@
+{
+  "item": [
+    {
+      "id": "ddf11ebd-cc85-4017-9171-ea5302a362d1",
+      "name": "oEmbed",
+      "description": {
+        "content": "Endpoints implementing the oEmbed protocol for embedding Reddit content in external websites and applications.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "628dafdc-eef9-4488-ad07-88b1265264b3",
+          "name": "Get Oembed Data for a Reddit Url",
+          "request": {
+            "name": "Get Oembed Data for a Reddit Url",
+            "description": {
+              "content": "Returns oEmbed-formatted embed data for a given Reddit URL. This endpoint follows the oEmbed specification and returns HTML embed code along with metadata about the content. Supports both JSON and XML response formats. The returned HTML can be used to embed Reddit posts and comments into external pages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "oembed"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "url",
+                  "value": "<uri>",
+                  "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL."
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json",
+                  "description": "The response format. Defaults to JSON."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxwidth",
+                  "value": "<integer>",
+                  "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxheight",
+                  "value": "<integer>",
+                  "description": "The maximum height of the embed in pixels."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent",
+                  "value": "<string>",
+                  "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6efd832a-9149-4515-9332-56698d072a7a",
+              "name": "oEmbed response with embed data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"rich\",\n  \"version\": \"1.0\",\n  \"title\": \"string\",\n  \"author_name\": \"string\",\n  \"author_url\": \"https://CrozCrirnCHq.nrsfs+UVOZ-7vclvCU7sqi0piCle1O3sN9QfU.RfuyUwZTr-XY4n4sT,4uVOg1hP69\",\n  \"provider_name\": \"reddit\",\n  \"provider_url\": \"https://www.reddit.com/\",\n  \"html\": \"string\",\n  \"width\": 8552,\n  \"height\": 1682,\n  \"thumbnail_url\": \"http://FUFXcmjvAubVITwWXOdBEChrgR.hcybTq8I3,J\",\n  \"thumbnail_width\": 8109,\n  \"thumbnail_height\": 3815,\n  \"cache_age\": 486\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b5f01c5-944a-46b6-9af4-dcbcea307ff2",
+              "name": "Invalid URL or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "29131b81-bc25-4bf5-abce-d9c0489c2905",
+              "name": "Content not found or not embeddable",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e4bc4089-be4f-47d2-955a-a820915b2fd8",
+              "name": "URL not supported for embedding",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "oembed"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e42af69d-dfe3-45ec-aa4b-ae062089983b",
+    "name": "Reddit Ads Account oEmbed API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

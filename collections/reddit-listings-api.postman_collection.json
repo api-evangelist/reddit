@@ -1,0 +1,783 @@
+{
+  "item": [
+    {
+      "id": "ac032f7b-54b8-4e36-93d8-3361fff66f31",
+      "name": "Listings",
+      "description": {
+        "content": "Endpoints for retrieving sorted listings of content from subreddits, including hot, new, rising, top, and controversial posts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "881d89dc-a5d6-440a-abba-172c787f5506",
+          "name": "Get Hot Listings",
+          "request": {
+            "name": "Get Hot Listings",
+            "description": {
+              "content": "Returns a listing of hot posts from the specified subreddit. Results are sorted by Reddit's hot ranking algorithm.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "hot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                },
+                {
+                  "disabled": false,
+                  "key": "g",
+                  "value": "<string>",
+                  "description": "Geolocation filter for location-specific hot listings."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb127bfa-0c87-4345-a94e-1f6c9708ddc8",
+              "name": "Listing of hot posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "hot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "g",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 3160,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db6bc4ec-adfe-46c4-bd5c-6f3b55dad9e4",
+          "name": "Get New Listings",
+          "request": {
+            "name": "Get New Listings",
+            "description": {
+              "content": "Returns a listing of new posts from the specified subreddit, sorted by submission time with newest first.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "new"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7be79a8a-1377-4d57-948d-504dc60fa292",
+              "name": "Listing of new posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "new"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 3160,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9e11591f-30ab-4202-b76f-c3cd2298cb77",
+          "name": "Get Rising Listings",
+          "request": {
+            "name": "Get Rising Listings",
+            "description": {
+              "content": "Returns a listing of rising posts from the specified subreddit. Rising posts are those gaining upvotes at a rapid rate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "rising"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5fbe87da-4284-4450-a84c-7f9fe8242c24",
+              "name": "Listing of rising posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "rising"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 3160,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d9bdf2e-ad09-47ba-8775-2615440dff23",
+          "name": "Get Top Listings",
+          "request": {
+            "name": "Get Top Listings",
+            "description": {
+              "content": "Returns a listing of top-scoring posts from the specified subreddit, filterable by time period.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "top"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                },
+                {
+                  "disabled": false,
+                  "key": "t",
+                  "value": "<string>",
+                  "description": "The time period for filtering results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90526dd5-e680-4881-ac48-01dc49d9e0cb",
+              "name": "Listing of top posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "top"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "t",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 3160,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22dd14e6-02d3-451e-9b7b-916fe039c31a",
+          "name": "Get Controversial Listings",
+          "request": {
+            "name": "Get Controversial Listings",
+            "description": {
+              "content": "Returns a listing of controversial posts from the specified subreddit, which are posts with a roughly even mix of upvotes and downvotes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "r",
+                ":subreddit",
+                "controversial"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "before",
+                  "value": "<string>",
+                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "25",
+                  "description": "The maximum number of items to return (default 25, max 100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+                },
+                {
+                  "disabled": false,
+                  "key": "t",
+                  "value": "<string>",
+                  "description": "The time period for filtering results."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subreddit",
+                  "description": "(Required) The name of the subreddit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14eb697e-6511-431a-942a-b82bb20732d8",
+              "name": "Listing of controversial posts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "r",
+                    ":subreddit",
+                    "controversial"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "after",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "before",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "25"
+                    },
+                    {
+                      "key": "count",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "t",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subreddit",
+                      "description": "(Required) The name of the subreddit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 3160,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://ads-api.reddit.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "scope",
+        "value": "ads"
+      },
+      {
+        "key": "accessTokenUrl",
+        "value": "https://www.reddit.com/api/v1/access_token"
+      },
+      {
+        "key": "authUrl",
+        "value": "https://www.reddit.com/api/v1/authorize"
+      },
+      {
+        "key": "grant_type",
+        "value": "authorization_code"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0a44ed16-1185-4a76-846a-fa04a2cda278",
+    "name": "Reddit Ads Account Listings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
+      "type": "text/plain"
+    }
+  }
+}

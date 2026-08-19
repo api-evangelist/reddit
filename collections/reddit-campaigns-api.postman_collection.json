@@ -1,27 +1,27 @@
 {
   "item": [
     {
-      "id": "f94a2be4-c696-4a18-b8a0-67b22156fb3a",
-      "name": "Ads",
+      "id": "1c2d1b4d-01b1-4a15-9cfd-1c4c5b713427",
+      "name": "Campaigns",
       "description": {
-        "content": "Endpoints for creating and managing individual ads and their associated creative content.",
+        "content": "Endpoints for creating, reading, updating, and deleting advertising campaigns, including budget and schedule management.",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "81d05bc9-854e-4353-b424-bf6badf9a183",
-          "name": "List Ads",
+          "id": "df49e068-9009-4d82-937e-4f2f21e2b099",
+          "name": "List Campaigns",
           "request": {
-            "name": "List Ads",
+            "name": "List Campaigns",
             "description": {
-              "content": "Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status.",
+              "content": "Lists all campaigns in a Reddit Ads account with filtering, pagination, and sorting. Returns campaign IDs, names, status, objectives, budgets, and schedule information.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads"
+                "campaigns"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -41,9 +41,9 @@
                 },
                 {
                   "disabled": false,
-                  "key": "ad_group_id",
+                  "key": "status",
                   "value": "<string>",
-                  "description": "Filter ads by ad group ID."
+                  "description": "Filter campaigns by status."
                 }
               ],
               "variable": [
@@ -67,14 +67,14 @@
           },
           "response": [
             {
-              "id": "21ce6281-34fc-4c6a-9aba-70a5acbcf9bb",
-              "name": "List of ads",
+              "id": "793c3cb0-37ae-46a9-afe1-ff7995fb14f0",
+              "name": "List of campaigns",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "campaigns"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -89,7 +89,7 @@
                       "value": "<string>"
                     },
                     {
-                      "key": "ad_group_id",
+                      "key": "status",
                       "value": "<string>"
                     }
                   ],
@@ -128,19 +128,19 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"ad_group_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"APPROVED\",\n      \"post_id\": \"string\",\n      \"post_url\": \"https://hS.zbcuDr6F4cbLCFR,BNedvMFZD5dvIVdKCQfVHOMraS3WMJwfUoTLkKNTfKEads\",\n      \"click_url\": \"http://CdPFYNGFVumtkqkkphuBld.glrl-dvDR-nr7YdV5Q7B4HrPMgS,Gjgb1HUT+QmcIh7\",\n      \"review_status\": \"APPROVED\",\n      \"rejection_reason\": \"string\",\n      \"created_at\": \"1958-08-09T16:53:17.214Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"ad_group_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PENDING_REVIEW\",\n      \"post_id\": \"string\",\n      \"post_url\": \"http://BQNGEH.vrMo\",\n      \"click_url\": \"https://ZvlgndUCkqPSakygcBqW.qqlhEbqBHqx-rEKCKf6QbPNxWea\",\n      \"review_status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"created_at\": \"1970-04-08T06:05:52.490Z\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PAUSED\",\n      \"objective\": \"BRAND_AWARENESS\",\n      \"daily_budget_micro\": 3679,\n      \"lifetime_budget_micro\": 2704,\n      \"start_time\": \"1958-09-17T09:31:11.356Z\",\n      \"end_time\": \"1973-06-04T09:11:51.575Z\",\n      \"created_at\": \"2023-03-19T17:00:15.667Z\",\n      \"updated_at\": \"1971-07-28T07:16:13.263Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PAUSED\",\n      \"objective\": \"APP_INSTALLS\",\n      \"daily_budget_micro\": 2221,\n      \"lifetime_budget_micro\": 5784,\n      \"start_time\": \"2016-03-22T20:04:52.602Z\",\n      \"end_time\": \"2023-02-23T20:49:21.721Z\",\n      \"created_at\": \"1985-08-10T23:23:54.567Z\",\n      \"updated_at\": \"1962-10-25T19:51:43.800Z\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "09339989-97aa-4f41-96e0-aec230bac8a6",
+              "id": "f2e6f6d0-3055-4efb-99eb-fa9709845d96",
               "name": "Authentication required",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "campaigns"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -155,7 +155,7 @@
                       "value": "<string>"
                     },
                     {
-                      "key": "ad_group_id",
+                      "key": "status",
                       "value": "<string>"
                     }
                   ],
@@ -201,19 +201,19 @@
           }
         },
         {
-          "id": "8dcd1425-18ab-44b4-bb11-c166a9a128f9",
-          "name": "Create an Ad",
+          "id": "954b1b44-3e94-4220-a5a2-aaf76c8fbd36",
+          "name": "Create a Campaign",
           "request": {
-            "name": "Create an Ad",
+            "name": "Create a Campaign",
             "description": {
-              "content": "Creates a new ad with creative content within an ad group.",
+              "content": "Creates a new advertising campaign in the specified Reddit Ads account.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads"
+                "campaigns"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -243,7 +243,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -253,14 +253,14 @@
           },
           "response": [
             {
-              "id": "27eb0504-333b-4bc5-9164-bf55217af567",
-              "name": "Ad created successfully",
+              "id": "86029558-a446-4214-a7f9-c755f01622a8",
+              "name": "Campaign created successfully",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "campaigns"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -293,7 +293,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -309,19 +309,19 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"PAUSED\",\n  \"objective\": \"VIDEO_VIEWS\",\n  \"daily_budget_micro\": 4256,\n  \"lifetime_budget_micro\": 7138,\n  \"start_time\": \"2014-11-14T02:17:04.211Z\",\n  \"end_time\": \"2024-11-13T03:27:57.781Z\",\n  \"created_at\": \"1962-09-05T16:48:54.830Z\",\n  \"updated_at\": \"1958-06-04T15:01:33.388Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "6613b3ee-f008-4969-9125-ef74a917d658",
-              "name": "Invalid ad data",
+              "id": "7d02ef86-a593-4a95-b806-d341bb0aeb5d",
+              "name": "Invalid campaign data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "campaigns"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -350,7 +350,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -369,6 +369,63 @@
               "body": "",
               "cookie": [],
               "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e4dab4a-f34b-42b6-bb55-e1733d5331b4",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
             }
           ],
           "event": [],
@@ -377,20 +434,20 @@
           }
         },
         {
-          "id": "cce6400c-a44a-4cae-bbd6-78b35d19b771",
-          "name": "Get an Ad",
+          "id": "a34fb915-9b2b-4c4d-b005-d0df18adf15f",
+          "name": "Get a Campaign",
           "request": {
-            "name": "Get an Ad",
+            "name": "Get a Campaign",
             "description": {
-              "content": "Fetches detailed information about a specific ad including creative content, status, and review information.",
+              "content": "Fetches detailed information about a specific Reddit Ads campaign including status, budget, schedule, and targeting configuration.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads",
-                ":ad_id"
+                "campaigns",
+                ":campaign_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -408,8 +465,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
+                  "key": "campaign_id",
+                  "description": "(Required) The unique identifier of the campaign."
                 }
               ]
             },
@@ -424,15 +481,15 @@
           },
           "response": [
             {
-              "id": "5a6467e4-baa4-4685-8f63-59d3e5e7d91e",
-              "name": "Ad details",
+              "id": "6ee232db-b0c8-44f5-bfcc-ad5cafdd885a",
+              "name": "Campaign details",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -450,8 +507,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -480,20 +537,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"PAUSED\",\n  \"objective\": \"VIDEO_VIEWS\",\n  \"daily_budget_micro\": 4256,\n  \"lifetime_budget_micro\": 7138,\n  \"start_time\": \"2014-11-14T02:17:04.211Z\",\n  \"end_time\": \"2024-11-13T03:27:57.781Z\",\n  \"created_at\": \"1962-09-05T16:48:54.830Z\",\n  \"updated_at\": \"1958-06-04T15:01:33.388Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d4f2d63b-92db-4243-8b2c-33d0e56d9a4a",
-              "name": "Ad not found",
+              "id": "c9aef7d8-b645-413a-b04d-12e12d6c1c2b",
+              "name": "Campaign not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -511,8 +568,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -548,20 +605,20 @@
           }
         },
         {
-          "id": "b5bc4f8f-9a31-4ced-9ff3-12bac090db7e",
-          "name": "Update an Ad",
+          "id": "ab8f8723-e80b-4e0e-b01b-f63363ea43f7",
+          "name": "Update a Campaign",
           "request": {
-            "name": "Update an Ad",
+            "name": "Update a Campaign",
             "description": {
-              "content": "Updates an existing ad's creative content and configuration.",
+              "content": "Updates an existing campaign's configuration, including name, budget, schedule, and status.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads",
-                ":ad_id"
+                "campaigns",
+                ":campaign_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -579,8 +636,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
+                  "key": "campaign_id",
+                  "description": "(Required) The unique identifier of the campaign."
                 }
               ]
             },
@@ -598,7 +655,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -608,15 +665,15 @@
           },
           "response": [
             {
-              "id": "93a12096-3e21-4a11-b71f-be971a1035bb",
-              "name": "Ad updated successfully",
+              "id": "50e3a70c-948d-4160-aacd-aff8cff1fb36",
+              "name": "Campaign updated successfully",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -634,8 +691,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -656,7 +713,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -672,20 +729,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"PAUSED\",\n  \"objective\": \"VIDEO_VIEWS\",\n  \"daily_budget_micro\": 4256,\n  \"lifetime_budget_micro\": 7138,\n  \"start_time\": \"2014-11-14T02:17:04.211Z\",\n  \"end_time\": \"2024-11-13T03:27:57.781Z\",\n  \"created_at\": \"1962-09-05T16:48:54.830Z\",\n  \"updated_at\": \"1958-06-04T15:01:33.388Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b3fba89a-90f8-4f3a-84f6-65a5e7063b26",
-              "name": "Invalid ad data",
+              "id": "054da8aa-4202-4307-90af-cd2ea92293d5",
+              "name": "Invalid campaign data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -703,8 +760,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -721,7 +778,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -740,64 +797,17 @@
               "body": "",
               "cookie": [],
               "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8e6782ed-d86b-4c82-82a9-71269ba216d4",
-          "name": "Delete an Ad",
-          "request": {
-            "name": "Delete an Ad",
-            "description": {
-              "content": "Deletes an ad from an ad group.",
-              "type": "text/plain"
             },
-            "url": {
-              "path": [
-                "accounts",
-                ":account_id",
-                "ads",
-                ":ad_id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "account_id",
-                  "description": "(Required) The unique identifier of the Reddit Ads account."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
-                }
-              ]
-            },
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
             {
-              "id": "e9136dd9-0ff5-442e-bf7a-a21b0f5f9fce",
-              "name": "Ad deleted successfully",
+              "id": "8089d1e1-863c-40e1-a57a-ad4d41f4f5e6",
+              "name": "Campaign not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -815,8 +825,120 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"objective\": \"<string>\",\n  \"daily_budget_micro\": \"<long>\",\n  \"lifetime_budget_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"status\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "08520fff-ee7f-45bf-a7df-fea9f7c08170",
+          "name": "Delete a Campaign",
+          "request": {
+            "name": "Delete a Campaign",
+            "description": {
+              "content": "Deletes an advertising campaign. The campaign must be in a non-active state to be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "accounts",
+                ":account_id",
+                "campaigns",
+                ":campaign_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "account_id",
+                  "description": "(Required) The unique identifier of the Reddit Ads account."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "campaign_id",
+                  "description": "(Required) The unique identifier of the campaign."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1c2713f9-70e6-45da-a0ee-7a7acfc1b00d",
+              "name": "Campaign deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "accounts",
+                    ":account_id",
+                    "campaigns",
+                    ":campaign_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "account_id",
+                      "description": "(Required) The unique identifier of the Reddit Ads account."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -846,15 +968,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "dfdf30b4-6d71-4eb1-9789-886e0170a61c",
-              "name": "Ad not found",
+              "id": "6e7859d5-d2c3-47a7-b8cf-865dafae3595",
+              "name": "Campaign not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "campaigns",
+                    ":campaign_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -872,8 +994,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "campaign_id",
+                      "description": "(Required) The unique identifier of the campaign."
                     }
                   ]
                 },
@@ -942,8 +1064,8 @@
     ]
   },
   "info": {
-    "_postman_id": "6cbe76f2-60db-42ce-b776-a516dba9742c",
-    "name": "Reddit Account Ads API",
+    "_postman_id": "641b827a-8022-4019-b2c0-6a0387097b67",
+    "name": "Reddit Ads Account Campaigns API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",

@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Reddit Ads Account Subreddits API",
+    "version": "3"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "authorization_code",
+      "authorizationUrl": "https://www.reddit.com/api/v1/authorize",
+      "accessTokenUrl": "https://www.reddit.com/api/v1/access_token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Subreddits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Subreddit Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns information about the specified subreddit, including subscriber count, description, rules, and settings."
+        },
+        {
+          "info": {
+            "name": "Get Subreddit Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/r/:subreddit/about/rules",
+            "params": [
+              {
+                "name": "subreddit",
+                "value": "",
+                "type": "path",
+                "description": "The name of the subreddit."
+              }
+            ]
+          },
+          "docs": "Returns the rules defined for the specified subreddit."
+        },
+        {
+          "info": {
+            "name": "Get Subscribed Subreddits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://ads-api.reddit.com/api/v3/subreddits/mine/subscriber",
+            "params": [
+              {
+                "name": "after",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
+              },
+              {
+                "name": "before",
+                "value": "",
+                "type": "query",
+                "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (default 25, max 100)."
+              },
+              {
+                "name": "count",
+                "value": "",
+                "type": "query",
+                "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
+              }
+            ]
+          },
+          "docs": "Returns a listing of subreddits the authenticated user is subscribed to. Requires the mysubreddits OAuth scope."
+        },
+        {
+          "info": {
+            "name": "Subscribe or Unsubscribe From a Subreddit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ads-api.reddit.com/api/v3/api/subscribe",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "action",
+                  "value": ""
+                },
+                {
+                  "name": "sr_name",
+                  "value": ""
+                },
+                {
+                  "name": "skip_initial_defaults",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Subscribes to or unsubscribes from a subreddit. Requires the subscribe OAuth scope."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

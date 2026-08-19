@@ -1,27 +1,27 @@
 {
   "item": [
     {
-      "id": "f94a2be4-c696-4a18-b8a0-67b22156fb3a",
-      "name": "Ads",
+      "id": "7115b21e-513a-4098-afcc-80b097dde572",
+      "name": "Ad Groups",
       "description": {
-        "content": "Endpoints for creating and managing individual ads and their associated creative content.",
+        "content": "Endpoints for managing ad groups within campaigns, including targeting, bidding, and scheduling configuration.",
         "type": "text/plain"
       },
       "item": [
         {
-          "id": "81d05bc9-854e-4353-b424-bf6badf9a183",
-          "name": "List Ads",
+          "id": "e945f191-cdbc-42e4-9ae1-efa34e318244",
+          "name": "List Ad Groups",
           "request": {
-            "name": "List Ads",
+            "name": "List Ad Groups",
             "description": {
-              "content": "Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status.",
+              "content": "Lists ad groups in a Reddit Ads account or campaign, with ad groups containing targeting settings and grouping related ads.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads"
+                "ad_groups"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -41,9 +41,9 @@
                 },
                 {
                   "disabled": false,
-                  "key": "ad_group_id",
+                  "key": "campaign_id",
                   "value": "<string>",
-                  "description": "Filter ads by ad group ID."
+                  "description": "Filter ad groups by campaign ID."
                 }
               ],
               "variable": [
@@ -67,14 +67,14 @@
           },
           "response": [
             {
-              "id": "21ce6281-34fc-4c6a-9aba-70a5acbcf9bb",
-              "name": "List of ads",
+              "id": "4591d72d-4b59-4849-b827-0848a62bfec9",
+              "name": "List of ad groups",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "ad_groups"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -89,7 +89,7 @@
                       "value": "<string>"
                     },
                     {
-                      "key": "ad_group_id",
+                      "key": "campaign_id",
                       "value": "<string>"
                     }
                   ],
@@ -128,19 +128,19 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"ad_group_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"APPROVED\",\n      \"post_id\": \"string\",\n      \"post_url\": \"https://hS.zbcuDr6F4cbLCFR,BNedvMFZD5dvIVdKCQfVHOMraS3WMJwfUoTLkKNTfKEads\",\n      \"click_url\": \"http://CdPFYNGFVumtkqkkphuBld.glrl-dvDR-nr7YdV5Q7B4HrPMgS,Gjgb1HUT+QmcIh7\",\n      \"review_status\": \"APPROVED\",\n      \"rejection_reason\": \"string\",\n      \"created_at\": \"1958-08-09T16:53:17.214Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"ad_group_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PENDING_REVIEW\",\n      \"post_id\": \"string\",\n      \"post_url\": \"http://BQNGEH.vrMo\",\n      \"click_url\": \"https://ZvlgndUCkqPSakygcBqW.qqlhEbqBHqx-rEKCKf6QbPNxWea\",\n      \"review_status\": \"REJECTED\",\n      \"rejection_reason\": \"string\",\n      \"created_at\": \"1970-04-08T06:05:52.490Z\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"campaign_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PAUSED\",\n      \"bid_strategy\": \"MANUAL_CPC\",\n      \"bid_micro\": 8056,\n      \"start_time\": \"1975-10-05T00:39:17.629Z\",\n      \"end_time\": \"1953-09-12T04:24:35.380Z\",\n      \"targeting\": {\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ],\n        \"interests\": [\n          \"string\",\n          \"string\"\n        ],\n        \"communities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"devices\": [\n          \"TABLET\",\n          \"MOBILE\"\n        ],\n        \"os\": [\n          \"ANDROID\",\n          \"WINDOWS\"\n        ],\n        \"custom_audience_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"excluded_custom_audience_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"age_ranges\": [\n          \"string\",\n          \"string\"\n        ],\n        \"genders\": [\n          \"FEMALE\",\n          \"MALE\"\n        ]\n      },\n      \"created_at\": \"2019-05-22T07:41:12.701Z\",\n      \"updated_at\": \"1979-01-21T15:44:52.466Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"campaign_id\": \"string\",\n      \"name\": \"string\",\n      \"status\": \"PAUSED\",\n      \"bid_strategy\": \"MANUAL_CPM\",\n      \"bid_micro\": 9877,\n      \"start_time\": \"2000-11-21T12:47:14.997Z\",\n      \"end_time\": \"2017-02-15T10:27:59.722Z\",\n      \"targeting\": {\n        \"locations\": [\n          \"string\",\n          \"string\"\n        ],\n        \"interests\": [\n          \"string\",\n          \"string\"\n        ],\n        \"communities\": [\n          \"string\",\n          \"string\"\n        ],\n        \"devices\": [\n          \"MOBILE\",\n          \"TABLET\"\n        ],\n        \"os\": [\n          \"WINDOWS\",\n          \"IOS\"\n        ],\n        \"custom_audience_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"excluded_custom_audience_ids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"age_ranges\": [\n          \"string\",\n          \"string\"\n        ],\n        \"genders\": [\n          \"MALE\",\n          \"ALL\"\n        ]\n      },\n      \"created_at\": \"1963-01-11T05:49:09.558Z\",\n      \"updated_at\": \"2005-02-05T23:45:18.456Z\"\n    }\n  ],\n  \"cursor\": \"string\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "09339989-97aa-4f41-96e0-aec230bac8a6",
+              "id": "81b26a7f-b55e-4524-acc0-29df591f4a08",
               "name": "Authentication required",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "ad_groups"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -155,7 +155,7 @@
                       "value": "<string>"
                     },
                     {
-                      "key": "ad_group_id",
+                      "key": "campaign_id",
                       "value": "<string>"
                     }
                   ],
@@ -201,19 +201,19 @@
           }
         },
         {
-          "id": "8dcd1425-18ab-44b4-bb11-c166a9a128f9",
-          "name": "Create an Ad",
+          "id": "a52dac8b-f4ab-43d7-8e97-ec68ac74f635",
+          "name": "Create an Ad Group",
           "request": {
-            "name": "Create an Ad",
+            "name": "Create an Ad Group",
             "description": {
-              "content": "Creates a new ad with creative content within an ad group.",
+              "content": "Creates a new ad group within a campaign with targeting and bidding configuration.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads"
+                "ad_groups"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -243,7 +243,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"interests\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"communities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"devices\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"os\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"custom_audience_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"age_ranges\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genders\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -253,14 +253,14 @@
           },
           "response": [
             {
-              "id": "27eb0504-333b-4bc5-9164-bf55217af567",
-              "name": "Ad created successfully",
+              "id": "243d4960-b789-4c66-886c-c818d5681850",
+              "name": "Ad group created successfully",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "ad_groups"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -293,7 +293,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"WINDOWS\",\n      \"IOS\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"ALL\",\n      \"FEMALE\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -309,19 +309,19 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"campaign_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"bid_strategy\": \"MANUAL_CPC\",\n  \"bid_micro\": 8054,\n  \"start_time\": \"2023-01-28T12:20:10.561Z\",\n  \"end_time\": \"2021-05-30T16:41:05.823Z\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"IOS\",\n      \"ANDROID\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"MALE\",\n      \"FEMALE\"\n    ]\n  },\n  \"created_at\": \"2019-02-27T03:14:06.702Z\",\n  \"updated_at\": \"2019-05-15T10:56:50.604Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "6613b3ee-f008-4969-9125-ef74a917d658",
-              "name": "Invalid ad data",
+              "id": "313076f0-f5cf-4cee-bbfa-a622edf490f9",
+              "name": "Invalid ad group data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads"
+                    "ad_groups"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -350,7 +350,7 @@
                 "method": "POST",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"WINDOWS\",\n      \"IOS\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"ALL\",\n      \"FEMALE\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -377,20 +377,20 @@
           }
         },
         {
-          "id": "cce6400c-a44a-4cae-bbd6-78b35d19b771",
-          "name": "Get an Ad",
+          "id": "04db9c55-eb3a-4482-bbbd-af39d1e9b39d",
+          "name": "Get an Ad Group",
           "request": {
-            "name": "Get an Ad",
+            "name": "Get an Ad Group",
             "description": {
-              "content": "Fetches detailed information about a specific ad including creative content, status, and review information.",
+              "content": "Fetches detailed information about a specific ad group including targeting settings, bid configuration, and schedule.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads",
-                ":ad_id"
+                "ad_groups",
+                ":ad_group_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -408,8 +408,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
+                  "key": "ad_group_id",
+                  "description": "(Required) The unique identifier of the ad group."
                 }
               ]
             },
@@ -424,15 +424,15 @@
           },
           "response": [
             {
-              "id": "5a6467e4-baa4-4685-8f63-59d3e5e7d91e",
-              "name": "Ad details",
+              "id": "9085fcfe-f58f-4257-98a4-c8eab50c2ad8",
+              "name": "Ad group details",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -450,8 +450,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -480,20 +480,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"campaign_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"bid_strategy\": \"MANUAL_CPC\",\n  \"bid_micro\": 8054,\n  \"start_time\": \"2023-01-28T12:20:10.561Z\",\n  \"end_time\": \"2021-05-30T16:41:05.823Z\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"IOS\",\n      \"ANDROID\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"MALE\",\n      \"FEMALE\"\n    ]\n  },\n  \"created_at\": \"2019-02-27T03:14:06.702Z\",\n  \"updated_at\": \"2019-05-15T10:56:50.604Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "d4f2d63b-92db-4243-8b2c-33d0e56d9a4a",
-              "name": "Ad not found",
+              "id": "e3ca3aaa-53a0-4772-a0cc-dfa090f93679",
+              "name": "Ad group not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -511,8 +511,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -548,20 +548,20 @@
           }
         },
         {
-          "id": "b5bc4f8f-9a31-4ced-9ff3-12bac090db7e",
-          "name": "Update an Ad",
+          "id": "b9b6fb3e-2b64-49a9-8ae2-0353f3b288c2",
+          "name": "Update an Ad Group",
           "request": {
-            "name": "Update an Ad",
+            "name": "Update an Ad Group",
             "description": {
-              "content": "Updates an existing ad's creative content and configuration.",
+              "content": "Updates an existing ad group's configuration, including targeting, bidding, and scheduling.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads",
-                ":ad_id"
+                "ad_groups",
+                ":ad_group_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -579,8 +579,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
+                  "key": "ad_group_id",
+                  "description": "(Required) The unique identifier of the ad group."
                 }
               ]
             },
@@ -598,7 +598,7 @@
             "auth": null,
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+              "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"interests\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"communities\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"devices\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"os\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"custom_audience_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"age_ranges\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"genders\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -608,15 +608,15 @@
           },
           "response": [
             {
-              "id": "93a12096-3e21-4a11-b71f-be971a1035bb",
-              "name": "Ad updated successfully",
+              "id": "38c3f644-642a-437e-942a-ae47d5709e47",
+              "name": "Ad group updated successfully",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -634,8 +634,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -656,7 +656,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"WINDOWS\",\n      \"IOS\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"ALL\",\n      \"FEMALE\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -672,20 +672,20 @@
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"id\": \"string\",\n  \"ad_group_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"post_id\": \"string\",\n  \"post_url\": \"https://uNfiY.owhfzHN79IA\",\n  \"click_url\": \"http://D.ckiK2VYLRTtyquHEnyqiKBZKtdTxdgiTTt9a.PpjxvQuaO8HSA0-RUNHQedqt2aUc3oozpArm\",\n  \"review_status\": \"PENDING\",\n  \"rejection_reason\": \"string\",\n  \"created_at\": \"2003-03-12T04:29:22.638Z\"\n}",
+              "body": "{\n  \"id\": \"string\",\n  \"campaign_id\": \"string\",\n  \"name\": \"string\",\n  \"status\": \"DRAFT\",\n  \"bid_strategy\": \"MANUAL_CPC\",\n  \"bid_micro\": 8054,\n  \"start_time\": \"2023-01-28T12:20:10.561Z\",\n  \"end_time\": \"2021-05-30T16:41:05.823Z\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"IOS\",\n      \"ANDROID\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"MALE\",\n      \"FEMALE\"\n    ]\n  },\n  \"created_at\": \"2019-02-27T03:14:06.702Z\",\n  \"updated_at\": \"2019-05-15T10:56:50.604Z\"\n}",
               "cookie": [],
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b3fba89a-90f8-4f3a-84f6-65a5e7063b26",
-              "name": "Invalid ad data",
+              "id": "5b246628-34e3-4170-a8ba-d04214569dca",
+              "name": "Invalid ad group data",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -703,8 +703,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -721,7 +721,7 @@
                 "method": "PUT",
                 "body": {
                   "mode": "raw",
-                  "raw": "{\n  \"ad_group_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"post_id\": \"<string>\",\n  \"click_url\": \"<uri>\",\n  \"status\": \"<string>\"\n}",
+                  "raw": "{\n  \"campaign_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"bid_strategy\": \"<string>\",\n  \"bid_micro\": \"<long>\",\n  \"start_time\": \"<dateTime>\",\n  \"end_time\": \"<dateTime>\",\n  \"targeting\": {\n    \"locations\": [\n      \"string\",\n      \"string\"\n    ],\n    \"interests\": [\n      \"string\",\n      \"string\"\n    ],\n    \"communities\": [\n      \"string\",\n      \"string\"\n    ],\n    \"devices\": [\n      \"TABLET\",\n      \"DESKTOP\"\n    ],\n    \"os\": [\n      \"WINDOWS\",\n      \"IOS\"\n    ],\n    \"custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"excluded_custom_audience_ids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"age_ranges\": [\n      \"string\",\n      \"string\"\n    ],\n    \"genders\": [\n      \"ALL\",\n      \"FEMALE\"\n    ]\n  },\n  \"status\": \"<string>\"\n}",
                   "options": {
                     "raw": {
                       "language": "json"
@@ -748,20 +748,20 @@
           }
         },
         {
-          "id": "8e6782ed-d86b-4c82-82a9-71269ba216d4",
-          "name": "Delete an Ad",
+          "id": "33379045-3134-43d8-9097-36a17c9bcaf8",
+          "name": "Delete an Ad Group",
           "request": {
-            "name": "Delete an Ad",
+            "name": "Delete an Ad Group",
             "description": {
-              "content": "Deletes an ad from an ad group.",
+              "content": "Deletes an ad group from a campaign.",
               "type": "text/plain"
             },
             "url": {
               "path": [
                 "accounts",
                 ":account_id",
-                "ads",
-                ":ad_id"
+                "ad_groups",
+                ":ad_group_id"
               ],
               "host": [
                 "{{baseUrl}}"
@@ -779,8 +779,8 @@
                   "disabled": false,
                   "type": "any",
                   "value": "<string>",
-                  "key": "ad_id",
-                  "description": "(Required) The unique identifier of the ad."
+                  "key": "ad_group_id",
+                  "description": "(Required) The unique identifier of the ad group."
                 }
               ]
             },
@@ -789,15 +789,15 @@
           },
           "response": [
             {
-              "id": "e9136dd9-0ff5-442e-bf7a-a21b0f5f9fce",
-              "name": "Ad deleted successfully",
+              "id": "8a49e423-8cd9-405d-81ef-50b6d334563b",
+              "name": "Ad group deleted successfully",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -815,8 +815,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -846,15 +846,15 @@
               "_postman_previewlanguage": "text"
             },
             {
-              "id": "dfdf30b4-6d71-4eb1-9789-886e0170a61c",
-              "name": "Ad not found",
+              "id": "26c56318-f5bc-4491-8505-c1ce002aa096",
+              "name": "Ad group not found",
               "originalRequest": {
                 "url": {
                   "path": [
                     "accounts",
                     ":account_id",
-                    "ads",
-                    ":ad_id"
+                    "ad_groups",
+                    ":ad_group_id"
                   ],
                   "host": [
                     "{{baseUrl}}"
@@ -872,8 +872,8 @@
                       "disabled": false,
                       "type": "any",
                       "value": "<string>",
-                      "key": "ad_id",
-                      "description": "(Required) The unique identifier of the ad."
+                      "key": "ad_group_id",
+                      "description": "(Required) The unique identifier of the ad group."
                     }
                   ]
                 },
@@ -942,8 +942,8 @@
     ]
   },
   "info": {
-    "_postman_id": "6cbe76f2-60db-42ce-b776-a516dba9742c",
-    "name": "Reddit Account Ads API",
+    "_postman_id": "a0ca0fa2-9874-41a9-b2b4-4017cdc9fd74",
+    "name": "Reddit Ads Account Ad Groups API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
       "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",

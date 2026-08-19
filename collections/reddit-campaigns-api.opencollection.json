@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Reddit Account Ads API",
+    "name": "Reddit Ads Account Campaigns API",
     "version": "3"
   },
   "request": {
@@ -19,18 +19,18 @@
   "items": [
     {
       "info": {
-        "name": "Ads",
+        "name": "Campaigns",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "List Ads",
+            "name": "List Campaigns",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns",
             "params": [
               {
                 "name": "account_id",
@@ -51,23 +51,23 @@
                 "description": "A pagination cursor for retrieving the next page of results."
               },
               {
-                "name": "ad_group_id",
+                "name": "status",
                 "value": "",
                 "type": "query",
-                "description": "Filter ads by ad group ID."
+                "description": "Filter campaigns by status."
               }
             ]
           },
-          "docs": "Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status."
+          "docs": "Lists all campaigns in a Reddit Ads account with filtering, pagination, and sorting. Returns campaign IDs, names, status, objectives, budgets, and schedule information."
         },
         {
           "info": {
-            "name": "Create an Ad",
+            "name": "Create a Campaign",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns",
             "params": [
               {
                 "name": "account_id",
@@ -81,16 +81,16 @@
               "data": "{}"
             }
           },
-          "docs": "Creates a new ad with creative content within an ad group."
+          "docs": "Creates a new advertising campaign in the specified Reddit Ads account."
         },
         {
           "info": {
-            "name": "Get an Ad",
+            "name": "Get a Campaign",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
             "params": [
               {
                 "name": "account_id",
@@ -99,23 +99,23 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "campaign_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the campaign."
               }
             ]
           },
-          "docs": "Fetches detailed information about a specific ad including creative content, status, and review information."
+          "docs": "Fetches detailed information about a specific Reddit Ads campaign including status, budget, schedule, and targeting configuration."
         },
         {
           "info": {
-            "name": "Update an Ad",
+            "name": "Update a Campaign",
             "type": "http"
           },
           "http": {
             "method": "PUT",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
             "params": [
               {
                 "name": "account_id",
@@ -124,10 +124,10 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "campaign_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the campaign."
               }
             ],
             "body": {
@@ -135,16 +135,16 @@
               "data": "{}"
             }
           },
-          "docs": "Updates an existing ad's creative content and configuration."
+          "docs": "Updates an existing campaign's configuration, including name, budget, schedule, and status."
         },
         {
           "info": {
-            "name": "Delete an Ad",
+            "name": "Delete a Campaign",
             "type": "http"
           },
           "http": {
             "method": "DELETE",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/campaigns/:campaign_id",
             "params": [
               {
                 "name": "account_id",
@@ -153,14 +153,14 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "campaign_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the campaign."
               }
             ]
           },
-          "docs": "Deletes an ad from an ad group."
+          "docs": "Deletes an advertising campaign. The campaign must be in a non-active state to be deleted."
         }
       ]
     }

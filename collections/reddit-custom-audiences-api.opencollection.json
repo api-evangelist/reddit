@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Reddit Account Ads API",
+    "name": "Reddit Ads Account Custom Audiences API",
     "version": "3"
   },
   "request": {
@@ -19,18 +19,18 @@
   "items": [
     {
       "info": {
-        "name": "Ads",
+        "name": "Custom Audiences",
         "type": "folder"
       },
       "items": [
         {
           "info": {
-            "name": "List Ads",
+            "name": "List Custom Audiences",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences",
             "params": [
               {
                 "name": "account_id",
@@ -49,25 +49,19 @@
                 "value": "",
                 "type": "query",
                 "description": "A pagination cursor for retrieving the next page of results."
-              },
-              {
-                "name": "ad_group_id",
-                "value": "",
-                "type": "query",
-                "description": "Filter ads by ad group ID."
               }
             ]
           },
-          "docs": "Lists ads in a Reddit Ads account or ad group, returning ad IDs, names, status, creative content, and review status."
+          "docs": "Lists custom audiences in a Reddit Ads account. Custom audiences allow targeting specific users based on email lists, mobile device IDs, or website visitor data."
         },
         {
           "info": {
-            "name": "Create an Ad",
+            "name": "Create a Custom Audience",
             "type": "http"
           },
           "http": {
             "method": "POST",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences",
             "params": [
               {
                 "name": "account_id",
@@ -81,16 +75,16 @@
               "data": "{}"
             }
           },
-          "docs": "Creates a new ad with creative content within an ad group."
+          "docs": "Creates a new custom audience for targeting in ad campaigns."
         },
         {
           "info": {
-            "name": "Get an Ad",
+            "name": "Get a Custom Audience",
             "type": "http"
           },
           "http": {
             "method": "GET",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
             "params": [
               {
                 "name": "account_id",
@@ -99,23 +93,23 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "audience_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the custom audience."
               }
             ]
           },
-          "docs": "Fetches detailed information about a specific ad including creative content, status, and review information."
+          "docs": "Fetches detailed information about a specific custom audience."
         },
         {
           "info": {
-            "name": "Update an Ad",
+            "name": "Update a Custom Audience",
             "type": "http"
           },
           "http": {
             "method": "PUT",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
             "params": [
               {
                 "name": "account_id",
@@ -124,10 +118,10 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "audience_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the custom audience."
               }
             ],
             "body": {
@@ -135,16 +129,16 @@
               "data": "{}"
             }
           },
-          "docs": "Updates an existing ad's creative content and configuration."
+          "docs": "Updates an existing custom audience's configuration and user list."
         },
         {
           "info": {
-            "name": "Delete an Ad",
+            "name": "Delete a Custom Audience",
             "type": "http"
           },
           "http": {
             "method": "DELETE",
-            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/ads/:ad_id",
+            "url": "https://ads-api.reddit.com/api/v3/accounts/:account_id/custom_audiences/:audience_id",
             "params": [
               {
                 "name": "account_id",
@@ -153,14 +147,14 @@
                 "description": "The unique identifier of the Reddit Ads account."
               },
               {
-                "name": "ad_id",
+                "name": "audience_id",
                 "value": "",
                 "type": "path",
-                "description": "The unique identifier of the ad."
+                "description": "The unique identifier of the custom audience."
               }
             ]
           },
-          "docs": "Deletes an ad from an ad group."
+          "docs": "Deletes a custom audience from the account."
         }
       ]
     }
