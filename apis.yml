@@ -27,6 +27,12 @@ tags:
 - Advertising
 - Communities
 - Content
+- Social-Media
+- Social News
+tags_raw:
+- Advertising
+- Communities
+- Content
 - Social Media
 - Social News
 url: https://raw.githubusercontent.com/api-evangelist/reddit/refs/heads/main/apis.yml
@@ -45,6 +51,12 @@ apis:
   humanURL: https://ads-api.reddit.com/docs/
   baseURL: https://ads-api.reddit.com/api/v3
   tags:
+  - Advertising
+  - Campaigns
+  - Marketing
+  - Social-Media
+  - Targeting
+  tags_raw:
   - Advertising
   - Campaigns
   - Marketing
@@ -68,6 +80,10 @@ apis:
   humanURL: https://github.com/reddit-archive/reddit/wiki/OAuth2
   baseURL: https://www.reddit.com/api/v1
   tags:
+  - Authentication
+  - Authorization
+  - Security
+  tags_raw:
   - Authentication
   - Authorization
   - OAuth 2.0
@@ -110,6 +126,8 @@ apis:
   humanURL: https://www.reddit.com/dev/api
   baseURL: https://oauth.reddit.com
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -314,6 +332,8 @@ apis:
   humanURL: https://www.reddit.com/dev/api
   baseURL: https://oauth.reddit.com
   tags:
+  - Message
+  tags_raw:
   - Messages
   properties:
   - type: OpenAPI
@@ -473,6 +493,8 @@ apis:
   humanURL: https://www.reddit.com/dev/api
   baseURL: https://oauth.reddit.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
