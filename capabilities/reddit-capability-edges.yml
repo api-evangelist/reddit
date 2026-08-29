@@ -1,0 +1,27 @@
+slug: reddit
+provider: Reddit
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Media, Entertainment & Telecom Content
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Moderation
+  spec_file: reddit-moderation-api-openapi.yml
+  capability_id: BC-3780.40
+  capability_id_l1: BC-3780
+  capability_name: User-Generated Content Moderation
+  confidence: 0.9
+  evidence: GET /r/{subreddit}/about/modqueue Get Moderation Queue; GET /r/{subreddit}/about/reports Get
+    Reported Items; POST /api/remove Remove a Submission or Comment; GET /r/{subreddit}/about/banned Get
+    Banned Users
+  reason: 'Operations are a platform content-moderation surface: mod queue triage, reported/spam items,
+    approve or remove submissions and comments, banned-user lists. That is user-generated content moderation,
+    not any other reading of ''moderation''.'
