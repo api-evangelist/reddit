@@ -9,6 +9,18 @@ description: Reddit is a social news aggregation, discussion, and community plat
   campaigns, audiences, and conversion tracking. All API access requires OAuth 2.0
   authentication via the oauth.reddit.com server at 60 requests per minute.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -40,35 +52,6 @@ created: '2026-01-01'
 modified: '2026-05-19'
 specificationVersion: '0.23'
 apis:
-- aid: reddit:ads-api
-  name: Reddit Ads API
-  description: >-
-    The Reddit Ads API allows advertisers and their marketing partners to programmatically create, edit,
-    manage, and report on advertising campaigns on the Reddit platform. It provides endpoints for managing
-    ad accounts, campaigns, ad groups, ads, creatives, targeting configurations, custom audiences (email
-    lists, mobile IDs, pixel-based), conversion pixels, and performance reporting. Authentication uses
-    OAuth 2.0 with a rate limit of one request per second per advertiser account.
-  humanURL: https://ads-api.reddit.com/docs/
-  baseURL: https://ads-api.reddit.com/api/v3
-  tags:
-  - Advertising
-  - Campaigns
-  - Marketing
-  - Social-Media
-  - Targeting
-  tags_raw:
-  - Advertising
-  - Campaigns
-  - Marketing
-  - Social Media
-  - Targeting
-  properties:
-  - type: Documentation
-    url: https://ads-api.reddit.com/docs/
-  - type: TermsOfService
-    url: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
-  - type: OpenAPI
-    url: openapi/reddit-ads-api-openapi.yml
 - aid: reddit:oauth
   name: Reddit OAuth 2.0 Authorization
   description: >-
@@ -118,122 +101,6 @@ apis:
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-accounts-api
-  name: Reddit Accounts API
-  description: >-
-    Endpoints for managing Reddit Ads accounts, including retrieving account details and configuration
-    settings.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Account
-  tags_raw:
-  - Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-accounts-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-ad-groups-api
-  name: Reddit Ad Groups API
-  description: >-
-    Endpoints for managing ad groups within campaigns, including targeting, bidding, and scheduling configuration.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Ad Groups
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-ad-groups-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-campaigns-api
-  name: Reddit Campaigns API
-  description: >-
-    Endpoints for creating, reading, updating, and deleting advertising campaigns, including budget and
-    schedule management.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Campaigns
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-campaigns-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-conversions-api
-  name: Reddit Conversions API
-  description: >-
-    Endpoints for managing conversion pixels and sending server-side conversion events via the Conversions
-    API (CAPI).
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Conversions
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-conversions-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-custom-audiences-api
-  name: Reddit Custom Audiences API
-  description: >-
-    Endpoints for managing custom audiences for targeting, including email lists, mobile device IDs, and
-    website visitor audiences.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Custom Audiences
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-custom-audiences-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
 - aid: reddit:reddit-flair-api
   name: Reddit Flair API
   description: >-
@@ -246,27 +113,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/reddit-flair-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-funding-api
-  name: Reddit Funding API
-  description: Endpoints for managing account funding instruments and billing information.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Funding
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-funding-api-openapi.yml
   - type: Documentation
     url: https://www.reddit.com/dev/api
   - type: Authentication
@@ -394,29 +240,6 @@ apis:
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-reporting-api
-  name: Reddit Reporting API
-  description: >-
-    Endpoints for retrieving campaign, ad group, and ad performance reporting data including impressions,
-    clicks, and conversions.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Reporting
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-reporting-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
 - aid: reddit:reddit-search-api
   name: Reddit Search API
   description: >-
@@ -451,29 +274,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/reddit-subreddits-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-targeting-api
-  name: Reddit Targeting API
-  description: >-
-    Endpoints for retrieving available targeting options including interests, communities, locations,
-    and devices.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - Targeting
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-targeting-api-openapi.yml
   - type: Documentation
     url: https://www.reddit.com/dev/api
   - type: Authentication
