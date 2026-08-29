@@ -1,17 +1,14 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Reddit Ads Account oEmbed API
-  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
-  version: '3'
+  title: Reddit Embeds O Embed API
+  description: Reddit Embeds allows developers and content creators to embed Reddit posts and comments directly into external websites and applications. This service provides oEmbed endpoints that return embed codes and metadata for rendering Reddit content in a visually consistent format outside of the Reddit platform. It follows the oEmbed specification for content discovery and embedding.
+  version: '1.0'
   contact:
-    name: Reddit Ads Support
-    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
-  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+    name: Reddit Developer Support
+    url: https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
 servers:
-- url: https://ads-api.reddit.com/api/v3
-  description: Reddit Ads API v3 Production Server
-security:
-- oauth2: []
+- url: https://www.reddit.com
+  description: Reddit oEmbed Server
 tags:
 - name: oEmbed
   description: Endpoints implementing the oEmbed protocol for embedding Reddit content in external websites and applications.
@@ -135,16 +132,6 @@ components:
         cache_age:
           type: integer
           description: The suggested cache lifetime for the embed data in seconds.
-  securitySchemes:
-    oauth2:
-      type: oauth2
-      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
-      flows:
-        authorizationCode:
-          authorizationUrl: https://www.reddit.com/api/v1/authorize
-          tokenUrl: https://www.reddit.com/api/v1/access_token
-          scopes:
-            ads: Access to ads management endpoints
 externalDocs:
-  description: Reddit Ads API Documentation
-  url: https://ads-api.reddit.com/docs/
+  description: oEmbed Specification
+  url: https://oembed.com/

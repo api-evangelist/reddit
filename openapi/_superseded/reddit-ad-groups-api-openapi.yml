@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reddit Ads Account Ad Groups API
   description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
@@ -130,129 +130,7 @@ paths:
         '404':
           description: Ad group not found
 components:
-  parameters:
-    adGroupId:
-      name: ad_group_id
-      in: path
-      required: true
-      description: The unique identifier of the ad group.
-      schema:
-        type: string
-    accountId:
-      name: account_id
-      in: path
-      required: true
-      description: The unique identifier of the Reddit Ads account.
-      schema:
-        type: string
-    pageSize:
-      name: page_size
-      in: query
-      description: The maximum number of items to return per page (default 25, max 100).
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    cursor:
-      name: cursor
-      in: query
-      description: A pagination cursor for retrieving the next page of results.
-      schema:
-        type: string
   schemas:
-    AdGroupInput:
-      type: object
-      description: Input for creating or updating an ad group.
-      required:
-      - campaign_id
-      - name
-      properties:
-        campaign_id:
-          type: string
-          description: The campaign to create the ad group in.
-        name:
-          type: string
-          description: The name of the ad group.
-        bid_strategy:
-          type: string
-          description: The bidding strategy.
-          enum:
-          - AUTOMATIC
-          - MANUAL_CPC
-          - MANUAL_CPM
-          - MANUAL_CPV
-        bid_micro:
-          type: integer
-          format: int64
-          description: The bid amount in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: The ad group start time.
-        end_time:
-          type: string
-          format: date-time
-          description: The ad group end time.
-        targeting:
-          $ref: '#/components/schemas/Targeting'
-        status:
-          type: string
-          description: The desired status.
-          enum:
-          - ACTIVE
-          - PAUSED
-          - DRAFT
-    AdGroup:
-      type: object
-      description: An ad group within a campaign that contains ads and targeting configuration.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the ad group.
-        campaign_id:
-          type: string
-          description: The campaign this ad group belongs to.
-        name:
-          type: string
-          description: The name of the ad group.
-        status:
-          type: string
-          description: The current status of the ad group.
-          enum:
-          - ACTIVE
-          - PAUSED
-          - DRAFT
-        bid_strategy:
-          type: string
-          description: The bidding strategy for the ad group.
-          enum:
-          - AUTOMATIC
-          - MANUAL_CPC
-          - MANUAL_CPM
-          - MANUAL_CPV
-        bid_micro:
-          type: integer
-          format: int64
-          description: The bid amount in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: The ad group start time.
-        end_time:
-          type: string
-          format: date-time
-          description: The ad group end time.
-        targeting:
-          $ref: '#/components/schemas/Targeting'
-        created_at:
-          type: string
-          format: date-time
-          description: The timestamp when the ad group was created.
-        updated_at:
-          type: string
-          format: date-time
-          description: The timestamp when the ad group was last updated.
     Targeting:
       type: object
       description: Targeting configuration for an ad group specifying the audience to reach.
@@ -315,6 +193,128 @@ components:
             - MALE
             - FEMALE
             - ALL
+    AdGroup:
+      type: object
+      description: An ad group within a campaign that contains ads and targeting configuration.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the ad group.
+        campaign_id:
+          type: string
+          description: The campaign this ad group belongs to.
+        name:
+          type: string
+          description: The name of the ad group.
+        status:
+          type: string
+          description: The current status of the ad group.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+        bid_strategy:
+          type: string
+          description: The bidding strategy for the ad group.
+          enum:
+          - AUTOMATIC
+          - MANUAL_CPC
+          - MANUAL_CPM
+          - MANUAL_CPV
+        bid_micro:
+          type: integer
+          format: int64
+          description: The bid amount in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The ad group start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The ad group end time.
+        targeting:
+          $ref: '#/components/schemas/Targeting'
+        created_at:
+          type: string
+          format: date-time
+          description: The timestamp when the ad group was created.
+        updated_at:
+          type: string
+          format: date-time
+          description: The timestamp when the ad group was last updated.
+    AdGroupInput:
+      type: object
+      description: Input for creating or updating an ad group.
+      required:
+      - campaign_id
+      - name
+      properties:
+        campaign_id:
+          type: string
+          description: The campaign to create the ad group in.
+        name:
+          type: string
+          description: The name of the ad group.
+        bid_strategy:
+          type: string
+          description: The bidding strategy.
+          enum:
+          - AUTOMATIC
+          - MANUAL_CPC
+          - MANUAL_CPM
+          - MANUAL_CPV
+        bid_micro:
+          type: integer
+          format: int64
+          description: The bid amount in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The ad group start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The ad group end time.
+        targeting:
+          $ref: '#/components/schemas/Targeting'
+        status:
+          type: string
+          description: The desired status.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+    adGroupId:
+      name: ad_group_id
+      in: path
+      required: true
+      description: The unique identifier of the ad group.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to return per page (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    cursor:
+      name: cursor
+      in: query
+      description: A pagination cursor for retrieving the next page of results.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2

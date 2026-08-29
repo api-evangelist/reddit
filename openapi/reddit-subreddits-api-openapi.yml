@@ -1,15 +1,15 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Reddit Ads Account Subreddits API
-  description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
-  version: '3'
+  title: Reddit Data Subreddits API
+  description: The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.
+  version: '1.0'
   contact:
-    name: Reddit Ads Support
-    url: https://business.reddithelp.com/s/article/Reddit-Ads-API
-  termsOfService: https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms
+    name: Reddit Developer Support
+    url: https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki
+  termsOfService: https://www.redditinc.com/policies/data-api-terms
 servers:
-- url: https://ads-api.reddit.com/api/v3
-  description: Reddit Ads API v3 Production Server
+- url: https://oauth.reddit.com
+  description: OAuth API Server
 security:
 - oauth2: []
 tags:
@@ -111,51 +111,43 @@ paths:
         '200':
           description: Subscription updated
 components:
+  parameters:
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
   schemas:
-    Thing:
-      type: object
-      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
-      properties:
-        kind:
-          type: string
-          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
-          enum:
-          - t1
-          - t2
-          - t3
-          - t4
-          - t5
-          - t6
-        data:
-          type: object
-          description: The thing's data payload, varying by kind.
-    SubredditRule:
-      type: object
-      description: Represents a rule defined for a subreddit.
-      properties:
-        kind:
-          type: string
-          description: The rule kind (link, comment, or all).
-          enum:
-          - link
-          - comment
-          - all
-        short_name:
-          type: string
-          description: A short name for the rule.
-        description:
-          type: string
-          description: The full description of the rule (markdown).
-        violation_reason:
-          type: string
-          description: The reason shown when content is reported for this rule.
-        created_utc:
-          type: number
-          format: double
-          description: The Unix timestamp of when the rule was created.
-        priority:
-          type: integer
-          description: The display priority of the rule.
     Subreddit:
       type: object
       description: Represents a Reddit subreddit community with its configuration and metadata.
@@ -245,52 +237,78 @@ components:
               description: The list of things in this listing.
               items:
                 $ref: '#/components/schemas/Thing'
-  parameters:
-    after:
-      name: after
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
-      schema:
-        type: string
-    count:
-      name: count
-      in: query
-      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
-      schema:
-        type: integer
-        minimum: 0
-    before:
-      name: before
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
-      schema:
-        type: string
-    subreddit:
-      name: subreddit
-      in: path
-      required: true
-      description: The name of the subreddit.
-      schema:
-        type: string
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of items to return (default 25, max 100).
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
+    SubredditRule:
+      type: object
+      description: Represents a rule defined for a subreddit.
+      properties:
+        kind:
+          type: string
+          description: The rule kind (link, comment, or all).
+          enum:
+          - link
+          - comment
+          - all
+        short_name:
+          type: string
+          description: A short name for the rule.
+        description:
+          type: string
+          description: The full description of the rule (markdown).
+        violation_reason:
+          type: string
+          description: The reason shown when content is reported for this rule.
+        created_utc:
+          type: number
+          format: double
+          description: The Unix timestamp of when the rule was created.
+        priority:
+          type: integer
+          description: The display priority of the rule.
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
   securitySchemes:
     oauth2:
       type: oauth2
-      description: Reddit Ads API uses OAuth 2.0 for authentication. Access tokens are obtained via the authorization code flow.
+      description: Reddit uses OAuth 2.0 for authentication. All API requests must include a valid access token obtained through one of the supported OAuth grant types.
       flows:
         authorizationCode:
           authorizationUrl: https://www.reddit.com/api/v1/authorize
           tokenUrl: https://www.reddit.com/api/v1/access_token
           scopes:
-            ads: Access to ads management endpoints
+            identity: Access user identity
+            edit: Edit and delete content
+            flair: Set user and link flair
+            history: Access voting history
+            modconfig: Manage subreddit configuration
+            modflair: Manage subreddit flair
+            modlog: Access moderation log
+            modposts: Approve and remove content
+            modwiki: Manage wiki pages
+            mysubreddits: Access subscribed subreddits
+            privatemessages: Access private messages
+            read: Read content
+            report: Report content
+            save: Save and unsave content
+            submit: Submit content
+            subscribe: Manage subscriptions
+            vote: Vote on content
+            wikiedit: Edit wiki pages
+            wikiread: Read wiki pages
 externalDocs:
-  description: Reddit Ads API Documentation
-  url: https://ads-api.reddit.com/docs/
+  description: Reddit API Documentation
+  url: https://www.reddit.com/dev/api

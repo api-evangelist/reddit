@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reddit Ads Account Funding API
   description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
@@ -38,6 +38,14 @@ paths:
                     items:
                       $ref: '#/components/schemas/FundingInstrument'
 components:
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
   schemas:
     FundingInstrument:
       type: object
@@ -63,14 +71,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the funding instrument was created.
-  parameters:
-    accountId:
-      name: account_id
-      in: path
-      required: true
-      description: The unique identifier of the Reddit Ads account.
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

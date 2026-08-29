@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reddit Ads Account Targeting API
   description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
@@ -87,6 +87,20 @@ paths:
                       $ref: '#/components/schemas/Location'
 components:
   schemas:
+    Interest:
+      type: object
+      description: An interest category available for ad targeting.
+      properties:
+        id:
+          type: string
+          description: The unique identifier of the interest.
+        name:
+          type: string
+          description: The name of the interest category.
+        parent_id:
+          type: string
+          nullable: true
+          description: The parent interest category ID, if applicable.
     Location:
       type: object
       description: A geographic location available for ad targeting.
@@ -108,20 +122,6 @@ components:
         country_code:
           type: string
           description: The ISO country code.
-    Interest:
-      type: object
-      description: An interest category available for ad targeting.
-      properties:
-        id:
-          type: string
-          description: The unique identifier of the interest.
-        name:
-          type: string
-          description: The name of the interest category.
-        parent_id:
-          type: string
-          nullable: true
-          description: The parent interest category ID, if applicable.
     TargetingCommunity:
       type: object
       description: A Reddit community (subreddit) available for ad targeting.

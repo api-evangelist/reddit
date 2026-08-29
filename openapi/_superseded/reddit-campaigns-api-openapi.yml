@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reddit Ads Account Campaigns API
   description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
@@ -139,7 +139,81 @@ paths:
         '404':
           description: Campaign not found
 components:
+  parameters:
+    accountId:
+      name: account_id
+      in: path
+      required: true
+      description: The unique identifier of the Reddit Ads account.
+      schema:
+        type: string
+    pageSize:
+      name: page_size
+      in: query
+      description: The maximum number of items to return per page (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    cursor:
+      name: cursor
+      in: query
+      description: A pagination cursor for retrieving the next page of results.
+      schema:
+        type: string
+    campaignId:
+      name: campaign_id
+      in: path
+      required: true
+      description: The unique identifier of the campaign.
+      schema:
+        type: string
   schemas:
+    CampaignInput:
+      type: object
+      description: Input for creating or updating a campaign.
+      required:
+      - name
+      - objective
+      properties:
+        name:
+          type: string
+          description: The name of the campaign.
+        objective:
+          type: string
+          description: The campaign objective.
+          enum:
+          - BRAND_AWARENESS
+          - TRAFFIC
+          - CONVERSIONS
+          - VIDEO_VIEWS
+          - APP_INSTALLS
+          - CATALOG_SALES
+          - REACH
+        daily_budget_micro:
+          type: integer
+          format: int64
+          description: The daily budget in microcurrency units.
+        lifetime_budget_micro:
+          type: integer
+          format: int64
+          description: The lifetime budget in microcurrency units.
+        start_time:
+          type: string
+          format: date-time
+          description: The campaign start time.
+        end_time:
+          type: string
+          format: date-time
+          description: The campaign end time.
+        status:
+          type: string
+          description: The desired status of the campaign.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
     Campaign:
       type: object
       description: An advertising campaign that contains ad groups and manages budget and scheduling.
@@ -193,80 +267,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the campaign was last updated.
-    CampaignInput:
-      type: object
-      description: Input for creating or updating a campaign.
-      required:
-      - name
-      - objective
-      properties:
-        name:
-          type: string
-          description: The name of the campaign.
-        objective:
-          type: string
-          description: The campaign objective.
-          enum:
-          - BRAND_AWARENESS
-          - TRAFFIC
-          - CONVERSIONS
-          - VIDEO_VIEWS
-          - APP_INSTALLS
-          - CATALOG_SALES
-          - REACH
-        daily_budget_micro:
-          type: integer
-          format: int64
-          description: The daily budget in microcurrency units.
-        lifetime_budget_micro:
-          type: integer
-          format: int64
-          description: The lifetime budget in microcurrency units.
-        start_time:
-          type: string
-          format: date-time
-          description: The campaign start time.
-        end_time:
-          type: string
-          format: date-time
-          description: The campaign end time.
-        status:
-          type: string
-          description: The desired status of the campaign.
-          enum:
-          - ACTIVE
-          - PAUSED
-          - DRAFT
-  parameters:
-    campaignId:
-      name: campaign_id
-      in: path
-      required: true
-      description: The unique identifier of the campaign.
-      schema:
-        type: string
-    accountId:
-      name: account_id
-      in: path
-      required: true
-      description: The unique identifier of the Reddit Ads account.
-      schema:
-        type: string
-    pageSize:
-      name: page_size
-      in: query
-      description: The maximum number of items to return per page (default 25, max 100).
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    cursor:
-      name: cursor
-      in: query
-      description: A pagination cursor for retrieving the next page of results.
-      schema:
-        type: string
   securitySchemes:
     oauth2:
       type: oauth2

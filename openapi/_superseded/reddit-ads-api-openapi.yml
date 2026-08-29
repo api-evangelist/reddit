@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Reddit Account Ads API
   description: The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.
@@ -131,13 +131,6 @@ paths:
           description: Ad not found
 components:
   parameters:
-    adId:
-      name: ad_id
-      in: path
-      required: true
-      description: The unique identifier of the ad.
-      schema:
-        type: string
     accountId:
       name: account_id
       in: path
@@ -160,7 +153,41 @@ components:
       description: A pagination cursor for retrieving the next page of results.
       schema:
         type: string
+    adId:
+      name: ad_id
+      in: path
+      required: true
+      description: The unique identifier of the ad.
+      schema:
+        type: string
   schemas:
+    AdInput:
+      type: object
+      description: Input for creating or updating an ad.
+      required:
+      - ad_group_id
+      - name
+      properties:
+        ad_group_id:
+          type: string
+          description: The ad group to create the ad in.
+        name:
+          type: string
+          description: The name of the ad.
+        post_id:
+          type: string
+          description: The Reddit post ID to use as the ad creative.
+        click_url:
+          type: string
+          format: uri
+          description: The destination URL when the ad is clicked.
+        status:
+          type: string
+          description: The desired status.
+          enum:
+          - ACTIVE
+          - PAUSED
+          - DRAFT
     Ad:
       type: object
       description: An individual ad with creative content and review status.
@@ -209,33 +236,6 @@ components:
           type: string
           format: date-time
           description: The timestamp when the ad was created.
-    AdInput:
-      type: object
-      description: Input for creating or updating an ad.
-      required:
-      - ad_group_id
-      - name
-      properties:
-        ad_group_id:
-          type: string
-          description: The ad group to create the ad in.
-        name:
-          type: string
-          description: The name of the ad.
-        post_id:
-          type: string
-          description: The Reddit post ID to use as the ad creative.
-        click_url:
-          type: string
-          format: uri
-          description: The destination URL when the ad is clicked.
-        status:
-          type: string
-          description: The desired status.
-          enum:
-          - ACTIVE
-          - PAUSED
-          - DRAFT
   securitySchemes:
     oauth2:
       type: oauth2
