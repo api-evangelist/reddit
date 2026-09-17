@@ -218,28 +218,6 @@ apis:
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
-- aid: reddit:reddit-oembed-api
-  name: Reddit oEmbed API
-  description: >-
-    Endpoints implementing the oEmbed protocol for embedding Reddit content in external websites and applications.
-  humanURL: https://www.reddit.com/dev/api
-  baseURL: https://oauth.reddit.com
-  tags:
-  - oEmbed
-  properties:
-  - type: OpenAPI
-    url: openapi/reddit-oembed-api-openapi.yml
-  - type: Documentation
-    url: https://www.reddit.com/dev/api
-  - type: Authentication
-    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
-  - type: TermsOfService
-    url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
-  - type: Documentation
-    url: >-
-      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
 - aid: reddit:reddit-search-api
   name: Reddit Search API
   description: >-
@@ -322,6 +300,28 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/reddit-wiki-api-openapi.yml
+  - type: Documentation
+    url: https://www.reddit.com/dev/api
+  - type: Authentication
+    url: https://github.com/reddit-archive/reddit/wiki/OAuth2
+  - type: TermsOfService
+    url: https://www.redditinc.com/policies/data-api-terms
+  - type: GraphQL
+    url: graphql/reddit-graphql.md
+  - type: Documentation
+    url: >-
+      https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
+- aid: reddit:reddit-o-embed-api
+  name: Reddit o Embed API
+  description: >-
+    Endpoints implementing the oEmbed protocol for embedding Reddit content in external websites and applications.
+  humanURL: https://github.com/reddit-archive/reddit/wiki/OAuth2
+  baseURL: https://www.reddit.com/api/v1
+  tags:
+  - o Embed
+  properties:
+  - type: OpenAPI
+    url: openapi/reddit-o-embed-api-openapi.yml
   - type: Documentation
     url: https://www.reddit.com/dev/api
   - type: Authentication
