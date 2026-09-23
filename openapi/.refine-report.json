@@ -17,33 +17,28 @@
     "reddit-wiki-api-openapi.yml",
     "reddit-oembed-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "reddit-data-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "reddit-embeds-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "reddit-embeds-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: reddit-o-embed-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 12 total)"
   ],
   "skipped": [
     "reddit-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-ad-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-ads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-conversions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-custom-audiences-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-flair-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-funding-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-links-comments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-listings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-messages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-moderation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-oembed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-reporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "reddit-o-embed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-subreddits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "reddit-targeting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "reddit-wiki-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]

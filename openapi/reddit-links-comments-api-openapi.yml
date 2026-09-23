@@ -451,23 +451,6 @@ paths:
           description: Report submitted
 components:
   schemas:
-    Thing:
-      type: object
-      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
-      properties:
-        kind:
-          type: string
-          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
-          enum:
-          - t1
-          - t2
-          - t3
-          - t4
-          - t5
-          - t6
-        data:
-          type: object
-          description: The thing's data payload, varying by kind.
     Listing:
       type: object
       description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
@@ -499,6 +482,23 @@ components:
               description: The list of things in this listing.
               items:
                 $ref: '#/components/schemas/Thing'
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
   parameters:
     limit:
       name: limit
