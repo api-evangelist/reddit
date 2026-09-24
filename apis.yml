@@ -38,9 +38,9 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/reddit.png
 tags:
 - Reddit
 - Advertising
-- Communities
+- Community
 - Content
-- Social-Media
+- Social Media
 - Social News
 tags_raw:
 - Reddit
@@ -49,6 +49,7 @@ tags_raw:
 - Content
 - Social Media
 - Social News
+- Social-Media
 url: https://raw.githubusercontent.com/api-evangelist/reddit/refs/heads/main/apis.yml
 created: '2026-01-01'
 modified: '2026-05-19'
@@ -98,8 +99,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -121,8 +120,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -144,8 +141,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -167,8 +162,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -192,8 +185,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -215,8 +206,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -237,8 +226,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -260,8 +247,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -285,8 +270,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -308,8 +291,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
@@ -332,8 +313,6 @@ apis:
     url: https://github.com/reddit-archive/reddit/wiki/OAuth2
   - type: TermsOfService
     url: https://www.redditinc.com/policies/data-api-terms
-  - type: GraphQL
-    url: graphql/reddit-graphql.md
   - type: Documentation
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
