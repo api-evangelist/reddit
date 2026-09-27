@@ -42,6 +42,7 @@ tags:
 - Content
 - Social Media
 - Social News
+- Social
 tags_raw:
 - Reddit
 - Advertising
@@ -50,6 +51,7 @@ tags_raw:
 - Social Media
 - Social News
 - Social-Media
+- Social
 url: https://raw.githubusercontent.com/api-evangelist/reddit/refs/heads/main/apis.yml
 created: '2026-01-01'
 modified: '2026-05-19'
@@ -301,8 +303,6 @@ apis:
   humanURL: https://github.com/reddit-archive/reddit/wiki/OAuth2
   baseURL: https://www.reddit.com/api/v1
   tags:
-  - oEmbed
-  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI
