@@ -111,118 +111,7 @@ paths:
         '200':
           description: Subscription updated
 components:
-  parameters:
-    subreddit:
-      name: subreddit
-      in: path
-      required: true
-      description: The name of the subreddit.
-      schema:
-        type: string
-    after:
-      name: after
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
-      schema:
-        type: string
-    count:
-      name: count
-      in: query
-      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
-      schema:
-        type: integer
-        minimum: 0
-    limit:
-      name: limit
-      in: query
-      description: The maximum number of items to return (default 25, max 100).
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
-    before:
-      name: before
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
-      schema:
-        type: string
   schemas:
-    Thing:
-      type: object
-      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
-      properties:
-        kind:
-          type: string
-          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
-          enum:
-          - t1
-          - t2
-          - t3
-          - t4
-          - t5
-          - t6
-        data:
-          type: object
-          description: The thing's data payload, varying by kind.
-    Subreddit:
-      type: object
-      description: Represents a Reddit subreddit community with its configuration and metadata.
-      properties:
-        kind:
-          type: string
-          description: The thing kind, always t5.
-        data:
-          type: object
-          properties:
-            id:
-              type: string
-              description: The subreddit's unique ID36.
-            display_name:
-              type: string
-              description: The subreddit's display name without the r/ prefix.
-            title:
-              type: string
-              description: The subreddit's title.
-            public_description:
-              type: string
-              description: The subreddit's public description shown in search results.
-            description:
-              type: string
-              description: The subreddit's full sidebar description (markdown).
-            subscribers:
-              type: integer
-              description: The number of subscribers.
-            accounts_active:
-              type: integer
-              description: The approximate number of users currently active.
-            created_utc:
-              type: number
-              format: double
-              description: The Unix timestamp of when the subreddit was created.
-            over18:
-              type: boolean
-              description: Whether the subreddit is marked as NSFW.
-            subreddit_type:
-              type: string
-              description: The subreddit's access type.
-              enum:
-              - public
-              - private
-              - restricted
-              - gold_restricted
-              - archived
-            url:
-              type: string
-              description: The subreddit's URL path (e.g., /r/example/).
-            icon_img:
-              type: string
-              format: uri
-              description: URL of the subreddit's icon image.
-            banner_img:
-              type: string
-              format: uri
-              description: URL of the subreddit's banner image.
     SubredditRule:
       type: object
       description: Represents a rule defined for a subreddit.
@@ -281,6 +170,117 @@ components:
               description: The list of things in this listing.
               items:
                 $ref: '#/components/schemas/Thing'
+    Subreddit:
+      type: object
+      description: Represents a Reddit subreddit community with its configuration and metadata.
+      properties:
+        kind:
+          type: string
+          description: The thing kind, always t5.
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              description: The subreddit's unique ID36.
+            display_name:
+              type: string
+              description: The subreddit's display name without the r/ prefix.
+            title:
+              type: string
+              description: The subreddit's title.
+            public_description:
+              type: string
+              description: The subreddit's public description shown in search results.
+            description:
+              type: string
+              description: The subreddit's full sidebar description (markdown).
+            subscribers:
+              type: integer
+              description: The number of subscribers.
+            accounts_active:
+              type: integer
+              description: The approximate number of users currently active.
+            created_utc:
+              type: number
+              format: double
+              description: The Unix timestamp of when the subreddit was created.
+            over18:
+              type: boolean
+              description: Whether the subreddit is marked as NSFW.
+            subreddit_type:
+              type: string
+              description: The subreddit's access type.
+              enum:
+              - public
+              - private
+              - restricted
+              - gold_restricted
+              - archived
+            url:
+              type: string
+              description: The subreddit's URL path (e.g., /r/example/).
+            icon_img:
+              type: string
+              format: uri
+              description: URL of the subreddit's icon image.
+            banner_img:
+              type: string
+              format: uri
+              description: URL of the subreddit's banner image.
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
+  parameters:
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
