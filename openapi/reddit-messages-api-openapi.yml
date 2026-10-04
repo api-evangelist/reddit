@@ -155,10 +155,23 @@ paths:
           description: All messages marked as read
 components:
   parameters:
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
     before:
       name: before
       in: query
       description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    after:
+      name: after
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
       schema:
         type: string
     limit:
@@ -170,19 +183,6 @@ components:
         default: 25
         minimum: 1
         maximum: 100
-    count:
-      name: count
-      in: query
-      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
-      schema:
-        type: integer
-        minimum: 0
-    after:
-      name: after
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
-      schema:
-        type: string
   schemas:
     Listing:
       type: object

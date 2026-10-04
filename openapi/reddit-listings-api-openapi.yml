@@ -212,12 +212,13 @@ paths:
                 $ref: '#/components/schemas/Listing'
 components:
   parameters:
-    before:
-      name: before
+    count:
+      name: count
       in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
       schema:
-        type: string
+        type: integer
+        minimum: 0
     subreddit:
       name: subreddit
       in: path
@@ -225,15 +226,12 @@ components:
       description: The name of the subreddit.
       schema:
         type: string
-    limit:
-      name: limit
+    before:
+      name: before
       in: query
-      description: The maximum number of items to return (default 25, max 100).
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
       schema:
-        type: integer
-        default: 25
-        minimum: 1
-        maximum: 100
+        type: string
     t:
       name: t
       in: query
@@ -247,19 +245,21 @@ components:
         - month
         - year
         - all
-    count:
-      name: count
-      in: query
-      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
-      schema:
-        type: integer
-        minimum: 0
     after:
       name: after
       in: query
       description: The fullname of a thing used as an anchor for pagination. Returns results after this item.
       schema:
         type: string
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return (default 25, max 100).
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        maximum: 100
   schemas:
     Listing:
       type: object
