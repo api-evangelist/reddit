@@ -1,386 +1,22 @@
-generated: '2026-07-15'
+generated: '2026-09-23'
 method: generated
-source: openapi/reddit-ads-api-openapi.yml, openapi/reddit-data-api-openapi.yml, openapi/reddit-embeds-openapi.yml
+source: openapi/reddit-account-api-openapi.yml, openapi/reddit-flair-api-openapi.yml, openapi/reddit-links-comments-api-openapi.yml,
+  openapi/reddit-listings-api-openapi.yml, openapi/reddit-messages-api-openapi.yml, openapi/reddit-moderation-api-openapi.yml,
+  openapi/reddit-o-embed-api-openapi.yml, openapi/reddit-search-api-openapi.yml, openapi/reddit-subreddits-api-openapi.yml,
+  openapi/reddit-users-api-openapi.yml, openapi/reddit-wiki-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 84
+  operations: 56
   by_action_class:
-    connected: 50
-    acting: 34
+    connected: 37
+    acting: 19
   by_consequence:
-    read: 50
-    write: 33
-    physical: 1
+    read: 37
+    write: 19
   human_in_the_loop_required: 0
 operations:
-- path: /accounts/{account_id}
-  method: get
-  operationId: getAccount
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/campaigns
-  method: get
-  operationId: listCampaigns
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/campaigns
-  method: post
-  operationId: createCampaign
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/campaigns/{campaign_id}
-  method: get
-  operationId: getCampaign
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/campaigns/{campaign_id}
-  method: put
-  operationId: updateCampaign
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/campaigns/{campaign_id}
-  method: delete
-  operationId: deleteCampaign
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ad_groups
-  method: get
-  operationId: listAdGroups
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ad_groups
-  method: post
-  operationId: createAdGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ad_groups/{ad_group_id}
-  method: get
-  operationId: getAdGroup
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ad_groups/{ad_group_id}
-  method: put
-  operationId: updateAdGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ad_groups/{ad_group_id}
-  method: delete
-  operationId: deleteAdGroup
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ads
-  method: get
-  operationId: listAds
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ads
-  method: post
-  operationId: createAd
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ads/{ad_id}
-  method: get
-  operationId: getAd
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/ads/{ad_id}
-  method: put
-  operationId: updateAd
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/ads/{ad_id}
-  method: delete
-  operationId: deleteAd
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/custom_audiences
-  method: get
-  operationId: listCustomAudiences
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/custom_audiences
-  method: post
-  operationId: createCustomAudience
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/custom_audiences/{audience_id}
-  method: get
-  operationId: getCustomAudience
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/custom_audiences/{audience_id}
-  method: put
-  operationId: updateCustomAudience
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/custom_audiences/{audience_id}
-  method: delete
-  operationId: deleteCustomAudience
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/pixels
-  method: get
-  operationId: listPixels
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/conversions/events
-  method: post
-  operationId: sendConversionEvents
-  x-agentic-access:
-    action-class: acting
-    consequence: physical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /targeting/interests
-  method: get
-  operationId: listInterests
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /targeting/communities
-  method: get
-  operationId: listTargetingCommunities
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /targeting/locations
-  method: get
-  operationId: listLocations
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /accounts/{account_id}/reports
-  method: post
-  operationId: createReport
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /accounts/{account_id}/funding_instruments
-  method: get
-  operationId: listFundingInstruments
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /api/v1/me
   method: get
   operationId: getMe
@@ -457,9 +93,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /r/{subreddit}/hot
+- path: /api/v1/scopes
   method: get
-  operationId: getHotListings
+  operationId: getScopes
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -467,39 +103,25 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /r/{subreddit}/new
-  method: get
-  operationId: getNewListings
+- path: /r/{subreddit}/api/flair
+  method: post
+  operationId: setFlair
   x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
     token:
-      max-ttl: 3600
-    audit: none
-- path: /r/{subreddit}/rising
-  method: get
-  operationId: getRisingListings
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /r/{subreddit}/top
-  method: get
-  operationId: getTopListings
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /r/{subreddit}/controversial
-  method: get
-  operationId: getControversialListings
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /r/{subreddit}/api/flairselector
+  method: post
+  operationId: getFlairSelector
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -687,6 +309,56 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /r/{subreddit}/hot
+  method: get
+  operationId: getHotListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/new
+  method: get
+  operationId: getNewListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/rising
+  method: get
+  operationId: getRisingListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/top
+  method: get
+  operationId: getTopListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/controversial
+  method: get
+  operationId: getControversialListings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /message/inbox
   method: get
   operationId: getInbox
@@ -765,112 +437,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /r/{subreddit}/about
-  method: get
-  operationId: getSubredditAbout
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /r/{subreddit}/about/rules
-  method: get
-  operationId: getSubredditRules
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /subreddits/mine/subscriber
-  method: get
-  operationId: getMySubreddits
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/subscribe
-  method: post
-  operationId: subscribe
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /subreddits/search
-  method: get
-  operationId: searchSubreddits
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /r/{subreddit}/search
-  method: get
-  operationId: search
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /user/{username}/about
-  method: get
-  operationId: getUserAbout
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /user/{username}/submitted
-  method: get
-  operationId: getUserSubmitted
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /user/{username}/comments
-  method: get
-  operationId: getUserComments
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /user/{username}/trophies
-  method: get
-  operationId: getUserTrophies
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /r/{subreddit}/about/moderators
   method: get
   operationId: getSubredditModerators
@@ -963,9 +529,69 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /r/{subreddit}/api/flair
+- path: /oembed
+  method: get
+  operationId: getOembed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subreddits/search
+  method: get
+  operationId: searchSubreddits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/search
+  method: get
+  operationId: search
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/about
+  method: get
+  operationId: getSubredditAbout
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /r/{subreddit}/about/rules
+  method: get
+  operationId: getSubredditRules
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subreddits/mine/subscriber
+  method: get
+  operationId: getMySubreddits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/subscribe
   method: post
-  operationId: setFlair
+  operationId: subscribe
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -979,22 +605,46 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /r/{subreddit}/api/flairselector
-  method: post
-  operationId: getFlairSelector
+- path: /user/{username}/about
+  method: get
+  operationId: getUserAbout
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
+- path: /user/{username}/submitted
+  method: get
+  operationId: getUserSubmitted
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user/{username}/comments
+  method: get
+  operationId: getUserComments
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /user/{username}/trophies
+  method: get
+  operationId: getUserTrophies
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /r/{subreddit}/wiki/{page}
   method: get
   operationId: getWikiPage
@@ -1034,26 +684,6 @@ operations:
 - path: /r/{subreddit}/wiki/revisions/{page}
   method: get
   operationId: getWikiPageRevisions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /api/v1/scopes
-  method: get
-  operationId: getScopes
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /oembed
-  method: get
-  operationId: getOembed
   x-agentic-access:
     action-class: connected
     consequence: read
