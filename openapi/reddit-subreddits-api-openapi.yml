@@ -112,33 +112,6 @@ paths:
           description: Subscription updated
 components:
   schemas:
-    SubredditRule:
-      type: object
-      description: Represents a rule defined for a subreddit.
-      properties:
-        kind:
-          type: string
-          description: The rule kind (link, comment, or all).
-          enum:
-          - link
-          - comment
-          - all
-        short_name:
-          type: string
-          description: A short name for the rule.
-        description:
-          type: string
-          description: The full description of the rule (markdown).
-        violation_reason:
-          type: string
-          description: The reason shown when content is reported for this rule.
-        created_utc:
-          type: number
-          format: double
-          description: The Unix timestamp of when the rule was created.
-        priority:
-          type: integer
-          description: The display priority of the rule.
     Subreddit:
       type: object
       description: Represents a Reddit subreddit community with its configuration and metadata.
@@ -197,6 +170,23 @@ components:
               type: string
               format: uri
               description: URL of the subreddit's banner image.
+    Thing:
+      type: object
+      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      properties:
+        kind:
+          type: string
+          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          enum:
+          - t1
+          - t2
+          - t3
+          - t4
+          - t5
+          - t6
+        data:
+          type: object
+          description: The thing's data payload, varying by kind.
     Listing:
       type: object
       description: A Reddit listing is a paginated collection of things. Listings contain a data object with children and pagination information.
@@ -228,44 +218,34 @@ components:
               description: The list of things in this listing.
               items:
                 $ref: '#/components/schemas/Thing'
-    Thing:
+    SubredditRule:
       type: object
-      description: A Reddit thing is the base object type. All Reddit objects (comments, links, subreddits, etc.) are things with a kind and data payload.
+      description: Represents a rule defined for a subreddit.
       properties:
         kind:
           type: string
-          description: The kind identifier (t1 for comment, t2 for account, t3 for link, t4 for message, t5 for subreddit, t6 for award).
+          description: The rule kind (link, comment, or all).
           enum:
-          - t1
-          - t2
-          - t3
-          - t4
-          - t5
-          - t6
-        data:
-          type: object
-          description: The thing's data payload, varying by kind.
+          - link
+          - comment
+          - all
+        short_name:
+          type: string
+          description: A short name for the rule.
+        description:
+          type: string
+          description: The full description of the rule (markdown).
+        violation_reason:
+          type: string
+          description: The reason shown when content is reported for this rule.
+        created_utc:
+          type: number
+          format: double
+          description: The Unix timestamp of when the rule was created.
+        priority:
+          type: integer
+          description: The display priority of the rule.
   parameters:
-    count:
-      name: count
-      in: query
-      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
-      schema:
-        type: integer
-        minimum: 0
-    subreddit:
-      name: subreddit
-      in: path
-      required: true
-      description: The name of the subreddit.
-      schema:
-        type: string
-    before:
-      name: before
-      in: query
-      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
-      schema:
-        type: string
     after:
       name: after
       in: query
@@ -281,6 +261,26 @@ components:
         default: 25
         minimum: 1
         maximum: 100
+    count:
+      name: count
+      in: query
+      description: A positive integer indicating the number of items already seen in this listing, used for pagination numbering.
+      schema:
+        type: integer
+        minimum: 0
+    before:
+      name: before
+      in: query
+      description: The fullname of a thing used as an anchor for pagination. Returns results before this item.
+      schema:
+        type: string
+    subreddit:
+      name: subreddit
+      in: path
+      required: true
+      description: The name of the subreddit.
+      schema:
+        type: string
   securitySchemes:
     oauth2:
       type: oauth2
