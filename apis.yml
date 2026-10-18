@@ -303,6 +303,8 @@ apis:
   humanURL: https://github.com/reddit-archive/reddit/wiki/OAuth2
   baseURL: https://www.reddit.com/api/v1
   tags:
+  - oEmbed
+  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI
