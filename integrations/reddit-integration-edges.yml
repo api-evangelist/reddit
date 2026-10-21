@@ -157,6 +157,34 @@ edges:
     builder: Pipedream repo (component)
   detected_by: sweep-workflow-automation.py
   first_seen: '2026-10-15'
+- partner_name: Y Combinator
+  partner: y-combinator
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.ycombinator.com/companies/reddit
+  category: accelerator portfolio participation
+  contract_reference:
+    register: Y Combinator company directory (ycombinator.com/companies/<slug>)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Reddit
+    register_id: https://www.ycombinator.com/companies/reddit
+    register_country: US
+    register_website: http://reddit.com
+    matched_domain: reddit.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    batch: Summer 2005
+    status: Acquired
+  detected_by: sweep-accelerator-portfolios.py
+  first_seen: '2026-10-21'
 method: searched
 checked:
 - https://connectors.airbyte.com/files/registries/v0/cloud_registry.json
@@ -168,4 +196,9 @@ checked:
 - https://github.com/n8n-io/n8n/tree/860f1273ebd73fabbd668cbec2c49ed9b48a286d/packages/nodes-base/nodes/
 - https://github.com/n8n-io/n8n/tree/f73dc337f8dc61a4fd44aebe41c55faafe4f53a4/packages/nodes-base/nodes/
 - https://zapier.com/api/v4/apps/
+- https://500.co/api/startups
+- https://500.co/companies
+- https://www.antler.co/portfolio
+- https://www.techstars.com/portfolio
+- https://www.ycombinator.com/companies
 source: https://fivetran.com/docs/activations/destinations/available-destinations/reddit
