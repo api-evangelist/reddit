@@ -319,6 +319,8 @@ apis:
     url: >-
       https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/reddit/overview
 - type: Plans
   url: plans/reddit-plans-pricing.yml
 - type: RateLimits
