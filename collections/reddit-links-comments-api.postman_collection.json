@@ -1,1974 +1,1812 @@
 {
+  "info": {
+    "_postman_id": "50c420d9-d3f3-4566-91ed-529665bf1dfe",
+    "name": "Reddit Data Links & Comments API",
+    "description": "The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:19.000Z",
+    "updatedAt": "2026-10-21T21:19:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-50c420d9-d3f3-4566-91ed-529665bf1dfe"
+  },
   "item": [
     {
-      "id": "33cc905b-716c-4914-be56-0d15459489b2",
-      "name": "Links & Comments",
-      "description": {
-        "content": "Endpoints for interacting with submissions (links) and comments, including voting, saving, hiding, reporting, and submitting content.",
-        "type": "text/plain"
-      },
+      "name": "comments",
       "item": [
         {
-          "id": "f2870053-2ae1-4e93-bab3-06e2e3b20f3c",
-          "name": "Get Comments for a Submission",
-          "request": {
-            "name": "Get Comments for a Submission",
-            "description": {
-              "content": "Returns comments for a given submission (article). The response includes both the submission data and a tree of comments. Use the sort parameter to control comment ordering.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "comments",
-                ":article"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "sort",
-                  "value": "<string>",
-                  "description": "The sorting method for comments."
-                },
-                {
-                  "disabled": false,
-                  "key": "depth",
-                  "value": "<integer>",
-                  "description": "Maximum depth of subtrees in the thread."
-                },
-                {
-                  "disabled": false,
-                  "key": "context",
-                  "value": "<integer>",
-                  "description": "Number of levels of parent comments to include for a comment permalink."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "article",
-                  "description": "(Required) The ID36 of the submission to retrieve comments for."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{article}",
+          "item": [
             {
-              "id": "729a163a-8405-42b5-87e7-dade58f63c75",
-              "name": "Submission and comment tree",
-              "originalRequest": {
+              "name": "Get Comments for a Submission",
+              "id": "7472ce8a-546a-432f-a8f4-ea804cf1b99b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/comments/:article?sort=qa&depth=<integer>&context=<integer>&limit=25",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "comments",
                     ":article"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "The sorting method for comments.",
                       "key": "sort",
-                      "value": "<string>"
+                      "value": "qa"
                     },
                     {
+                      "description": "Maximum depth of subtrees in the thread.",
                       "key": "depth",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Number of levels of parent comments to include for a comment permalink.",
                       "key": "context",
                       "value": "<integer>"
                     },
                     {
+                      "description": "The maximum number of items to return (default 25, max 100).",
                       "key": "limit",
                       "value": "25"
                     }
                   ],
                   "variable": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
+                      "id": "496e2cdd-04ce-44e1-8e70-d79785aac03a",
                       "key": "article",
+                      "value": "<string>",
                       "description": "(Required) The ID36 of the submission to retrieve comments for."
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                "description": "Returns comments for a given submission (article). The response includes both the submission data and a tree of comments. Use the sort parameter to control comment ordering."
+              },
+              "response": [
+                {
+                  "id": "67ac1ac3-06ee-4f97-9025-209d0e700863",
+                  "name": "Submission and comment tree",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/comments/:article?sort=qa&depth=<integer>&context=<integer>&limit=25",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "comments",
+                        ":article"
+                      ],
+                      "query": [
+                        {
+                          "description": "The sorting method for comments.",
+                          "key": "sort",
+                          "value": "qa"
+                        },
+                        {
+                          "description": "Maximum depth of subtrees in the thread.",
+                          "key": "depth",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of levels of parent comments to include for a comment permalink.",
+                          "key": "context",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "The maximum number of items to return (default 25, max 100).",
+                          "key": "limit",
+                          "value": "25"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "article"
+                        }
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"kind\": \"Listing\",\n    \"data\": {\n      \"after\": \"<string>\",\n      \"before\": \"<string>\",\n      \"dist\": \"<integer>\",\n      \"modhash\": \"<string>\",\n      \"children\": [\n        {\n          \"kind\": \"t4\",\n          \"data\": {}\n        },\n        {\n          \"kind\": \"t1\",\n          \"data\": {}\n        }\n      ]\n    }\n  },\n  {\n    \"kind\": \"Listing\",\n    \"data\": {\n      \"after\": \"<string>\",\n      \"before\": \"<string>\",\n      \"dist\": \"<integer>\",\n      \"modhash\": \"<string>\",\n      \"children\": [\n        {\n          \"kind\": \"t5\",\n          \"data\": {}\n        },\n        {\n          \"kind\": \"t6\",\n          \"data\": {}\n        }\n      ]\n    }\n  }\n]",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-67ac1ac3-06ee-4f97-9025-209d0e700863"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-7472ce8a-546a-432f-a8f4-ea804cf1b99b"
+            }
+          ],
+          "id": "f692b8fe-f093-46a1-b574-011344556d51",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-f692b8fe-f093-46a1-b574-011344556d51"
+        }
+      ],
+      "id": "ebf44419-857f-4f1e-9c43-f46f6b717a5f",
+      "createdAt": "2026-10-21T21:19:19.000Z",
+      "updatedAt": "2026-10-21T21:19:19.000Z",
+      "uid": "35240-ebf44419-857f-4f1e-9c43-f46f6b717a5f"
+    },
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "morechildren",
+          "item": [
+            {
+              "name": "Retrieve Additional Comments",
+              "id": "d36bf992-7c05-4938-b7aa-64e54ce65f6a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "[\n  {\n    \"kind\": \"Listing\",\n    \"data\": {\n      \"after\": \"string\",\n      \"before\": \"string\",\n      \"dist\": 4592,\n      \"modhash\": \"string\",\n      \"children\": [\n        {\n          \"kind\": \"t1\",\n          \"data\": {}\n        },\n        {\n          \"kind\": \"t1\",\n          \"data\": {}\n        }\n      ]\n    }\n  },\n  {\n    \"kind\": \"Listing\",\n    \"data\": {\n      \"after\": \"string\",\n      \"before\": \"string\",\n      \"dist\": 1140,\n      \"modhash\": \"string\",\n      \"children\": [\n        {\n          \"kind\": \"t1\",\n          \"data\": {}\n        },\n        {\n          \"kind\": \"t3\",\n          \"data\": {}\n        }\n      ]\n    }\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "7b26f654-70e7-4900-a353-cf145b838d88",
-          "name": "Retrieve Additional Comments",
-          "request": {
-            "name": "Retrieve Additional Comments",
-            "description": {
-              "content": "Retrieves additional comments omitted from a base comment tree. Used to load more comments from a stub returned in a comment listing.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "morechildren"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "link_id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname (t3_ prefix) of the submission."
-                },
-                {
-                  "disabled": false,
-                  "key": "children",
-                  "value": "<string>",
-                  "description": "(Required) A comma-delimited list of comment ID36s to be fetched."
-                },
-                {
-                  "disabled": false,
-                  "key": "sort",
-                  "value": "<string>",
-                  "description": "The sorting method for comments."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json",
-                  "description": "The string json to request JSON response."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "54ccd405-688e-4b5f-a74e-eaccbbcfe939",
-              "name": "Additional comment data",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/api/morechildren?link_id=<string>&children=<string>&sort=qa&api_type=json",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "morechildren"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "(Required) The fullname (t3_ prefix) of the submission.",
                       "key": "link_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "(Required) A comma-delimited list of comment ID36s to be fetched.",
                       "key": "children",
                       "value": "<string>"
                     },
                     {
+                      "description": "The sorting method for comments.",
                       "key": "sort",
-                      "value": "<string>"
+                      "value": "qa"
                     },
                     {
+                      "description": "The string json to request JSON response.",
                       "key": "api_type",
                       "value": "json"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Retrieves additional comments omitted from a base comment tree. Used to load more comments from a stub returned in a comment listing."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "dc2cc66c-51fc-4512-9f25-f2145476db83",
+                  "name": "Additional comment data",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/morechildren?link_id=<string>&children=<string>&sort=qa&api_type=json",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "morechildren"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The fullname (t3_ prefix) of the submission.",
+                          "key": "link_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) A comma-delimited list of comment ID36s to be fetched.",
+                          "key": "children",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The sorting method for comments.",
+                          "key": "sort",
+                          "value": "qa"
+                        },
+                        {
+                          "description": "The string json to request JSON response.",
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-dc2cc66c-51fc-4512-9f25-f2145476db83"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-d36bf992-7c05-4938-b7aa-64e54ce65f6a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "661aed37-982e-48fe-b2e8-dfb9a94839fc",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-661aed37-982e-48fe-b2e8-dfb9a94839fc"
         },
         {
-          "id": "9223119e-3329-4458-ad8d-f6eded58f66d",
-          "name": "Submit a New Link or Self-post",
-          "request": {
-            "name": "Submit a New Link or Self-post",
-            "description": {
-              "content": "Submits a new link or self-post to a subreddit. Requires the submit OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "submit"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "sr",
-                  "value": "<string>",
-                  "description": "(Required) The name of the subreddit to submit to."
-                },
-                {
-                  "disabled": false,
-                  "key": "title",
-                  "value": "<string>",
-                  "description": "(Required) The title of the submission (max 300 characters)."
-                },
-                {
-                  "disabled": false,
-                  "key": "kind",
-                  "value": "<string>",
-                  "description": "(Required) The type of submission."
-                },
-                {
-                  "disabled": false,
-                  "key": "url",
-                  "value": "<uri>",
-                  "description": "The URL for a link submission."
-                },
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "The body text for a self-post (markdown)."
-                },
-                {
-                  "disabled": false,
-                  "key": "richtext_json",
-                  "value": "<string>",
-                  "description": "The rich text body as JSON for a self-post."
-                },
-                {
-                  "disabled": false,
-                  "key": "flair_id",
-                  "value": "<string>",
-                  "description": "The flair template ID to apply to the submission."
-                },
-                {
-                  "disabled": false,
-                  "key": "flair_text",
-                  "value": "<string>",
-                  "description": "The flair text to apply to the submission."
-                },
-                {
-                  "disabled": false,
-                  "key": "nsfw",
-                  "value": "<boolean>",
-                  "description": "Whether the submission is NSFW."
-                },
-                {
-                  "disabled": false,
-                  "key": "spoiler",
-                  "value": "<boolean>",
-                  "description": "Whether the submission is a spoiler."
-                },
-                {
-                  "disabled": false,
-                  "key": "resubmit",
-                  "value": "<boolean>",
-                  "description": "Whether to allow resubmitting a URL that has already been submitted."
-                },
-                {
-                  "disabled": false,
-                  "key": "sendreplies",
-                  "value": "<boolean>",
-                  "description": "Whether to send replies to the user's inbox."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "submit",
+          "item": [
             {
-              "id": "c852b578-2644-43b1-ac6a-b406324c74d6",
-              "name": "Submission created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "submit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Submit a New Link or Self-post",
+              "id": "d2afe18c-bcd0-4679-a9f0-24b638e19aea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The name of the subreddit to submit to.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The name of the subreddit to submit to.",
                       "key": "sr",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The title of the submission (max 300 characters).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The title of the submission (max 300 characters).",
                       "key": "title",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The type of submission.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The type of submission.",
                       "key": "kind",
-                      "value": "<string>"
+                      "value": "image"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The URL for a link submission.",
-                        "type": "text/plain"
-                      },
+                      "description": "The URL for a link submission.",
                       "key": "url",
                       "value": "<uri>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The body text for a self-post (markdown).",
-                        "type": "text/plain"
-                      },
+                      "description": "The body text for a self-post (markdown).",
                       "key": "text",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The rich text body as JSON for a self-post.",
-                        "type": "text/plain"
-                      },
+                      "description": "The rich text body as JSON for a self-post.",
                       "key": "richtext_json",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The flair template ID to apply to the submission.",
-                        "type": "text/plain"
-                      },
+                      "description": "The flair template ID to apply to the submission.",
                       "key": "flair_id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The flair text to apply to the submission.",
-                        "type": "text/plain"
-                      },
+                      "description": "The flair text to apply to the submission.",
                       "key": "flair_text",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether the submission is NSFW.",
-                        "type": "text/plain"
-                      },
+                      "description": "Whether the submission is NSFW.",
                       "key": "nsfw",
                       "value": "<boolean>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether the submission is a spoiler.",
-                        "type": "text/plain"
-                      },
+                      "description": "Whether the submission is a spoiler.",
                       "key": "spoiler",
                       "value": "<boolean>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether to allow resubmitting a URL that has already been submitted.",
-                        "type": "text/plain"
-                      },
+                      "description": "Whether to allow resubmitting a URL that has already been submitted.",
                       "key": "resubmit",
                       "value": "<boolean>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether to send replies to the user's inbox.",
-                        "type": "text/plain"
-                      },
+                      "description": "Whether to send replies to the user's inbox.",
                       "key": "sendreplies",
                       "value": "<boolean>"
                     },
                     {
-                      "disabled": false,
                       "key": "api_type",
                       "value": "json"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7ab3acf7-e740-41a0-929b-cadcabacd6eb",
-              "name": "Permission denied",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/submit",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "submit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The name of the subreddit to submit to.",
-                        "type": "text/plain"
-                      },
-                      "key": "sr",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The title of the submission (max 300 characters).",
-                        "type": "text/plain"
-                      },
-                      "key": "title",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The type of submission.",
-                        "type": "text/plain"
-                      },
-                      "key": "kind",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The URL for a link submission.",
-                        "type": "text/plain"
-                      },
-                      "key": "url",
-                      "value": "<uri>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The body text for a self-post (markdown).",
-                        "type": "text/plain"
-                      },
-                      "key": "text",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The rich text body as JSON for a self-post.",
-                        "type": "text/plain"
-                      },
-                      "key": "richtext_json",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The flair template ID to apply to the submission.",
-                        "type": "text/plain"
-                      },
-                      "key": "flair_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The flair text to apply to the submission.",
-                        "type": "text/plain"
-                      },
-                      "key": "flair_text",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether the submission is NSFW.",
-                        "type": "text/plain"
-                      },
-                      "key": "nsfw",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether the submission is a spoiler.",
-                        "type": "text/plain"
-                      },
-                      "key": "spoiler",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether to allow resubmitting a URL that has already been submitted.",
-                        "type": "text/plain"
-                      },
-                      "key": "resubmit",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "Whether to send replies to the user's inbox.",
-                        "type": "text/plain"
-                      },
-                      "key": "sendreplies",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "disabled": false,
-                      "key": "api_type",
-                      "value": "json"
-                    }
                   ]
-                }
+                },
+                "description": "Submits a new link or self-post to a subreddit. Requires the submit OAuth scope."
               },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "78f550ef-eefa-46b9-b136-87f256b80d9c",
+                  "name": "Submission created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The name of the subreddit to submit to.",
+                          "key": "sr",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The title of the submission (max 300 characters).",
+                          "key": "title",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of submission.",
+                          "key": "kind",
+                          "value": "image"
+                        },
+                        {
+                          "description": "The URL for a link submission.",
+                          "key": "url",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "The body text for a self-post (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The rich text body as JSON for a self-post.",
+                          "key": "richtext_json",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The flair template ID to apply to the submission.",
+                          "key": "flair_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The flair text to apply to the submission.",
+                          "key": "flair_text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether the submission is NSFW.",
+                          "key": "nsfw",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether the submission is a spoiler.",
+                          "key": "spoiler",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether to allow resubmitting a URL that has already been submitted.",
+                          "key": "resubmit",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether to send replies to the user's inbox.",
+                          "key": "sendreplies",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/submit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "submit"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-78f550ef-eefa-46b9-b136-87f256b80d9c"
+                },
+                {
+                  "id": "3dc918a4-bdf7-4a6c-ba92-1708294689b2",
+                  "name": "Permission denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The name of the subreddit to submit to.",
+                          "key": "sr",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The title of the submission (max 300 characters).",
+                          "key": "title",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The type of submission.",
+                          "key": "kind",
+                          "value": "image"
+                        },
+                        {
+                          "description": "The URL for a link submission.",
+                          "key": "url",
+                          "value": "<uri>"
+                        },
+                        {
+                          "description": "The body text for a self-post (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The rich text body as JSON for a self-post.",
+                          "key": "richtext_json",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The flair template ID to apply to the submission.",
+                          "key": "flair_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The flair text to apply to the submission.",
+                          "key": "flair_text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "Whether the submission is NSFW.",
+                          "key": "nsfw",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether the submission is a spoiler.",
+                          "key": "spoiler",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether to allow resubmitting a URL that has already been submitted.",
+                          "key": "resubmit",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "Whether to send replies to the user's inbox.",
+                          "key": "sendreplies",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/submit",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "submit"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-3dc918a4-bdf7-4a6c-ba92-1708294689b2"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-d2afe18c-bcd0-4679-a9f0-24b638e19aea"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "23fda585-5f5c-4f80-83b2-b3839cbdfa4b",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-23fda585-5f5c-4f80-83b2-b3839cbdfa4b"
         },
         {
-          "id": "3d50c8f3-0b15-4e5b-9782-1a370020a055",
-          "name": "Submit a New Comment",
-          "request": {
-            "name": "Submit a New Comment",
-            "description": {
-              "content": "Submits a new comment on a submission or in reply to another comment. Requires the submit OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "comment"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "thing_id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the parent thing to comment on."
-                },
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "(Required) The body of the comment (markdown)."
-                },
-                {
-                  "disabled": false,
-                  "key": "richtext_json",
-                  "value": "<string>",
-                  "description": "The rich text body as JSON."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "comment",
+          "item": [
             {
-              "id": "71ad7f84-7ea3-47b1-8059-7c8fdc50807c",
-              "name": "Comment created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "comment"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Submit a New Comment",
+              "id": "62f05755-1ecc-4c42-8ab5-77575adc5fa5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the parent thing to comment on.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the parent thing to comment on.",
                       "key": "thing_id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The body of the comment (markdown).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The body of the comment (markdown).",
                       "key": "text",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The rich text body as JSON.",
-                        "type": "text/plain"
-                      },
+                      "description": "The rich text body as JSON.",
                       "key": "richtext_json",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
                       "key": "api_type",
                       "value": "json"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "697bf165-7afe-433d-86a8-de19484d1c7d",
-              "name": "Permission denied",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/comment",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "comment"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the parent thing to comment on.",
-                        "type": "text/plain"
-                      },
-                      "key": "thing_id",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The body of the comment (markdown).",
-                        "type": "text/plain"
-                      },
-                      "key": "text",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The rich text body as JSON.",
-                        "type": "text/plain"
-                      },
-                      "key": "richtext_json",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "key": "api_type",
-                      "value": "json"
-                    }
                   ]
-                }
+                },
+                "description": "Submits a new comment on a submission or in reply to another comment. Requires the submit OAuth scope."
               },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "4d6a8e4b-555a-4c1f-af52-27c563cf1658",
+                  "name": "Comment created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the parent thing to comment on.",
+                          "key": "thing_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The body of the comment (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The rich text body as JSON.",
+                          "key": "richtext_json",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/comment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "comment"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-4d6a8e4b-555a-4c1f-af52-27c563cf1658"
+                },
+                {
+                  "id": "cac283e2-3509-4746-997d-1df679ac4ac0",
+                  "name": "Permission denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the parent thing to comment on.",
+                          "key": "thing_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The body of the comment (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The rich text body as JSON.",
+                          "key": "richtext_json",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/comment",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "comment"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-cac283e2-3509-4746-997d-1df679ac4ac0"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-62f05755-1ecc-4c42-8ab5-77575adc5fa5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4ffb3ec7-94f3-4e67-9e32-c962694ae116",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-4ffb3ec7-94f3-4e67-9e32-c962694ae116"
         },
         {
-          "id": "53c25f42-fa15-4e01-ba6a-db98b4b3757a",
-          "name": "Vote on a Submission or Comment",
-          "request": {
-            "name": "Vote on a Submission or Comment",
-            "description": {
-              "content": "Casts a vote on a submission or comment. Direction values are 1 for upvote, -1 for downvote, and 0 to remove the vote. Requires the vote OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "vote"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to vote on."
-                },
-                {
-                  "disabled": false,
-                  "key": "dir",
-                  "value": "<integer>",
-                  "description": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote)."
-                },
-                {
-                  "disabled": false,
-                  "key": "rank",
-                  "value": "<integer>",
-                  "description": "An integer greater than 1 (deprecated)."
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "vote",
+          "item": [
             {
-              "id": "13322f42-8393-4fbe-ad51-72fe3f119a59",
-              "name": "Vote cast successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "vote"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Vote on a Submission or Comment",
+              "id": "61d505fe-4874-4c5d-b7b0-bba0957b1f4a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to vote on.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to vote on.",
                       "key": "id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote).",
                       "key": "dir",
-                      "value": "<integer>"
+                      "value": "1"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "An integer greater than 1 (deprecated).",
-                        "type": "text/plain"
-                      },
+                      "description": "An integer greater than 1 (deprecated).",
                       "key": "rank",
                       "value": "<integer>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a6e45d80-0a2b-42ac-b7b8-b576caed1937",
-              "name": "Authentication required",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/vote",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "vote"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to vote on.",
-                        "type": "text/plain"
-                      },
-                      "key": "id",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote).",
-                        "type": "text/plain"
-                      },
-                      "key": "dir",
-                      "value": "<integer>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "An integer greater than 1 (deprecated).",
-                        "type": "text/plain"
-                      },
-                      "key": "rank",
-                      "value": "<integer>"
-                    }
                   ]
-                }
+                },
+                "description": "Casts a vote on a submission or comment. Direction values are 1 for upvote, -1 for downvote, and 0 to remove the vote. Requires the vote OAuth scope."
               },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "902b6735-f56c-436f-ae49-34577685f7d0",
+                  "name": "Vote cast successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to vote on.",
+                          "key": "id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote).",
+                          "key": "dir",
+                          "value": "1"
+                        },
+                        {
+                          "description": "An integer greater than 1 (deprecated).",
+                          "key": "rank",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/vote",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "vote"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-902b6735-f56c-436f-ae49-34577685f7d0"
+                },
+                {
+                  "id": "86148681-ee43-4235-b14a-01c7eca3de12",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to vote on.",
+                          "key": "id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Vote direction: 1 (upvote), -1 (downvote), 0 (unvote).",
+                          "key": "dir",
+                          "value": "1"
+                        },
+                        {
+                          "description": "An integer greater than 1 (deprecated).",
+                          "key": "rank",
+                          "value": "<integer>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/vote",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "vote"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-86148681-ee43-4235-b14a-01c7eca3de12"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-61d505fe-4874-4c5d-b7b0-bba0957b1f4a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "24f8342f-16f7-443f-9567-48ac30eb0f8d",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-24f8342f-16f7-443f-9567-48ac30eb0f8d"
         },
         {
-          "id": "7f4d4ab8-653a-4162-bfc8-c994878c95b5",
-          "name": "Save a Submission or Comment",
-          "request": {
-            "name": "Save a Submission or Comment",
-            "description": {
-              "content": "Saves a submission or comment to the authenticated user's saved items. Requires the save OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "save"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to save."
-                },
-                {
-                  "disabled": false,
-                  "key": "category",
-                  "value": "<string>",
-                  "description": "A category name for the saved item (Reddit Gold feature)."
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "save",
+          "item": [
             {
-              "id": "7c648777-2fe9-4c1e-9863-83239645042d",
-              "name": "Item saved successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "save"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Save a Submission or Comment",
+              "id": "5286354c-c6a2-41be-a844-f656b8cad1ea",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to save.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to save.",
                       "key": "id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "A category name for the saved item (Reddit Gold feature).",
-                        "type": "text/plain"
-                      },
+                      "description": "A category name for the saved item (Reddit Gold feature).",
                       "key": "category",
                       "value": "<string>"
                     }
                   ]
-                }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/save",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "save"
+                  ]
+                },
+                "description": "Saves a submission or comment to the authenticated user's saved items. Requires the save OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "299a6483-9dfd-47c8-af23-6b61da2cfe97",
+                  "name": "Item saved successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to save.",
+                          "key": "id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A category name for the saved item (Reddit Gold feature).",
+                          "key": "category",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/save",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "save"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-299a6483-9dfd-47c8-af23-6b61da2cfe97"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-5286354c-c6a2-41be-a844-f656b8cad1ea"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "15dab00b-af2d-4ad9-aae1-a4bf57d2cf0b",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-15dab00b-af2d-4ad9-aae1-a4bf57d2cf0b"
         },
         {
-          "id": "799cf8ec-b503-45f4-b311-437934cd6a26",
-          "name": "Unsave a Submission or Comment",
-          "request": {
-            "name": "Unsave a Submission or Comment",
-            "description": {
-              "content": "Removes a submission or comment from the authenticated user's saved items. Requires the save OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "unsave"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to unsave."
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "unsave",
+          "item": [
             {
-              "id": "62b361a9-e644-43cf-9580-2a10107c12c4",
-              "name": "Item unsaved successfully",
-              "originalRequest": {
+              "name": "Unsave a Submission or Comment",
+              "id": "1eafcf9f-dede-472a-90df-d43d4e7b11b3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The fullname of the thing to unsave.",
+                      "key": "id",
+                      "value": "<string>"
+                    }
+                  ]
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/unsave",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "unsave"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
+                "description": "Removes a submission or comment from the authenticated user's saved items. Requires the save OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "6b341770-ca45-45b6-8012-fc85e2f38d26",
+                  "name": "Item unsaved successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to unsave.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/unsave",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "unsave"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-6b341770-ca45-45b6-8012-fc85e2f38d26"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-1eafcf9f-dede-472a-90df-d43d4e7b11b3"
+            }
+          ],
+          "id": "584512b5-f2bd-4690-a7a2-dcf4e209ff7f",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-584512b5-f2bd-4690-a7a2-dcf4e209ff7f"
+        },
+        {
+          "name": "hide",
+          "item": [
+            {
+              "name": "Hide a Submission",
+              "id": "f0572786-3718-48f3-8127-ba5ed10abc87",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to unsave.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) A comma-separated list of fullnames to hide.",
                       "key": "id",
                       "value": "<string>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1452ba99-eb12-47ae-8577-7fe63bca907f",
-          "name": "Hide a Submission",
-          "request": {
-            "name": "Hide a Submission",
-            "description": {
-              "content": "Hides a submission from the authenticated user's listings. Requires the report OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "hide"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) A comma-separated list of fullnames to hide."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "857c9965-09c4-4757-b957-03111a487421",
-              "name": "Submission hidden successfully",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/hide",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "hide"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
+                "description": "Hides a submission from the authenticated user's listings. Requires the report OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "73bf617f-a02c-410a-a125-f5fb6f4a39d2",
+                  "name": "Submission hidden successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) A comma-separated list of fullnames to hide.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/hide",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "hide"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-73bf617f-a02c-410a-a125-f5fb6f4a39d2"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-f0572786-3718-48f3-8127-ba5ed10abc87"
+            }
+          ],
+          "id": "5991d537-b9a3-41e9-9a2d-f303f7a044e4",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-5991d537-b9a3-41e9-9a2d-f303f7a044e4"
+        },
+        {
+          "name": "unhide",
+          "item": [
+            {
+              "name": "Unhide a Submission",
+              "id": "37482f85-4be3-43b5-91c8-b4a5da51e965",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) A comma-separated list of fullnames to hide.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) A comma-separated list of fullnames to unhide.",
                       "key": "id",
                       "value": "<string>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a2031cd4-f0e4-4afc-9d42-71cf1389944a",
-          "name": "Unhide a Submission",
-          "request": {
-            "name": "Unhide a Submission",
-            "description": {
-              "content": "Unhides a previously hidden submission. Requires the report OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "unhide"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) A comma-separated list of fullnames to unhide."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "30d939cf-402b-489c-a679-d1926c7054cf",
-              "name": "Submission unhidden successfully",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/unhide",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "unhide"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
+                  ]
                 },
+                "description": "Unhides a previously hidden submission. Requires the report OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "7e676663-8948-408c-95af-ba34fa65bde8",
+                  "name": "Submission unhidden successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) A comma-separated list of fullnames to unhide.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/unhide",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "unhide"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-7e676663-8948-408c-95af-ba34fa65bde8"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-37482f85-4be3-43b5-91c8-b4a5da51e965"
+            }
+          ],
+          "id": "2d96f337-e2f3-495e-86a0-e4b83b9e52a2",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-2d96f337-e2f3-495e-86a0-e4b83b9e52a2"
+        },
+        {
+          "name": "del",
+          "item": [
+            {
+              "name": "Delete a Submission or Comment",
+              "id": "2e3f9ebb-e88b-4156-b832-2fe19217d70f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) A comma-separated list of fullnames to unhide.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to delete.",
                       "key": "id",
                       "value": "<string>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e51bd41e-1fe0-4470-93af-bda10ecf1b76",
-          "name": "Delete a Submission or Comment",
-          "request": {
-            "name": "Delete a Submission or Comment",
-            "description": {
-              "content": "Deletes a submission or comment authored by the authenticated user. Requires the edit OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "del"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to delete."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "ab6d2aff-b05c-438a-af8a-46d7e8963b9f",
-              "name": "Item deleted successfully",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/del",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "del"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to delete.",
-                        "type": "text/plain"
-                      },
-                      "key": "id",
-                      "value": "<string>"
-                    }
                   ]
-                }
+                },
+                "description": "Deletes a submission or comment authored by the authenticated user. Requires the edit OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "2eb2fc22-22dd-443a-8cb2-095ae28d0eb0",
+                  "name": "Item deleted successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to delete.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/del",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "del"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-2eb2fc22-22dd-443a-8cb2-095ae28d0eb0"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-2e3f9ebb-e88b-4156-b832-2fe19217d70f"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0c8696c8-c453-48e1-9261-02c50ef8b474",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-0c8696c8-c453-48e1-9261-02c50ef8b474"
         },
         {
-          "id": "1f91bf3d-65fe-4b3a-86c5-d9f92060121c",
-          "name": "Edit a Self-post or Comment",
-          "request": {
-            "name": "Edit a Self-post or Comment",
-            "description": {
-              "content": "Edits the body text of a self-post or comment authored by the authenticated user. Requires the edit OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "editusertext"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "thing_id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to edit."
-                },
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "(Required) The new body text (markdown)."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "editusertext",
+          "item": [
             {
-              "id": "2b03f47d-99aa-491d-957e-ae7cf54194ae",
-              "name": "Text edited successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "editusertext"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Edit a Self-post or Comment",
+              "id": "f52f7827-e27b-45f4-b5fc-2776f0ccf49a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to edit.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to edit.",
                       "key": "thing_id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The new body text (markdown).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The new body text (markdown).",
                       "key": "text",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
                       "key": "api_type",
                       "value": "json"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "0d3db3bc-bca5-4168-9a03-2600090aedf4",
-          "name": "Report a Submission or Comment",
-          "request": {
-            "name": "Report a Submission or Comment",
-            "description": {
-              "content": "Reports a submission or comment to the moderators of the subreddit. Requires the report OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "report"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "thing_id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to report."
                 },
-                {
-                  "disabled": false,
-                  "key": "reason",
-                  "value": "<string>",
-                  "description": "The reason for reporting (max 100 characters)."
-                },
-                {
-                  "disabled": false,
-                  "key": "other_reason",
-                  "value": "<string>",
-                  "description": "A custom reason for reporting (max 100 characters)."
-                },
-                {
-                  "disabled": false,
-                  "key": "site_reason",
-                  "value": "<string>",
-                  "description": "A site rule violation reason."
-                },
-                {
-                  "disabled": false,
-                  "key": "rule_reason",
-                  "value": "<string>",
-                  "description": "A subreddit rule violation reason."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "f9b05c6e-d044-46ca-81ee-138625617eeb",
-              "name": "Report submitted",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "api",
-                    "report"
-                  ],
+                  "raw": "{{baseUrl}}/api/editusertext",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "api",
+                    "editusertext"
+                  ]
                 },
+                "description": "Edits the body text of a self-post or comment authored by the authenticated user. Requires the edit OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "88f0fd3d-11b1-473c-9703-d248d4ba89b1",
+                  "name": "Text edited successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to edit.",
+                          "key": "thing_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The new body text (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/editusertext",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "editusertext"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-88f0fd3d-11b1-473c-9703-d248d4ba89b1"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-f52f7827-e27b-45f4-b5fc-2776f0ccf49a"
+            }
+          ],
+          "id": "1e42301c-f079-477a-92fe-6de8d64cd350",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-1e42301c-f079-477a-92fe-6de8d64cd350"
+        },
+        {
+          "name": "report",
+          "item": [
+            {
+              "name": "Report a Submission or Comment",
+              "id": "06b2987d-a014-4136-ad8d-a575d59ab58b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to report.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to report.",
                       "key": "thing_id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "The reason for reporting (max 100 characters).",
-                        "type": "text/plain"
-                      },
+                      "description": "The reason for reporting (max 100 characters).",
                       "key": "reason",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "A custom reason for reporting (max 100 characters).",
-                        "type": "text/plain"
-                      },
+                      "description": "A custom reason for reporting (max 100 characters).",
                       "key": "other_reason",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "A site rule violation reason.",
-                        "type": "text/plain"
-                      },
+                      "description": "A site rule violation reason.",
                       "key": "site_reason",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "A subreddit rule violation reason.",
-                        "type": "text/plain"
-                      },
+                      "description": "A subreddit rule violation reason.",
                       "key": "rule_reason",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
                       "key": "api_type",
                       "value": "json"
                     }
                   ]
-                }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/report",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "report"
+                  ]
+                },
+                "description": "Reports a submission or comment to the moderators of the subreddit. Requires the report OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "d6429921-b666-471e-a522-422fc487248c",
+                  "name": "Report submitted",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to report.",
+                          "key": "thing_id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The reason for reporting (max 100 characters).",
+                          "key": "reason",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A custom reason for reporting (max 100 characters).",
+                          "key": "other_reason",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A site rule violation reason.",
+                          "key": "site_reason",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "A subreddit rule violation reason.",
+                          "key": "rule_reason",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/report",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "report"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:19.000Z",
+                  "updatedAt": "2026-10-21T21:19:19.000Z",
+                  "uid": "35240-d6429921-b666-471e-a522-422fc487248c"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:19.000Z",
+              "updatedAt": "2026-10-21T21:19:19.000Z",
+              "uid": "35240-06b2987d-a014-4136-ad8d-a575d59ab58b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d6f15368-6e07-4cdc-811b-186aa52daead",
+          "createdAt": "2026-10-21T21:19:19.000Z",
+          "updatedAt": "2026-10-21T21:19:19.000Z",
+          "uid": "35240-d6f15368-6e07-4cdc-811b-186aa52daead"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://ads-api.reddit.com/api/v3",
-      "key": "baseUrl"
+      "id": "850d5558-f523-485c-b866-b67c189f046e",
+      "createdAt": "2026-10-21T21:19:19.000Z",
+      "updatedAt": "2026-10-21T21:19:19.000Z",
+      "uid": "35240-850d5558-f523-485c-b866-b67c189f046e"
     }
   ],
   "auth": {
@@ -1976,29 +1814,30 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "ads"
+        "value": "identity edit flair history modconfig modflair modlog modposts modwiki mysubreddits privatemessages read report save submit subscribe vote wikiedit wikiread",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://www.reddit.com/api/v1/access_token"
+        "value": "https://www.reddit.com/api/v1/access_token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://www.reddit.com/api/v1/authorize"
+        "value": "https://www.reddit.com/api/v1/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "8bffe534-769e-4efe-b115-a646f4daaf03",
-    "name": "Reddit Ads Account Links & Comments API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://oauth.reddit.com"
     }
-  }
+  ]
 }

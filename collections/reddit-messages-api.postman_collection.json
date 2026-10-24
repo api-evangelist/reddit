@@ -1,795 +1,794 @@
 {
+  "info": {
+    "_postman_id": "ec2c399e-b6d4-4c9a-940d-06e2168ab7aa",
+    "name": "Reddit Data Messages API",
+    "description": "The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:32.000Z",
+    "updatedAt": "2026-10-21T21:19:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ec2c399e-b6d4-4c9a-940d-06e2168ab7aa"
+  },
   "item": [
     {
-      "id": "3480ed4c-786e-433f-8289-16afc4e094d4",
-      "name": "Messages",
-      "description": {
-        "content": "Endpoints for managing private messages, including inbox, sent, unread messages, composing, and message actions.",
-        "type": "text/plain"
-      },
+      "name": "message",
       "item": [
         {
-          "id": "50e9bf3b-bedc-4166-98b5-362a940f2b10",
-          "name": "Get Inbox Messages",
-          "request": {
-            "name": "Get Inbox Messages",
-            "description": {
-              "content": "Returns a listing of the authenticated user's inbox messages, including both private messages and comment replies. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "message",
-                "inbox"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                },
-                {
-                  "disabled": false,
-                  "key": "mark",
-                  "value": "true",
-                  "description": "Whether to mark messages as read."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "inbox",
+          "item": [
             {
-              "id": "a2987173-1e44-44ce-87a4-184abf2d0c15",
-              "name": "Listing of inbox messages",
-              "originalRequest": {
+              "name": "Get Inbox Messages",
+              "id": "24efa04b-7e24-4945-99fb-15ca3e1a28c4",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
                 "url": {
+                  "raw": "{{baseUrl}}/message/inbox?after=<string>&before=<string>&limit=25&count=<integer>&mark=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "message",
                     "inbox"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
                       "key": "after",
                       "value": "<string>"
                     },
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
                       "key": "before",
                       "value": "<string>"
                     },
                     {
+                      "description": "The maximum number of items to return (default 25, max 100).",
                       "key": "limit",
                       "value": "25"
                     },
                     {
+                      "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
                       "key": "count",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Whether to mark messages as read.",
                       "key": "mark",
                       "value": "true"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                "description": "Returns a listing of the authenticated user's inbox messages, including both private messages and comment replies. Requires the privatemessages OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "c2fd7757-a631-49e4-ac3b-6b4ec0bd6dc1",
+                  "name": "Listing of inbox messages",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/message/inbox?after=<string>&before=<string>&limit=25&count=<integer>&mark=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "message",
+                        "inbox"
+                      ],
+                      "query": [
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of items to return (default 25, max 100).",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                          "key": "count",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Whether to mark messages as read.",
+                          "key": "mark",
+                          "value": "true"
+                        }
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t5\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-c2fd7757-a631-49e4-ac3b-6b4ec0bd6dc1"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-24efa04b-7e24-4945-99fb-15ca3e1a28c4"
+            }
+          ],
+          "id": "ced747b6-d694-4c42-ad40-3c4179a364e8",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-ced747b6-d694-4c42-ad40-3c4179a364e8"
+        },
+        {
+          "name": "unread",
+          "item": [
+            {
+              "name": "Get Unread Messages",
+              "id": "c58c1bcb-7476-4fa0-85c1-64d1e76e8f3f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 4783,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "9e0dc483-6c1f-429d-851f-8e7831c7652c",
-          "name": "Get Unread Messages",
-          "request": {
-            "name": "Get Unread Messages",
-            "description": {
-              "content": "Returns a listing of the authenticated user's unread messages. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "message",
-                "unread"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                },
-                {
-                  "disabled": false,
-                  "key": "mark",
-                  "value": "true",
-                  "description": "Whether to mark messages as read."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ea1ea8d4-645b-458d-8ffd-3b42aa2731a5",
-              "name": "Listing of unread messages",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/message/unread?after=<string>&before=<string>&limit=25&count=<integer>&mark=true",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "message",
                     "unread"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
                       "key": "after",
                       "value": "<string>"
                     },
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
                       "key": "before",
                       "value": "<string>"
                     },
                     {
+                      "description": "The maximum number of items to return (default 25, max 100).",
                       "key": "limit",
                       "value": "25"
                     },
                     {
+                      "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
                       "key": "count",
                       "value": "<integer>"
                     },
                     {
+                      "description": "Whether to mark messages as read.",
                       "key": "mark",
                       "value": "true"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                "description": "Returns a listing of the authenticated user's unread messages. Requires the privatemessages OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "2b6d1aef-3402-4535-937c-829469b863eb",
+                  "name": "Listing of unread messages",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/message/unread?after=<string>&before=<string>&limit=25&count=<integer>&mark=true",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "message",
+                        "unread"
+                      ],
+                      "query": [
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of items to return (default 25, max 100).",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                          "key": "count",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Whether to mark messages as read.",
+                          "key": "mark",
+                          "value": "true"
+                        }
+                      ]
+                    }
                   },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t5\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-2b6d1aef-3402-4535-937c-829469b863eb"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-c58c1bcb-7476-4fa0-85c1-64d1e76e8f3f"
+            }
+          ],
+          "id": "64f96241-db79-422b-bf0b-9fd03287f02d",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-64f96241-db79-422b-bf0b-9fd03287f02d"
+        },
+        {
+          "name": "sent",
+          "item": [
+            {
+              "name": "Get Sent Messages",
+              "id": "ce9543c0-380d-498a-bfbb-be2d0abad145",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
                   {
                     "key": "Accept",
                     "value": "application/json"
                   }
                 ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 4783,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "8213ad77-5b45-4a2d-b48e-ce136a089d66",
-          "name": "Get Sent Messages",
-          "request": {
-            "name": "Get Sent Messages",
-            "description": {
-              "content": "Returns a listing of the authenticated user's sent messages. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "message",
-                "sent"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4052d3c1-b7f9-42e9-95f8-0cc14d9379ee",
-              "name": "Listing of sent messages",
-              "originalRequest": {
                 "url": {
+                  "raw": "{{baseUrl}}/message/sent?after=<string>&before=<string>&limit=25&count=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "message",
                     "sent"
                   ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
                   "query": [
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
                       "key": "after",
                       "value": "<string>"
                     },
                     {
+                      "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
                       "key": "before",
                       "value": "<string>"
                     },
                     {
+                      "description": "The maximum number of items to return (default 25, max 100).",
                       "key": "limit",
                       "value": "25"
                     },
                     {
+                      "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
                       "key": "count",
                       "value": "<integer>"
                     }
-                  ],
-                  "variable": []
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                "description": "Returns a listing of the authenticated user's sent messages. Requires the privatemessages OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "8547636d-3218-4468-94ce-cf43b124b304",
+                  "name": "Listing of sent messages",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/message/sent?after=<string>&before=<string>&limit=25&count=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "message",
+                        "sent"
+                      ],
+                      "query": [
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                          "key": "after",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                          "key": "before",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "The maximum number of items to return (default 25, max 100).",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                          "key": "count",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
                   },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t5\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-8547636d-3218-4468-94ce-cf43b124b304"
                 }
               ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 4783,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-ce9543c0-380d-498a-bfbb-be2d0abad145"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
+          "id": "455c626e-9c07-4f20-9f61-649aae983251",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-455c626e-9c07-4f20-9f61-649aae983251"
+        }
+      ],
+      "id": "6acc4957-cd1f-45e6-9ddf-ea503ab45cc9",
+      "createdAt": "2026-10-21T21:19:32.000Z",
+      "updatedAt": "2026-10-21T21:19:32.000Z",
+      "uid": "35240-6acc4957-cd1f-45e6-9ddf-ea503ab45cc9"
+    },
+    {
+      "name": "api",
+      "item": [
         {
-          "id": "8aab8219-8f86-4e32-9217-5ceae5d3df6e",
-          "name": "Compose a Private Message",
-          "request": {
-            "name": "Compose a Private Message",
-            "description": {
-              "content": "Sends a private message to another user or a subreddit's moderators. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "compose"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "to",
-                  "value": "<string>",
-                  "description": "(Required) The recipient username or /r/subreddit for modmail."
-                },
-                {
-                  "disabled": false,
-                  "key": "subject",
-                  "value": "<string>",
-                  "description": "(Required) The subject of the message (max 100 characters)."
-                },
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "(Required) The body of the message (markdown)."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "compose",
+          "item": [
             {
-              "id": "2d0dffa6-527e-495c-a00b-5f88250e1dec",
-              "name": "Message sent successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "compose"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Compose a Private Message",
+              "id": "264dea30-dc44-4602-997c-9a97296dd265",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The recipient username or /r/subreddit for modmail.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The recipient username or /r/subreddit for modmail.",
                       "key": "to",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The subject of the message (max 100 characters).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The subject of the message (max 100 characters).",
                       "key": "subject",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The body of the message (markdown).",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The body of the message (markdown).",
                       "key": "text",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
                       "key": "api_type",
                       "value": "json"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "f254394d-d525-4606-b4e3-09ec16355f0d",
-              "name": "Permission denied",
-              "originalRequest": {
+                },
                 "url": {
+                  "raw": "{{baseUrl}}/api/compose",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
                   "path": [
                     "api",
                     "compose"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The recipient username or /r/subreddit for modmail.",
-                        "type": "text/plain"
-                      },
-                      "key": "to",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The subject of the message (max 100 characters).",
-                        "type": "text/plain"
-                      },
-                      "key": "subject",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The body of the message (markdown).",
-                        "type": "text/plain"
-                      },
-                      "key": "text",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "key": "api_type",
-                      "value": "json"
-                    }
                   ]
-                }
+                },
+                "description": "Sends a private message to another user or a subreddit's moderators. Requires the privatemessages OAuth scope."
               },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "cd459bcc-f700-4eae-a164-918d7519d53d",
+                  "name": "Message sent successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The recipient username or /r/subreddit for modmail.",
+                          "key": "to",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The subject of the message (max 100 characters).",
+                          "key": "subject",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The body of the message (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/compose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "compose"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-cd459bcc-f700-4eae-a164-918d7519d53d"
+                },
+                {
+                  "id": "34d7076c-f9c7-4c15-b345-d29f204c7da5",
+                  "name": "Permission denied",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The recipient username or /r/subreddit for modmail.",
+                          "key": "to",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The subject of the message (max 100 characters).",
+                          "key": "subject",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) The body of the message (markdown).",
+                          "key": "text",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "api_type",
+                          "value": "json"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/compose",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "compose"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-34d7076c-f9c7-4c15-b345-d29f204c7da5"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-264dea30-dc44-4602-997c-9a97296dd265"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6c1fbd90-c521-40b7-bb9d-67d3749abfb6",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-6c1fbd90-c521-40b7-bb9d-67d3749abfb6"
         },
         {
-          "id": "910db554-b77d-4fd0-8f41-10f26542fb58",
-          "name": "Mark Messages As Read",
-          "request": {
-            "name": "Mark Messages As Read",
-            "description": {
-              "content": "Marks one or more messages as read. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "read_message"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) A comma-separated list of message fullnames to mark as read."
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "read_message",
+          "item": [
             {
-              "id": "4b292c88-fd08-403f-824a-4a27d3868fd9",
-              "name": "Messages marked as read",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "read_message"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Mark Messages As Read",
+              "id": "697c0634-1e86-47e9-a1f6-877b4f592a65",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) A comma-separated list of message fullnames to mark as read.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) A comma-separated list of message fullnames to mark as read.",
                       "key": "id",
                       "value": "<string>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a9b093ac-7529-48ca-90c4-843d5bbd6df5",
-          "name": "Mark All Messages As Read",
-          "request": {
-            "name": "Mark All Messages As Read",
-            "description": {
-              "content": "Marks all of the authenticated user's messages as read. Requires the privatemessages OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "read_all_messages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "POST",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d2d86f52-32c9-49c2-b07c-bd40de6472b6",
-              "name": "All messages marked as read",
-              "originalRequest": {
+                },
                 "url": {
-                  "path": [
-                    "api",
-                    "read_all_messages"
-                  ],
+                  "raw": "{{baseUrl}}/api/read_message",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [],
-                  "variable": []
+                  "path": [
+                    "api",
+                    "read_message"
+                  ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
+                "description": "Marks one or more messages as read. Requires the privatemessages OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "a03cca17-c87a-4a81-a664-83b8de8e3811",
+                  "name": "Messages marked as read",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) A comma-separated list of message fullnames to mark as read.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/read_message",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "read_message"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-a03cca17-c87a-4a81-a664-83b8de8e3811"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-697c0634-1e86-47e9-a1f6-877b4f592a65"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "cce0605d-54bd-4ce1-8047-48ddb6d8efb5",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-cce0605d-54bd-4ce1-8047-48ddb6d8efb5"
+        },
+        {
+          "name": "read_all_messages",
+          "item": [
+            {
+              "name": "Mark All Messages As Read",
+              "id": "66848abc-ada9-46bf-af04-8158988f0832",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/read_all_messages",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "read_all_messages"
+                  ]
+                },
+                "description": "Marks all of the authenticated user's messages as read. Requires the privatemessages OAuth scope."
+              },
+              "response": [
+                {
+                  "id": "92f6da48-d840-45b3-bab1-1fdf5252817f",
+                  "name": "All messages marked as read",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/read_all_messages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "read_all_messages"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:32.000Z",
+                  "updatedAt": "2026-10-21T21:19:32.000Z",
+                  "uid": "35240-92f6da48-d840-45b3-bab1-1fdf5252817f"
+                }
+              ],
+              "createdAt": "2026-10-21T21:19:32.000Z",
+              "updatedAt": "2026-10-21T21:19:32.000Z",
+              "uid": "35240-66848abc-ada9-46bf-af04-8158988f0832"
+            }
+          ],
+          "id": "ebc55510-5c60-41c8-bde0-67858adf8259",
+          "createdAt": "2026-10-21T21:19:32.000Z",
+          "updatedAt": "2026-10-21T21:19:32.000Z",
+          "uid": "35240-ebc55510-5c60-41c8-bde0-67858adf8259"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://ads-api.reddit.com/api/v3",
-      "key": "baseUrl"
+      "id": "9caedb30-2dae-405e-adf1-a261ec86a0f7",
+      "createdAt": "2026-10-21T21:19:32.000Z",
+      "updatedAt": "2026-10-21T21:19:32.000Z",
+      "uid": "35240-9caedb30-2dae-405e-adf1-a261ec86a0f7"
     }
   ],
   "auth": {
@@ -797,29 +796,30 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "ads"
+        "value": "identity edit flair history modconfig modflair modlog modposts modwiki mysubreddits privatemessages read report save submit subscribe vote wikiedit wikiread",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://www.reddit.com/api/v1/access_token"
+        "value": "https://www.reddit.com/api/v1/access_token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://www.reddit.com/api/v1/authorize"
+        "value": "https://www.reddit.com/api/v1/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "149c28a1-f691-45e6-890c-7678042f11bf",
-    "name": "Reddit Ads Account Messages API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://oauth.reddit.com"
     }
-  }
+  ]
 }

@@ -1,326 +1,324 @@
 {
+  "info": {
+    "_postman_id": "613f5e38-5ae6-482c-954e-a0c527881939",
+    "name": "Reddit Data Flair API",
+    "description": "The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:10.000Z",
+    "updatedAt": "2026-10-21T21:19:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-613f5e38-5ae6-482c-954e-a0c527881939"
+  },
   "item": [
     {
-      "id": "307aa198-d0fb-4f70-b57a-81adb4cdd6c9",
-      "name": "Flair",
-      "description": {
-        "content": "Endpoints for managing user and link flair within subreddits, including flair templates, assignments, and configuration.",
-        "type": "text/plain"
-      },
+      "name": "r",
       "item": [
         {
-          "id": "d32e865d-fadf-40b4-a381-84d7da71b69a",
-          "name": "Set User Flair",
-          "request": {
-            "name": "Set User Flair",
-            "description": {
-              "content": "Sets the flair for a user in the specified subreddit. Requires the modflair OAuth scope (or flair scope for self-flair).",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "api",
-                "flair"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "The username to set flair for."
-                },
-                {
-                  "disabled": false,
-                  "key": "text",
-                  "value": "<string>",
-                  "description": "The flair text."
-                },
-                {
-                  "disabled": false,
-                  "key": "css_class",
-                  "value": "<string>",
-                  "description": "The CSS class for the flair."
-                },
-                {
-                  "disabled": false,
-                  "key": "api_type",
-                  "value": "json"
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "{subreddit}",
+          "item": [
             {
-              "id": "76d0f650-b95b-4777-ac4f-511046f5eee5",
-              "name": "Flair set successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "api",
-                    "flair"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The username to set flair for.",
-                        "type": "text/plain"
-                      },
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The flair text.",
-                        "type": "text/plain"
-                      },
-                      "key": "text",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The CSS class for the flair.",
-                        "type": "text/plain"
-                      },
-                      "key": "css_class",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "key": "api_type",
-                      "value": "json"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "api",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "flair",
+                  "item": [
+                    {
+                      "name": "Set User Flair",
+                      "id": "67a8085c-e300-481a-9faa-12cdc91b3a46",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "The username to set flair for.",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The flair text.",
+                              "key": "text",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The CSS class for the flair.",
+                              "key": "css_class",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "api_type",
+                              "value": "json"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/api/flair",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "api",
+                            "flair"
+                          ],
+                          "variable": [
+                            {
+                              "id": "605e061d-c6a9-4bb9-a989-092c82a1c378",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Sets the flair for a user in the specified subreddit. Requires the modflair OAuth scope (or flair scope for self-flair)."
+                      },
+                      "response": [
+                        {
+                          "id": "603b15aa-a14f-47ee-abca-373092005f3a",
+                          "name": "Flair set successfully",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "The username to set flair for.",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The flair text.",
+                                  "key": "text",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The CSS class for the flair.",
+                                  "key": "css_class",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "api_type",
+                                  "value": "json"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/api/flair",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "api",
+                                "flair"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T21:19:10.000Z",
+                          "updatedAt": "2026-10-21T21:19:10.000Z",
+                          "uid": "35240-603b15aa-a14f-47ee-abca-373092005f3a"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:10.000Z",
+                      "updatedAt": "2026-10-21T21:19:10.000Z",
+                      "uid": "35240-67a8085c-e300-481a-9faa-12cdc91b3a46"
+                    }
+                  ],
+                  "id": "33bbbcf3-e9b0-4515-85f9-15bf6411ddff",
+                  "createdAt": "2026-10-21T21:19:10.000Z",
+                  "updatedAt": "2026-10-21T21:19:10.000Z",
+                  "uid": "35240-33bbbcf3-e9b0-4515-85f9-15bf6411ddff"
+                },
+                {
+                  "name": "flairselector",
+                  "item": [
+                    {
+                      "name": "Get Available Flair Options",
+                      "id": "c66e9ec2-743c-479f-afdc-639337a2d2cd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/x-www-form-urlencoded"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "urlencoded",
+                          "urlencoded": [
+                            {
+                              "description": "The fullname of a link to get flair options for.",
+                              "key": "link",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The username to get flair options for.",
+                              "key": "name",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/api/flairselector",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "api",
+                            "flairselector"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5b33cf43-e132-4ac0-95a8-f47d0392c115",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns available flair options for a user or link in the specified subreddit."
+                      },
+                      "response": [
+                        {
+                          "id": "127718a0-fc1c-43d3-95e7-cb2214091748",
+                          "name": "Available flair options",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "The fullname of a link to get flair options for.",
+                                  "key": "link",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The username to get flair options for.",
+                                  "key": "name",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/api/flairselector",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "api",
+                                "flairselector"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-21T21:19:10.000Z",
+                          "updatedAt": "2026-10-21T21:19:10.000Z",
+                          "uid": "35240-127718a0-fc1c-43d3-95e7-cb2214091748"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:10.000Z",
+                      "updatedAt": "2026-10-21T21:19:10.000Z",
+                      "uid": "35240-c66e9ec2-743c-479f-afdc-639337a2d2cd"
+                    }
+                  ],
+                  "id": "a60e5d9d-a497-4cb3-b3a6-2daa2dc51579",
+                  "createdAt": "2026-10-21T21:19:10.000Z",
+                  "updatedAt": "2026-10-21T21:19:10.000Z",
+                  "uid": "35240-a60e5d9d-a497-4cb3-b3a6-2daa2dc51579"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "c5dd6451-9bc2-4e1c-8595-85f3b4a19333",
+              "createdAt": "2026-10-21T21:19:10.000Z",
+              "updatedAt": "2026-10-21T21:19:10.000Z",
+              "uid": "35240-c5dd6451-9bc2-4e1c-8595-85f3b4a19333"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "04b6240f-0300-49a0-9dc6-fb71262e4ee6",
-          "name": "Get Available Flair Options",
-          "request": {
-            "name": "Get Available Flair Options",
-            "description": {
-              "content": "Returns available flair options for a user or link in the specified subreddit.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "api",
-                "flairselector"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "link",
-                  "value": "<string>",
-                  "description": "The fullname of a link to get flair options for."
-                },
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "The username to get flair options for."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "71140244-1661-4af0-a919-3f8fe8b61656",
-              "name": "Available flair options",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "api",
-                    "flairselector"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The fullname of a link to get flair options for.",
-                        "type": "text/plain"
-                      },
-                      "key": "link",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The username to get flair options for.",
-                        "type": "text/plain"
-                      },
-                      "key": "name",
-                      "value": "<string>"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "34b115ad-c29a-4682-92b2-2a4298110401",
+          "createdAt": "2026-10-21T21:19:10.000Z",
+          "updatedAt": "2026-10-21T21:19:10.000Z",
+          "uid": "35240-34b115ad-c29a-4682-92b2-2a4298110401"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://ads-api.reddit.com/api/v3",
-      "key": "baseUrl"
+      "id": "3e3c1c7b-d91d-4802-bd9a-0b5922aea277",
+      "createdAt": "2026-10-21T21:19:10.000Z",
+      "updatedAt": "2026-10-21T21:19:10.000Z",
+      "uid": "35240-3e3c1c7b-d91d-4802-bd9a-0b5922aea277"
     }
   ],
   "auth": {
@@ -328,29 +326,30 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "ads"
+        "value": "identity edit flair history modconfig modflair modlog modposts modwiki mysubreddits privatemessages read report save submit subscribe vote wikiedit wikiread",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://www.reddit.com/api/v1/access_token"
+        "value": "https://www.reddit.com/api/v1/access_token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://www.reddit.com/api/v1/authorize"
+        "value": "https://www.reddit.com/api/v1/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "ec5f7487-9353-4beb-9afe-236f9b22cf06",
-    "name": "Reddit Ads Account Flair API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://oauth.reddit.com"
     }
-  }
+  ]
 }

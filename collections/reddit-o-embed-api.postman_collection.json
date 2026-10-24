@@ -1,0 +1,313 @@
+{
+  "info": {
+    "_postman_id": "223a6af4-b52d-46cf-89c6-6a106b7e4202",
+    "name": "Reddit Embeds O Embed API",
+    "description": "Reddit Embeds allows developers and content creators to embed Reddit posts and comments directly into external websites and applications. This service provides oEmbed endpoints that return embed codes and metadata for rendering Reddit content in a visually consistent format outside of the Reddit platform. It follows the oEmbed specification for content discovery and embedding.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:20:06.000Z",
+    "updatedAt": "2026-10-21T21:20:06.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-223a6af4-b52d-46cf-89c6-6a106b7e4202"
+  },
+  "item": [
+    {
+      "name": "oembed",
+      "item": [
+        {
+          "name": "Get Oembed Data for a Reddit Url",
+          "id": "ab9ea112-35db-403c-b67d-653cb4e93c61",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/oembed?url=<uri>&format=json&maxwidth=<integer>&maxheight=<integer>&parent=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "oembed"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.",
+                  "key": "url",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "The response format. Defaults to JSON.",
+                  "key": "format",
+                  "value": "json"
+                },
+                {
+                  "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width.",
+                  "key": "maxwidth",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The maximum height of the embed in pixels.",
+                  "key": "maxheight",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.",
+                  "key": "parent",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns oEmbed-formatted embed data for a given Reddit URL. This endpoint follows the oEmbed specification and returns HTML embed code along with metadata about the content. Supports both JSON and XML response formats. The returned HTML can be used to embed Reddit posts and comments into external pages."
+          },
+          "response": [
+            {
+              "id": "d22c5091-54da-4a42-928a-3048c5053353",
+              "name": "oEmbed response with embed data",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/oembed?url=<uri>&format=json&maxwidth=<integer>&maxheight=<integer>&parent=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oembed"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width.",
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The maximum height of the embed in pixels.",
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.",
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"rich\",\n  \"version\": \"1.0\",\n  \"title\": \"<string>\",\n  \"author_name\": \"<string>\",\n  \"author_url\": \"<uri>\",\n  \"provider_name\": \"reddit\",\n  \"provider_url\": \"https://www.reddit.com/\",\n  \"html\": \"<string>\",\n  \"width\": \"<integer>\",\n  \"height\": \"<integer>\",\n  \"thumbnail_url\": \"<uri>\",\n  \"thumbnail_width\": \"<integer>\",\n  \"thumbnail_height\": \"<integer>\",\n  \"cache_age\": \"<integer>\"\n}",
+              "createdAt": "2026-10-21T21:20:06.000Z",
+              "updatedAt": "2026-10-21T21:20:06.000Z",
+              "uid": "35240-d22c5091-54da-4a42-928a-3048c5053353"
+            },
+            {
+              "id": "0b69aff9-2132-4897-9747-c56d8281c3e9",
+              "name": "Invalid URL or parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/oembed?url=<uri>&format=json&maxwidth=<integer>&maxheight=<integer>&parent=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oembed"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width.",
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The maximum height of the embed in pixels.",
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.",
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T21:20:06.000Z",
+              "updatedAt": "2026-10-21T21:20:06.000Z",
+              "uid": "35240-0b69aff9-2132-4897-9747-c56d8281c3e9"
+            },
+            {
+              "id": "6fbd3b20-5871-4dd8-890d-1ab1999bbe12",
+              "name": "Content not found or not embeddable",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/oembed?url=<uri>&format=json&maxwidth=<integer>&maxheight=<integer>&parent=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oembed"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width.",
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The maximum height of the embed in pixels.",
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.",
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T21:20:06.000Z",
+              "updatedAt": "2026-10-21T21:20:06.000Z",
+              "uid": "35240-6fbd3b20-5871-4dd8-890d-1ab1999bbe12"
+            },
+            {
+              "id": "a7aa35f5-bf31-447c-a4bc-82573233327e",
+              "name": "URL not supported for embedding",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/oembed?url=<uri>&format=json&maxwidth=<integer>&maxheight=<integer>&parent=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "oembed"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The URL of the Reddit content to embed. Must be a valid Reddit post or comment permalink URL.",
+                      "key": "url",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The response format. Defaults to JSON.",
+                      "key": "format",
+                      "value": "json"
+                    },
+                    {
+                      "description": "The maximum width of the embed in pixels. The embed will be scaled to fit within this width.",
+                      "key": "maxwidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The maximum height of the embed in pixels.",
+                      "key": "maxheight",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "The parent origin domain for the embed iframe. Required for proper cross-origin embed functionality.",
+                      "key": "parent",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-10-21T21:20:06.000Z",
+              "updatedAt": "2026-10-21T21:20:06.000Z",
+              "uid": "35240-a7aa35f5-bf31-447c-a4bc-82573233327e"
+            }
+          ],
+          "createdAt": "2026-10-21T21:20:06.000Z",
+          "updatedAt": "2026-10-21T21:20:06.000Z",
+          "uid": "35240-ab9ea112-35db-403c-b67d-653cb4e93c61"
+        }
+      ],
+      "id": "25f6d577-3aea-4300-baef-60eb93a8cb26",
+      "createdAt": "2026-10-21T21:20:06.000Z",
+      "updatedAt": "2026-10-21T21:20:06.000Z",
+      "uid": "35240-25f6d577-3aea-4300-baef-60eb93a8cb26"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://www.reddit.com"
+    }
+  ]
+}

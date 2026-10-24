@@ -1,1078 +1,1114 @@
 {
+  "info": {
+    "_postman_id": "74301726-c8bb-4a9e-b694-7a69a9d91fd5",
+    "name": "Reddit Data Moderation API",
+    "description": "The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:19:37.000Z",
+    "updatedAt": "2026-10-21T21:19:37.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-74301726-c8bb-4a9e-b694-7a69a9d91fd5"
+  },
   "item": [
     {
-      "id": "6df42e26-ede7-40f4-8993-3df2e125f6df",
-      "name": "Moderation",
-      "description": {
-        "content": "Endpoints for subreddit moderation tasks, including approving and removing content, managing bans, moderation logs, and modqueue.",
-        "type": "text/plain"
-      },
+      "name": "r",
       "item": [
         {
-          "id": "26116840-d2bc-4c63-afdf-0c53419dc487",
-          "name": "Get Subreddit Moderators",
-          "request": {
-            "name": "Get Subreddit Moderators",
-            "description": {
-              "content": "Returns a listing of the moderators of the specified subreddit.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "moderators"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{subreddit}",
+          "item": [
             {
-              "id": "489998ea-09ce-401f-9031-0eb4dba5769c",
-              "name": "Moderator listing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "moderators"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
+              "name": "about",
+              "item": [
+                {
+                  "name": "moderators",
+                  "item": [
                     {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
+                      "name": "Get Subreddit Moderators",
+                      "id": "c600076f-8a0b-497a-a815-f0fa97804f2c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/moderators",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "moderators"
+                          ],
+                          "variable": [
+                            {
+                              "id": "eb5d7eb6-95e2-4e8d-99dd-596ca9119e4f",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of the moderators of the specified subreddit."
+                      },
+                      "response": [
+                        {
+                          "id": "e120bc3f-402a-4c96-afc2-0074f3ab6d43",
+                          "name": "Moderator listing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/moderators",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "moderators"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-e120bc3f-402a-4c96-afc2-0074f3ab6d43"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-c600076f-8a0b-497a-a815-f0fa97804f2c"
+                    }
+                  ],
+                  "id": "e9a0f53f-aa44-4fbb-bc1f-9e31538d0821",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-e9a0f53f-aa44-4fbb-bc1f-9e31538d0821"
+                },
+                {
+                  "name": "modqueue",
+                  "item": [
+                    {
+                      "name": "Get Moderation Queue",
+                      "id": "9b9523d2-8018-45c9-8ba6-5de81f9fe1c9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/modqueue?type=comments&after=<string>&before=<string>&limit=25&count=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "modqueue"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by type of content in the queue.",
+                              "key": "type",
+                              "value": "comments"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return (default 25, max 100).",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                              "key": "count",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "463aa3ee-0f9d-4371-965c-bb3c4566f790",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of items in the subreddit's moderation queue. Items include submissions and comments that have been reported or caught by spam filters. Requires the modposts OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "6207d7ed-9dfa-480d-8693-f62e6010b5d8",
+                          "name": "Moderation queue listing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/modqueue?type=comments&after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "modqueue"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by type of content in the queue.",
+                                  "key": "type",
+                                  "value": "comments"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-6207d7ed-9dfa-480d-8693-f62e6010b5d8"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-9b9523d2-8018-45c9-8ba6-5de81f9fe1c9"
+                    }
+                  ],
+                  "id": "d5584473-b703-4952-be88-bf478d012c0d",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-d5584473-b703-4952-be88-bf478d012c0d"
+                },
+                {
+                  "name": "reports",
+                  "item": [
+                    {
+                      "name": "Get Reported Items",
+                      "id": "6e342258-c452-422c-ba30-1e79a5f42762",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/reports?after=<string>&before=<string>&limit=25&count=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "reports"
+                          ],
+                          "query": [
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return (default 25, max 100).",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                              "key": "count",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "d7cfe03a-26ed-412f-9b2d-767c863569db",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of reported items in the subreddit. Requires the modposts OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "77606fdd-ad25-4bac-8956-c4c42a4a67c5",
+                          "name": "Listing of reported items",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/reports?after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "reports"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-77606fdd-ad25-4bac-8956-c4c42a4a67c5"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-6e342258-c452-422c-ba30-1e79a5f42762"
+                    }
+                  ],
+                  "id": "800ed670-0a32-4691-afaf-0e45a00c8c71",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-800ed670-0a32-4691-afaf-0e45a00c8c71"
+                },
+                {
+                  "name": "spam",
+                  "item": [
+                    {
+                      "name": "Get Spam Items",
+                      "id": "1c98d303-edce-4f1d-b245-1ea6f9fd34bf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/spam?after=<string>&before=<string>&limit=25&count=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "spam"
+                          ],
+                          "query": [
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return (default 25, max 100).",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                              "key": "count",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "c5f020a2-2633-4fc6-a860-a06357ad00ab",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of items marked as spam in the subreddit. Requires the modposts OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "c59f72d7-a178-4a36-a7ae-6e295bac49aa",
+                          "name": "Listing of spam items",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/spam?after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "spam"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-c59f72d7-a178-4a36-a7ae-6e295bac49aa"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-1c98d303-edce-4f1d-b245-1ea6f9fd34bf"
+                    }
+                  ],
+                  "id": "e7aaab2f-fe60-427b-8f57-928f6365a360",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-e7aaab2f-fe60-427b-8f57-928f6365a360"
+                },
+                {
+                  "name": "log",
+                  "item": [
+                    {
+                      "name": "Get Moderation Log",
+                      "id": "781a9d94-fa5b-41ab-9667-04d681f997ef",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/log?mod=<string>&type=<string>&after=<string>&before=<string>&limit=25&count=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "log"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by moderator username.",
+                              "key": "mod",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by moderation action type.",
+                              "key": "type",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return (default 25, max 100).",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                              "key": "count",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "2d1ae63e-25d1-4ba1-a868-c35545f36065",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of moderation actions taken in the subreddit. Requires the modlog OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "d8d6ad96-7b50-44a2-88ff-1da71e8bc3c4",
+                          "name": "Moderation log listing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/log?mod=<string>&type=<string>&after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "log"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Filter by moderator username.",
+                                  "key": "mod",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by moderation action type.",
+                                  "key": "type",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-d8d6ad96-7b50-44a2-88ff-1da71e8bc3c4"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-781a9d94-fa5b-41ab-9667-04d681f997ef"
+                    }
+                  ],
+                  "id": "364e0fbd-1a38-4d64-bf37-88fce5bc712b",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-364e0fbd-1a38-4d64-bf37-88fce5bc712b"
+                },
+                {
+                  "name": "banned",
+                  "item": [
+                    {
+                      "name": "Get Banned Users",
+                      "id": "7b571554-4447-4e47-8d97-b6f7536daea8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/about/banned?after=<string>&before=<string>&limit=25&count=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "about",
+                            "banned"
+                          ],
+                          "query": [
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                              "key": "after",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                              "key": "before",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "The maximum number of items to return (default 25, max 100).",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                              "key": "count",
+                              "value": "<integer>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "9ee5353c-2929-404f-bbde-dc49f66fd540",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of users banned from the specified subreddit. Requires the modcontributors OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "0b032807-48ee-41e9-8764-427d4c57ed72",
+                          "name": "Listing of banned users",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/about/banned?after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "about",
+                                "banned"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-21T21:19:38.000Z",
+                          "updatedAt": "2026-10-21T21:19:38.000Z",
+                          "uid": "35240-0b032807-48ee-41e9-8764-427d4c57ed72"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:19:38.000Z",
+                      "updatedAt": "2026-10-21T21:19:38.000Z",
+                      "uid": "35240-7b571554-4447-4e47-8d97-b6f7536daea8"
+                    }
+                  ],
+                  "id": "f38e6735-7857-44f2-9f3b-9270a00c882e",
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-f38e6735-7857-44f2-9f3b-9270a00c882e"
+                }
+              ],
+              "id": "d237017f-0445-4968-8d85-98a09ba5ba70",
+              "createdAt": "2026-10-21T21:19:38.000Z",
+              "updatedAt": "2026-10-21T21:19:38.000Z",
+              "uid": "35240-d237017f-0445-4968-8d85-98a09ba5ba70"
+            }
+          ],
+          "id": "547dec67-bd3c-486a-b68b-24b9e3243398",
+          "createdAt": "2026-10-21T21:19:38.000Z",
+          "updatedAt": "2026-10-21T21:19:38.000Z",
+          "uid": "35240-547dec67-bd3c-486a-b68b-24b9e3243398"
+        }
+      ],
+      "id": "806d6746-6fd4-4345-9118-e24326f2a6d9",
+      "createdAt": "2026-10-21T21:19:38.000Z",
+      "updatedAt": "2026-10-21T21:19:38.000Z",
+      "uid": "35240-806d6746-6fd4-4345-9118-e24326f2a6d9"
+    },
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "approve",
+          "item": [
+            {
+              "name": "Approve a Submission or Comment",
+              "id": "b8a47b0c-0556-497f-b88d-751175ec713a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The fullname of the thing to approve.",
+                      "key": "id",
+                      "value": "<string>"
                     }
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "bd9e86b2-fc3c-46d9-8d37-3948a90ee06f",
-          "name": "Get Moderation Queue",
-          "request": {
-            "name": "Get Moderation Queue",
-            "description": {
-              "content": "Returns a listing of items in the subreddit's moderation queue. Items include submissions and comments that have been reported or caught by spam filters. Requires the modposts OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "modqueue"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "<string>",
-                  "description": "Filter by type of content in the queue."
-                },
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "4c05077a-8f44-4592-bbc7-bbfd862a4516",
-              "name": "Moderation queue listing",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "modqueue"
-                  ],
+                  "raw": "{{baseUrl}}/api/approve",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "type",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 138,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t6\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b4cd33c1-7502-495f-9b93-985d4c5b1733",
-          "name": "Get Reported Items",
-          "request": {
-            "name": "Get Reported Items",
-            "description": {
-              "content": "Returns a listing of reported items in the subreddit. Requires the modposts OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "reports"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "0894a985-c55d-40df-8ad8-c17dc437b087",
-              "name": "Listing of reported items",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "reports"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 138,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t6\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "6e66655d-6335-413f-a44f-00e291b71ac1",
-          "name": "Get Spam Items",
-          "request": {
-            "name": "Get Spam Items",
-            "description": {
-              "content": "Returns a listing of items marked as spam in the subreddit. Requires the modposts OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "spam"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "85e9bcb2-2f5b-4d9a-862f-e5290307364d",
-              "name": "Listing of spam items",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "spam"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 138,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t6\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "73f1b7a3-2020-4e65-ab1f-b491cd13582d",
-          "name": "Get Moderation Log",
-          "request": {
-            "name": "Get Moderation Log",
-            "description": {
-              "content": "Returns a listing of moderation actions taken in the subreddit. Requires the modlog OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "log"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "mod",
-                  "value": "<string>",
-                  "description": "Filter by moderator username."
-                },
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "<string>",
-                  "description": "Filter by moderation action type."
-                },
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d8e65e06-3a05-4865-97ab-e9e1eb2d5548",
-              "name": "Moderation log listing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "log"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "mod",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 138,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t1\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t6\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "21716ce6-8b44-4eb7-bd9a-5a66f48a3341",
-          "name": "Approve a Submission or Comment",
-          "request": {
-            "name": "Approve a Submission or Comment",
-            "description": {
-              "content": "Approves a submission or comment that was removed or reported. Requires the modposts OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "approve"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to approve."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "802d584e-557b-4db7-ac2f-401b33d17000",
-              "name": "Item approved",
-              "originalRequest": {
-                "url": {
                   "path": [
                     "api",
                     "approve"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to approve.",
-                        "type": "text/plain"
-                      },
-                      "key": "id",
-                      "value": "<string>"
-                    }
                   ]
-                }
+                },
+                "description": "Approves a submission or comment that was removed or reported. Requires the modposts OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "id": "b4d6405c-87e8-4e09-a7ef-f42821ec8b41",
+                  "name": "Item approved",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to approve.",
+                          "key": "id",
+                          "value": "<string>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/approve",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "approve"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-b4d6405c-87e8-4e09-a7ef-f42821ec8b41"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "createdAt": "2026-10-21T21:19:38.000Z",
+              "updatedAt": "2026-10-21T21:19:38.000Z",
+              "uid": "35240-b8a47b0c-0556-497f-b88d-751175ec713a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "adf12f28-c974-4b43-9e6c-6a59166b43a9",
+          "createdAt": "2026-10-21T21:19:38.000Z",
+          "updatedAt": "2026-10-21T21:19:38.000Z",
+          "uid": "35240-adf12f28-c974-4b43-9e6c-6a59166b43a9"
         },
         {
-          "id": "1d904221-3f9c-4651-9221-a6e80b2117d0",
-          "name": "Remove a Submission or Comment",
-          "request": {
-            "name": "Remove a Submission or Comment",
-            "description": {
-              "content": "Removes a submission or comment from public listings. Requires the modposts OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "remove"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "id",
-                  "value": "<string>",
-                  "description": "(Required) The fullname of the thing to remove."
-                },
-                {
-                  "disabled": false,
-                  "key": "spam",
-                  "value": "<boolean>",
-                  "description": "(Required) Whether to mark the item as spam."
-                }
-              ]
-            }
-          },
-          "response": [
+          "name": "remove",
+          "item": [
             {
-              "id": "eb6cf16e-e2f5-4abf-a1e7-85534483e2a0",
-              "name": "Item removed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "remove"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+              "name": "Remove a Submission or Comment",
+              "id": "c381e774-4645-4555-948d-0533d34166a3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The fullname of the thing to remove.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) The fullname of the thing to remove.",
                       "key": "id",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) Whether to mark the item as spam.",
-                        "type": "text/plain"
-                      },
+                      "description": "(Required) Whether to mark the item as spam.",
                       "key": "spam",
                       "value": "<boolean>"
                     }
                   ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "576af9ec-e37c-4f68-b5c8-6a745d5453b8",
-          "name": "Get Banned Users",
-          "request": {
-            "name": "Get Banned Users",
-            "description": {
-              "content": "Returns a listing of users banned from the specified subreddit. Requires the modcontributors OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "about",
-                "banned"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
                 },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "1b0e19cd-4e8f-45e8-bd13-36152da5e8fa",
-              "name": "Listing of banned users",
-              "originalRequest": {
                 "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "about",
-                    "banned"
-                  ],
+                  "raw": "{{baseUrl}}/api/remove",
                   "host": [
                     "{{baseUrl}}"
                   ],
-                  "query": [
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
+                  "path": [
+                    "api",
+                    "remove"
                   ]
                 },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
+                "description": "Removes a submission or comment from public listings. Requires the modposts OAuth scope."
               },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "response": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "c4adef43-63c6-4309-b3ed-678b4434c37a",
+                  "name": "Item removed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/x-www-form-urlencoded"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "urlencoded",
+                      "urlencoded": [
+                        {
+                          "description": "(Required) The fullname of the thing to remove.",
+                          "key": "id",
+                          "value": "<string>"
+                        },
+                        {
+                          "description": "(Required) Whether to mark the item as spam.",
+                          "key": "spam",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/remove",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "remove"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-21T21:19:38.000Z",
+                  "updatedAt": "2026-10-21T21:19:38.000Z",
+                  "uid": "35240-c4adef43-63c6-4309-b3ed-678b4434c37a"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "createdAt": "2026-10-21T21:19:38.000Z",
+              "updatedAt": "2026-10-21T21:19:38.000Z",
+              "uid": "35240-c381e774-4645-4555-948d-0533d34166a3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "a2093117-324a-4066-8c30-64fe810f67b2",
+          "createdAt": "2026-10-21T21:19:38.000Z",
+          "updatedAt": "2026-10-21T21:19:38.000Z",
+          "uid": "35240-a2093117-324a-4066-8c30-64fe810f67b2"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://ads-api.reddit.com/api/v3",
-      "key": "baseUrl"
+      "id": "13243500-521a-4ede-be04-cd60ec3a794c",
+      "createdAt": "2026-10-21T21:19:38.000Z",
+      "updatedAt": "2026-10-21T21:19:38.000Z",
+      "uid": "35240-13243500-521a-4ede-be04-cd60ec3a794c"
     }
   ],
   "auth": {
@@ -1080,29 +1116,30 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "ads"
+        "value": "identity edit flair history modconfig modflair modlog modposts modwiki mysubreddits privatemessages read report save submit subscribe vote wikiedit wikiread",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://www.reddit.com/api/v1/access_token"
+        "value": "https://www.reddit.com/api/v1/access_token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://www.reddit.com/api/v1/authorize"
+        "value": "https://www.reddit.com/api/v1/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4b4e3a26-07ab-4f65-9971-1460dfbf5960",
-    "name": "Reddit Ads Account Moderation API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://oauth.reddit.com"
     }
-  }
+  ]
 }

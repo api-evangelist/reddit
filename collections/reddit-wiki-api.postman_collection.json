@@ -1,619 +1,627 @@
 {
+  "info": {
+    "_postman_id": "4483259f-6cd1-4af8-a26e-5ee5e065f436",
+    "name": "Reddit Data Wiki API",
+    "description": "The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, and interact with Reddit communities. All requests require OAuth 2.0 authentication via oauth.reddit.com, with rate limits of 60 requests per minute for authenticated clients.\n\nContact Support:\n Name: Reddit Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-21T21:20:00.000Z",
+    "updatedAt": "2026-10-21T21:20:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4483259f-6cd1-4af8-a26e-5ee5e065f436"
+  },
   "item": [
     {
-      "id": "13929a06-298a-4212-8446-d2e4457191f8",
-      "name": "Wiki",
-      "description": {
-        "content": "Endpoints for managing subreddit wikis, including reading and editing wiki pages, revision history, and permissions.",
-        "type": "text/plain"
-      },
+      "name": "r",
       "item": [
         {
-          "id": "19e60c4d-1370-42c3-b26d-8ace673062b4",
-          "name": "Get a Wiki Page",
-          "request": {
-            "name": "Get a Wiki Page",
-            "description": {
-              "content": "Returns the content of a wiki page in the specified subreddit. Requires the wikiread OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "wiki",
-                ":page"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "page",
-                  "description": "(Required) The name of the wiki page."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{subreddit}",
+          "item": [
             {
-              "id": "dd2f3ec6-b6ff-4cec-bc8e-5357eeaeef16",
-              "name": "Wiki page content",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "wiki",
-                    ":page"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "page",
-                      "description": "(Required) The name of the wiki page."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "wiki",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{page}",
+                  "item": [
+                    {
+                      "name": "Get a Wiki Page",
+                      "id": "c535d7f6-164c-45e3-bb60-447066f30caa",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/wiki/:page",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "wiki",
+                            ":page"
+                          ],
+                          "variable": [
+                            {
+                              "id": "960cddc7-b0f3-4cb4-bceb-9aae0dbdadc5",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            },
+                            {
+                              "id": "a5585365-1207-48ad-a3a2-ed26d53f41bf",
+                              "key": "page",
+                              "value": "<string>",
+                              "description": "(Required) The name of the wiki page."
+                            }
+                          ]
+                        },
+                        "description": "Returns the content of a wiki page in the specified subreddit. Requires the wikiread OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "dcb6bf88-281a-42fd-9ad1-245798b039a4",
+                          "name": "Wiki page content",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/wiki/:page",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "wiki",
+                                ":page"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                },
+                                {
+                                  "key": "page"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"<string>\",\n  \"data\": {\n    \"content_md\": \"<string>\",\n    \"content_html\": \"<string>\",\n    \"revision_by\": {},\n    \"revision_date\": \"<double>\",\n    \"may_revise\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-10-21T21:20:00.000Z",
+                          "updatedAt": "2026-10-21T21:20:00.000Z",
+                          "uid": "35240-dcb6bf88-281a-42fd-9ad1-245798b039a4"
+                        },
+                        {
+                          "id": "cb3bcee1-94a8-4184-9dcd-880e13b3df56",
+                          "name": "Wiki page not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/wiki/:page",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "wiki",
+                                ":page"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                },
+                                {
+                                  "key": "page"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-21T21:20:00.000Z",
+                          "updatedAt": "2026-10-21T21:20:00.000Z",
+                          "uid": "35240-cb3bcee1-94a8-4184-9dcd-880e13b3df56"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:20:00.000Z",
+                      "updatedAt": "2026-10-21T21:20:00.000Z",
+                      "uid": "35240-c535d7f6-164c-45e3-bb60-447066f30caa"
+                    }
+                  ],
+                  "id": "b43f59cd-40ae-4c01-9e26-d7351faa7cdf",
+                  "createdAt": "2026-10-21T21:20:00.000Z",
+                  "updatedAt": "2026-10-21T21:20:00.000Z",
+                  "uid": "35240-b43f59cd-40ae-4c01-9e26-d7351faa7cdf"
+                },
+                {
+                  "name": "pages",
+                  "item": [
+                    {
+                      "name": "List Wiki Pages",
+                      "id": "076a7e4c-ac0a-470f-a9c8-fc169e00a7bd",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/r/:subreddit/wiki/pages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "r",
+                            ":subreddit",
+                            "wiki",
+                            "pages"
+                          ],
+                          "variable": [
+                            {
+                              "id": "48712a96-2a0a-4a99-9ae7-df8a3831ded1",
+                              "key": "subreddit",
+                              "value": "<string>",
+                              "description": "(Required) The name of the subreddit."
+                            }
+                          ]
+                        },
+                        "description": "Returns a listing of all wiki pages in the specified subreddit. Requires the wikiread OAuth scope."
+                      },
+                      "response": [
+                        {
+                          "id": "4bcd289d-b76e-4cab-902a-0e25c6b3d10c",
+                          "name": "List of wiki pages",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: oauth2",
+                                "key": "Authorization",
+                                "value": "<token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/wiki/pages",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "wiki",
+                                "pages"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subreddit"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"kind\": \"<string>\",\n  \"data\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "createdAt": "2026-10-21T21:20:00.000Z",
+                          "updatedAt": "2026-10-21T21:20:00.000Z",
+                          "uid": "35240-4bcd289d-b76e-4cab-902a-0e25c6b3d10c"
+                        }
+                      ],
+                      "createdAt": "2026-10-21T21:20:00.000Z",
+                      "updatedAt": "2026-10-21T21:20:00.000Z",
+                      "uid": "35240-076a7e4c-ac0a-470f-a9c8-fc169e00a7bd"
+                    }
+                  ],
+                  "id": "b762e8a4-91e5-4797-9e51-11aa6bb2eb11",
+                  "createdAt": "2026-10-21T21:20:00.000Z",
+                  "updatedAt": "2026-10-21T21:20:00.000Z",
+                  "uid": "35240-b762e8a4-91e5-4797-9e51-11aa6bb2eb11"
+                },
+                {
+                  "name": "revisions",
+                  "item": [
+                    {
+                      "name": "{page}",
+                      "item": [
+                        {
+                          "name": "Get Wiki Page Revision History",
+                          "id": "461699cc-5958-4df8-8b89-f10e7c497d8b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/wiki/revisions/:page?after=<string>&before=<string>&limit=25&count=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "wiki",
+                                "revisions",
+                                ":page"
+                              ],
+                              "query": [
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                  "key": "after",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                  "key": "before",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The maximum number of items to return (default 25, max 100).",
+                                  "key": "limit",
+                                  "value": "25"
+                                },
+                                {
+                                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                  "key": "count",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "02a47430-95c3-48ed-9b0d-e6229ae89c60",
+                                  "key": "subreddit",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the subreddit."
+                                },
+                                {
+                                  "id": "8fee47dd-dba4-42d8-a4ef-3c75be83911b",
+                                  "key": "page",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the wiki page."
+                                }
+                              ]
+                            },
+                            "description": "Returns the revision history for a wiki page. Requires the wikiread OAuth scope."
+                          },
+                          "response": [
+                            {
+                              "id": "50fdb6ec-0f4f-4213-a1c3-2e531f2da077",
+                              "name": "Revision history listing",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/r/:subreddit/wiki/revisions/:page?after=<string>&before=<string>&limit=25&count=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "r",
+                                    ":subreddit",
+                                    "wiki",
+                                    "revisions",
+                                    ":page"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item.",
+                                      "key": "after",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item.",
+                                      "key": "before",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "The maximum number of items to return (default 25, max 100).",
+                                      "key": "limit",
+                                      "value": "25"
+                                    },
+                                    {
+                                      "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering.",
+                                      "key": "count",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subreddit"
+                                    },
+                                    {
+                                      "key": "page"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"<string>\",\n    \"before\": \"<string>\",\n    \"dist\": \"<integer>\",\n    \"modhash\": \"<string>\",\n    \"children\": [\n      {\n        \"kind\": \"t2\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t3\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-10-21T21:20:00.000Z",
+                              "updatedAt": "2026-10-21T21:20:00.000Z",
+                              "uid": "35240-50fdb6ec-0f4f-4213-a1c3-2e531f2da077"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T21:20:00.000Z",
+                          "updatedAt": "2026-10-21T21:20:00.000Z",
+                          "uid": "35240-461699cc-5958-4df8-8b89-f10e7c497d8b"
+                        }
+                      ],
+                      "id": "886e5ab8-1303-4a98-b7d3-31ede5e811df",
+                      "createdAt": "2026-10-21T21:20:00.000Z",
+                      "updatedAt": "2026-10-21T21:20:00.000Z",
+                      "uid": "35240-886e5ab8-1303-4a98-b7d3-31ede5e811df"
+                    }
+                  ],
+                  "id": "9951941c-5b40-4347-8b95-239f1e716d4f",
+                  "createdAt": "2026-10-21T21:20:00.000Z",
+                  "updatedAt": "2026-10-21T21:20:00.000Z",
+                  "uid": "35240-9951941c-5b40-4347-8b95-239f1e716d4f"
                 }
               ],
-              "body": "{\n  \"kind\": \"string\",\n  \"data\": {\n    \"content_md\": \"string\",\n    \"content_html\": \"string\",\n    \"revision_by\": {},\n    \"revision_date\": 1132.75429526147,\n    \"may_revise\": false\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "6397a6e7-41af-4e6d-a8e4-4053479ebd9e",
+              "createdAt": "2026-10-21T21:20:00.000Z",
+              "updatedAt": "2026-10-21T21:20:00.000Z",
+              "uid": "35240-6397a6e7-41af-4e6d-a8e4-4053479ebd9e"
             },
             {
-              "id": "0907d831-3934-470f-aaff-2f9d60a4f66a",
-              "name": "Wiki page not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "wiki",
-                    ":page"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "page",
-                      "description": "(Required) The name of the wiki page."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
+              "name": "api",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "text/plain"
+                  "name": "wiki",
+                  "item": [
+                    {
+                      "name": "edit",
+                      "item": [
+                        {
+                          "name": "Edit a Wiki Page",
+                          "id": "c96a13b8-bae6-4e42-a186-e1b2832fe09c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/x-www-form-urlencoded"
+                              }
+                            ],
+                            "body": {
+                              "mode": "urlencoded",
+                              "urlencoded": [
+                                {
+                                  "description": "(Required) The name of the wiki page to edit.",
+                                  "key": "page",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) The new content for the wiki page (markdown).",
+                                  "key": "content",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The edit reason (max 256 characters).",
+                                  "key": "reason",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "The revision ID that this edit is based on.",
+                                  "key": "previous",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/r/:subreddit/api/wiki/edit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "r",
+                                ":subreddit",
+                                "api",
+                                "wiki",
+                                "edit"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "9a9e4788-7e11-48a7-a1a5-123610ab65ca",
+                                  "key": "subreddit",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the subreddit."
+                                }
+                              ]
+                            },
+                            "description": "Edits the content of a wiki page in the specified subreddit. Requires the wikiedit OAuth scope."
+                          },
+                          "response": [
+                            {
+                              "id": "a09b3b85-f246-49c3-bfc2-f80366761a6c",
+                              "name": "Wiki page edited successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/x-www-form-urlencoded"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: oauth2",
+                                    "key": "Authorization",
+                                    "value": "<token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "urlencoded",
+                                  "urlencoded": [
+                                    {
+                                      "description": "(Required) The name of the wiki page to edit.",
+                                      "key": "page",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "(Required) The new content for the wiki page (markdown).",
+                                      "key": "content",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "The edit reason (max 256 characters).",
+                                      "key": "reason",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "The revision ID that this edit is based on.",
+                                      "key": "previous",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/r/:subreddit/api/wiki/edit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "r",
+                                    ":subreddit",
+                                    "api",
+                                    "wiki",
+                                    "edit"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "subreddit"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-21T21:20:00.000Z",
+                              "updatedAt": "2026-10-21T21:20:00.000Z",
+                              "uid": "35240-a09b3b85-f246-49c3-bfc2-f80366761a6c"
+                            }
+                          ],
+                          "createdAt": "2026-10-21T21:20:00.000Z",
+                          "updatedAt": "2026-10-21T21:20:00.000Z",
+                          "uid": "35240-c96a13b8-bae6-4e42-a186-e1b2832fe09c"
+                        }
+                      ],
+                      "id": "a3213d77-1d3d-4c09-bcd0-32ba2a1b7577",
+                      "createdAt": "2026-10-21T21:20:00.000Z",
+                      "updatedAt": "2026-10-21T21:20:00.000Z",
+                      "uid": "35240-a3213d77-1d3d-4c09-bcd0-32ba2a1b7577"
+                    }
+                  ],
+                  "id": "e6e3c295-8824-44a8-88f1-b31e7f85499c",
+                  "createdAt": "2026-10-21T21:20:00.000Z",
+                  "updatedAt": "2026-10-21T21:20:00.000Z",
+                  "uid": "35240-e6e3c295-8824-44a8-88f1-b31e7f85499c"
                 }
               ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
+              "id": "6d331f25-a089-4b88-87ac-f5750265c85c",
+              "createdAt": "2026-10-21T21:20:00.000Z",
+              "updatedAt": "2026-10-21T21:20:00.000Z",
+              "uid": "35240-6d331f25-a089-4b88-87ac-f5750265c85c"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c68079e2-8d20-494c-82dd-c4c15e78b7bf",
-          "name": "List Wiki Pages",
-          "request": {
-            "name": "List Wiki Pages",
-            "description": {
-              "content": "Returns a listing of all wiki pages in the specified subreddit. Requires the wikiread OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "wiki",
-                "pages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "27a1978b-0dfe-4b89-ad23-e215d6c3bfd5",
-              "name": "List of wiki pages",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "wiki",
-                    "pages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"string\",\n  \"data\": [\n    \"string\",\n    \"string\"\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ccbdf4f6-c696-440b-a74a-f9fd094e8340",
-          "name": "Edit a Wiki Page",
-          "request": {
-            "name": "Edit a Wiki Page",
-            "description": {
-              "content": "Edits the content of a wiki page in the specified subreddit. Requires the wikiedit OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "api",
-                "wiki",
-                "edit"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/x-www-form-urlencoded"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "urlencoded",
-              "urlencoded": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<string>",
-                  "description": "(Required) The name of the wiki page to edit."
-                },
-                {
-                  "disabled": false,
-                  "key": "content",
-                  "value": "<string>",
-                  "description": "(Required) The new content for the wiki page (markdown)."
-                },
-                {
-                  "disabled": false,
-                  "key": "reason",
-                  "value": "<string>",
-                  "description": "The edit reason (max 256 characters)."
-                },
-                {
-                  "disabled": false,
-                  "key": "previous",
-                  "value": "<string>",
-                  "description": "The revision ID that this edit is based on."
-                }
-              ]
-            }
-          },
-          "response": [
-            {
-              "id": "9e45179c-57af-4c94-a2c0-c9588cb29011",
-              "name": "Wiki page edited successfully",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "api",
-                    "wiki",
-                    "edit"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "urlencoded",
-                  "urlencoded": [
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The name of the wiki page to edit.",
-                        "type": "text/plain"
-                      },
-                      "key": "page",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) The new content for the wiki page (markdown).",
-                        "type": "text/plain"
-                      },
-                      "key": "content",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The edit reason (max 256 characters).",
-                        "type": "text/plain"
-                      },
-                      "key": "reason",
-                      "value": "<string>"
-                    },
-                    {
-                      "disabled": false,
-                      "description": {
-                        "content": "The revision ID that this edit is based on.",
-                        "type": "text/plain"
-                      },
-                      "key": "previous",
-                      "value": "<string>"
-                    }
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "32c65d54-67fc-4e3b-a1b7-4d8d2e9bfb0f",
-          "name": "Get Wiki Page Revision History",
-          "request": {
-            "name": "Get Wiki Page Revision History",
-            "description": {
-              "content": "Returns the revision history for a wiki page. Requires the wikiread OAuth scope.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "r",
-                ":subreddit",
-                "wiki",
-                "revisions",
-                ":page"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "after",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results after this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "before",
-                  "value": "<string>",
-                  "description": "The fullname of a thing used as an anchor for pagination. Returns results before this item."
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "25",
-                  "description": "The maximum number of items to return (default 25, max 100)."
-                },
-                {
-                  "disabled": false,
-                  "key": "count",
-                  "value": "<integer>",
-                  "description": "A positive integer indicating the number of items already seen in this listing, used for pagination numbering."
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "subreddit",
-                  "description": "(Required) The name of the subreddit."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "page",
-                  "description": "(Required) The name of the wiki page."
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "a538a7e0-c795-4c16-b975-f6e37eccd597",
-              "name": "Revision history listing",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "r",
-                    ":subreddit",
-                    "wiki",
-                    "revisions",
-                    ":page"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "after",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "before",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "25"
-                    },
-                    {
-                      "key": "count",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "subreddit",
-                      "description": "(Required) The name of the subreddit."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "page",
-                      "description": "(Required) The name of the wiki page."
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: oauth2",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "<token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"kind\": \"Listing\",\n  \"data\": {\n    \"after\": \"string\",\n    \"before\": \"string\",\n    \"dist\": 2411,\n    \"modhash\": \"string\",\n    \"children\": [\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      },\n      {\n        \"kind\": \"t4\",\n        \"data\": {}\n      }\n    ]\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d7e01be7-5a04-4892-8914-305207f3e3c9",
+          "createdAt": "2026-10-21T21:20:00.000Z",
+          "updatedAt": "2026-10-21T21:20:00.000Z",
+          "uid": "35240-d7e01be7-5a04-4892-8914-305207f3e3c9"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://ads-api.reddit.com/api/v3",
-      "key": "baseUrl"
+      "id": "074d62e1-ce8b-4f5f-975f-dd89847fc94e",
+      "createdAt": "2026-10-21T21:20:00.000Z",
+      "updatedAt": "2026-10-21T21:20:00.000Z",
+      "uid": "35240-074d62e1-ce8b-4f5f-975f-dd89847fc94e"
     }
   ],
   "auth": {
@@ -621,29 +629,30 @@
     "oauth2": [
       {
         "key": "scope",
-        "value": "ads"
+        "value": "identity edit flair history modconfig modflair modlog modposts modwiki mysubreddits privatemessages read report save submit subscribe vote wikiedit wikiread",
+        "type": "string"
       },
       {
         "key": "accessTokenUrl",
-        "value": "https://www.reddit.com/api/v1/access_token"
+        "value": "https://www.reddit.com/api/v1/access_token",
+        "type": "string"
       },
       {
         "key": "authUrl",
-        "value": "https://www.reddit.com/api/v1/authorize"
+        "value": "https://www.reddit.com/api/v1/authorize",
+        "type": "string"
       },
       {
         "key": "grant_type",
-        "value": "authorization_code"
+        "value": "authorization_code",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "14c3877b-790c-40e4-b317-af7ffe55222a",
-    "name": "Reddit Ads Account Wiki API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Reddit Ads API allows advertisers and their partners to programmatically create, edit, and manage advertising campaigns and audiences on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting, custom audiences, conversion pixels, and reporting. Authentication is handled via OAuth 2.0, and rate limits are set at one request per second.\n\nContact Support:\n Name: Reddit Ads Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://oauth.reddit.com"
     }
-  }
+  ]
 }
