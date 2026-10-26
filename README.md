@@ -1,0 +1,212 @@
+# Reddit (reddit)
+
+<!-- API-EVANGELIST-PROVENANCE:BEGIN -->
+> ### About this repository
+>
+> **This is not our API.** This repository is an independent, third-party profile of a company's
+> **publicly available** API surface, maintained by [API Evangelist](https://apievangelist.com).
+> API Evangelist does not operate, host, resell, or support this company's APIs, and is not
+> affiliated with or endorsed by the company unless stated on the profile.
+>
+> **Where the information came from.** Everything here is assembled from material a member of the
+> public can reach with a browser and no credentials — the company's own website, developer portal
+> and documentation, the specifications it publishes for public use (OpenAPI, AsyncAPI, JSON Schema,
+> `apis.json`, `llms.txt` and similar), its public repositories, and its public status, pricing and
+> changelog pages. **Nothing here is obtained by breaching a system, defeating an access control, or
+> using credentials of any kind.**
+>
+> **The rating is an independent assessment.** The Kin Score and Agent Readiness rating are
+> independently calculated scores of a company's *public* API artifacts, produced by API Evangelist
+> against a published rubric. They are not certifications, endorsements, security assessments, or
+> audits, and they score published artifacts — not the quality, safety, or security of the software.
+>
+> **Corrections, re-scores, and removal are free.** No partnership, contract, or purchase is
+> required, and you do not need to justify the request.
+>
+> - **Something wrong?** Open an issue on this repository, or email
+>   [info@apievangelist.com](mailto:info@apievangelist.com).
+> - **Published something new?** Ask for a re-score and we will re-run the rating.
+> - **Want the listing taken down?** Say so and we will honor it. The profile is reduced to your
+>   company name, a factual description, and a link to your own site, and the company is recorded as
+>   **unrated** — never scored zero for having asked.
+>
+> **Response times.** Acknowledgement within **one business day**; removal or restriction within
+> **two business days**; corrections and re-scores within **five business days**.
+>
+> **Not from the company, and here with a question?** You are welcome here — we would rather be the
+> front line and point you the right way than have a good report go nowhere. What this repository
+> can answer is narrow, though, so it is worth knowing who you are actually looking for:
+>
+> - **A question about how the API works, an account, billing, or a bug in the service** — that is
+>   the company's own support, not us. We profile this API; we do not operate it and cannot see
+>   your account.
+> - **A bug in an open-source project we only catalog** — file it on that project's own repository.
+>   This has happened with a real and correct bug report that reached us instead of the people who
+>   could fix it, which helped nobody.
+> - **Anything about this listing itself** — the description, the tags, the rating, a missing or
+>   wrong artifact — is ours. Open an issue here.
+> - **Not sure, or something general about API Evangelist or APIs.io** — open an issue on the
+>   [APIs.io Inbox](https://github.com/api-search/inbox) and we will route it.
+>
+> **This repository contains no software, and we will never ask you to download anything.** There is
+> no build, release, installer, or binary here — only text and machine-readable API descriptions, so
+> there is nothing here that can be "corrupt" or need "repairing". Any issue, comment, or email
+> claiming otherwise and offering a download link is not from us and is hostile. Do not follow the
+> link; it is a lure. Report it to GitHub and, if you like, tell us at
+> [info@apievangelist.com](mailto:info@apievangelist.com) so we can take it down.
+>
+> **On a security or compliance team?** Email
+> [info@apievangelist.com](mailto:info@apievangelist.com) with *security* in the subject line and
+> you will get a person, not a form. We will tell you exactly which public URLs this profile was
+> built from so your team can see the same surface we did, and we will take the listing down on
+> request while you work through it.
+>
+> Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
+<!-- API-EVANGELIST-PROVENANCE:END -->
+
+Reddit is a social news aggregation, discussion, and community platform where users submit, vote, and comment on content organized into topic-based communities called subreddits. Reddit provides developer APIs for accessing platform data, managing communities, running advertising campaigns, and embedding content. The Reddit Data API provides access to posts, comments, subreddits, user profiles, and moderation tools via OAuth 2.0. The Reddit Ads API enables programmatic management of advertising campaigns, audiences, and conversion tracking. All API access requires OAuth 2.0 authentication via the oauth.reddit.com server at 60 requests per minute.
+
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/reddit/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/reddit/refs/heads/main/apis.yml)
+
+## Scope
+
+- **Type:** Index
+
+## Tags
+
+- Advertising
+- Communities
+- Content
+- Social Media
+- Social News
+
+## Timestamps
+
+- **Created:** 2026-01-01
+- **Modified:** 2026-05-19
+
+## APIs
+
+### Reddit Data API
+
+The Reddit Data API provides programmatic access to Reddit content including subreddits, posts, comments, user profiles, and voting data. Developers can use the API to read and submit content, manage subreddits, search across the platform, interact with Reddit communities, handle private messages, and manage flair. All requests require OAuth 2.0 authentication via oauth.reddit.com with rate limits of 60 requests per minute for authenticated clients. A Data API Terms agreement is required for high-volume access.
+
+- **Human URL:** [https://www.reddit.com/dev/api](https://www.reddit.com/dev/api)
+- **Base URL:** `https://oauth.reddit.com`
+
+#### Tags
+
+- Comments
+- Communities
+- Content
+- Posts
+- Social Media
+- Subreddits
+
+#### Properties
+
+- [Documentation](https://www.reddit.com/dev/api)
+- [Authentication](https://github.com/reddit-archive/reddit/wiki/OAuth2)
+- [Terms of Service](https://www.redditinc.com/policies/data-api-terms)
+- [OpenAPI](openapi/reddit-data-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/reddit-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Reddit Ads API
+
+The Reddit Ads API allows advertisers and their marketing partners to programmatically create, edit, manage, and report on advertising campaigns on the Reddit platform. It provides endpoints for managing ad accounts, campaigns, ad groups, ads, creatives, targeting configurations, custom audiences (email lists, mobile IDs, pixel-based), conversion pixels, and performance reporting. Authentication uses OAuth 2.0 with a rate limit of one request per second per advertiser account.
+
+- **Human URL:** [https://ads-api.reddit.com/docs/](https://ads-api.reddit.com/docs/)
+- **Base URL:** `https://ads-api.reddit.com/api/v3`
+
+#### Tags
+
+- Advertising
+- Campaigns
+- Marketing
+- Social Media
+- Targeting
+
+#### Properties
+
+- [Documentation](https://ads-api.reddit.com/docs/)
+- [Terms of Service](https://business.reddithelp.com/s/article/Reddit-Ads-API-Terms)
+- [OpenAPI](openapi/reddit-ads-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/reddit-ads-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-ads-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Reddit Embeds (oEmbed)
+
+Reddit Embeds allows developers and content creators to embed Reddit posts and comments directly into external websites and applications. The service provides oEmbed endpoints that return embed codes and metadata for rendering Reddit content in a visually consistent format outside of the Reddit platform. It follows the oEmbed specification for content discovery and embedding, returning HTML embed code for any Reddit post or comment URL.
+
+- **Human URL:** [https://oembed.com/](https://oembed.com/)
+- **Base URL:** `https://www.reddit.com`
+
+#### Tags
+
+- Content
+- Embedding
+- oEmbed
+- Social Media
+
+#### Properties
+
+- [Documentation](https://support.reddithelp.com/hc/en-us/articles/14945211791892-Developer-Platform-Accessing-Reddit-Data)
+- [OpenAPI](openapi/reddit-embeds-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/reddit-embeds.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-embeds.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+### Reddit OAuth 2.0 Authorization
+
+Reddit's OAuth 2.0 authorization system provides authentication for all Reddit API access. Developers register applications at reddit.com/prefs/apps to obtain client credentials. Supported grant types include authorization_code (for user-delegated access), client_credentials (for app-only access), and implicit (for installed apps). Access tokens are obtained from https://www.reddit.com/api/v1/access_token and must be refreshed using refresh tokens. All scopes and permissions are listed at https://www.reddit.com/api/v1/scopes.
+
+- **Human URL:** [https://github.com/reddit-archive/reddit/wiki/OAuth2](https://github.com/reddit-archive/reddit/wiki/OAuth2)
+- **Base URL:** `https://www.reddit.com/api/v1`
+
+#### Tags
+
+- Authentication
+- Authorization
+- OAuth 2.0
+- Security
+
+#### Properties
+
+- [Documentation](https://github.com/reddit-archive/reddit/wiki/OAuth2)
+- [Scopes](https://www.reddit.com/api/v1/scopes)
+- [App  Registration](https://www.reddit.com/prefs/apps)
+- [Postman Collection](collections/reddit-ads-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-ads-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/reddit-data-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-data-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Postman Collection](collections/reddit-embeds.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/reddit-embeds.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+
+## Common Properties
+
+- [LinkedIn](https://www.linkedin.com/company/reddit-com)
+- [Website](https://www.reddit.com)
+- [Developer  Portal](https://www.reddit.com/dev/api)
+- [Documentation](https://support.reddithelp.com/hc/en-us/articles/16160319875092-Reddit-Data-API-Wiki)
+- [GitHub Organization](https://github.com/reddit-archive)
+- [Blog](https://www.redditinc.com/blog)
+- [Privacy Policy](https://www.reddit.com/policies/privacy-policy)
+- [Terms of Service](https://www.redditinc.com/policies/user-agreement)
+- [Status Page](https://www.redditstatus.com/)
+- [Support](https://support.reddithelp.com/hc/en-us)
+- [Sign Up](https://www.reddit.com/register)
+- [OpenAPI](openapi/reddit-data-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [OpenAPI](openapi/reddit-ads-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [OpenAPI](openapi/reddit-embeds-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [JSON Schema](json-schema/reddit-post-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/reddit-comment-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/reddit-subreddit-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [J S O N L D Context](json-ld/reddit-context.jsonld)
+- [JSON Structure](json-structure/reddit-post-structure.json)
+- [Spectral Ruleset](rules/reddit-rules.yml)
+- [Vocabulary](vocabulary/reddit-vocabulary.yml)
+
+## Maintainers
+
+**FN:** Kin Lane
+**Email:** kin@apievangelist.com
